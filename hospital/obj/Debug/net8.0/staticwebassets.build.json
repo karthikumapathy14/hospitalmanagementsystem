@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "XaR+4Z82hbi9dF32uZ5x1jZLc8HKeM+kG9LBt/GF4hY=",
+  "Source": "hospital",
+  "BasePath": "_content/hospital",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

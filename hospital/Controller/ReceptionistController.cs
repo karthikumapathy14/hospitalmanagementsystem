@@ -1,0 +1,246 @@
+﻿using hospital.Data;
+using hospital.Model;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
+using System;
+
+namespace hospital.Controller
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    //[Authorize(Roles ="Receptionist")]
+    public class ReceptionistController : ControllerBase
+    {
+        private readonly Applicationdbcontext _dbcontext;
+        private readonly UserManager<IdentityUser> _usermanager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+
+        public ReceptionistController(Applicationdbcontext dbcontext, UserManager<IdentityUser> usermanager, RoleManager<IdentityRole> roleManager)
+        {
+            _dbcontext = dbcontext;
+            _usermanager = usermanager;
+            _roleManager = roleManager;
+        }
+
+        [HttpPost("Register")]
+        public async Task<IActionResult> PatientReg(User model)
+        {
+            string generatedUserName;
+            if (model.Role == "Patient")
+            {
+                generatedUserName = await GenerateUsernameAsync(model.UserName); // base name comes from model.UserName
+            }
+            else
+            {
+                generatedUserName = model.UserName; // fallback for non-patient users
+            }
+
+            var user = new User
+            {
+                UserName = model.UserName,
+                Email = model.Email,
+             
+            };
+
+            var result = await _usermanager.CreateAsync(user, model.PasswordHash);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            // Ensure role exists
+            if (!await _roleManager.RoleExistsAsync(model.Role))
+            {
+                var roleResult = await _roleManager.CreateAsync(new IdentityRole(model.Role));
+                if (!roleResult.Succeeded)
+                {
+                    return BadRequest(roleResult.Errors);
+                }
+            }
+
+            // Assign role to user
+            var addToRoleResult = await _usermanager.AddToRoleAsync(user, model.Role);
+            if (!addToRoleResult.Succeeded)
+            {
+                return BadRequest(addToRoleResult.Errors);
+            }
+
+            // Save Patient
+            if (model.Role == "Patient")
+            {
+                var patient = new Patient
+                {
+                    UserId = user.Id,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    Role = "Patient",
+                    patientid=generatedUserName
+                };
+
+                _dbcontext.Patients.Add(patient);
+                await _dbcontext.SaveChangesAsync();
+                
+            }
+
+            return Ok(new { message ="patient register successfully",PatientId= generatedUserName});
+
+        }
+
+        private async Task<string> GenerateUsernameAsync(string name)
+        {
+            var baseName = name.Replace(" ", "").ToLower();
+
+            // Count existing patients
+            int totalPatients = await _dbcontext.Patients.CountAsync();
+
+            // Global patient number (incrementing)
+            int nextNumber = totalPatients + 1;
+
+            // Return formatted username like: karthik001, aravind002, etc.
+            return $"{baseName}{nextNumber:D3}";
+        }
+
+
+        [HttpGet("Getallpatient")]
+        public async Task<IActionResult> GetAllPatient()
+        {
+           var patient= await _dbcontext.Patients.ToListAsync();
+            return Ok(patient);
+        }
+
+        [HttpGet("getbyid-patient/{id}")]
+        public async Task<IActionResult> Getbyid(int id)
+        {
+            var patientid = await _dbcontext.Patients.FindAsync(id);
+            if (patientid == null) return BadRequest("PatientId Not Found");
+            return Ok(patientid);
+        }
+
+        [HttpPut("Editpatient/{id}")]
+        public async Task<IActionResult> Editpatient(int id,Patient patient)
+        {
+            
+            var patid = await _dbcontext.Patients.FindAsync(id);
+            if (!string.IsNullOrWhiteSpace(patient.UserName) && patient.UserName != "string")
+                patid.UserName = patient.UserName;
+            if (!string.IsNullOrWhiteSpace(patient.Email) && patient.Email != "string")
+                patid.Email = patient.Email;
+            if (!string.IsNullOrWhiteSpace(patient.Role) && patient.Role != "string")
+                patid.Role = patient.Role;
+            if(!string.IsNullOrWhiteSpace(patient.Age )&& patient.Age!="string")
+            patid.Age = patient.Age;
+            if (!string.IsNullOrWhiteSpace(patient.PhoneNo) && patient.PhoneNo != "string")
+            patid.PhoneNo = patient.PhoneNo;
+            if (!string.IsNullOrWhiteSpace(patient.Bloodgrp) && patient.Bloodgrp != "string")
+                patid.Bloodgrp = patient.Bloodgrp;
+            if (!string.IsNullOrWhiteSpace(patient.Address) && patient.Address != "string")
+                patid.Address = patient.Address;
+            patid.DoctorId = patient.DoctorId;
+            patid.NurseId = patient.NurseId;
+                patid.status = patient.status;
+           await _dbcontext.SaveChangesAsync();
+
+
+            return Ok("Updated successfully");
+            
+        }
+
+      
+        [HttpPost("Create-appointment")]
+        
+        public async Task<IActionResult> CreateAppointment(Appointment dto)
+        {
+            var appointment = new Appointment
+            {
+                DoctorId = dto.DoctorId,
+                PatientId = dto.PatientId,
+                DepartmentId = dto.DepartmentId,
+                AppointmentDate = dto.AppointmentDate,
+                AppointmentTime=dto.AppointmentTime,
+                Reason = dto.Reason,
+                Status = dto.Status,
+
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _dbcontext.appointments.Add(appointment);
+            await _dbcontext.SaveChangesAsync();
+
+            return Ok("register successfully");
+        }
+
+        [HttpPut("Edit-appointment/{id}")]
+        public async Task<IActionResult> Editappointment(int id,Appointment dto)
+        {
+            var appid = await _dbcontext.appointments.FindAsync(id);
+            if (appid == null)
+                return NotFound();
+
+            if (dto.PatientId.HasValue)
+                appid.PatientId = dto.PatientId.Value;
+
+            if (dto.DoctorId.HasValue)
+                appid.DoctorId = dto.DoctorId.Value;
+
+            if (dto.DepartmentId.HasValue)
+                appid.DepartmentId = dto.DepartmentId.Value;
+
+            if (dto.AppointmentDate >= DateOnly.MinValue)
+                 appid.AppointmentDate = dto.AppointmentDate;
+
+           
+                appid.AppointmentTime = dto.AppointmentTime;
+
+            if (!string.IsNullOrWhiteSpace(dto.Reason) && dto.Reason != "string")
+                appid.Reason = dto.Reason;
+
+            if (!string.IsNullOrWhiteSpace(dto.Status))
+                appid.Status = dto.Status;
+
+            await _dbcontext.SaveChangesAsync();
+            return Ok();
+        }
+
+        [HttpGet("getappointmentid/{id}")]
+        public async Task<IActionResult> getappointmentid(int id)
+        {
+            var getid = await _dbcontext.appointments.FindAsync(id);
+         
+            if (getid == null) return BadRequest("invalid id");
+            return Ok(getid);
+        }
+
+        [HttpGet("getappointment")]
+        public async Task<IActionResult> getappointment()
+        {
+            var appointment = await _dbcontext.appointments
+                .Include(a => a.Doctor)
+                .Include(a => a.Department)
+                .Include(a=>a.Patient)
+                .Select(a => new 
+                {
+                a.AppointmentId,
+                a.PatientId,
+                a.DoctorId,
+                a.DepartmentId,
+                a.Reason,
+                a.Status,
+                a.CreatedAt,
+                a.AppointmentDate,
+                a.AppointmentTime,
+                Patientid=a.Patient.patientid,
+                DoctorName=a.Doctor.UserName,
+                DepartmentName=a.Department.DepartmentName
+                }).ToListAsync();
+          
+            return Ok(appointment);
+        }
+
+
+    }
+}

@@ -1,0 +1,490 @@
+[
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "Department",
+    "RelativePath": "api/Admin/create-dept",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "department",
+        "Type": "hospital.Model.Department",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "DeleteNurse",
+    "RelativePath": "api/Admin/delete-nurse/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "DeleteReceptionist",
+    "RelativePath": "api/Admin/delete-receptionist/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "Delete",
+    "RelativePath": "api/Admin/docdelete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "Edit",
+    "RelativePath": "api/Admin/docedit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "doctor",
+        "Type": "hospital.Model.Doctor",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GetAllDoctors",
+    "RelativePath": "api/Admin/docGetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "Getid",
+    "RelativePath": "api/Admin/docGetbyid/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "EditNurse",
+    "RelativePath": "api/Admin/edit-Nurse/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "nurse",
+        "Type": "hospital.Model.Nurse",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "EditReceptionits",
+    "RelativePath": "api/Admin/edit-repceptionist/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "receptionist",
+        "Type": "hospital.Model.Receptionist",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "Departmentget",
+    "RelativePath": "api/Admin/get-dept",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GetReceptionist",
+    "RelativePath": "api/Admin/get-receptionist",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GetidNurse",
+    "RelativePath": "api/Admin/getbyid-nurse/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GetReception",
+    "RelativePath": "api/Admin/getbyid-receptionist/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "Departmentid",
+    "RelativePath": "api/Admin/getdeptbyid/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "getNurse",
+    "RelativePath": "api/Admin/getnurse",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AuthenticationController",
+    "Method": "Login",
+    "RelativePath": "api/Authentication/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginDto",
+        "Type": "hospital.Model.LoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AuthenticationController",
+    "Method": "Register",
+    "RelativePath": "api/Authentication/Register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "hospital.Model.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.DoctorController",
+    "Method": "GetAppointmentById",
+    "RelativePath": "api/Doctor/api/appointments/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.DoctorController",
+    "Method": "GetAppointmentsForDoctor",
+    "RelativePath": "api/Doctor/api/appointments/my",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.DoctorController",
+    "Method": "UpdateAppointment",
+    "RelativePath": "api/Doctor/api/Editappointments/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "appointment",
+        "Type": "hospital.Model.Appointment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.DoctorController",
+    "Method": "getPatient",
+    "RelativePath": "api/Doctor/getAllPatient",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.DoctorController",
+    "Method": "GetPrescription",
+    "RelativePath": "api/Doctor/getPrescription",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.DoctorController",
+    "Method": "GetPatientHistory",
+    "RelativePath": "api/Doctor/history/{patientId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.DoctorController",
+    "Method": "Createprescription",
+    "RelativePath": "api/Doctor/postprescription",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "prescription",
+        "Type": "hospital.Model.Prescription",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "CreateAppointment",
+    "RelativePath": "api/Receptionist/Create-appointment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "hospital.Model.Appointment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "Editappointment",
+    "RelativePath": "api/Receptionist/Edit-appointment/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "hospital.Model.Appointment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "Editpatient",
+    "RelativePath": "api/Receptionist/Editpatient/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "patient",
+        "Type": "hospital.Model.Patient",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "GetAllPatient",
+    "RelativePath": "api/Receptionist/Getallpatient",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "getappointment",
+    "RelativePath": "api/Receptionist/getappointment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "getappointmentid",
+    "RelativePath": "api/Receptionist/getappointmentid/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "Getbyid",
+    "RelativePath": "api/Receptionist/getbyid-patient/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "PatientReg",
+    "RelativePath": "api/Receptionist/Register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "hospital.Model.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
