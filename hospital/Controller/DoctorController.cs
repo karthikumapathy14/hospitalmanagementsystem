@@ -118,28 +118,28 @@ namespace hospital.Controller
         //}
 
 
-        [HttpPost("postprescription")]
-        public async Task<IActionResult> Createprescription([FromBody] Prescription prescription)
-        {
+        //[HttpPost("postprescription")]
+        //public async Task<IActionResult> Createprescription([FromBody] Prescription prescription)
+        //{
           
-            var appointment = await _dbcontext.appointments
-                .Include(a => a.Patient)
-                .ThenInclude(p => p.User)
-                .FirstOrDefaultAsync(a => a.AppointmentId == prescription.AppointmentId);
+        //    var appointment = await _dbcontext.appointments
+        //        .Include(a => a.Patient)
+        //        .ThenInclude(p => p.User)
+        //        .FirstOrDefaultAsync(a => a.AppointmentId == prescription.AppointmentId);
 
-            if (appointment == null)
-            {
-                return NotFound("Appointment not found.");
-            }
+        //    if (appointment == null)
+        //    {
+        //        return NotFound("Appointment not found.");
+        //    }
 
             
-            prescription.Appointment = appointment;
+        //    prescription.Appointment = appointment;
 
-            _dbcontext.Prescription.Add(prescription);
-            await _dbcontext.SaveChangesAsync();
+        //    _dbcontext.Prescription.Add(prescription);
+        //    await _dbcontext.SaveChangesAsync();
 
-            return Ok(prescription);
-        }
+        //    return Ok(prescription);
+        //}
 
         //[HttpGet("filterbyid/{id}")]
         //public async Task<IActionResult> filterbyid (int id)

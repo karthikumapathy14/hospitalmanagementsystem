@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\karthik\\source\\repos\\hospital\\hospital\\hospital.csproj": {}
+    "C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\hospital\\hospital.csproj": {}
   },
   "projects": {
-    "C:\\Users\\karthik\\source\\repos\\hospital\\hospital\\hospital.csproj": {
+    "C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\hospital\\hospital.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\karthik\\source\\repos\\hospital\\hospital\\hospital.csproj",
+        "projectUniqueName": "C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\hospital\\hospital.csproj",
         "projectName": "hospital",
-        "projectPath": "C:\\Users\\karthik\\source\\repos\\hospital\\hospital\\hospital.csproj",
+        "projectPath": "C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\hospital\\hospital.csproj",
         "packagesPath": "C:\\Users\\karthik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\karthik\\source\\repos\\hospital\\hospital\\obj\\",
+        "outputPath": "C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\hospital\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
