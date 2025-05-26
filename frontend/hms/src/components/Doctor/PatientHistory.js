@@ -1,57 +1,65 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+
 
 const PatientHistory = () => {
 
-  const { patientId } = useParams()
-  const [history, gethistory] = useState([])
+  const [history, gethistory] = useState([]);
 
   useEffect(() => {
-    if (!patientId) return;
+   
 
-    axios.get(`https://localhost:7058/api/Doctor/history/${patientId}`)
+    axios.get('https://localhost:7058/api/Doctor/history')
       .then((res) => gethistory(res.data))
-      .catch((err) => console.log(err))
-  }, [])
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
-    <div>
-      <h1>Patient History</h1>
+    <div className="container mt-5">
+      <h1 className="mb-4 text-center">Patient History</h1>
 
-      <table className='table table-bordered table-striped'>
-        <thead>
-          <tr>
-            <td>Patient Id</td>
-            <td>Patient Unique Id</td>
-            <td>AppointmentDate</td>
-            <td>DoctorName</td>
-            <td>DepartmentName</td>
-            <td>Diagnosis</td>
-            <td>Medications</td>
-            <td>Notes</td>
-            <td>PrescribedDate</td>
-          </tr>
-        </thead>
-        <tbody>
-          {history.map((item, index) => (
-            <tr key={index}>
-              <td>{item.patientId}</td>
-              <td>{item.patientUniqueId}</td>
-              <td>{item.appointmentDate}</td>
-              <td>{item.doctor?.userName || '-'}</td>
-              <td>{item.doctor?.department?.departmentName || '-'}</td>
-              <td>{item.prescription?.diagnosis || 'N/A'}</td>
-              <td>{item.prescription?.medications || 'N/A'}</td>
-              <td>{item.prescription?.notes || 'N/A'}</td>
-              <td>{item.prescription?.prescribedDate ? new Date(item.prescription.prescribedDate).toLocaleDateString() : 'N/A'}</td>
+      <div className="table-responsive">
+        <table className="table table-bordered table-striped">
+          <thead className="table-dark">
+            <tr>
+              <th>Patient Id</th>
+              <th>Patient Unique Id</th>
+              <th>Appointment ID</th>
+              <th>Appointment Date</th>
+              <th>Reason</th>
+              <th>Doctor Name</th>
+              <th>Department Name</th>
+              <th>Diagnosis</th>
+              <th>Medications</th>
+              <th>Notes</th>
+              <th>Prescribed Date</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-
+          </thead>
+          <tbody>
+            {history.length > 0 ? history.map((item, index) => (
+              <tr key={index}>
+                <td>{item.patient.id}</td>
+                <td>{item.patient.patientid}</td>
+                <td>{item.appointmentId}</td>
+                <td>{item.appointmentDate}</td>
+                <td>{item.reason}</td>
+                <td>{item.doctor?.docname || '-'}</td>
+                <td>{item.doctor?.department?.departmentName || '-'}</td>
+                <td>{item.prescription?.diagnosis }</td>
+                <td>{item.prescription?.medications || 'N/A'}</td>
+                <td>{item.prescription?.notes || 'N/A'}</td>
+                <td>{item.prescription?.prescribedDate ? new Date(item.prescription.prescribedDate).toLocaleDateString() : 'N/A'}</td>
+              </tr>
+            )) : (
+              <tr>
+                <td colSpan="10" className="text-center">No history available.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default PatientHistory
+export default PatientHistory;

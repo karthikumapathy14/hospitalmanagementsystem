@@ -77,7 +77,7 @@ function App() {
               <Route path='/viewappointment' element={<Viewappointment />}> </Route>
               <Route path="/DoctorSideEditAppointment/:id" element={<DoctorSideEditAppointment />} />
               <Route path='/Addprescription' element={<Addprescription/>}></Route>
-              <Route path='/history/:patientId' element={<PatientHistory/>}></Route>
+              <Route path='/PatientHistory' element={<PatientHistory/>}></Route>
 
             </Routes>
           </div>

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 import Addprescription from './Addprescription';
 
+
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
 
@@ -48,14 +49,15 @@ const Appointments = () => {
     navigate('/Addprescription')
   }
 
-  const handleView=(patientId)=>{
-    navigate(`/history/${patientId}`)
-  }
 
+  const viewappointment =()=>{
+navigate('/PatientHistory')
+  }
   return (
     <div className="container mt-4">
-      welcome: {doctorId}
-      <h2 className="text-center mb-4">My Appointments</h2>
+<div className='d-flex justify-content-between'> <h2 className="text-center mb-4">My Appointments</h2> <button type='button' onClick={viewappointment} className='btn btn-outline-primary'>View Appointment
+      </button></div>
+     
       <div className="row">
         {appointments.map((appointment) => (
           <div
@@ -90,14 +92,7 @@ const Appointments = () => {
               >
                 Add Prescription
               </button>
-              <button
-                className="btn btn-secondary"
-                onClick={() => {
-                  handleView(appointment.patientId);
-                }}
-              >
-                View History
-              </button>
+            
             </div>
           </div>
 

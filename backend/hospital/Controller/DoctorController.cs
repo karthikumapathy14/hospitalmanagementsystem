@@ -170,6 +170,7 @@ namespace hospital.Controller
                 {
                     a.AppointmentId,
                     a.AppointmentDate,
+                    a.Reason,
                     PatientId = a.PatientId,
                     PatientUniqueId = a.Patient.patientid, 
 
@@ -202,6 +203,66 @@ namespace hospital.Controller
 
             return Ok(history);
         }
+        [HttpGet("history")]
+        public async Task<IActionResult> GetAllPatientHistories()
+        {
+            var history = await _dbcontext.appointments
+                .Include(a => a.Doctor)
+                    .ThenInclude(d => d.Department)
+                .Include(a => a.Patient)
+                .OrderByDescending(a => a.AppointmentDate)
+                .ToListAsync();
+
+            var result = history.Select(a => new
+            {
+                a.AppointmentId,
+                a.AppointmentDate,
+                a.Reason,
+
+                Patient = new
+                {
+                    id = a.Patient?.Id,
+                    userName = a.Patient?.UserName,
+                    patientid = a.Patient?.patientid
+                },
+
+                Doctor = new
+                {
+                    docid = a.Doctor?.Id,
+                    docname = a.Doctor?.UserName,
+                    Department = new
+                    {
+                        departmentName = a.Doctor?.Department?.DepartmentName
+                    }
+                },
+
+                Prescription = _dbcontext.Prescription
+                    .Where(p => p.AppointmentId == a.AppointmentId)
+                    .Select(p => new
+                    {
+                        p.Diagnosis,
+                        p.Medications,
+                        p.Notes,
+                        p.Prescribedby,
+                        p.PrescribedDate
+                    })
+                    .FirstOrDefault() // ✅ returns a single object instead of list
+            }).ToList();
+
+            if (!result.Any())
+                return NotFound("No patient histories found.");
+
+            return Ok(result);
+        }
+
+
+
+
+
+
+
+
+
 
     }
 }

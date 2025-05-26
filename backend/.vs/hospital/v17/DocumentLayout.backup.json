@@ -5,6 +5,22 @@
     {
       "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\new folder\\hospitalmanagementsystem\\backend\\hospital\\controller\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\new folder\\hospitalmanagementsystem\\backend\\hospital\\model\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\model\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\new folder\\hospitalmanagementsystem\\backend\\hospital\\model\\prescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\model\\prescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\backend\\hospital\\Migrations\\20250526055704_hel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:hospital\\Migrations\\20250526055704_hel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\new folder\\hospitalmanagementsystem\\backend\\hospital\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,19 +30,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Appointment.cs",
+              "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\backend\\hospital\\Model\\Appointment.cs",
+              "RelativeDocumentMoniker": "hospital\\Model\\Appointment.cs",
+              "ToolTip": "C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\backend\\hospital\\Model\\Appointment.cs",
+              "RelativeToolTip": "hospital\\Model\\Appointment.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAUwCcAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-26T05:53:53.233Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Prescription.cs",
+              "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\backend\\hospital\\Model\\Prescription.cs",
+              "RelativeDocumentMoniker": "hospital\\Model\\Prescription.cs",
+              "ToolTip": "C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\backend\\hospital\\Model\\Prescription.cs",
+              "RelativeToolTip": "hospital\\Model\\Prescription.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-26T05:50:39.566Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "DoctorController.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\backend\\hospital\\Controller\\DoctorController.cs",
               "RelativeDocumentMoniker": "hospital\\Controller\\DoctorController.cs",
-              "ToolTip": "C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\backend\\hospital\\Controller\\DoctorController.cs*",
-              "RelativeToolTip": "hospital\\Controller\\DoctorController.cs*",
-              "ViewState": "AgIAAKQAAAAAAAAAAAAAwK0AAAA7AAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\backend\\hospital\\Controller\\DoctorController.cs",
+              "RelativeToolTip": "hospital\\Controller\\DoctorController.cs",
+              "ViewState": "AgIAAN4AAAAAAAAAAAAuwAABAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-26T04:33:21.838Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "20250526055704_hel.cs",
+              "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\backend\\hospital\\Migrations\\20250526055704_hel.cs",
+              "RelativeDocumentMoniker": "hospital\\Migrations\\20250526055704_hel.cs",
+              "ToolTip": "C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\backend\\hospital\\Migrations\\20250526055704_hel.cs",
+              "RelativeToolTip": "hospital\\Migrations\\20250526055704_hel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-26T05:57:04.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Applicationdbcontext.cs",
+              "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\backend\\hospital\\Data\\Applicationdbcontext.cs",
+              "RelativeDocumentMoniker": "hospital\\Data\\Applicationdbcontext.cs",
+              "ToolTip": "C:\\Users\\karthik\\Desktop\\New folder\\hospitalmanagementsystem\\backend\\hospital\\Data\\Applicationdbcontext.cs",
+              "RelativeToolTip": "hospital\\Data\\Applicationdbcontext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-26T05:52:59.306Z",
               "EditorCaption": ""
             }
           ]

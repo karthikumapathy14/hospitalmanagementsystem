@@ -311,6 +311,22 @@
   },
   {
     "ContainingType": "hospital.Controller.DoctorController",
+    "Method": "filterbyid",
+    "RelativePath": "api/Doctor/filterbyid/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.DoctorController",
     "Method": "getPatient",
     "RelativePath": "api/Doctor/getAllPatient",
     "HttpMethod": "GET",
@@ -323,6 +339,16 @@
     "ContainingType": "hospital.Controller.DoctorController",
     "Method": "GetPrescription",
     "RelativePath": "api/Doctor/getPrescription",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.DoctorController",
+    "Method": "GetAllPatientHistories",
+    "RelativePath": "api/Doctor/history",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
