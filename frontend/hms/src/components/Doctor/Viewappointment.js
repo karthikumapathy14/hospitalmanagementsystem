@@ -57,7 +57,9 @@ const Appointments = () => {
       welcome: {doctorId}
       <h2 className="text-center mb-4">My Appointments</h2>
       <div className="row">
-        {appointments.map((appointment) => (
+        {appointments
+        .filter((appointment)=>appointment.status!=='Complete')
+        .map((appointment) => (
           <div
             key={appointment.appointmentId || appointment.id}
             className="col-md-4 mb-4"
