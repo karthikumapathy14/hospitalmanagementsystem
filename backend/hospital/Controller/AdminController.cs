@@ -183,7 +183,11 @@ namespace hospital.Controller
                 nurseid.PhoneNo = nurse.PhoneNo;
            
                 nurseid.status = nurse.status;
+<<<<<<< Updated upstream
       
+=======
+            
+>>>>>>> Stashed changes
             if (!string.IsNullOrWhiteSpace(nurse.Role) && nurse.Role != "string")
                 nurseid.Role = nurse.Role;
 

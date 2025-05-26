@@ -27,10 +27,11 @@ namespace hospital.Model
 
         [MaxLength(255)]
         public string Reason { get; set; }
-      
+
 
         [MaxLength(50)]
-        public string Status { get; set; }
+        public string Status { get; set; } = "Schedule";
+
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
