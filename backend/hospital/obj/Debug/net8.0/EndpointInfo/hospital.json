@@ -663,6 +663,77 @@
         }
       }
     },
+    "/api/Nurse/Patientlist": {
+      "get": {
+        "tags": [
+          "Nurse"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nurse/appointmentnurse": {
+      "get": {
+        "tags": [
+          "Nurse"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nurse/updateprescription/{id}": {
+      "put": {
+        "tags": [
+          "Nurse"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Prescription"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Prescription"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Prescription"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Prescription"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Receptionist/Register": {
       "post": {
         "tags": [
@@ -1082,14 +1153,6 @@
           },
           "user": {
             "$ref": "#/components/schemas/User"
-          },
-          "doctor": {
-            "$ref": "#/components/schemas/Doctor"
-          },
-          "doctorId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
           }
         },
         "additionalProperties": false

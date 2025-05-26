@@ -388,6 +388,47 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "hospital.Controller.NurseController",
+    "Method": "GetAppointmentfornurse",
+    "RelativePath": "api/Nurse/appointmentnurse",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.NurseController",
+    "Method": "GetPatientlist",
+    "RelativePath": "api/Nurse/Patientlist",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.NurseController",
+    "Method": "updatePrescription",
+    "RelativePath": "api/Nurse/updateprescription/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "prescription",
+        "Type": "hospital.Model.Prescription",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "hospital.Controller.ReceptionistController",
     "Method": "CreateAppointment",
     "RelativePath": "api/Receptionist/Create-appointment",

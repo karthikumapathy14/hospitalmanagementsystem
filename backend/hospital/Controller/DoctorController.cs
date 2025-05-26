@@ -256,13 +256,5 @@ namespace hospital.Controller
         }
 
 
-
-
-
-
-
-
-
-
     }
 }

@@ -21,10 +21,5 @@ namespace hospital.Model
 
         public User User { get; set; }
 
-      
-        public Doctor Doctor { get; set; }
-        [ForeignKey("Doctor")]
-        public int? DoctorId { get; set; }
-
     }
 }

@@ -183,8 +183,7 @@ namespace hospital.Controller
                 nurseid.PhoneNo = nurse.PhoneNo;
            
                 nurseid.status = nurse.status;
-            if(nurse.DoctorId!=null)
-                nurseid.DoctorId = nurse.DoctorId;
+      
             if (!string.IsNullOrWhiteSpace(nurse.Role) && nurse.Role != "string")
                 nurseid.Role = nurse.Role;
 

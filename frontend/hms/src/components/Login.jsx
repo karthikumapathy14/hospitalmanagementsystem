@@ -44,7 +44,7 @@ const Login = () => {
 
       if (role.includes('Admin')) navigate('/Admindashboard');
       else if (role.includes('Receptionist')) navigate('/recepdashboard');
-      else if (role.includes('Nurse')) navigate('/listdoc');
+      else if (role.includes('Nurse')) navigate('/Viewappointmentnurse');
       else if (role.includes('Doctor')) navigate('/viewappointment');
       else navigate('/unauthorized');
     } catch (error) {

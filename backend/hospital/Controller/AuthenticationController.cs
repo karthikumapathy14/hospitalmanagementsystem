@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Data;
 using System.IdentityModel.Tokens.Jwt;
+using System.Numerics;
 using System.Security.Claims;
 using System.Text;
 
@@ -109,6 +110,7 @@ namespace hospital.Controller
             return Ok("User registered successfully!");
         }
 
+
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDTO loginDto)
         {
@@ -155,6 +157,7 @@ namespace hospital.Controller
                         return Unauthorized("Nurse record not found.");
                     if (!nurse.status)
                         return BadRequest("Your account is inactive. Contact admin.");
+                    claims.Add(new Claim("NurseId", nurse.Id.ToString()));
                 }
 
                 // Receptionist check
@@ -181,11 +184,13 @@ namespace hospital.Controller
 
                 // Extract doctorId if available
                 string doctorId = claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value;
+                string nurseId = claims.FirstOrDefault(c => c.Type == "NurseId")?.Value;
 
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo,
+                    nurseID=nurseId,
                     doctorID = doctorId // optional: frontend can store/use if needed
                 });
             }

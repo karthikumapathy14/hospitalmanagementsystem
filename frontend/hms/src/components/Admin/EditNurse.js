@@ -10,11 +10,11 @@ const EditNurse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios.get('https://localhost:7058/api/Admin/docGetAll')
-      .then(res => setDoctors(res.data))
-      .catch(err => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   axios.get('https://localhost:7058/api/Admin/docGetAll')
+  //     .then(res => setDoctors(res.data))
+  //     .catch(err => console.log(err));
+  // }, []);
 
   useEffect(() => {
     axios.get(`https://localhost:7058/api/Admin/getbyid-nurse/${id}`)
@@ -80,7 +80,7 @@ const EditNurse = () => {
               <input type="text" name="address" value={nurse.address} onChange={handleChange} className="form-control rounded-pill" required />
             </div>
 
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label className="form-label fw-bold">Doctor</label>
               <select name="doctorId" value={nurse.doctorId} onChange={handleChange} className="form-select rounded-pill" required>
                 <option value="" disabled>- Select Doctor -</option>
@@ -88,7 +88,7 @@ const EditNurse = () => {
                   <option key={doctor.id} value={doctor.id}>{doctor.userName}</option>
                 ))}
               </select>
-            </div>
+            </div> */}
 
             <div className="mb-4">
               <label className="form-label fw-bold">Status</label>

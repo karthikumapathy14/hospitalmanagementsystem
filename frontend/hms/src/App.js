@@ -28,6 +28,7 @@ import DoctorSideEditAppointment from './components/Doctor/DoctorSideEditAppoint
 import Viewappointment from './components/Doctor/Viewappointment.js';
 import Addprescription from './components/Doctor/Addprescription.js';
 import PatientHistory from './components/Doctor/PatientHistory.js';
+import Viewappointmentnurse from './components/Nurse/Viewappointmentnurse.js';
 
 
 
@@ -78,6 +79,9 @@ function App() {
               <Route path="/DoctorSideEditAppointment/:id" element={<DoctorSideEditAppointment />} />
               <Route path='/Addprescription' element={<Addprescription/>}></Route>
               <Route path='/PatientHistory' element={<PatientHistory/>}></Route>
+
+              {/* nurse dashboard */}
+              <Route path='/Viewappointmentnurse' element={<Viewappointmentnurse/>}></Route>
 
             </Routes>
           </div>
