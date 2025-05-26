@@ -118,44 +118,44 @@ namespace hospital.Controller
         //}
 
 
-        //[HttpPost("postprescription")]
-        //public async Task<IActionResult> Createprescription([FromBody] Prescription prescription)
-        //{
-          
-        //    var appointment = await _dbcontext.appointments
-        //        .Include(a => a.Patient)
-        //        .ThenInclude(p => p.User)
-        //        .FirstOrDefaultAsync(a => a.AppointmentId == prescription.AppointmentId);
+        [HttpPost("postprescription")]
+        public async Task<IActionResult> Createprescription([FromBody] Prescription prescription)
+        {
 
-        //    if (appointment == null)
-        //    {
-        //        return NotFound("Appointment not found.");
-        //    }
+            var appointment = await _dbcontext.appointments
+                .Include(a => a.Patient)
+                .ThenInclude(p => p.User)
+                .FirstOrDefaultAsync(a => a.AppointmentId == prescription.AppointmentId);
 
-            
-        //    prescription.Appointment = appointment;
+            if (appointment == null)
+            {
+                return NotFound("Appointment not found.");
+            }
 
-        //    _dbcontext.Prescription.Add(prescription);
-        //    await _dbcontext.SaveChangesAsync();
 
-        //    return Ok(prescription);
-        //}
+            prescription.Appointment = appointment;
 
-        //[HttpGet("filterbyid/{id}")]
-        //public async Task<IActionResult> filterbyid (int id)
-        //{
-        //    var appointment = await _dbcontext.appointments
-        //        .Include(p => p.Patient)
-        //        .Where(p => p.PatientId == id)
-        //        .Select(p => new
-        //        {
-        //            p.PatientId,
-        //            p.DoctorId,
-        //            Patientid=p.Patient.patientid
-        //        }).FirstOrDefaultAsync();
+            _dbcontext.Prescription.Add(prescription);
+            await _dbcontext.SaveChangesAsync();
 
-        //    return Ok(appointment);
-        //}
+            return Ok(prescription);
+        }
+
+        [HttpGet("filterbyid/{id}")]
+        public async Task<IActionResult> filterbyid(int id)
+        {
+            var appointment = await _dbcontext.appointments
+                .Include(p => p.Patient)
+                .Where(p => p.PatientId == id)
+                .Select(p => new
+                {
+                    p.PatientId,
+                    p.DoctorId,
+                    Patientid = p.Patient.patientid
+                }).FirstOrDefaultAsync();
+
+            return Ok(appointment);
+        }
 
         [HttpGet("history/{patientId}")]
         public async Task<IActionResult> GetPatientHistory(int patientId)
@@ -171,7 +171,7 @@ namespace hospital.Controller
                     a.AppointmentId,
                     a.AppointmentDate,
                     PatientId = a.PatientId,
-                    PatientUniqueId = a.Patient.patientid, // ✅ this is the string `patientid` from Patient model
+                    PatientUniqueId = a.Patient.patientid, 
 
                     Doctor = new
                     {
