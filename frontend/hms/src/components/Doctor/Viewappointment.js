@@ -69,7 +69,7 @@ const Appointments = () => {
               <p><strong>Patient ID:</strong> {appointment.patientid}</p>
               <p><strong>Patient Name:</strong> {appointment.patientName}</p>
               <p><strong>Reason:</strong> {appointment.reason}</p>
-              <p><strong>Status:</strong> {appointment.status}</p>
+              {/* <p><strong>Status:</strong> {appointment.status}</p> */}
 
               <button
                 className="btn btn-primary"
