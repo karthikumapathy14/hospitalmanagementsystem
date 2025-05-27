@@ -20,6 +20,7 @@ const Viewappointmentnurse = () => {
       .catch((err) => console.log(err));
   }, []);
 
+
   const handleEdit = (appointmentId) => {
     navigate(`/Editappointmentnurse/${appointmentId}`);
   };
@@ -78,6 +79,7 @@ const Viewappointmentnurse = () => {
           )}
         </div>
       </div>
+
     </div>
   );
 };
