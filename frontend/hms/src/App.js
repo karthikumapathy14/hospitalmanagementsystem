@@ -29,6 +29,7 @@ import Viewappointment from './components/Doctor/Viewappointment.js';
 import Addprescription from './components/Doctor/Addprescription.js';
 import PatientHistory from './components/Doctor/PatientHistory.js';
 import Viewappointmentnurse from './components/Nurse/Viewappointmentnurse.js';
+import Editappointmentnurse from './components/Nurse/Editappointmentnurse.js';
 
 
 
@@ -82,6 +83,7 @@ function App() {
 
               {/* nurse dashboard */}
               <Route path='/Viewappointmentnurse' element={<Viewappointmentnurse/>}></Route>
+              <Route path='/Editappointmentnurse/:id' element={<Editappointmentnurse/>}></Route>
 
             </Routes>
           </div>
