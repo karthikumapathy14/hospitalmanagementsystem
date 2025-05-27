@@ -1,22 +1,68 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-
 const PatientHistory = () => {
+  const [history, setHistory] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredHistory, setFilteredHistory] = useState([]);
 
-  const [history, gethistory] = useState([]);
-
+  // Fetch history once on mount
   useEffect(() => {
-   
-
     axios.get('https://localhost:7058/api/Doctor/history')
-      .then((res) => gethistory(res.data))
+      .then((res) => {
+        setHistory(res.data);
+        setFilteredHistory(res.data); // set initial filtered data
+      })
       .catch((err) => console.log(err));
   }, []);
+
+  // Run filter whenever search term or original data changes
+  useEffect(() => {
+    const term = searchTerm.toLowerCase();
+
+    const filtered = history.filter(item => {
+      const patientId = String(item?.patient?.patientid || '');
+      const patientDbId = String(item?.patient?.id || '');
+      const appointmentId = String(item?.appointmentId || '');
+      const appointmentDate = String(item?.appointmentDate || '');
+      const reason = String(item?.reason || '');
+      const doctorName = String(item?.doctor?.docname || '');
+      const departmentName = String(item?.doctor?.department?.departmentName || '');
+      const diagnosis = String(item?.prescription?.diagnosis || '');
+      const medications = String(item?.prescription?.medications || '');
+      const notes = String(item?.prescription?.notes || '');
+      const prescribedDate = String(item?.prescription?.prescribedDate || '');
+
+      return (
+        patientId.toLowerCase().includes(term) ||
+        patientDbId.toLowerCase().includes(term) ||
+        appointmentId.toLowerCase().includes(term) ||
+        appointmentDate.toLowerCase().includes(term) ||
+        reason.toLowerCase().includes(term) ||
+        doctorName.toLowerCase().includes(term) ||
+        departmentName.toLowerCase().includes(term) ||
+        diagnosis.toLowerCase().includes(term) ||
+        medications.toLowerCase().includes(term) ||
+        notes.toLowerCase().includes(term) ||
+        prescribedDate.toLowerCase().includes(term)
+      );
+    });
+
+    setFilteredHistory(filtered);
+  }, [searchTerm, history]);
 
   return (
     <div className="container mt-5">
       <h1 className="mb-4 text-center">Patient History</h1>
+      <div className="mb-3 d-flex gap-2">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Search by Patient ID or Doctor Name"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
 
       <div className="table-responsive">
         <table className="table table-bordered table-striped">
@@ -36,7 +82,7 @@ const PatientHistory = () => {
             </tr>
           </thead>
           <tbody>
-            {history.length > 0 ? history.map((item, index) => (
+            {filteredHistory.length > 0 ? filteredHistory.map((item, index) => (
               <tr key={index}>
                 <td>{item.patient.id}</td>
                 <td>{item.patient.patientid}</td>
@@ -45,14 +91,14 @@ const PatientHistory = () => {
                 <td>{item.reason}</td>
                 <td>{item.doctor?.docname || '-'}</td>
                 <td>{item.doctor?.department?.departmentName || '-'}</td>
-                <td>{item.prescription?.diagnosis }</td>
+                <td>{item.prescription?.diagnosis}</td>
                 <td>{item.prescription?.medications || 'N/A'}</td>
                 <td>{item.prescription?.notes || 'N/A'}</td>
                 <td>{item.prescription?.prescribedDate ? new Date(item.prescription.prescribedDate).toLocaleDateString() : 'N/A'}</td>
               </tr>
             )) : (
               <tr>
-                <td colSpan="10" className="text-center">No history available.</td>
+                <td colSpan="11" className="text-center">No history available.</td>
               </tr>
             )}
           </tbody>
