@@ -185,7 +185,11 @@ namespace hospital.Controller
                 nurseid.status = nurse.status;
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       
+=======
+            
+>>>>>>> Stashed changes
 =======
             
 >>>>>>> Stashed changes
