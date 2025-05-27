@@ -9,9 +9,7 @@ const Login = () => {
   const [data, setData] = useState({ Email: '', Password: '' });
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  // const [doctorId, setLocalDoctorId] = useState(null); // local state for doctorId
-
-  const { setDoctorId,doctorId } = useAuth(); // from AuthContext
+  const { setDoctorId, doctorId } = useAuth();
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -35,8 +33,7 @@ const Login = () => {
 
       if (doctorIdFromToken) {
         localStorage.setItem('doctorId', doctorIdFromToken);
-        setDoctorId(doctorIdFromToken); // for context
-        // setLocalDoctorId(doctorIdFromToken); // for local component usage
+        setDoctorId(doctorIdFromToken);
       }
 
       const role = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
@@ -57,21 +54,23 @@ const Login = () => {
   };
 
   return (
-    <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light">
-      <div className="card shadow-lg border-0" style={{ maxWidth: '400px', width: '100%' }}>
-        <div className="card-header bg-primary text-white text-center">
-          <h3 className="mb-0">Hospital Login</h3>
+    <div className="min-vh-100 d-flex align-items-center justify-content-center" style={{ background: '#e9f7fc' }}>
+      <div className="card shadow-lg border-0 rounded-4" style={{ maxWidth: '420px', width: '100%' }}>
+        <div className="card-header bg-info text-white text-center rounded-top-4">
+          <h3 className="mb-1"><i className="bi bi-hospital"></i> Hospital Login</h3>
+          <p className="mb-0 small">Access your healthcare dashboard</p>
         </div>
-        <form className="card-body" onSubmit={handleFormSubmit}>
+
+        <form className="card-body px-4 py-3" onSubmit={handleFormSubmit}>
           {message && <div className="alert alert-danger text-center">{message}</div>}
 
           <div className="mb-3">
-            <label className="form-label">Email</label>
+            <label className="form-label">Email address</label>
             <input
               type="email"
               name="Email"
               className="form-control"
-              placeholder="Enter your Email"
+              placeholder="Enter your email"
               value={data.Email}
               onChange={handleInputChange}
               required
@@ -84,19 +83,23 @@ const Login = () => {
               type="password"
               name="Password"
               className="form-control"
-              placeholder="Enter your Password"
+              placeholder="Enter your password"
               value={data.Password}
               onChange={handleInputChange}
               required
             />
           </div>
 
-          <button className="btn btn-primary w-100" type="submit" disabled={loading}>
+          <button className="btn btn-info w-100 text-white" type="submit" disabled={loading}>
             {loading ? <span className="spinner-border spinner-border-sm" /> : 'Login'}
           </button>
         </form>
 
-        {/* Only show Addprescription if doctorId is available */}
+        <div className="text-center pb-3">
+          <small className="text-muted">© 2025 HealthyLife Hospital</small>
+        </div>
+
+        {/* Show Addprescription if doctor is logged in */}
         {doctorId && <Addprescription doctorId={doctorId} />}
       </div>
     </div>
