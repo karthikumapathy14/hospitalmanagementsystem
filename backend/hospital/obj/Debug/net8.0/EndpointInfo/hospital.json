@@ -992,6 +992,42 @@
           }
         }
       }
+    },
+    "/api/Receptionist/Billgeneration": {
+      "post": {
+        "tags": [
+          "Receptionist"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Bill"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Bill"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Bill"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Bill"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1056,6 +1092,48 @@
           },
           "nurse": {
             "$ref": "#/components/schemas/Nurse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Bill": {
+        "type": "object",
+        "properties": {
+          "billId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "appointmentId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "consultationFee": {
+            "type": "number",
+            "format": "double"
+          },
+          "treatmentCharges": {
+            "type": "number",
+            "format": "double"
+          },
+          "medicationCharges": {
+            "type": "number",
+            "format": "double"
+          },
+          "otherCharges": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalAmount": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "billDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "appointment": {
+            "$ref": "#/components/schemas/Appointment"
           }
         },
         "additionalProperties": false
