@@ -446,6 +446,22 @@
   },
   {
     "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "CreateBill",
+    "RelativePath": "api/Receptionist/Billgeneration",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "hospital.Model.Bill",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
     "Method": "CreateAppointment",
     "RelativePath": "api/Receptionist/Create-appointment",
     "HttpMethod": "POST",

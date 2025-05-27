@@ -241,6 +241,30 @@ namespace hospital.Controller
             return Ok(appointment);
         }
 
+        [HttpPost("Billgeneration")]
+        public async Task<IActionResult> CreateBill(Bill dto)
+        {
+            var bills = new Bill
+            {
+                AppointmentId = dto.AppointmentId,
+                ConsultationFee = dto.ConsultationFee,
+                TreatmentCharges = dto.TreatmentCharges,
+                MedicationCharges = dto.MedicationCharges,
+                OtherCharges = dto.OtherCharges,
+                BillDate = DateTime.Now
+            };
+             _dbcontext.bill.Add(bills);
+            await _dbcontext.SaveChangesAsync();
+
+            return Ok ("Bill Geneated");
+        }
+
+        [HttpGet("bill")]
+        public async Task<IActionResult> getbill()
+        {
+            var detail = await _dbcontext.bill.ToListAsync();
+            return Ok(detail);
+        }
 
     }
 }
