@@ -22,5 +22,6 @@ namespace hospital.Model
         public User User { get; set; }
 
 
+
     }
 }

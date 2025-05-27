@@ -184,6 +184,7 @@ namespace hospital.Controller
            
                 nurseid.status = nurse.status;
 
+
             if (!string.IsNullOrWhiteSpace(nurse.Role) && nurse.Role != "string")
                 nurseid.Role = nurse.Role;
 
