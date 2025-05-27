@@ -185,12 +185,16 @@ namespace hospital.Controller
                 nurseid.status = nurse.status;
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       
 =======
             
 >>>>>>> Stashed changes
 =======
             
+>>>>>>> Stashed changes
+=======
+
 >>>>>>> Stashed changes
             if (!string.IsNullOrWhiteSpace(nurse.Role) && nurse.Role != "string")
                 nurseid.Role = nurse.Role;

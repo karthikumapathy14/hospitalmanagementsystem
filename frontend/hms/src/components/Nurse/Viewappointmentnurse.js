@@ -15,8 +15,8 @@ const Viewappointmentnurse = () => {
         .catch((err)=>console.log(err))
     },[])
 
-    const handleEdit=()=>{
-        navigate(`/`)
+    const handleEdit=(appointmentId)=>{
+        navigate(`/Editappointmentnurse/${appointmentId}`)
     }
 
   return (
@@ -42,7 +42,7 @@ const Viewappointmentnurse = () => {
                 <td>{item.reason}</td>
                 <td>{item.status}</td>
                 <td>{item.doctorName}</td>
-                <td><button className='btn btn-warning' onClick={()=>handleEdit}>Edit</button></td>
+                <td><button className='btn btn-warning' onClick={()=>handleEdit(item.appointmentId)}>Edit</button></td>
                 </tr>)}
         </tbody>
       </table>

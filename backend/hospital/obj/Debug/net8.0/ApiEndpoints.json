@@ -399,6 +399,22 @@
   },
   {
     "ContainingType": "hospital.Controller.NurseController",
+    "Method": "getPrescriptionbyid",
+    "RelativePath": "api/Nurse/getbyidprescibe/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.NurseController",
     "Method": "GetPatientlist",
     "RelativePath": "api/Nurse/Patientlist",
     "HttpMethod": "GET",

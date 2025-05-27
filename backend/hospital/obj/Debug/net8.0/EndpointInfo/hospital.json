@@ -687,6 +687,29 @@
         }
       }
     },
+    "/api/Nurse/getbyidprescibe/{id}": {
+      "get": {
+        "tags": [
+          "Nurse"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Nurse/updateprescription/{id}": {
       "put": {
         "tags": [

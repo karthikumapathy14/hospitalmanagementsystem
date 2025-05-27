@@ -55,15 +55,26 @@ namespace hospital.Controller
             return Ok(appointment);
         }
 
+        [HttpGet("getbyidprescibe/{id}")]
+        public async Task<IActionResult> getPrescriptionbyid(int id)
+        {
+            var prescribe = await _dbcontext.Prescription.FirstOrDefaultAsync(a=>a.AppointmentId==id);
+            if (prescribe == null)
+                return NotFound();
+            return Ok(prescribe);
+        }
+
         [HttpPut("updateprescription/{id}")]
         public async Task<IActionResult> updatePrescription(int id,Prescription prescription)
         {
-            var existing =  _dbcontext.Prescription.FirstOrDefault(a=>a.Id==id);
+            var existing =  _dbcontext.Prescription.FirstOrDefault(a=>a.AppointmentId==id);
             if (existing == null) return NotFound();
 
             existing.Diagnosis = prescription.Diagnosis;
             existing.Notes = prescription.Notes;
             existing.Medications = prescription.Medications;
+
+            await _dbcontext.SaveChangesAsync();
 
             return Ok("Prescription Updated Successfully");
 

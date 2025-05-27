@@ -194,11 +194,7 @@ namespace hospital.Controller
                     doctorID = doctorId // optional: frontend can store/use if needed
                 });
             }
-
             return Unauthorized("Invalid email or password");
         }
-
-
-
     }
 }
