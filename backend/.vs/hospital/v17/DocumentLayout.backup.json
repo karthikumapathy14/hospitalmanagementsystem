@@ -114,11 +114,12 @@
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AdminController.cs",
               "RelativeDocumentMoniker": "hospital\\Controller\\AdminController.cs",
-              "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AdminController.cs",
-              "RelativeToolTip": "hospital\\Controller\\AdminController.cs",
-              "ViewState": "AgIAAKgAAAAAAAAAAAAAwLkAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AdminController.cs*",
+              "RelativeToolTip": "hospital\\Controller\\AdminController.cs*",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAAwLkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T04:25:30.811Z"
+              "WhenOpened": "2025-05-27T04:25:30.811Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -128,7 +129,7 @@
               "RelativeDocumentMoniker": "hospital\\Model\\Nurse.cs",
               "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Nurse.cs",
               "RelativeToolTip": "hospital\\Model\\Nurse.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAIwBcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAwwBYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-27T04:25:30.814Z",
               "EditorCaption": ""
