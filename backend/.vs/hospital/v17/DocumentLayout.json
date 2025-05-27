@@ -82,8 +82,7 @@
               "RelativeToolTip": "hospital\\Controller\\AuthenticationController.cs",
               "ViewState": "AgIAAKsAAAAAAAAAAAAwwL4AAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T10:36:36.63Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-26T10:36:36.63Z"
             },
             {
               "$type": "Document",
@@ -93,7 +92,7 @@
               "RelativeDocumentMoniker": "hospital\\Controller\\NurseController.cs",
               "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\NurseController.cs",
               "RelativeToolTip": "hospital\\Controller\\NurseController.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAQwEMAAAA7AAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAQwD0AAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-26T10:34:57.973Z",
               "EditorCaption": ""
@@ -132,8 +131,7 @@
               "RelativeToolTip": "hospital\\Model\\Nurse.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAA1wBYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T10:05:05.862Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-26T10:05:05.862Z"
             },
             {
               "$type": "Document",
@@ -157,8 +155,7 @@
               "RelativeToolTip": "hospital\\Model\\Prescription.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAxwAgAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T09:51:40.342Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-26T09:51:40.342Z"
             },
             {
               "$type": "Document",
@@ -170,8 +167,7 @@
               "RelativeToolTip": "hospital\\Controller\\DoctorController.cs",
               "ViewState": "AgIAAFAAAAAAAAAAAAAIwDYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T09:51:40.345Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-26T09:51:40.345Z"
             },
             {
               "$type": "Document",
