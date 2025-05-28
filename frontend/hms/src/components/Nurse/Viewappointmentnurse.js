@@ -21,6 +21,7 @@ const Viewappointmentnurse = () => {
   }, []);
 
 
+
   const handleEdit = (appointmentId) => {
     navigate(`/Editappointmentnurse/${appointmentId}`);
   };
