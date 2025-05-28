@@ -446,6 +446,16 @@
   },
   {
     "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "getbill",
+    "RelativePath": "api/Receptionist/bill",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
     "Method": "CreateBill",
     "RelativePath": "api/Receptionist/Billgeneration",
     "HttpMethod": "POST",

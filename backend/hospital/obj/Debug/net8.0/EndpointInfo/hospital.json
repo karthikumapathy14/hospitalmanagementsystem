@@ -1028,6 +1028,18 @@
           }
         }
       }
+    },
+    "/api/Receptionist/bill": {
+      "get": {
+        "tags": [
+          "Receptionist"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
