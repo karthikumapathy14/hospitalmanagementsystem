@@ -266,5 +266,11 @@ namespace hospital.Controller
             return Ok(detail);
         }
 
+        [HttpGet("billbyid/{id}")]
+        public async Task<IActionResult> GetBillbyid(int id)
+        {
+            var exists =  _dbcontext.bill.Any(b => b.AppointmentId == id);
+            return Ok(new { billexists = exists });
+        }
     }
 }

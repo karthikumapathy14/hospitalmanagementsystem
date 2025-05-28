@@ -30,6 +30,8 @@ import Addprescription from './components/Doctor/Addprescription.js';
 import PatientHistory from './components/Doctor/PatientHistory.js';
 import Viewappointmentnurse from './components/Nurse/Viewappointmentnurse.js';
 import Editappointmentnurse from './components/Nurse/Editappointmentnurse.js';
+import Bill from './components/Receptionist/Bill.js';
+import Viewapatientappointment from './components/Patient.js/viewpatientappointment.js'
 
 
 
@@ -73,6 +75,7 @@ function App() {
               <Route path='/Createappointment' element={<Makeappointment />}></Route>
               <Route path='/Listappointment' element={<ListAppointment />}></Route>
               <Route path='/editappointment/:id' element={<Editappointment />}></Route>
+              <Route path='/billgenerate' element={<Bill/>}></Route>
 
               {/* Doctor dashboard */}
               <Route path='/DoctorSidebar' element={<DoctorSidebarWrapper />}></Route>
@@ -84,6 +87,9 @@ function App() {
               {/* nurse dashboard */}
               <Route path='/Viewappointmentnurse' element={<Viewappointmentnurse/>}></Route>
               <Route path='/Editappointmentnurse/:id' element={<Editappointmentnurse/>}></Route>
+
+              {/* {patient dashboard} */}
+              <Route path='/Viewapatientappointment' element={<Viewapatientappointment/>}></Route>
 
             </Routes>
           </div>

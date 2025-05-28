@@ -29,6 +29,7 @@ const Login = () => {
       localStorage.setItem('token', token);
 
       const decoded = jwtDecode(token);
+      const patientId = decoded.PatientId;
       const doctorIdFromToken = decoded['DoctorId'];
 
       if (doctorIdFromToken) {
@@ -43,6 +44,7 @@ const Login = () => {
       else if (role.includes('Receptionist')) navigate('/recepdashboard');
       else if (role.includes('Nurse')) navigate('/Viewappointmentnurse');
       else if (role.includes('Doctor')) navigate('/viewappointment');
+      else if (role.includes('Patient')) navigate('/Viewapatientappointment')
       else navigate('/unauthorized');
     } catch (error) {
       console.error('Login failed:', error);
