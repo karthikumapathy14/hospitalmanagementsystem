@@ -52,7 +52,7 @@ const CreatePatient = () => {
         Role: "Patient",
         PasswordHash: ""
       });
-      setTimeout(() => navigate('/listpatient'), 4000);
+      setTimeout(() => null, 3000);
     } catch (err) {
       setMessage({
         text:
