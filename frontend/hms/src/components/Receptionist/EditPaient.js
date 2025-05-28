@@ -43,7 +43,8 @@ const EditPatient = () => {
       .then((res) => {
         setData(res.data);
         setMessage("Patient details updated successfully");
-        setTimeout(() => setMessage(null), 3000);
+        setTimeout(() => setMessage(navigate(-1)), 3000);
+        
       })
       .catch((err) => {
         setMessage(err.response?.data[0]?.description || "Update failed");

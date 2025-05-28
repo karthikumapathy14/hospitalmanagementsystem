@@ -26,7 +26,7 @@ const RegisterForm = () => {
     try {
       const response = await axios.post('https://localhost:7058/api/Authentication/Register', formData);
       setMessage("✅ " + response.data);
-      setTimeout(() => navigate('/login'), 2000);
+      setTimeout(() => null, 2000);
     } catch (error) {
       if (error.response) {
         setMessage("❌ " + (error.response.data[0]?.description || "Registration failed."));
@@ -42,7 +42,7 @@ const RegisterForm = () => {
       <div className="flex-grow-1 bg-light">
         <div className="container d-flex justify-content-center align-items-center min-vh-100">
           <div className="card shadow rounded-4 p-4" style={{ maxWidth: '500px', width: '100%' }}>
-            <h3 className="text-center text-primary mb-4">🏥 Hospital Registration</h3>
+            <h3 className="text-center text-primary mb-4">🏥 User Registration</h3>
             {message && <div className="alert alert-info">{message}</div>}
 
             <form onSubmit={handleSubmit}>

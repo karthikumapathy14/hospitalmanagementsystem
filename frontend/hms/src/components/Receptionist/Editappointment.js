@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Editappointment = () => {
   const [forms, setforms] = useState({
@@ -12,6 +12,7 @@ const Editappointment = () => {
     reason: "",
     status: ""
   });
+  const navigate = useNavigate();
 
   const { id } = useParams();
   const [dept, getdept] = useState([]);
@@ -71,6 +72,7 @@ const Editappointment = () => {
       .then((res) => {
         console.log(res.data);
         alert("Updated successfully");
+        navigate(-1);
       })
       .catch((err) => console.log(err));
   };

@@ -68,9 +68,9 @@ const PatientHistory = () => {
         <table className="table table-bordered table-striped">
           <thead className="table-dark">
             <tr>
-              <th>Patient Id</th>
+             
               <th>Patient Unique Id</th>
-              <th>Appointment ID</th>
+              
               <th>Appointment Date</th>
               <th>Reason</th>
               <th>Doctor Name</th>
@@ -84,9 +84,9 @@ const PatientHistory = () => {
           <tbody>
             {filteredHistory.length > 0 ? filteredHistory.map((item, index) => (
               <tr key={index}>
-                <td>{item.patient.id}</td>
+                {/* <td>{item.patient.id}</td> */}
                 <td>{item.patient.patientid}</td>
-                <td>{item.appointmentId}</td>
+                {/* <td>{item.appointmentId}</td> */}
                 <td>{item.appointmentDate}</td>
                 <td>{item.reason}</td>
                 <td>{item.doctor?.docname || '-'}</td>
