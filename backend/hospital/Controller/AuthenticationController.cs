@@ -169,6 +169,17 @@ namespace hospital.Controller
                     if (!receptionist.status)
                         return BadRequest("Your account is inactive. Contact admin.");
                 }
+                else if (roles.Contains("Patient"))
+                {
+                    var patient = await _dbcontext.Patients.FirstOrDefaultAsync(p => p.Email == loginDto.Email);
+
+                    if (patient == null)
+                        return Unauthorized("Patient record not found.");
+
+                    // ✅ Ensure proper claim key
+                    claims.Add(new Claim("PatientId", patient.Id.ToString()));
+                }
+
 
                 // Generate token
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Secretkey"]));
@@ -185,12 +196,14 @@ namespace hospital.Controller
                 // Extract doctorId if available
                 string doctorId = claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value;
                 string nurseId = claims.FirstOrDefault(c => c.Type == "NurseId")?.Value;
+                string patientId = claims.FirstOrDefault(c => c.Type == "PatientId")?.Value;
 
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo,
                     nurseID=nurseId,
+                    patientID=patientId,
                     doctorID = doctorId // optional: frontend can store/use if needed
                 });
             }

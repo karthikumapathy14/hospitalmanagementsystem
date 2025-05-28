@@ -445,6 +445,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "hospital.Controller.PatientContoller",
+    "Method": "GetAppointmentsForPatient",
+    "RelativePath": "api/PatientContoller/api/patient/appointments/my",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "hospital.Controller.ReceptionistController",
     "Method": "getbill",
     "RelativePath": "api/Receptionist/bill",
@@ -452,6 +462,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "GetBillbyid",
+    "RelativePath": "api/Receptionist/billbyid/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

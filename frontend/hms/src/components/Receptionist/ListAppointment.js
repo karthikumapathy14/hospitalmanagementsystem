@@ -1,31 +1,49 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import Editappointment from "./Editappointment";
-import ReceptionistNavbar from "./ReceptionistNavbar";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import ReceptionistNavbar from './ReceptionistNavbar';
+import { useAuth } from '../AuthContext'; // Update the path as needed
 
 const ListAppointment = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const { id } = useParams();
+  const { setAppid } = useAuth(); // Context function to set appointment ID
+  const [bills, setBills] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("https://localhost:7058/api/Receptionist/getappointment")
-      .then((res) => {const sorteddata = res.data.sort((a,b)=>new Date(b.appointmentDate)-new Date (a.appointmentDate));
-        setData(sorteddata)})
+    axios.get("https://localhost:7058/api/Receptionist/getappointment")
+      .then((res) => setData(res.data))
       .catch((err) => console.log(err));
+
+    axios.get("https://localhost:7058/api/Receptionist/bill")
+      .then(res => setBills(res.data))
+      .catch(err => console.log(err));
   }, []);
 
+  const billnavi = async (appointmentId) => {
+    try {
+      const response = await axios.get(`https://localhost:7058/api/Receptionist/billbyid/${appointmentId}`);
+      if (response.data.exists) {
+        alert("Bill already generated for this appointment.");
+      } else {
+        setAppid(appointmentId);
+        navigate("/billgenerate");
+      }
+    } catch (error) {
+      console.error("Error checking bill existence:", error);
+      alert("Error checking bill. Please try again.");
+    }
+  };
+
+  // Check if bill already exists for the appointment
+  const isPaid = (appointmentId) => {
+    return bills.some(bill => bill.appointmentId === appointmentId);
+  };
+
   return (
-    <div
-      className="d-flex"
-      style={{ minHeight: "100vh", backgroundColor: "#f8f9fa" }}
-    >
+    <div className="d-flex" style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
       <ReceptionistNavbar />
-      <div
-        className="flex-grow-1 p-4"
-        style={{ marginLeft: "260px", width: "calc(100% - 260px)" }}
-      >
+      <div className="flex-grow-1 p-4" style={{ marginLeft: '260px', width: 'calc(100% - 260px)' }}>
         <div className="container-fluid py-4">
           <div className="card shadow-sm border-0">
             <div className="container mt-5">
@@ -41,6 +59,7 @@ const ListAppointment = () => {
                       <th>Appointment Time</th>
                       <th>Reason</th>
                       <th>Status</th>
+                      <th>Bill Status</th>
                       <th>Created At</th>
                       <th>Action</th>
                     </tr>
@@ -52,23 +71,20 @@ const ListAppointment = () => {
                           <td>{item.patientid}</td>
                           <td>{item.departmentName}</td>
                           <td>{item.doctorName}</td>
-                          <td>
-                            {new Date(
-                              item.appointmentDate
-                            ).toLocaleDateString()}
-                          </td>
+                          <td>{new Date(item.appointmentDate).toLocaleDateString()}</td>
                           <td>{item.appointmentTime}</td>
                           <td>{item.reason}</td>
                           <td>
-                            <span
-                              className={`badge ${
-                                item.status === "Confirmed"
-                                  ? "bg-success"
-                                  : "bg-secondary"
-                              }`}
-                            >
+                            <span className={`badge ${item.status === 'Confirmed' ? 'bg-success' : 'bg-secondary'}`}>
                               {item.status}
                             </span>
+                          </td>
+                          <td>
+                            {isPaid(item.appointmentId) ? (
+                              <span className="badge bg-success">Paid</span>
+                            ) : (
+                              <span className="badge bg-warning text-dark">Pending</span>
+                            )}
                           </td>
                           <td>{new Date(item.createdAt).toLocaleString()}</td>
                           <td>
@@ -77,14 +93,20 @@ const ListAppointment = () => {
                                 <i className="bi bi-pencil-square"></i> Edit
                               </button>
                             </Link>
+                            <button
+                              className="btn btn-outline-secondary ms-2"
+                              onClick={() => billnavi(item.appointmentId)}
+                              disabled={isPaid(item.appointmentId)}
+                              title={isPaid(item.appointmentId) ? "Bill already generated" : "Generate bill"}
+                            >
+                              Bill Generate
+                            </button>
                           </td>
                         </tr>
                       ))
                     ) : (
                       <tr>
-                        <td colSpan="9" className="text-center">
-                          No appointments found.
-                        </td>
+                        <td colSpan="10" className="text-center">No appointments found.</td>
                       </tr>
                     )}
                   </tbody>

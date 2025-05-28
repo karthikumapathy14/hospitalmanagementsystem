@@ -757,6 +757,18 @@
         }
       }
     },
+    "/api/PatientContoller/api/patient/appointments/my": {
+      "get": {
+        "tags": [
+          "PatientContoller"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Receptionist/Register": {
       "post": {
         "tags": [
@@ -1033,6 +1045,29 @@
       "get": {
         "tags": [
           "Receptionist"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Receptionist/billbyid/{id}": {
+      "get": {
+        "tags": [
+          "Receptionist"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "responses": {
           "200": {
