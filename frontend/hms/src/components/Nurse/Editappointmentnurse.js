@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
+
 import { useParams, useNavigate } from "react-router-dom";
 import Nursesidebar from "./Nursesidebar";
 
 const Editappointmentnurse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -22,6 +24,7 @@ const Editappointmentnurse = () => {
 
         console.error(err);
 
+
         setLoading(false);
       });
   }, [id]);
@@ -31,11 +34,13 @@ const Editappointmentnurse = () => {
     axios
       .put(`https://localhost:7058/api/Nurse/updateprescription/${id}`, data)
 
+
       .then(() => {
         alert("✅ Prescription updated successfully");
         navigate("/Viewappointmentnurse");
       })
       .catch((err) => console.error(err));
+
 
   };
 
@@ -45,11 +50,13 @@ const Editappointmentnurse = () => {
 
   if (loading) {
 
+
     return (
       <div className="d-flex justify-content-center align-items-center vh-100">
         <div className="spinner-border text-primary" role="status"></div>
       </div>
     );
+
 
   }
 
@@ -57,7 +64,9 @@ const Editappointmentnurse = () => {
     return (
       <div className="text-center mt-5">
 
+
         <h4 className="text-danger">⚠ No prescription record found</h4>
+
 
       </div>
     );
@@ -133,6 +142,7 @@ const Editappointmentnurse = () => {
             </form>
           </div>
         </div>
+
 
       </div>
     </div>
