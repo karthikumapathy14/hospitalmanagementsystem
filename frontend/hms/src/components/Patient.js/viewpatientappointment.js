@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
+import { Link ,useParams} from 'react-router-dom';
 
 const Viewapatientappointment = () => {
   const [appointments, setAppointments] = useState([]);
   const [error, setError] = useState('');
+    const { id } = useParams();
 
   const getAppointments = async () => {
     try {
@@ -71,7 +73,12 @@ const Viewapatientappointment = () => {
                 <td>{app.appointmentTime}</td>
                 <td>{app.reason}</td>
                 <td>{app.status}</td>
-                <td><button></button></td>
+                <td>
+                  <Link to={`/billview/${app.appointmentId}`}>
+                    <button className='btn btn-outline-primary'>Bill View</button>
+                  </Link>
+                </td>
+
               </tr>
             ))}
           </tbody>
