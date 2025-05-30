@@ -32,6 +32,8 @@ namespace hospital.Model
         [MaxLength(50)]
         public string Status { get; set; } = "Schedule";
 
+        public string BillStatus { get; set; }
+
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 

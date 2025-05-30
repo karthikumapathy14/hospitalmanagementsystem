@@ -74,7 +74,7 @@ const Viewapatientappointment = () => {
                 <td>{app.reason}</td>
                 <td>{app.status}</td>
                 <td>
-                  <Link to={`/billview/${app.appointmentId}`}>
+                  <Link to={`/billpatientview/${app.appointmentId}`}>
                     <button className='btn btn-outline-primary'>Bill View</button>
                   </Link>
                 </td>

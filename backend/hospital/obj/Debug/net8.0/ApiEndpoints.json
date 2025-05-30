@@ -455,6 +455,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "hospital.Controller.PatientContoller",
+    "Method": "GetBillWithFullDetails",
+    "RelativePath": "api/PatientContoller/BillView/getbyid/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "hospital.Controller.ReceptionistController",
     "Method": "getbill",
     "RelativePath": "api/Receptionist/bill",

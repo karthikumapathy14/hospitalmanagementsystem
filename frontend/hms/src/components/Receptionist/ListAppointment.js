@@ -2,22 +2,27 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import ReceptionistNavbar from './ReceptionistNavbar';
-import { useAuth } from '../AuthContext'; // Update the path as needed
+import { useAuth } from '../AuthContext';
 
 const ListAppointment = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const { setAppid } = useAuth(); // Context function to set appointment ID
+  const { setAppid } = useAuth();
   const [bills, setBills] = useState([]);
+
+  // ✅ Fetch bills as a reusable function
+  const fetchBills = () => {
+    axios.get("https://localhost:7058/api/Receptionist/bill")
+      .then(res => setBills(res.data))
+      .catch(err => console.log(err));
+  };
 
   useEffect(() => {
     axios.get("https://localhost:7058/api/Receptionist/getappointment")
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
 
-    axios.get("https://localhost:7058/api/Receptionist/bill")
-      .then(res => setBills(res.data))
-      .catch(err => console.log(err));
+    fetchBills();
   }, []);
 
   const billnavi = async (appointmentId) => {
@@ -35,9 +40,27 @@ const ListAppointment = () => {
     }
   };
 
-  // Check if bill already exists for the appointment
   const isPaid = (appointmentId) => {
-    return bills.some(bill => bill.appointmentId === appointmentId);
+    return bills.some(bill => bill.appointmentId === appointmentId && bill.status === "Paid");
+  };
+
+  const getBillIdByAppointmentId = (appointmentId) => {
+    const bill = bills.find(b => b.appointmentId === appointmentId);
+    return bill?.id;
+  };
+
+  const handleBillStatusUpdate = (billId, newStatus) => {
+    axios.put(`https://localhost:7058/api/Receptionist/update-bill-status/${billId}`, {
+      status: newStatus
+    })
+      .then(() => {
+        alert("Bill status updated!");
+        fetchBills(); // ✅ Refresh bill list
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Failed to update bill status");
+      });
   };
 
   return (
@@ -66,44 +89,56 @@ const ListAppointment = () => {
                   </thead>
                   <tbody>
                     {data.length > 0 ? (
-                      data.map((item) => (
-                        <tr key={item.appointmentId}>
-                          <td>{item.patientid}</td>
-                          <td>{item.departmentName}</td>
-                          <td>{item.doctorName}</td>
-                          <td>{new Date(item.appointmentDate).toLocaleDateString()}</td>
-                          <td>{item.appointmentTime}</td>
-                          <td>{item.reason}</td>
-                          <td>
-                            <span className={`badge ${item.status === 'Confirmed' ? 'bg-success' : 'bg-secondary'}`}>
-                              {item.status}
-                            </span>
-                          </td>
-                          <td>
-                            {isPaid(item.appointmentId) ? (
-                              <span className="badge bg-success">Paid</span>
-                            ) : (
-                              <span className="badge bg-warning text-dark">Pending</span>
-                            )}
-                          </td>
-                          <td>{new Date(item.createdAt).toLocaleString()}</td>
-                          <td>
-                            <Link to={`/editappointment/${item.appointmentId}`}>
-                              <button className="btn btn-sm btn-outline-primary">
-                                <i className="bi bi-pencil-square"></i> Edit
+                      data.map((item) => {
+                        const billId = getBillIdByAppointmentId(item.appointmentId);
+                        const billPaid = isPaid(item.appointmentId);
+
+                        return (
+                          <tr key={item.appointmentId}>
+                            <td>{item.patientid}</td>
+                            <td>{item.departmentName}</td>
+                            <td>{item.doctorName}</td>
+                            <td>{new Date(item.appointmentDate).toLocaleDateString()}</td>
+                            <td>{item.appointmentTime}</td>
+                            <td>{item.reason}</td>
+                            <td>
+                              <span className={`badge ${item.status === 'Confirmed' ? 'bg-success' : 'bg-secondary'}`}>
+                                {item.status}
+                              </span>
+                            </td>
+                            <td>
+                              {billPaid ? (
+                                <span className="badge bg-success">Paid</span>
+                              ) : billId ? (
+                                <button
+                                  className="btn btn-sm btn-warning"
+                                  onClick={() => handleBillStatusUpdate(billId, "Paid")}
+                                >
+                                  Mark as Paid
+                                </button>
+                              ) : (
+                                <span className="badge bg-warning text-dark">Pending</span>
+                              )}
+                            </td>
+                            <td>{new Date(item.createdAt).toLocaleString()}</td>
+                            <td>
+                              <Link to={`/editappointment/${item.appointmentId}`}>
+                                <button className="btn btn-sm btn-outline-primary">
+                                  <i className="bi bi-pencil-square"></i> Edit
+                                </button>
+                              </Link>
+                              <button
+                                className="btn btn-outline-secondary ms-2"
+                                onClick={() => billnavi(item.appointmentId)}
+                                disabled={billId !== undefined}
+                                title={billId ? "Bill already generated" : "Generate bill"}
+                              >
+                                Bill Generate
                               </button>
-                            </Link>
-                            <button
-                              className="btn btn-outline-secondary ms-2"
-                              onClick={() => billnavi(item.appointmentId)}
-                              disabled={isPaid(item.appointmentId)}
-                              title={isPaid(item.appointmentId) ? "Bill already generated" : "Generate bill"}
-                            >
-                              Bill Generate
-                            </button>
-                          </td>
-                        </tr>
-                      ))
+                            </td>
+                          </tr>
+                        );
+                      })
                     ) : (
                       <tr>
                         <td colSpan="10" className="text-center">No appointments found.</td>
