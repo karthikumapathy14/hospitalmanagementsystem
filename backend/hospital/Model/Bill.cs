@@ -28,6 +28,7 @@ namespace hospital.Model
             }
             private set { /* Required by EF */ }
         }
+        public string billstatus { get; set; }
 
         public DateTime BillDate { get; set; } = DateTime.Now;
 

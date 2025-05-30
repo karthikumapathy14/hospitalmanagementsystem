@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using hospital.Data;
 
@@ -11,9 +12,11 @@ using hospital.Data;
 namespace hospital.Migrations
 {
     [DbContext(typeof(Applicationdbcontext))]
-    partial class ApplicationdbcontextModelSnapshot : ModelSnapshot
+    [Migration("20250529115020_addsa")]
+    partial class addsa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -296,6 +299,9 @@ namespace hospital.Migrations
                     b.Property<TimeOnly>("AppointmentTime")
                         .HasColumnType("time");
 
+                    b.Property<string>("BillStatus")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -360,9 +366,6 @@ namespace hospital.Migrations
 
                     b.Property<decimal>("TreatmentCharges")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("billstatus")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BillId");
 

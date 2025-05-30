@@ -64,6 +64,7 @@ const Appointments = () => {
       </div>
 
       <div className="row">
+
         <table className="table table-bordered table-striped">
           <thead>
             <tr>
@@ -124,6 +125,7 @@ const Appointments = () => {
             )}
           </tbody>
         </table>
+
       </div>
     </div>
   );

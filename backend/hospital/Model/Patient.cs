@@ -14,6 +14,7 @@ namespace hospital.Model
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Age { get; set; }
+        public string Gender { get; set; }
         public string Role { get; set; }
         public string PhoneNo { get; set; }
         public string Bloodgrp { get; set; }

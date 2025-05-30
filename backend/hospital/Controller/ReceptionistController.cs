@@ -140,6 +140,7 @@ namespace hospital.Controller
                 patid.Bloodgrp = patient.Bloodgrp;
             if (!string.IsNullOrWhiteSpace(patient.Address) && patient.Address != "string")
                 patid.Address = patient.Address;
+            patid.Gender = patient.Gender;
             patid.DoctorId = patient.DoctorId;
             patid.NurseId = patient.NurseId;
                 patid.status = patient.status;
@@ -233,6 +234,7 @@ namespace hospital.Controller
                 a.CreatedAt,
                 a.AppointmentDate,
                 a.AppointmentTime,
+               
                 Patientid=a.Patient.patientid,
                 DoctorName=a.Doctor.UserName,
                 DepartmentName=a.Department.DepartmentName
