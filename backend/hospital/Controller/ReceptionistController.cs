@@ -243,36 +243,81 @@ namespace hospital.Controller
             return Ok(appointment);
         }
 
-        [HttpPost("Billgeneration")]
-        public async Task<IActionResult> CreateBill(Bill dto)
-        {
-            var bills = new Bill
-            {
-                AppointmentId = dto.AppointmentId,
-                ConsultationFee = dto.ConsultationFee,
-                TreatmentCharges = dto.TreatmentCharges,
-                MedicationCharges = dto.MedicationCharges,
-                OtherCharges = dto.OtherCharges,
-                BillDate = DateTime.Now
-            };
-             _dbcontext.bill.Add(bills);
-            await _dbcontext.SaveChangesAsync();
+        //[HttpPost("Billgeneration")]
+        //public async Task<IActionResult> CreateBill(Bill dto)
+        //{
+        //    var bills = new Bill
+        //    {
+        //        AppointmentId = dto.AppointmentId,
+        //        ConsultationFee = dto.ConsultationFee,
+        //        TreatmentCharges = dto.TreatmentCharges,
+        //        MedicationCharges = dto.MedicationCharges,
+        //        OtherCharges = dto.OtherCharges,
+        //        BillDate = DateTime.Now
+        //    };
+        //     _dbcontext.bill.Add(bills);
+        //    await _dbcontext.SaveChangesAsync();
 
-            return Ok ("Bill Geneated");
-        }
+        //    return Ok ("Bill Geneated");
+        //}
+
+        //[HttpGet("bill")]
+        //public async Task<IActionResult> getbill()
+        //{
+        //    var detail = await _dbcontext.bill.ToListAsync();
+        //    return Ok(detail);
+        //}
+
+        //[HttpGet("billbyid/{id}")]
+        //public async Task<IActionResult> GetBillbyid(int id)
+        //{
+        //    var exists =  _dbcontext.bill.Any(b => b.AppointmentId == id);
+        //    return Ok(new { billexists = exists });
+        //}
 
         [HttpGet("bill")]
-        public async Task<IActionResult> getbill()
+        public IActionResult GetAllBills()
         {
-            var detail = await _dbcontext.bill.ToListAsync();
-            return Ok(detail);
+            return Ok(_dbcontext.bill.ToList());
         }
 
-        [HttpGet("billbyid/{id}")]
-        public async Task<IActionResult> GetBillbyid(int id)
+        [HttpGet("billbyid/{appointmentId}")]
+        public IActionResult CheckBillExists(int appointmentId)
         {
-            var exists =  _dbcontext.bill.Any(b => b.AppointmentId == id);
-            return Ok(new { billexists = exists });
+            var billExists = _dbcontext.bill.Any(b => b.AppointmentId == appointmentId);
+            return Ok(new { exists = billExists });
         }
+
+        [HttpPost("create-bill")]
+        public IActionResult CreateBill([FromBody] Bill bill)
+        {
+            if (_dbcontext.bill.Any(b => b.AppointmentId == bill.AppointmentId))
+                return BadRequest("Bill already exists.");
+
+            _dbcontext.bill.Add(bill);
+            _dbcontext.SaveChanges();
+            return Ok("Bill created.");
+        }
+
+        [HttpPut("update-bill-status/{id}")]
+        public IActionResult UpdateBillStatus(int id, [FromBody] Bill updatedBill)
+        {
+            var bill = _dbcontext.bill.FirstOrDefault(b => b.AppointmentId == id);
+            if (bill == null)
+                return NotFound();
+
+            bill.billstatus = updatedBill.billstatus;
+            _dbcontext.SaveChanges();
+            return Ok("Bill status updated.");
+        }
+
+        [HttpGet("get-bill/{appointmentId}")]
+        public IActionResult GetBillByAppointmentId(int appointmentId)
+        {
+            var bill = _dbcontext.bill.FirstOrDefault(b => b.AppointmentId == appointmentId);
+            if (bill == null) return NotFound();
+            return Ok(bill);
+        }
+
     }
 }
