@@ -234,7 +234,7 @@ namespace hospital.Controller
                 a.CreatedAt,
                 a.AppointmentDate,
                 a.AppointmentTime,
-                a.BillStatus,
+               
                 Patientid=a.Patient.patientid,
                 DoctorName=a.Doctor.UserName,
                 DepartmentName=a.Department.DepartmentName
