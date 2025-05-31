@@ -71,7 +71,7 @@ const Bill = () => {
       return;
     }
     try {
-      await axios.post("https://localhost:7058/api/Receptionist/Billgeneration", formData);
+      await axios.post("https://localhost:7058/api/Receptionist/create-bill", formData);
       console.log("Bill created successfully!");
       setBillExists(true); // Prevent further edits
     } catch (error) {

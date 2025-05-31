@@ -23,8 +23,6 @@ const Editappointmentnurse = () => {
       .catch((err) => {
 
         console.error(err);
-
-
         setLoading(false);
       });
   }, [id]);

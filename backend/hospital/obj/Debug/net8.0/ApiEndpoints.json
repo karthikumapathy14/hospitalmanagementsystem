@@ -472,7 +472,7 @@
   },
   {
     "ContainingType": "hospital.Controller.ReceptionistController",
-    "Method": "getbill",
+    "Method": "GetAllBills",
     "RelativePath": "api/Receptionist/bill",
     "HttpMethod": "GET",
     "IsController": true,
@@ -482,31 +482,15 @@
   },
   {
     "ContainingType": "hospital.Controller.ReceptionistController",
-    "Method": "GetBillbyid",
-    "RelativePath": "api/Receptionist/billbyid/{id}",
+    "Method": "CheckBillExists",
+    "RelativePath": "api/Receptionist/billbyid/{appointmentId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "appointmentId",
         "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "hospital.Controller.ReceptionistController",
-    "Method": "CreateBill",
-    "RelativePath": "api/Receptionist/Billgeneration",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "hospital.Model.Bill",
         "IsRequired": true
       }
     ],
@@ -523,6 +507,22 @@
       {
         "Name": "dto",
         "Type": "hospital.Model.Appointment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "CreateBill",
+    "RelativePath": "api/Receptionist/create-bill",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bill",
+        "Type": "hospital.Model.Bill",
         "IsRequired": true
       }
     ],
@@ -565,6 +565,22 @@
       {
         "Name": "patient",
         "Type": "hospital.Model.Patient",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "GetBillByAppointmentId",
+    "RelativePath": "api/Receptionist/get-bill/{appointmentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "appointmentId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -633,6 +649,27 @@
       {
         "Name": "model",
         "Type": "hospital.Model.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "UpdateBillStatus",
+    "RelativePath": "api/Receptionist/update-bill-status/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedBill",
+        "Type": "hospital.Model.Bill",
         "IsRequired": true
       }
     ],

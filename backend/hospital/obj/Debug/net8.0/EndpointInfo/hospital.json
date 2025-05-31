@@ -1028,7 +1028,42 @@
         }
       }
     },
-    "/api/Receptionist/Billgeneration": {
+    "/api/Receptionist/bill": {
+      "get": {
+        "tags": [
+          "Receptionist"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Receptionist/billbyid/{appointmentId}": {
+      "get": {
+        "tags": [
+          "Receptionist"
+        ],
+        "parameters": [
+          {
+            "name": "appointmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Receptionist/create-bill": {
       "post": {
         "tags": [
           "Receptionist"
@@ -1064,11 +1099,46 @@
         }
       }
     },
-    "/api/Receptionist/bill": {
-      "get": {
+    "/api/Receptionist/update-bill-status/{id}": {
+      "put": {
         "tags": [
           "Receptionist"
         ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Bill"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Bill"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Bill"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Bill"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -1076,14 +1146,14 @@
         }
       }
     },
-    "/api/Receptionist/billbyid/{id}": {
+    "/api/Receptionist/get-bill/{appointmentId}": {
       "get": {
         "tags": [
           "Receptionist"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "appointmentId",
             "in": "path",
             "required": true,
             "schema": {
