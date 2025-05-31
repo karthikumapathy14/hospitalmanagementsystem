@@ -2,12 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 
+
 import { useParams, useNavigate } from "react-router-dom";
 import Nursesidebar from "./Nursesidebar";
 
 const Editappointmentnurse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+
 
 
   const [data, setData] = useState(null);
@@ -23,6 +25,7 @@ const Editappointmentnurse = () => {
       .catch((err) => {
 
         console.error(err);
+
         setLoading(false);
       });
   }, [id]);
@@ -40,6 +43,7 @@ const Editappointmentnurse = () => {
       .catch((err) => console.error(err));
 
 
+
   };
 
   const handleChange = (e) => {
@@ -49,11 +53,13 @@ const Editappointmentnurse = () => {
   if (loading) {
 
 
+
     return (
       <div className="d-flex justify-content-center align-items-center vh-100">
         <div className="spinner-border text-primary" role="status"></div>
       </div>
     );
+
 
 
   }
@@ -63,7 +69,9 @@ const Editappointmentnurse = () => {
       <div className="text-center mt-5">
 
 
+
         <h4 className="text-danger">⚠ No prescription record found</h4>
+
 
 
       </div>
@@ -71,6 +79,7 @@ const Editappointmentnurse = () => {
   }
 
   return (
+
 
     <div className="d-flex" style={{ minHeight: "100vh" }}>
       {/* Sidebar */}
@@ -140,6 +149,7 @@ const Editappointmentnurse = () => {
             </form>
           </div>
         </div>
+
 
 
       </div>

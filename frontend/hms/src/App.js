@@ -5,6 +5,7 @@ import '../node_modules/bootstrap/dist/js/bootstrap.bundle.js'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter, Links, Route, Routes } from 'react-router-dom'
 
+
 import 'react-toastify/dist/ReactToastify.css';
 import Login from './components/Login.jsx';
 import Department from './components/Admin/Department.js';
@@ -31,9 +32,11 @@ import Addprescription from './components/Doctor/Addprescription.js';
 import PatientHistory from './components/Doctor/PatientHistory.js';
 import Viewappointmentnurse from './components/Nurse/Viewappointmentnurse.js';
 import Editappointmentnurse from './components/Nurse/Editappointmentnurse.js';
+
 import Bill from './components/Receptionist/Bill.js';
 import Viewapatientappointment from './components/Patient.js/viewpatientappointment.js'
 import Billpatientview from './components/Patient.js/Billpatientview.js';
+
 
 
 
@@ -93,6 +96,7 @@ function App() {
               {/* {patient dashboard} */}
               <Route path='/Viewapatientappointment' element={<Viewapatientappointment/>}></Route>
               <Route path='/billpatientview/:id' element={<Billpatientview/>}></Route>
+
 
             </Routes>
           </div>

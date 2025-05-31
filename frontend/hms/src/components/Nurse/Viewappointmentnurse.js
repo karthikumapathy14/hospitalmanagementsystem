@@ -23,6 +23,7 @@ const Viewappointmentnurse = () => {
 
 
 
+
   const handleEdit = (appointmentId) => {
     navigate(`/Editappointmentnurse/${appointmentId}`);
   };
@@ -85,6 +86,7 @@ const Viewappointmentnurse = () => {
           )}
         </div>
       </div>
+
 
     </div>
   );
