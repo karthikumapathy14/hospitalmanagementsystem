@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Nursesidebar from './Nursesidebar';
 
 const Viewappointmentnurse = () => {
   const [data, setData] = useState([]);
@@ -27,8 +28,12 @@ const Viewappointmentnurse = () => {
   };
 
   return (
-    <div className="container my-5">
-      <div className="card shadow-lg border-0">
+    <div className="d-flex" style={{ minHeight: "100vh" }}>
+      {/* Sidebar */}
+      <div style={{ width: "250px", backgroundColor: "#f8f9fa" }}>
+        <Nursesidebar />
+      </div>
+      <div className="card shadow-lg border-0 ">
         <div className="card-header bg-info text-white text-center">
           <h4 className="mb-0">
             <i className="bi bi-calendar-check"></i> Nurse - View Appointments

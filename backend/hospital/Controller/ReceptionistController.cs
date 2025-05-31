@@ -1,4 +1,5 @@
 ﻿using hospital.Data;
+using hospital.Migrations;
 using hospital.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -216,32 +217,42 @@ namespace hospital.Controller
             return Ok(getid);
         }
 
+
+
         [HttpGet("getappointment")]
         public async Task<IActionResult> getappointment()
         {
-            var appointment = await _dbcontext.appointments
+            var appointmentsWithRelations = await _dbcontext.appointments
                 .Include(a => a.Doctor)
                 .Include(a => a.Department)
-                .Include(a=>a.Patient)
-                .Select(a => new 
-                {
-                a.AppointmentId,
-                a.PatientId,
-                a.DoctorId,
-                a.DepartmentId,
-                a.Reason,
-                a.Status,
-                a.CreatedAt,
-                a.AppointmentDate,
-                a.AppointmentTime,
-               
-                Patientid=a.Patient.patientid,
-                DoctorName=a.Doctor.UserName,
-                DepartmentName=a.Department.DepartmentName
-                }).ToListAsync();
-          
-            return Ok(appointment);
+                .Include(a => a.Patient)
+                .ToListAsync();
+
+            var result = (from a in appointmentsWithRelations
+                          join b in _dbcontext.bill
+                          on a.AppointmentId equals b.AppointmentId into ab
+                          from b in ab.DefaultIfEmpty()
+                          select new
+                          {
+                              a.AppointmentId,
+                              a.PatientId,
+                              a.DoctorId,
+                              a.DepartmentId,
+                              a.Reason,
+                              a.Status,
+                              a.CreatedAt,
+                              a.AppointmentDate,
+                              a.AppointmentTime,
+                              Patientid = a.Patient != null ? a.Patient.patientid : "Unknown",
+                              DoctorName = a.Doctor != null ? a.Doctor.UserName : "Unknown",
+                              DepartmentName = a.Department != null ? a.Department.DepartmentName : "Unknown",
+                              BillStatus = b != null ? b.billstatus : "Pending",
+                              BillId = b != null ? b.BillId : 0
+                          }).ToList();
+
+            return Ok(result);
         }
+
 
         //[HttpPost("Billgeneration")]
         //public async Task<IActionResult> CreateBill(Bill dto)
@@ -307,6 +318,8 @@ namespace hospital.Controller
                 return NotFound();
 
             bill.billstatus = updatedBill.billstatus;
+            Console.WriteLine($"Updating AppointmentId {id} to status: {updatedBill.billstatus}");
+
             _dbcontext.SaveChanges();
             return Ok("Bill status updated.");
         }
