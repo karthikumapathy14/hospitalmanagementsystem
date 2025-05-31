@@ -12,12 +12,14 @@ const Editappointment = () => {
     reason: "",
     status: ""
   });
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const { id } = useParams();
+
   const [dept, getdept] = useState([]);
   const [doc, getdoc] = useState([]);
   const [filtered, setfiltered] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handlechange = (e) => {
     const { name, value } = e.target;
@@ -25,11 +27,10 @@ const Editappointment = () => {
     if (name === 'departmentId') {
       const filteredDoctors = doc.filter((d) => d.departmentId === value);
       setfiltered(filteredDoctors);
-
       setforms((prev) => ({
         ...prev,
         departmentId: value,
-        doctorId: '' // Reset doctor if department changes
+        doctorId: ''
       }));
     } else {
       setforms((prev) => ({
@@ -40,133 +41,173 @@ const Editappointment = () => {
   };
 
   useEffect(() => {
-    // Fetch all departments and doctors
     axios.get("https://localhost:7058/api/Admin/get-dept")
       .then((res) => getdept(res.data))
-      .catch((err) => console.log(err));
+      .catch(console.error);
 
     axios.get("https://localhost:7058/api/Admin/docGetAll")
       .then((res) => getdoc(res.data))
-      .catch((err) => console.log(err));
+      .catch(console.error);
   }, []);
 
   useEffect(() => {
-    // Fetch appointment by ID
     axios.get(`https://localhost:7058/api/Receptionist/getappointmentid/${id}`)
       .then((res) => {
         setforms(res.data);
-
-        // Filter doctors once doc list is ready
         const filteredDoctors = doc.filter((d) => d.departmentId === res.data.departmentId);
         setfiltered(filteredDoctors);
       })
-      .catch((err) => console.log(err));
+      .catch(console.error);
   }, [id, doc]);
 
   const handlesubmit = (e) => {
     e.preventDefault();
-
-    console.log("Sending data:", forms);
-
+    setLoading(true);
     axios.put(`https://localhost:7058/api/Receptionist/Edit-appointment/${id}`, forms)
-      .then((res) => {
-        console.log(res.data);
-        alert("Updated successfully");
+      .then(() => {
+        alert("Appointment updated successfully!");
         navigate(-1);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error(err);
+        alert("Update failed. Try again.");
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
-    <div className='row justify-content-center'>
-      <form onSubmit={handlesubmit} className='col-5'>
-        <h2>Edit Appointment</h2>
+    <div className="container py-4">
+      <div className="row justify-content-center">
+        <div className="col-md-8 col-lg-6">
+          <div className="card shadow-lg rounded-4 border-0">
+            <div className="card-body">
+              <h3 className="card-title text-center mb-4">Edit Appointment</h3>
+              <form onSubmit={handlesubmit}>
 
-        <label className='form-label'>Patient ID</label>
-        <input
-          className='form-control'
-          name='patientId'
-          value={forms.patientId}
-          onChange={handlechange}
-          disabled={true}
-        />
+                <div className="mb-3">
+                  <label className="form-label">Patient ID</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="patientId"
+                    value={forms.patientId}
+                    disabled
+                  />
+                </div>
 
-        <label className='form-label'>Department</label>
-        <select
-          className='form-select'
-          name='departmentId'
-          value={forms.departmentId}
-          onChange={handlechange}
-        >
-          <option value=''>-select-</option>
-          {dept.map((d) => (
-            <option key={d.id} value={d.id}>
-              {d.departmentName}
-            </option>
-          ))}
-        </select>
+                <div className="mb-3">
+                  <label className="form-label">Department</label>
+                  <select
+                    className="form-select"
+                    name="departmentId"
+                    value={forms.departmentId}
+                    onChange={handlechange}
+                    required
+                  >
+                    <option value="">Select Department</option>
+                    {dept.map((d) => (
+                      <option key={d.id} value={d.id}>
+                        {d.departmentName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-        <label className='form-label'>Doctor Name</label>
-        <select
-          className='form-select'
-          name='doctorId'
-          value={forms.doctorId}
-          onChange={handlechange}
-        >
-          <option value=''>-select-</option>
-          {(forms.departmentId ? filtered : doc).map((d) => (
-            <option key={d.id} value={d.id}>
-              {d.userName}
-            </option>
-          ))}
-        </select>
+                <div className="mb-3">
+                  <label className="form-label">Doctor</label>
+                  <select
+                    className="form-select"
+                    name="doctorId"
+                    value={forms.doctorId}
+                    onChange={handlechange}
+                    required
+                    disabled={!forms.departmentId}
+                  >
+                    <option value="">Select Doctor</option>
+                    {(forms.departmentId ? filtered : doc).map((d) => (
+                      <option key={d.id} value={d.id}>
+                        {d.userName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-        <label className='form-label'>Appointment Date</label>
-        <input
-          className='form-control'
-          type='date'
-          name='appointmentDate'
-          value={forms.appointmentDate}
-          onChange={handlechange}
-        />
+                <div className="mb-3">
+                  <label className="form-label">Appointment Date</label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    name="appointmentDate"
+                    value={forms.appointmentDate}
+                    onChange={handlechange}
+                    required
+                  />
+                </div>
 
-        <label className='form-label'>Appointment Time</label>
-        <input
-          className='form-control'
-          type='time'
-          step='1'
-          name='appointmentTime'
-          value={forms.appointmentTime}
-          onChange={handlechange}
-        />
+                <div className="mb-3">
+                  <label className="form-label">Appointment Time</label>
+                  <input
+                    type="time"
+                    className="form-control"
+                    name="appointmentTime"
+                    step="1"
+                    value={forms.appointmentTime}
+                    onChange={handlechange}
+                    required
+                  />
+                </div>
 
-        <label className='form-label'>Reason</label>
-        <input
-          className='form-control'
-          name='reason'
-          value={forms.reason}
-          onChange={handlechange}
-        />
+                <div className="mb-3">
+                  <label className="form-label">Reason</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="reason"
+                    value={forms.reason}
+                    onChange={handlechange}
+                    required
+                  />
+                </div>
 
-        <label className='form-label'>Status</label>
-        <select
-          className='form-select'
-          name='status'
-          value={forms.status}
-          onChange={handlechange}
-        >
-          <option value='' disabled>
-            -select status-
-          </option>
-          <option value='Schedule'>Schedule</option>
-          <option value='Complete'>Complete</option>
-          <option value='Cancel'>Cancel</option>
-        </select>
+                <div className="mb-3">
+                  <label className="form-label">Status</label>
+                  <select
+                    className="form-select"
+                    name="status"
+                    value={forms.status}
+                    onChange={handlechange}
+                    required
+                  >
+                    <option value="">Select Status</option>
+                    <option value="Schedule">Schedule</option>
+                    <option value="Complete">Complete</option>
+                    <option value="Cancel">Cancel</option>
+                  </select>
+                </div>
 
-        <button type='submit' className='btn btn-outline-primary mt-3'>
-          Save
-        </button>
-      </form>
+                <div className="text-end">
+                  <button
+                    type="submit"
+                    className="btn btn-primary px-4"
+                    disabled={loading}
+                  >
+                    {loading ? "Saving..." : "Save Changes"}
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary ms-2"
+                    onClick={() => navigate(-1)}
+                    disabled={loading}
+                  >
+                    Cancel
+                  </button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -6,13 +6,15 @@ import { useAuth } from "../AuthContext";
 
 const ListAppointment = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { setAppid } = useAuth();
+
   const [appointments, setAppointments] = useState([]);
   const [bills, setBills] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
-  const location = useLocation();
 
-  // Fetch all bills from API
+  // Fetch all bills
   const fetchBills = async () => {
     try {
       const res = await axios.get("https://localhost:7058/api/Receptionist/bill");
@@ -22,24 +24,29 @@ const ListAppointment = () => {
     }
   };
 
-  // Fetch all appointments from API
+  // Fetch all appointments
   const fetchAppointments = async () => {
     try {
       const res = await axios.get("https://localhost:7058/api/Receptionist/getappointment");
       setAppointments(res.data);
-      // console.log(res.data); // Debugging
     } catch (err) {
       console.error("Failed to fetch appointments:", err);
     }
   };
 
-  // Fetch appointments and bills on component mount or location change
   useEffect(() => {
     fetchAppointments();
     fetchBills();
   }, [location]);
 
-  // Navigate to bill generate page if no bill exists for appointment
+  // Search filter
+  const filteredAppointments = appointments.filter((item) =>
+    item.patientid?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.departmentName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.doctorName?.toLowerCase().includes(searchTerm.toLowerCase()) 
+  );
+
+  // Navigate to bill page
   const handleBillNavigation = async (appointmentId) => {
     try {
       const response = await axios.get(
@@ -57,8 +64,11 @@ const ListAppointment = () => {
     }
   };
 
-  // Update bill status (Paid / Pending)
+  // Update bill status
   const handleBillStatusUpdate = async (appointmentId, newStatus) => {
+    const confirmChange = window.confirm(`Are you sure you want to mark this bill as ${newStatus}?`);
+    if (!confirmChange) return;
+
     setLoading(true);
     try {
       await axios.put(
@@ -66,7 +76,6 @@ const ListAppointment = () => {
         { billstatus: newStatus }
       );
 
-      // Optimistically update bills in UI for responsiveness
       setBills((prevBills) =>
         prevBills.map((bill) =>
           bill.appointmentId === appointmentId
@@ -85,16 +94,27 @@ const ListAppointment = () => {
   };
 
   return (
-    <div className="d-flex" style={{ minHeight: "100vh", backgroundColor: "#f8f9fa" }}>
+    <div className="d-flex bg-light min-vh-100">
       <ReceptionistNavbar />
-      <div
-        className="flex-grow-1 p-4"
-        style={{ marginLeft: "260px", width: "calc(100% - 260px)" }}
-      >
-        <div className="container-fluid py-4">
-          <div className="card shadow-sm border-0">
-            <div className="container mt-5">
+      <div className="flex-grow-1 p-4" style={{ marginLeft: "230px" }}>
+        <div className="container-fluid py-3">
+          <div className="card shadow-sm border-0 rounded-4">
+            <div className="container mt-4">
               <h2 className="text-center mb-4">Appointments List</h2>
+
+              <div className="input-group w-100 mb-4">
+                <span className="input-group-text bg-white border-end-0">
+                  <i className="bi bi-search text-muted"></i>
+                </span>
+                <input
+                  type="text"
+                  className="form-control border-start-0"
+                  placeholder="Search by Patient ID, Department, Doctor "
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+
               <div className="table-responsive">
                 <table className="table table-hover table-striped table-bordered">
                   <thead className="table-dark">
@@ -103,7 +123,7 @@ const ListAppointment = () => {
                       <th>Department</th>
                       <th>Doctor</th>
                       <th>Appointment Date</th>
-                      <th>Appointment Time</th>
+                      <th>Time</th>
                       <th>Reason</th>
                       <th>Status</th>
                       <th>Bill Status</th>
@@ -112,8 +132,8 @@ const ListAppointment = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {appointments.length > 0 ? (
-                      appointments.map((item) => {
+                    {filteredAppointments.length > 0 ? (
+                      filteredAppointments.map((item) => {
                         const bill = bills.find(
                           (b) => b.appointmentId === item.appointmentId
                         );
@@ -139,7 +159,7 @@ const ListAppointment = () => {
                             </td>
                             <td>
                               {bill ? (
-                                <div className="form-check form-switch">
+                                <div className="form-check form-switch d-flex align-items-center gap-2">
                                   <input
                                     className="form-check-input"
                                     type="checkbox"
@@ -152,7 +172,7 @@ const ListAppointment = () => {
                                     disabled={loading}
                                   />
                                   <label
-                                    className={`form-check-label ${
+                                    className={`form-check-label fw-semibold ${
                                       billStatus.toLowerCase() === "paid"
                                         ? "text-success"
                                         : "text-warning"
@@ -170,16 +190,16 @@ const ListAppointment = () => {
                             <td>
                               <Link to={`/editappointment/${item.appointmentId}`}>
                                 <button className="btn btn-sm btn-outline-primary">
-                                  <i className="bi bi-pencil-square"></i> Edit
+                                  <i className="bi bi-pencil-square me-1"></i> Edit
                                 </button>
                               </Link>
                               <button
-                                className="btn btn-outline-secondary ms-2"
+                                className="btn btn-sm btn-outline-secondary ms-2"
                                 onClick={() => handleBillNavigation(item.appointmentId)}
                                 disabled={!!billId}
                                 title={billId ? "Bill already generated" : "Generate bill"}
                               >
-                                Bill Generate
+                                <i className="bi bi-cash-stack me-1"></i> Bill
                               </button>
                             </td>
                           </tr>
@@ -187,15 +207,21 @@ const ListAppointment = () => {
                       })
                     ) : (
                       <tr>
-                        <td colSpan="10" className="text-center">
+                        <td colSpan="10" className="text-center text-muted">
                           No appointments found.
                         </td>
                       </tr>
                     )}
                   </tbody>
                 </table>
+
                 {loading && (
-                  <p className="text-center mt-3 text-muted">Updating bill status...</p>
+                  <div className="text-center my-3">
+                    <div className="spinner-border text-primary" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                    <p className="mt-2 text-muted">Updating bill status...</p>
+                  </div>
                 )}
               </div>
             </div>
