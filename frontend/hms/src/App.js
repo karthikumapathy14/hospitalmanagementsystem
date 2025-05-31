@@ -32,14 +32,13 @@ import Addprescription from './components/Doctor/Addprescription.js';
 import PatientHistory from './components/Doctor/PatientHistory.js';
 import Viewappointmentnurse from './components/Nurse/Viewappointmentnurse.js';
 import Editappointmentnurse from './components/Nurse/Editappointmentnurse.js';
-<<<<<<< Updated upstream
+
 
 import Bill from './components/Receptionist/Bill.js';
 import Viewapatientappointment from './components/Patient.js/viewpatientappointment.js'
 import Billpatientview from './components/Patient.js/Billpatientview.js';
 
-=======
->>>>>>> Stashed changes
+
 
 
 
@@ -95,14 +94,12 @@ function App() {
               {/* nurse dashboard */}
               <Route path='/Viewappointmentnurse' element={<Viewappointmentnurse/>}></Route>
               <Route path='/Editappointmentnurse/:id' element={<Editappointmentnurse/>}></Route>
-<<<<<<< Updated upstream
 
               {/* {patient dashboard} */}
               <Route path='/Viewapatientappointment' element={<Viewapatientappointment/>}></Route>
               <Route path='/billpatientview/:id' element={<Billpatientview/>}></Route>
 
-=======
->>>>>>> Stashed changes
+
 
             </Routes>
           </div>
