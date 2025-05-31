@@ -244,5 +244,61 @@ namespace hospital.Controller
 
             return Ok("Delete successfully");
         }
+
+
+        //dashboard
+
+        [HttpGet("totaldoctors")]
+        public IActionResult GetTotalDoctors()
+        {
+            int count = _dbcontext.Doctors.Count();
+            return Ok(count);
+        }
+
+        [HttpGet("totalpatients")]
+        public IActionResult GetTotalPatients()
+        {
+            int count = _dbcontext.Patients.Count();
+            return Ok(count);
+        }
+        [HttpGet("totalnurses")]
+        public IActionResult GetTotalNurses()
+        {
+            int count = _dbcontext.Nurses.Count();
+            return Ok(count);
+        }
+        [HttpGet("totalreceptionist")]
+        public IActionResult GetTotalReceptionist()
+        {
+            int count = _dbcontext.Receptionists.Count();
+            return Ok(count);
+        }
+
+        [HttpGet("totalappointments")]
+        public IActionResult GetTotalAppointments()
+        {
+            int count = _dbcontext.appointments.Count();
+            return Ok(count);
+        }
+        [HttpGet("today-appointments")]
+        public IActionResult GettodayAppointment()
+        {
+            var today = DateOnly.FromDateTime(DateTime.Today); // Ensures DateOnly type
+            int count = _dbcontext.appointments.Count(a => a.AppointmentDate == today);
+            return Ok(count);
+        }
+
+        [HttpGet("getdaywisereport")]
+        public IActionResult GetDaywiseReport()
+        {
+            var result = _dbcontext.appointments
+         .GroupBy(a => a.AppointmentDate)
+         .Select(g => new {
+             Date = g.Key,
+             Count = g.Count()
+         }).OrderBy(x => x.Date).ToList();
+
+            return Ok(result);
+        }
     }
 }

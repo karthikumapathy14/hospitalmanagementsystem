@@ -206,6 +206,16 @@
   },
   {
     "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GetDaywiseReport",
+    "RelativePath": "api/Admin/getdaywisereport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
     "Method": "Departmentid",
     "RelativePath": "api/Admin/getdeptbyid/{id}",
     "HttpMethod": "GET",
@@ -224,6 +234,66 @@
     "ContainingType": "hospital.Controller.AdminController",
     "Method": "getNurse",
     "RelativePath": "api/Admin/getnurse",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GettodayAppointment",
+    "RelativePath": "api/Admin/today-appointments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GetTotalAppointments",
+    "RelativePath": "api/Admin/totalappointments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GetTotalDoctors",
+    "RelativePath": "api/Admin/totaldoctors",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GetTotalNurses",
+    "RelativePath": "api/Admin/totalnurses",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GetTotalPatients",
+    "RelativePath": "api/Admin/totalpatients",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GetTotalReceptionist",
+    "RelativePath": "api/Admin/totalreceptionist",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
