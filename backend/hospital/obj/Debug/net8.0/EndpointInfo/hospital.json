@@ -1147,10 +1147,6 @@
             "type": "string",
             "nullable": true
           },
-          "billStatus": {
-            "type": "string",
-            "nullable": true
-          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -1201,6 +1197,10 @@
             "type": "number",
             "format": "double",
             "readOnly": true
+          },
+          "billstatus": {
+            "type": "string",
+            "nullable": true
           },
           "billDate": {
             "type": "string",
