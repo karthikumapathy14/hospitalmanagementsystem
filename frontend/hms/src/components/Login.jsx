@@ -101,8 +101,8 @@ const Login = () => {
           <small className="text-muted">© 2025 HealthyLife Hospital</small>
         </div>
 
-        {/* Show Addprescription if doctor is logged in */}
-        {doctorId && <Addprescription doctorId={doctorId} />}
+
+
       </div>
     </div>
   );
