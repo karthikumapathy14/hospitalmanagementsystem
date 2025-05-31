@@ -1,50 +1,50 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import ReceptionistNavbar from './ReceptionistNavbar';
-import { useAuth } from '../AuthContext';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import ReceptionistNavbar from "./ReceptionistNavbar";
+import { useAuth } from "../AuthContext";
 
 const ListAppointment = () => {
   const navigate = useNavigate();
   const { setAppid } = useAuth();
-  const [data, setData] = useState([]);
+  const [appointments, setAppointments] = useState([]);
   const [bills, setBills] = useState([]);
-  const [billsts,getbillsts]=useState([])
-  const [loading, setLoading] = useState(false); // Optional loading state for debugging
+  const [loading, setLoading] = useState(false);
+  const location = useLocation();
 
-  // ✅ Fetch bills as async
+  // Fetch all bills from API
   const fetchBills = async () => {
     try {
       const res = await axios.get("https://localhost:7058/api/Receptionist/bill");
       setBills(res.data);
     } catch (err) {
-      console.log(err);
+      console.error("Failed to fetch bills:", err);
     }
   };
 
-  // ✅ Fetch appointments and bills
-  useEffect(() => {
-    const fetchAppointments = async () => {
-      try {
-        const res = await axios.get("https://localhost:7058/api/Receptionist/getappointment");
-        setData(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  // Fetch all appointments from API
+  const fetchAppointments = async () => {
+    try {
+      const res = await axios.get("https://localhost:7058/api/Receptionist/getappointment");
+      setAppointments(res.data);
+      // console.log(res.data); // Debugging
+    } catch (err) {
+      console.error("Failed to fetch appointments:", err);
+    }
+  };
 
+  // Fetch appointments and bills on component mount or location change
+  useEffect(() => {
     fetchAppointments();
     fetchBills();
+  }, [location]);
 
-    axios.get("https://localhost:7058/api/Receptionist/bill")
-    .then((res)=>getbillsts(res.data))
-    .catch((err)=>console.log(err))
-  }, []);
-
-  // ✅ Navigate to billing page
-  const billnavi = async (appointmentId) => {
+  // Navigate to bill generate page if no bill exists for appointment
+  const handleBillNavigation = async (appointmentId) => {
     try {
-      const response = await axios.get(`https://localhost:7058/api/Receptionist/billbyid/${appointmentId}`);
+      const response = await axios.get(
+        `https://localhost:7058/api/Receptionist/billbyid/${appointmentId}`
+      );
       if (response.data.exists) {
         alert("Bill already generated for this appointment.");
       } else {
@@ -57,17 +57,27 @@ const ListAppointment = () => {
     }
   };
 
-  // ✅ Update bill status using appointmentId
+  // Update bill status (Paid / Pending)
   const handleBillStatusUpdate = async (appointmentId, newStatus) => {
     setLoading(true);
     try {
-      await axios.put(`https://localhost:7058/api/Receptionist/update-bill-status/${appointmentId}`, {
-        status: newStatus
-      });
+      await axios.put(
+        `https://localhost:7058/api/Receptionist/update-bill-status/${appointmentId}`,
+        { billstatus: newStatus }
+      );
+
+      // Optimistically update bills in UI for responsiveness
+      setBills((prevBills) =>
+        prevBills.map((bill) =>
+          bill.appointmentId === appointmentId
+            ? { ...bill, billstatus: newStatus }
+            : bill
+        )
+      );
+
       alert("Bill status updated!");
-      await fetchBills(); // Ensure latest data
     } catch (err) {
-      console.error(err);
+      console.error("Failed to update bill status:", err);
       alert("Failed to update bill status");
     } finally {
       setLoading(false);
@@ -75,9 +85,12 @@ const ListAppointment = () => {
   };
 
   return (
-    <div className="d-flex" style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}>
+    <div className="d-flex" style={{ minHeight: "100vh", backgroundColor: "#f8f9fa" }}>
       <ReceptionistNavbar />
-      <div className="flex-grow-1 p-4" style={{ marginLeft: '260px', width: 'calc(100% - 260px)' }}>
+      <div
+        className="flex-grow-1 p-4"
+        style={{ marginLeft: "260px", width: "calc(100% - 260px)" }}
+      >
         <div className="container-fluid py-4">
           <div className="card shadow-sm border-0">
             <div className="container mt-5">
@@ -99,10 +112,12 @@ const ListAppointment = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data.length > 0 ? (
-                      data.map((item) => {
-                        const bill = bills.find(b => b.appointmentId === item.appointmentId);
-                        const billStatus = bill?.status || "Pending";
+                    {appointments.length > 0 ? (
+                      appointments.map((item) => {
+                        const bill = bills.find(
+                          (b) => b.appointmentId === item.appointmentId
+                        );
+                        const billStatus = bill?.billstatus || "Pending";
                         const billId = bill?.id;
 
                         return (
@@ -114,7 +129,11 @@ const ListAppointment = () => {
                             <td>{item.appointmentTime}</td>
                             <td>{item.reason}</td>
                             <td>
-                              <span className={`badge ${item.status === 'Confirmed' ? 'bg-success' : 'bg-secondary'}`}>
+                              <span
+                                className={`badge ${
+                                  item.status === "Confirmed" ? "bg-success" : "bg-secondary"
+                                }`}
+                              >
                                 {item.status}
                               </span>
                             </td>
@@ -125,15 +144,19 @@ const ListAppointment = () => {
                                     className="form-check-input"
                                     type="checkbox"
                                     id={`billSwitch-${item.appointmentId}`}
-                                    checked={billStatus === "Paid"}
+                                    checked={billStatus.toLowerCase() === "paid"}
                                     onChange={(e) => {
                                       const newStatus = e.target.checked ? "Paid" : "Pending";
                                       handleBillStatusUpdate(item.appointmentId, newStatus);
                                     }}
-                                    disabled={loading} // Optionally disable during update
+                                    disabled={loading}
                                   />
                                   <label
-                                    className={`form-check-label ${billStatus === "Paid" ? "text-success" : "text-warning"}`}
+                                    className={`form-check-label ${
+                                      billStatus.toLowerCase() === "paid"
+                                        ? "text-success"
+                                        : "text-warning"
+                                    }`}
                                     htmlFor={`billSwitch-${item.appointmentId}`}
                                   >
                                     {billStatus}
@@ -152,8 +175,8 @@ const ListAppointment = () => {
                               </Link>
                               <button
                                 className="btn btn-outline-secondary ms-2"
-                                onClick={() => billnavi(item.appointmentId)}
-                                disabled={billId !== undefined}
+                                onClick={() => handleBillNavigation(item.appointmentId)}
+                                disabled={!!billId}
                                 title={billId ? "Bill already generated" : "Generate bill"}
                               >
                                 Bill Generate
@@ -164,12 +187,16 @@ const ListAppointment = () => {
                       })
                     ) : (
                       <tr>
-                        <td colSpan="10" className="text-center">No appointments found.</td>
+                        <td colSpan="10" className="text-center">
+                          No appointments found.
+                        </td>
                       </tr>
                     )}
                   </tbody>
                 </table>
-                {loading && <p className="text-center mt-3 text-muted">Updating bill status...</p>}
+                {loading && (
+                  <p className="text-center mt-3 text-muted">Updating bill status...</p>
+                )}
               </div>
             </div>
           </div>

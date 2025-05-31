@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../AuthContext';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Bill = () => {
   const { appid } = useAuth(); // Get appointment ID from context
   const today = new Date().toISOString().split('T')[0];
+  const navigate=useNavigate()
 
   const [formData, setFormData] = useState({
     appointmentId: '',
@@ -73,7 +75,8 @@ const Bill = () => {
     try {
       await axios.post("https://localhost:7058/api/Receptionist/create-bill", formData);
       console.log("Bill created successfully!");
-      setBillExists(true); // Prevent further edits
+      setBillExists(true); 
+      navigate(-1);// Prevent further edits
     } catch (error) {
       console.error("Error creating bill:", error);
       alert("Failed to create bill.");
@@ -92,6 +95,7 @@ const Bill = () => {
         <div className="alert alert-info" role="alert">
           Bill created for this appointment.
         </div>
+        
       )}
 
       <form onSubmit={handleSubmit}>
