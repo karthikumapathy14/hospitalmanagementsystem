@@ -33,14 +33,9 @@ import PatientHistory from './components/Doctor/PatientHistory.js';
 import Viewappointmentnurse from './components/Nurse/Viewappointmentnurse.js';
 import Editappointmentnurse from './components/Nurse/Editappointmentnurse.js';
 
-
 import Bill from './components/Receptionist/Bill.js';
 import Viewapatientappointment from './components/Patient.js/viewpatientappointment.js'
 import Billpatientview from './components/Patient.js/Billpatientview.js';
-
-
-
-
 
 
 function App() {
@@ -94,7 +89,6 @@ function App() {
               {/* nurse dashboard */}
               <Route path='/Viewappointmentnurse' element={<Viewappointmentnurse/>}></Route>
               <Route path='/Editappointmentnurse/:id' element={<Editappointmentnurse/>}></Route>
-
               {/* {patient dashboard} */}
               <Route path='/Viewapatientappointment' element={<Viewapatientappointment/>}></Route>
               <Route path='/billpatientview/:id' element={<Billpatientview/>}></Route>
