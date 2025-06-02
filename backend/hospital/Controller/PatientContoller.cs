@@ -1,4 +1,5 @@
 ﻿using hospital.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace hospital.Controller
 {
     [Route("api/[controller]")]
+    //[Authorize(Roles ="Patient")]
     [ApiController]
     public class PatientContoller : ControllerBase
     {

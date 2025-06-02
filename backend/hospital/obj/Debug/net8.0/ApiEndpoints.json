@@ -381,6 +381,16 @@
   },
   {
     "ContainingType": "hospital.Controller.DoctorController",
+    "Method": "GetTodaysAppointmentCountForDoctor",
+    "RelativePath": "api/Doctor/appointments/today-count",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.DoctorController",
     "Method": "filterbyid",
     "RelativePath": "api/Doctor/filterbyid/{id}",
     "HttpMethod": "GET",

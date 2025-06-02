@@ -747,6 +747,18 @@
         }
       }
     },
+    "/api/Doctor/appointments/today-count": {
+      "get": {
+        "tags": [
+          "Doctor"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Nurse/Patientlist": {
       "get": {
         "tags": [

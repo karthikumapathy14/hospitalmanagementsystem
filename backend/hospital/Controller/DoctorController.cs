@@ -1,4 +1,5 @@
-﻿using hospital.Data;
+﻿using System.Security.Claims;
+using hospital.Data;
 using hospital.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -253,6 +254,26 @@ namespace hospital.Controller
                 return NotFound("No patient histories found.");
 
             return Ok(result);
+        }
+
+
+        //dashboard
+
+        [HttpGet("appointments/today-count")]
+        public async Task<IActionResult> GetTodaysAppointmentCountForDoctor()
+        {
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+                return Unauthorized("User ID not found in token");
+
+            int doctorId = int.Parse(userIdClaim.Value);
+            DateTime today = DateTime.Today;
+
+            int todayCount = await _dbcontext.appointments
+                .CountAsync(a => a.DoctorId == doctorId && a.AppointmentDate == DateOnly.FromDateTime(DateTime.Today)
+);
+
+            return Ok(todayCount);
         }
 
 
