@@ -94,19 +94,11 @@ function App() {
               {/* nurse dashboard */}
               <Route path='/Viewappointmentnurse' element={<Viewappointmentnurse/>}></Route>
               <Route path='/Editappointmentnurse/:id' element={<Editappointmentnurse/>}></Route>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
 
-
->>>>>>> b015cd1cb247a24fd85d56d0e689967029f695ba
               {/* {patient dashboard} */}
               <Route path='/Viewapatientappointment' element={<Viewapatientappointment/>}></Route>
               <Route path='/billpatientview/:id' element={<Billpatientview/>}></Route>
 
-
-=======
->>>>>>> Stashed changes
 
             </Routes>
           </div>
