@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import PatientNavbar from './PatientNavbar';
 
 const Viewapatientappointment = () => {
   const [appointments, setAppointments] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
-  const { id } = useParams();
 
   const getAppointments = async () => {
     try {
@@ -19,7 +19,7 @@ const Viewapatientappointment = () => {
       }
 
       const decoded = jwtDecode(token);
-      const patientID = decoded.PatientId;
+      const patientID = decoded?.PatientId;
 
       if (!patientID) {
         setError('Patient ID not found in token.');
@@ -27,11 +27,14 @@ const Viewapatientappointment = () => {
         return;
       }
 
-      const response = await axios.get(`https://localhost:7058/api/PatientContoller/api/patient/appointments/my`, {
-        headers: {
-          Authorization: `Bearer ${token}`
+      const response = await axios.get(
+        `https://localhost:7058/api/PatientContoller/api/patient/appointments/my`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
 
       setAppointments(response.data);
     } catch (err) {
@@ -47,7 +50,7 @@ const Viewapatientappointment = () => {
   }, []);
 
   const getStatusBadge = (status) => {
-    switch (status.toLowerCase()) {
+    switch (status?.toLowerCase()) {
       case 'confirmed':
         return <span className="badge bg-success">{status}</span>;
       case 'pending':
@@ -55,58 +58,75 @@ const Viewapatientappointment = () => {
       case 'cancelled':
         return <span className="badge bg-danger">{status}</span>;
       default:
-        return <span className="badge bg-secondary">{status}</span>;
+        return <span className="badge bg-secondary">{status || 'N/A'}</span>;
     }
   };
 
   return (
-    <div className="container mt-5">
-      <h2 className="mb-4 text-center">My Appointments</h2>
+    <>
+      <PatientNavbar />
 
-      {loading && <div className="text-center text-primary">Loading appointments...</div>}
-      {error && <div className="alert alert-danger text-center">{error}</div>}
+      <div className="container mt-5">
+        <h2 className="mb-4 text-center">My Appointments</h2>
 
-      {!loading && appointments.length === 0 && !error && (
-        <div className="alert alert-info text-center">No appointments found.</div>
-      )}
+        {loading && (
+          <div className="text-center text-primary">Loading appointments...</div>
+        )}
 
-      {!loading && appointments.length > 0 && (
-        <div className="table-responsive">
-          <table className="table table-striped table-hover align-middle shadow">
-            <thead className="table-primary">
-              <tr>
-                <th>ID</th>
-                <th>Doctor</th>
-                <th>Department</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Reason</th>
-                <th>Status</th>
-                <th>Bill</th>
-              </tr>
-            </thead>
-            <tbody>
-              {appointments.map((app, index) => (
-                <tr key={index}>
-                  <td>{app.appointmentId}</td>
-                  <td>{app.doctorName}</td>
-                  <td>{app.departmentName}</td>
-                  <td>{new Date(app.appointmentDate).toLocaleDateString()}</td>
-                  <td>{app.appointmentTime}</td>
-                  <td>{app.reason}</td>
-                  <td>{getStatusBadge(app.status)}</td>
-                  <td>
-                    <Link to={`/billpatientview/${app.appointmentId}`}>
-                      <button className="btn btn-outline-primary btn-sm">View Bill</button>
-                    </Link>
-                  </td>
+        {error && (
+          <div className="alert alert-danger text-center">{error}</div>
+        )}
+
+        {!loading && appointments.length === 0 && !error && (
+          <div className="alert alert-info text-center">
+            No appointments found.
+          </div>
+        )}
+
+        {!loading && appointments.length > 0 && (
+          <div className="table-responsive">
+            <table className="table table-striped table-hover align-middle shadow">
+              <thead className="table-primary">
+                <tr>
+                  <th>ID</th>
+                  <th>Doctor</th>
+                  <th>Department</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Reason</th>
+                  <th>Status</th>
+                  <th>Bill</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </div>
+              </thead>
+              <tbody>
+                {appointments.map((app, index) => (
+                  <tr key={index}>
+                    <td>{app.appointmentId}</td>
+                    <td>{app.doctorName}</td>
+                    <td>{app.departmentName}</td>
+                    <td>
+                      {app.appointmentDate
+                        ? new Date(app.appointmentDate).toLocaleDateString()
+                        : 'N/A'}
+                    </td>
+                    <td>{app.appointmentTime || 'N/A'}</td>
+                    <td>{app.reason || 'N/A'}</td>
+                    <td>{getStatusBadge(app.status)}</td>
+                    <td>
+                      <Link to={`/billpatientview/${app.appointmentId}`}>
+                        <button className="btn btn-outline-primary btn-sm">
+                          View Bill
+                        </button>
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
