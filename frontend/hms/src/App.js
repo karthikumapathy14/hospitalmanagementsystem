@@ -95,11 +95,9 @@ function App() {
               <Route path='/Viewappointmentnurse' element={<Viewappointmentnurse/>}></Route>
               <Route path='/Editappointmentnurse/:id' element={<Editappointmentnurse/>}></Route>
 
-
               {/* {patient dashboard} */}
               <Route path='/Viewapatientappointment' element={<Viewapatientappointment/>}></Route>
               <Route path='/billpatientview/:id' element={<Billpatientview/>}></Route>
-
 
 
             </Routes>
