@@ -25,7 +25,7 @@ import CreatePatient from './components/Receptionist/CreatePatient.js';
 import Makeappointment from './components/Receptionist/Makeappointment.js';
 import ListAppointment from './components/Receptionist/ListAppointment.js';
 import Editappointment from './components/Receptionist/Editappointment.js';
-import DoctorSidebar from './components/Doctor/DoctorDashboard.js';
+import DoctorDashboard from './components/Doctor/DoctorDashboard.js';
 import DoctorSideEditAppointment from './components/Doctor/DoctorSideEditAppointment.js';
 import Viewappointment from './components/Doctor/Viewappointment.js';
 import Addprescription from './components/Doctor/Addprescription.js';
@@ -37,20 +37,10 @@ import Editappointmentnurse from './components/Nurse/Editappointmentnurse.js';
 import Bill from './components/Receptionist/Bill.js';
 import Viewapatientappointment from './components/Patient.js/viewpatientappointment.js'
 import Billpatientview from './components/Patient.js/Billpatientview.js';
-
-
-
-
+import ChangePassword from './components/ChangePassword.js';
 
 
 function App() {
-  const doctorData = {
-    name: "Dr. Marttin Deo",
-    qualifications: "MBBS, FCPS - MD (Medicine), MCPS",
-    imageUrl: "https://th.bing.com/th/id/OIP.Bgc_mdHsFNhmSWk6oRCcaQHaEJ?w=626&h=351&rs=1&pid=ImgDetMain"
-  };
-
-  const DoctorSidebarWrapper = () => <DoctorSidebar doctor={doctorData} />;
   return (
     <BrowserRouter>
       <div className="App">
@@ -61,6 +51,8 @@ function App() {
             <Routes>
               {/* common */}
               <Route path="/" element={<Login />} />
+              <Route path='/changepassword' element={<ChangePassword/>}></Route>
+
               {/* Admin navbar */}
               <Route path="/reg" element={<Reg />} />
               <Route path='/department' element={<Department />}></Route>
@@ -85,7 +77,7 @@ function App() {
               <Route path='/billgenerate' element={<Bill/>}></Route>
 
               {/* Doctor dashboard */}
-              <Route path='/DoctorSidebar' element={<DoctorSidebarWrapper />}></Route>
+              <Route path='/DoctorDashboard' element={<DoctorDashboard/>}></Route>
               <Route path='/viewappointment' element={<Viewappointment />}> </Route>
               <Route path="/DoctorSideEditAppointment/:id" element={<DoctorSideEditAppointment />} />
               <Route path='/Addprescription' element={<Addprescription/>}></Route>

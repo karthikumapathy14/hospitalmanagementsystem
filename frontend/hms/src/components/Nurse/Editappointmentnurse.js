@@ -133,7 +133,7 @@ const Editappointmentnurse = () => {
               </form>
             </div>
             <div className="card-footer text-center text-muted">
-              Last updated: {new Date().toLocaleDateString()}
+              
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 ﻿using hospital.Data;
 using hospital.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -122,6 +123,7 @@ namespace hospital.Controller
                 // Initialize claims early
                 var claims = new List<Claim>
         {
+                    new Claim(ClaimTypes.NameIdentifier, user.Id),
             new Claim(ClaimTypes.NameIdentifier, user.UserName),
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.Role, roles.FirstOrDefault() ?? "User")
@@ -209,5 +211,36 @@ namespace hospital.Controller
             }
             return Unauthorized("Invalid email or password");
         }
+
+        [Authorize]
+        [HttpPost("changepassword")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePassword model)
+        {
+            if (model.NewPassword != model.ConfirmPassword)
+                return BadRequest(new { message = "New password and confirm password do not match." });
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return Unauthorized();
+
+            var result = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                var errors = result.Errors.Select(e => e.Description);
+                return BadRequest(new { message = "Password change failed", errors });
+            }
+
+            return Ok(new { message = "Password changed successfully" });
+
+        }
+        [Authorize]
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            // Since JWT is stateless, logout is handled on client by deleting token
+            return Ok(new { message = "Logged out successfully." });
+        }
+
     }
 }

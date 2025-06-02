@@ -21,9 +21,6 @@ const Viewappointmentnurse = () => {
       .catch((err) => console.log(err));
   }, []);
 
-
-
-
   const handleEdit = (appointmentId) => {
     navigate(`/Editappointmentnurse/${appointmentId}`);
   };
@@ -34,7 +31,8 @@ const Viewappointmentnurse = () => {
       <div style={{ width: "250px", backgroundColor: "#f8f9fa" }}>
         <Nursesidebar />
       </div>
-      <div className="card shadow-lg border-0 ">
+      <div className='flex-grow-1' style={{ backgroundColor: "#e8f4f8" }}>
+      <div className="card shadow-lg border-0  m-5">
         <div className="card-header bg-info text-white text-center">
           <h4 className="mb-0">
             <i className="bi bi-calendar-check"></i> Nurse - View Appointments
@@ -85,6 +83,7 @@ const Viewappointmentnurse = () => {
             </div>
           )}
         </div>
+      </div>
       </div>
 
 
