@@ -21,7 +21,7 @@ import ListPatient from './components/Receptionist/ListPatient.js';
 import EditPaient from './components/Receptionist/EditPaient.js';
 import CreatePatient from './components/Receptionist/CreatePatient.js';
 
-import ReceptionistDashboard from './components/Receptionist/ReceptionistDashboard.js';
+
 import Makeappointment from './components/Receptionist/Makeappointment.js';
 import ListAppointment from './components/Receptionist/ListAppointment.js';
 import Editappointment from './components/Receptionist/Editappointment.js';
@@ -32,14 +32,13 @@ import Addprescription from './components/Doctor/Addprescription.js';
 import PatientHistory from './components/Doctor/PatientHistory.js';
 import Viewappointmentnurse from './components/Nurse/Viewappointmentnurse.js';
 import Editappointmentnurse from './components/Nurse/Editappointmentnurse.js';
-<<<<<<< Updated upstream
+
 
 import Bill from './components/Receptionist/Bill.js';
 import Viewapatientappointment from './components/Patient.js/viewpatientappointment.js'
 import Billpatientview from './components/Patient.js/Billpatientview.js';
 
-=======
->>>>>>> Stashed changes
+
 
 
 
@@ -74,7 +73,7 @@ function App() {
               <Route path='/listrecep/:id' element={<EditRecep />}></Route>
 
               {/* receptionist dashboard */}
-              <Route path='/recepdashboard' element={<ReceptionistDashboard />}></Route>
+        
               <Route path='/listPatient' element={<ListPatient />}></Route>
               <Route path='/listPatient/:id' element={<EditPaient />}></Route>
               <Route path='/CreatePatient' element={<CreatePatient />}></Route>
@@ -95,14 +94,13 @@ function App() {
               {/* nurse dashboard */}
               <Route path='/Viewappointmentnurse' element={<Viewappointmentnurse/>}></Route>
               <Route path='/Editappointmentnurse/:id' element={<Editappointmentnurse/>}></Route>
-<<<<<<< Updated upstream
+
 
               {/* {patient dashboard} */}
               <Route path='/Viewapatientappointment' element={<Viewapatientappointment/>}></Route>
               <Route path='/billpatientview/:id' element={<Billpatientview/>}></Route>
 
-=======
->>>>>>> Stashed changes
+
 
             </Routes>
           </div>

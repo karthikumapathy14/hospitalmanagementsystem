@@ -42,17 +42,7 @@ const ReceptionistNavbar = () => {
 
       {/* Navigation Menu */}
       <nav className="nav flex-column gap-1 px-3">
-        {/* Dashboard */}
-        <Link 
-          className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
-            isActive('/recepdashboard') ? 'bg-sky-100 text-sky-800 fw-medium' : 'text-sky-600'
-          }`}
-          to="/recepdashboard"
-        >
-          <i className="bi bi-speedometer2" style={{ width: '24px', fontSize: '1.1rem' }}></i>
-          Dashboard
-        </Link>
-
+       
         {/* Patient Management Section */}
         <div className="mt-3 mb-2 text-uppercase small fw-bold text-sky-600 ps-3">
           <i className="bi bi-clipboard2-pulse me-2"></i>
@@ -128,7 +118,7 @@ const ReceptionistNavbar = () => {
         >
           <button className="btn btn-sm btn-outline-primary rounded-pill mx-2 mb-3">
           <i className="bi bi-calendar-plus me-1"></i>
-          New Appointment
+          Create Appointment
         </button>
         </Link>
 

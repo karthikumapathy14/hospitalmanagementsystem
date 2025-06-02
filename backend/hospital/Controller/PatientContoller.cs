@@ -65,6 +65,7 @@ namespace hospital.Controller
                     b.OtherCharges,
                     b.TotalAmount,
                     b.BillDate,
+                    b.billstatus,
 
                     // Appointment Info
                     AppointmentId = b.Appointment.AppointmentId,

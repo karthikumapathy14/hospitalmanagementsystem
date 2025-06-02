@@ -108,7 +108,7 @@ const BillPatientView = () => {
                     className="mb-1 fw-bold"
                     style={{ fontSize: '24px', letterSpacing: '1px' }}
                   >
-                    Healing Touch Multi-Specialty Hospital
+                    MEDCARE HOSPITAL
                   </h2>
                   <p className="mb-1" style={{ opacity: '0.9', fontSize: '14px' }}>
                     123, Health Street, Wellness City, India - 560001
@@ -386,7 +386,7 @@ const BillPatientView = () => {
                               <div style={{ fontSize: '14px' }}>
                                 <p className="mb-1">
                                   <span className="text-muted">Status:</span> 
-                                  <span className="badge bg-success ms-2">Paid</span>
+                                  <span className="badge bg-success ms-2">{billData.billstatus}</span>
                                 </p>
                                 <p className="mb-1">
                                   <span className="text-muted">Method:</span> 
@@ -460,9 +460,7 @@ const BillPatientView = () => {
                       <p className="mb-1">
                         This is a computer-generated bill and does not require a physical signature.
                       </p>
-                      <p className="mb-0 fst-italic" style={{ color: '#1a5276' }}>
-                        <strong>Healing Touch</strong> – Where Care Comes First.
-                      </p>
+                      
                     </div>
                   </div>
                 )}
