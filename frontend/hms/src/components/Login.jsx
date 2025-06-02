@@ -56,56 +56,76 @@ const Login = () => {
   };
 
   return (
-    <div className="min-vh-100 d-flex align-items-center justify-content-center" style={{ background: '#e9f7fc' }}>
-      <div className="card shadow-lg border-0 rounded-4" style={{ maxWidth: '420px', width: '100%' }}>
-        <div className="card-header bg-info text-white text-center rounded-top-4">
-          <h3 className="mb-1"><i className="bi bi-hospital"></i> Hospital Login</h3>
-          <p className="mb-0 small">Access your healthcare dashboard</p>
+
+  <div
+    className="min-vh-100 d-flex align-items-center justify-content-center"
+    style={{
+      backgroundImage: "url('https://cdn.pixabay.com/photo/2017/08/06/22/01/hospital-2598822_1280.jpg')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      fontFamily: "'Poppins', sans-serif",
+    }}
+  >
+    <div
+      className="p-4 rounded-4 shadow"
+      style={{
+        backdropFilter: 'blur(10px)',
+        backgroundColor: 'rgba(255, 255, 255, 0.3)',
+        maxWidth: '400px',
+        width: '100%',
+        border: '1px solid rgba(255,255,255,0.4)',
+      }}
+    >
+      <div className="text-center text-white mb-4">
+        <i className="bi bi-hospital-fill" style={{ fontSize: '2rem' }}></i>
+        <h3 className="fw-bold mt-2">Hospital Portal</h3>
+        <p className="small mb-0">Secure Login for Staff & Patients</p>
+      </div>
+
+      {message && <div className="alert alert-danger text-center">{message}</div>}
+
+      <form onSubmit={handleFormSubmit}>
+        <div className="mb-3">
+          <label className="form-label text-white">Email</label>
+          <input
+            type="email"
+            name="Email"
+            className="form-control"
+            placeholder="Enter email"
+            value={data.Email}
+            onChange={handleInputChange}
+            required
+          />
         </div>
 
-        <form className="card-body px-4 py-3" onSubmit={handleFormSubmit}>
-          {message && <div className="alert alert-danger text-center">{message}</div>}
-
-          <div className="mb-3">
-            <label className="form-label">Email address</label>
-            <input
-              type="email"
-              name="Email"
-              className="form-control"
-              placeholder="Enter your email"
-              value={data.Email}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="form-label">Password</label>
-            <input
-              type="password"
-              name="Password"
-              className="form-control"
-              placeholder="Enter your password"
-              value={data.Password}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-
-          <button className="btn btn-info w-100 text-white" type="submit" disabled={loading}>
-            {loading ? <span className="spinner-border spinner-border-sm" /> : 'Login'}
-          </button>
-        </form>
-
-        <div className="text-center pb-3">
-          <small className="text-muted">© 2025 HealthyLife Hospital</small>
+        <div className="mb-3">
+          <label className="form-label text-white">Password</label>
+          <input
+            type="password"
+            name="Password"
+            className="form-control"
+            placeholder="Enter password"
+            value={data.Password}
+            onChange={handleInputChange}
+            required
+          />
         </div>
 
+        <div className="text-end mb-3">
+          <a href="/forgot-password" className="small text-white text-decoration-none">Forgot Password?</a>
+        </div>
 
+        <button className="btn btn-light w-100 fw-semibold" type="submit" disabled={loading}>
+          {loading ? <span className="spinner-border spinner-border-sm" /> : 'Login'}
+        </button>
+      </form>
 
+      <div className="text-center mt-3">
+        <small className="text-white-50">© 2025 HealthyLife Hospital</small>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
+};
 export default Login;
