@@ -51,13 +51,15 @@ const Editappointment = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`https://localhost:7058/api/Receptionist/getappointmentid/${id}`)
-      .then((res) => {
-        setforms(res.data);
-        const filteredDoctors = doc.filter((d) => d.departmentId === res.data.departmentId);
-        setfiltered(filteredDoctors);
-      })
-      .catch(console.error);
+    if (doc.length > 0) {
+      axios.get(`https://localhost:7058/api/Receptionist/getappointmentid/${id}`)
+        .then((res) => {
+          setforms(res.data);
+          const filteredDoctors = doc.filter((d) => d.departmentId === res.data.departmentId);
+          setfiltered(filteredDoctors);
+        })
+        .catch(console.error);
+    }
   }, [id, doc]);
 
   const handlesubmit = (e) => {
@@ -76,16 +78,16 @@ const Editappointment = () => {
   };
 
   return (
-    <div className="container py-4">
+    <div className="container py-5">
       <div className="row justify-content-center">
-        <div className="col-md-8 col-lg-6">
-          <div className="card shadow-lg rounded-4 border-0">
-            <div className="card-body">
-              <h3 className="card-title text-center mb-4">Edit Appointment</h3>
+        <div className="col-md-10 col-lg-8">
+          <div className="card border-0 shadow-lg rounded-4">
+            <div className="card-body p-4">
+              <h2 className="text-center text-primary fw-bold mb-4">Edit Appointment</h2>
               <form onSubmit={handlesubmit}>
 
-                <div className="mb-3">
-                  <label className="form-label">Patient ID</label>
+                <div className="mb-4">
+                  <label className="form-label fw-semibold">Patient ID</label>
                   <input
                     type="text"
                     className="form-control"
@@ -95,8 +97,8 @@ const Editappointment = () => {
                   />
                 </div>
 
-                <div className="mb-3">
-                  <label className="form-label">Department</label>
+                <div className="mb-4">
+                  <label className="form-label fw-semibold">Department</label>
                   <select
                     className="form-select"
                     name="departmentId"
@@ -113,8 +115,8 @@ const Editappointment = () => {
                   </select>
                 </div>
 
-                <div className="mb-3">
-                  <label className="form-label">Doctor</label>
+                <div className="mb-4">
+                  <label className="form-label fw-semibold">Doctor</label>
                   <select
                     className="form-select"
                     name="doctorId"
@@ -132,8 +134,8 @@ const Editappointment = () => {
                   </select>
                 </div>
 
-                <div className="mb-3">
-                  <label className="form-label">Appointment Date</label>
+                <div className="mb-4">
+                  <label className="form-label fw-semibold">Appointment Date</label>
                   <input
                     type="date"
                     className="form-control"
@@ -144,8 +146,8 @@ const Editappointment = () => {
                   />
                 </div>
 
-                <div className="mb-3">
-                  <label className="form-label">Appointment Time</label>
+                <div className="mb-4">
+                  <label className="form-label fw-semibold">Appointment Time</label>
                   <input
                     type="time"
                     className="form-control"
@@ -157,8 +159,8 @@ const Editappointment = () => {
                   />
                 </div>
 
-                <div className="mb-3">
-                  <label className="form-label">Reason</label>
+                <div className="mb-4">
+                  <label className="form-label fw-semibold">Reason</label>
                   <input
                     type="text"
                     className="form-control"
@@ -169,8 +171,8 @@ const Editappointment = () => {
                   />
                 </div>
 
-                <div className="mb-3">
-                  <label className="form-label">Status</label>
+                <div className="mb-4">
+                  <label className="form-label fw-semibold">Status</label>
                   <select
                     className="form-select"
                     name="status"
@@ -185,17 +187,17 @@ const Editappointment = () => {
                   </select>
                 </div>
 
-                <div className="text-end">
+                <div className="d-flex justify-content-end">
                   <button
                     type="submit"
-                    className="btn btn-primary px-4"
+                    className="btn btn-success px-4 me-2"
                     disabled={loading}
                   >
-                    {loading ? "Saving..." : "Save Changes"}
+                    {loading ? "Saving..." : "Save"}
                   </button>
                   <button
                     type="button"
-                    className="btn btn-outline-secondary ms-2"
+                    className="btn btn-outline-secondary"
                     onClick={() => navigate(-1)}
                     disabled={loading}
                   >

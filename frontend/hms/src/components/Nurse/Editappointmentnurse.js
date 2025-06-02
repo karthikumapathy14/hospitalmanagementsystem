@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 <<<<<<< Updated upstream
 
 
+
+
 import { useParams, useNavigate } from "react-router-dom";
 import Nursesidebar from "./Nursesidebar";
 
@@ -34,9 +36,13 @@ const Editappointmentnurse = () => {
 
         console.error(err);
 
+<<<<<<< HEAD
 =======
         console.log(err);
 >>>>>>> Stashed changes
+=======
+
+>>>>>>> b015cd1cb247a24fd85d56d0e689967029f695ba
         setLoading(false);
       });
   }, [id]);
@@ -48,6 +54,7 @@ const Editappointmentnurse = () => {
 <<<<<<< Updated upstream
 
 
+
       .then(() => {
         alert("✅ Prescription updated successfully");
         navigate("/Viewappointmentnurse");
@@ -55,6 +62,7 @@ const Editappointmentnurse = () => {
       .catch((err) => console.error(err));
 
 
+<<<<<<< HEAD
 =======
       .then((res) => {
         console.log(res.data);
@@ -62,6 +70,10 @@ const Editappointmentnurse = () => {
       })
       .catch((err) => console.log(err));
 >>>>>>> Stashed changes
+=======
+
+
+>>>>>>> b015cd1cb247a24fd85d56d0e689967029f695ba
   };
 
   const handleChange = (e) => {
@@ -71,6 +83,9 @@ const Editappointmentnurse = () => {
   if (loading) {
 <<<<<<< Updated upstream
 
+
+
+
     return (
       <div className="d-flex justify-content-center align-items-center vh-100">
         <div className="spinner-border text-primary" role="status"></div>
@@ -79,11 +94,14 @@ const Editappointmentnurse = () => {
 
 
 
+<<<<<<< HEAD
 
 
 =======
     return <div className="text-center mt-5">Loading...</div>;
 >>>>>>> Stashed changes
+=======
+>>>>>>> b015cd1cb247a24fd85d56d0e689967029f695ba
   }
 
   if (!data || !data.appointmentId) {
@@ -91,16 +109,26 @@ const Editappointmentnurse = () => {
       <div className="text-center mt-5">
 <<<<<<< Updated upstream
 
+
+
         <h4 className="text-danger">⚠ No prescription record found</h4>
+<<<<<<< HEAD
 =======
         <h4 className="text-danger">No prescription added</h4>
 >>>>>>> Stashed changes
+=======
+
+
+
+
+>>>>>>> b015cd1cb247a24fd85d56d0e689967029f695ba
       </div>
     );
   }
 
   return (
 <<<<<<< Updated upstream
+
 
 
     <div className="d-flex" style={{ minHeight: "100vh" }}>
@@ -175,6 +203,7 @@ const Editappointmentnurse = () => {
 
 
 
+<<<<<<< HEAD
 
 =======
     <div className="container mt-5">
@@ -234,6 +263,8 @@ const Editappointmentnurse = () => {
           </div>
         </form>
 >>>>>>> Stashed changes
+=======
+>>>>>>> b015cd1cb247a24fd85d56d0e689967029f695ba
       </div>
     </div>
   );
