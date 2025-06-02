@@ -475,6 +475,18 @@
         }
       }
     },
+    "/api/Admin/gettodaystatusreport": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Authentication/Register": {
       "post": {
         "tags": [

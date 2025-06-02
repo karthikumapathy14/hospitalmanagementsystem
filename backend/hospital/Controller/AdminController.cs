@@ -300,5 +300,30 @@ namespace hospital.Controller
 
             return Ok(result);
         }
+        [HttpGet("gettodaystatusreport")]
+        public IActionResult GetTodayStatusReport()
+        {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Today); // ✅ DateOnly
+
+            var statusCounts = _dbcontext.appointments
+                .Where(a => a.AppointmentDate == today) // ✅ Direct comparison
+                .GroupBy(a => a.Status)
+                .Select(g => new { Status = g.Key, Count = g.Count() })
+                .ToList();
+
+            var result = new
+            {
+                Complete = statusCounts.FirstOrDefault(s => s.Status == "Complete")?.Count ?? 0,
+                Pending = statusCounts.FirstOrDefault(s => s.Status == "Pending")?.Count ?? 0,
+                Scheduled = statusCounts.FirstOrDefault(s => s.Status == "Scheduled")?.Count ?? 0
+            };
+
+            return Ok(result);
+        }
+
+
+
+
+
     }
 }

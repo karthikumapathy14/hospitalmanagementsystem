@@ -242,6 +242,16 @@
   },
   {
     "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GetTodayStatusReport",
+    "RelativePath": "api/Admin/gettodaystatusreport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
     "Method": "GettodayAppointment",
     "RelativePath": "api/Admin/today-appointments",
     "HttpMethod": "GET",
