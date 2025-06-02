@@ -98,8 +98,6 @@ function App() {
               {/* {patient dashboard} */}
               <Route path='/Viewapatientappointment' element={<Viewapatientappointment/>}></Route>
               <Route path='/billpatientview/:id' element={<Billpatientview/>}></Route>
-
-
             </Routes>
           </div>
         </div>

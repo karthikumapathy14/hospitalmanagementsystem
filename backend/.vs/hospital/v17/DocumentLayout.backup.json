@@ -102,7 +102,7 @@
               "RelativeToolTip": "hospital\\Migrations\\20250529115020_addsa.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.124Z"
+              "WhenOpened": "2025-06-02T09:23:23.401Z"
             },
             {
               "$type": "Document",
@@ -114,7 +114,7 @@
               "RelativeToolTip": "hospital\\Model\\Doctor.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAQwBsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.147Z"
+              "WhenOpened": "2025-06-02T09:23:23.418Z"
             },
             {
               "$type": "Document",
@@ -126,7 +126,7 @@
               "RelativeToolTip": "hospital\\Model\\Nurse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.149Z"
+              "WhenOpened": "2025-06-02T09:23:23.421Z"
             },
             {
               "$type": "Document",
@@ -138,7 +138,7 @@
               "RelativeToolTip": "hospital\\Controller\\AdminController.cs",
               "ViewState": "AgIAAMYAAAAAAAAAAAAiwCsBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.151Z"
+              "WhenOpened": "2025-06-02T09:23:23.422Z"
             },
             {
               "$type": "Document",
@@ -150,7 +150,7 @@
               "RelativeToolTip": "hospital\\Migrations\\20250529084808_addsss.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.152Z"
+              "WhenOpened": "2025-06-02T09:23:23.424Z"
             },
             {
               "$type": "Document",
@@ -162,7 +162,7 @@
               "RelativeToolTip": "hospital\\Controller\\ReceptionistController.cs",
               "ViewState": "AgIAAPgAAAAAAAAAAAAowB8BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.154Z",
+              "WhenOpened": "2025-06-02T09:23:23.426Z",
               "EditorCaption": ""
             },
             {
@@ -175,7 +175,7 @@
               "RelativeToolTip": "hospital\\Controller\\PatientContoller.cs",
               "ViewState": "AgIAACcAAAAAAAAAAAAowEMAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.156Z"
+              "WhenOpened": "2025-06-02T09:23:23.427Z"
             },
             {
               "$type": "Document",
@@ -187,7 +187,7 @@
               "RelativeToolTip": "hospital\\Controller\\AuthenticationController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAKoAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.158Z"
+              "WhenOpened": "2025-06-02T09:23:23.429Z"
             },
             {
               "$type": "Document",
@@ -199,7 +199,7 @@
               "RelativeToolTip": "hospital\\Migrations\\20250527115001_bill.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.159Z"
+              "WhenOpened": "2025-06-02T09:23:23.431Z"
             },
             {
               "$type": "Document",
@@ -211,7 +211,7 @@
               "RelativeToolTip": "hospital\\Model\\Appointment.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAiwCIAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.161Z"
+              "WhenOpened": "2025-06-02T09:23:23.433Z"
             },
             {
               "$type": "Document",
@@ -223,7 +223,7 @@
               "RelativeToolTip": "hospital\\Migrations\\20250530043253_oll.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.163Z"
+              "WhenOpened": "2025-06-02T09:23:23.435Z"
             },
             {
               "$type": "Document",
@@ -235,7 +235,7 @@
               "RelativeToolTip": "hospital\\Model\\Bill.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.164Z"
+              "WhenOpened": "2025-06-02T09:23:23.436Z"
             },
             {
               "$type": "Document",
@@ -247,7 +247,7 @@
               "RelativeToolTip": "hospital\\Model\\Patient.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAswBAAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.166Z"
+              "WhenOpened": "2025-06-02T09:23:23.439Z"
             },
             {
               "$type": "Document",
@@ -259,7 +259,7 @@
               "RelativeToolTip": "hospital\\Migrations\\20250529084954_addss.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.167Z"
+              "WhenOpened": "2025-06-02T09:23:23.441Z"
             },
             {
               "$type": "Document",
@@ -271,7 +271,7 @@
               "RelativeToolTip": "hospital\\Model\\Prescription.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAxwAgAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.169Z"
+              "WhenOpened": "2025-06-02T09:23:23.443Z"
             },
             {
               "$type": "Document",
@@ -283,7 +283,7 @@
               "RelativeToolTip": "hospital\\Controller\\DoctorController.cs",
               "ViewState": "AgIAABwAAAAAAAAAAADwvyIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.171Z"
+              "WhenOpened": "2025-06-02T09:23:23.444Z"
             },
             {
               "$type": "Document",
@@ -295,7 +295,7 @@
               "RelativeToolTip": "hospital\\Controller\\NurseController.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAjwCUAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.173Z"
+              "WhenOpened": "2025-06-02T09:23:23.446Z"
             },
             {
               "$type": "Document",
@@ -307,7 +307,7 @@
               "RelativeToolTip": "hospital\\Migrations\\20250526055704_hel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.175Z"
+              "WhenOpened": "2025-06-02T09:23:23.448Z"
             },
             {
               "$type": "Document",
@@ -319,7 +319,7 @@
               "RelativeToolTip": "hospital\\Data\\Applicationdbcontext.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAABkAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:01:14.177Z"
+              "WhenOpened": "2025-06-02T09:23:23.45Z"
             }
           ]
         }
