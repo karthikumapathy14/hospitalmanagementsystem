@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import ReceptionistNavbar from "./ReceptionistNavbar";
 import { useAuth } from "../AuthContext";
+import BillPatientView from "../Patient.js/Billpatientview";
 
 const ListAppointment = () => {
   const navigate = useNavigate();
@@ -17,7 +18,9 @@ const ListAppointment = () => {
   // Fetch all bills
   const fetchBills = async () => {
     try {
-      const res = await axios.get("https://localhost:7058/api/Receptionist/bill");
+      const res = await axios.get(
+        "https://localhost:7058/api/Receptionist/bill"
+      );
       setBills(res.data);
     } catch (err) {
       console.error("Failed to fetch bills:", err);
@@ -27,7 +30,9 @@ const ListAppointment = () => {
   // Fetch all appointments
   const fetchAppointments = async () => {
     try {
-      const res = await axios.get("https://localhost:7058/api/Receptionist/getappointment");
+      const res = await axios.get(
+        "https://localhost:7058/api/Receptionist/getappointment"
+      );
       setAppointments(res.data);
     } catch (err) {
       console.error("Failed to fetch appointments:", err);
@@ -40,10 +45,11 @@ const ListAppointment = () => {
   }, [location]);
 
   // Search filter
-  const filteredAppointments = appointments.filter((item) =>
-    item.patientid?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.departmentName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.doctorName?.toLowerCase().includes(searchTerm.toLowerCase()) 
+  const filteredAppointments = appointments.filter(
+    (item) =>
+      item.patientid?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.departmentName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.doctorName?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Navigate to bill page
@@ -66,7 +72,9 @@ const ListAppointment = () => {
 
   // Update bill status
   const handleBillStatusUpdate = async (appointmentId, newStatus) => {
-    const confirmChange = window.confirm(`Are you sure you want to mark this bill as ${newStatus}?`);
+    const confirmChange = window.confirm(
+      `Are you sure you want to mark this bill as ${newStatus}?`
+    );
     if (!confirmChange) return;
 
     setLoading(true);
@@ -145,13 +153,19 @@ const ListAppointment = () => {
                             <td>{item.patientid}</td>
                             <td>{item.departmentName}</td>
                             <td>{item.doctorName}</td>
-                            <td>{new Date(item.appointmentDate).toLocaleDateString()}</td>
+                            <td>
+                              {new Date(
+                                item.appointmentDate
+                              ).toLocaleDateString()}
+                            </td>
                             <td>{item.appointmentTime}</td>
                             <td>{item.reason}</td>
                             <td>
                               <span
                                 className={`badge ${
-                                  item.status === "Confirmed" ? "bg-success" : "bg-secondary"
+                                  item.status === "Confirmed"
+                                    ? "bg-success"
+                                    : "bg-secondary"
                                 }`}
                               >
                                 {item.status}
@@ -164,10 +178,17 @@ const ListAppointment = () => {
                                     className="form-check-input"
                                     type="checkbox"
                                     id={`billSwitch-${item.appointmentId}`}
-                                    checked={billStatus.toLowerCase() === "paid"}
+                                    checked={
+                                      billStatus.toLowerCase() === "paid"
+                                    }
                                     onChange={(e) => {
-                                      const newStatus = e.target.checked ? "Paid" : "Pending";
-                                      handleBillStatusUpdate(item.appointmentId, newStatus);
+                                      const newStatus = e.target.checked
+                                        ? "Paid"
+                                        : "Pending";
+                                      handleBillStatusUpdate(
+                                        item.appointmentId,
+                                        newStatus
+                                      );
                                     }}
                                     disabled={loading}
                                   />
@@ -183,24 +204,43 @@ const ListAppointment = () => {
                                   </label>
                                 </div>
                               ) : (
-                                <span className="badge bg-warning text-dark">Pending</span>
+                                <span className="badge bg-warning text-dark">
+                                  Pending
+                                </span>
                               )}
                             </td>
                             <td>{new Date(item.createdAt).toLocaleString()}</td>
                             <td>
-                              <Link to={`/editappointment/${item.appointmentId}`}>
+                              <Link
+                                to={`/editappointment/${item.appointmentId}`}
+                              >
                                 <button className="btn btn-sm btn-outline-primary">
-                                  <i className="bi bi-pencil-square me-1"></i> Edit
+                                  <i className="bi bi-pencil-square me-1"></i>{" "}
+                                  Edit
                                 </button>
                               </Link>
                               <button
                                 className="btn btn-sm btn-outline-secondary ms-2"
-                                onClick={() => handleBillNavigation(item.appointmentId)}
+                                onClick={() =>
+                                  handleBillNavigation(item.appointmentId)
+                                }
                                 disabled={!!billId}
-                                title={billId ? "Bill already generated" : "Generate bill"}
+                                title={
+                                  billId
+                                    ? "Bill already generated"
+                                    : "Generate bill"
+                                }
                               >
                                 <i className="bi bi-cash-stack me-1"></i> Bill
                               </button>
+
+                              <Link
+                                to={`/billpatientview/${item.appointmentId}`}
+                              >
+                                <button className="btn btn-outline-primary">
+                                  Bill View
+                                </button>
+                              </Link>
                             </td>
                           </tr>
                         );

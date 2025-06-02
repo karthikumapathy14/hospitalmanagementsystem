@@ -33,7 +33,7 @@ const Viewappointmentnurse = () => {
       <div style={{ width: "250px", backgroundColor: "#f8f9fa" }}>
         <Nursesidebar />
       </div>
-      <div className="card shadow-lg border-0 ">
+      <div className="card shadow-lg border-0 flex-grow-1 mx-5 my-4">
         <div className="card-header bg-info text-white text-center">
           <h4 className="mb-0">
             <i className="bi bi-calendar-check"></i> Nurse - View Appointments
