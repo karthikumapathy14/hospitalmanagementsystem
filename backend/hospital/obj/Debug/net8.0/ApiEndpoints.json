@@ -561,9 +561,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "hospital.Controller.PatientContoller",
+    "ContainingType": "hospital.Controller.PatientController",
     "Method": "GetAppointmentsForPatient",
-    "RelativePath": "api/PatientContoller/api/patient/appointments/my",
+    "RelativePath": "api/Patient/appointments/my",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -571,9 +571,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "hospital.Controller.PatientContoller",
+    "ContainingType": "hospital.Controller.PatientController",
     "Method": "GetBillWithFullDetails",
-    "RelativePath": "api/PatientContoller/BillView/getbyid/{id}",
+    "RelativePath": "api/Patient/BillView/getbyid/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

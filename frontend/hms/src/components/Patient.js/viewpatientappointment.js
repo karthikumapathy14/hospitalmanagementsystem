@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PatientNavbar from './PatientNavbar';
+import { toast } from 'react-toastify';
 
 const Viewapatientappointment = () => {
   const [appointments, setAppointments] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+  const navigate=useNavigate();
+
 
   const getAppointments = async () => {
+
     try {
       const token = localStorage.getItem('token');
       if (!token) {
@@ -26,9 +30,13 @@ const Viewapatientappointment = () => {
         setLoading(false);
         return;
       }
-
+      if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
       const response = await axios.get(
-        `https://localhost:7058/api/PatientContoller/api/patient/appointments/my`,
+        `https://localhost:7058/api/Patient/appointments/my`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -47,7 +55,7 @@ const Viewapatientappointment = () => {
 
   useEffect(() => {
     getAppointments();
-  }, []);
+  }, [navigate]);
 
   const getStatusBadge = (status) => {
     switch (status?.toLowerCase()) {

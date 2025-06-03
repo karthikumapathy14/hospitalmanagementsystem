@@ -4,6 +4,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import '../node_modules/bootstrap/dist/js/bootstrap.bundle.js'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter, Links, Route, Routes } from 'react-router-dom'
+import { ToastContainer } from "react-toastify";
 
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -44,6 +45,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <ToastContainer position="top-right" autoClose={3000} />
         {/* <DoctorSidebar doctor={doctorData} /> */}
 
         <div className='d-flex'>

@@ -2,12 +2,19 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Nursesidebar from './Nursesidebar';
+import { toast } from 'react-toastify';
 
 const Viewappointmentnurse = () => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
+      if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
     axios
       .get('https://localhost:7058/api/Nurse/appointmentnurse', {
         headers: {
@@ -19,7 +26,7 @@ const Viewappointmentnurse = () => {
         console.log('Appointments fetched:', res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [navigate]);
 
   const handleEdit = (appointmentId) => {
     navigate(`/Editappointmentnurse/${appointmentId}`);

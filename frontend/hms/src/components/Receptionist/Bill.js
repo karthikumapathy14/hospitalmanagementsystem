@@ -1,56 +1,74 @@
-import React, { useState, useEffect } from 'react';
-import { useAuth } from '../AuthContext';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../AuthContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Bill = () => {
   const { appid } = useAuth();
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split("T")[0];
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    appointmentId: '',
-    consultationFee: '',
-    treatmentCharges: '',
-    medicationCharges: '',
-    otherCharges: '',
-    totalAmount: '',
+    appointmentId: "",
+    consultationFee: "",
+    treatmentCharges: "",
+    medicationCharges: "",
+    otherCharges: "",
+    totalAmount: "",
     billDate: today,
   });
 
   const [billExists, setBillExists] = useState(false);
-  const [appointmentStatus, setAppointmentStatus] = useState('');
+  const [appointmentStatus, setAppointmentStatus] = useState("");
   const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    if (appid) {
+      if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
+  if (appid) {
       setFormData((prev) => ({ ...prev, appointmentId: appid }));
 
       axios
-        .get(`https://localhost:7058/api/Receptionist/getappointmentid/${appid}`)
+        .get(
+          `https://localhost:7058/api/Receptionist/getappointmentid/${appid}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
         .then((response) => setAppointmentStatus(response.data.status))
-        .catch((error) => console.error('Error fetching appointment status:', error));
+        .catch((error) =>
+          console.error("Error fetching appointment status:", error)
+        );
 
       axios
-        .get(`https://localhost:7058/api/Receptionist/billbyid/${appid}`)
+        .get(`https://localhost:7058/api/Receptionist/billbyid/${appid}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
         .then((response) => {
           setBillExists(response.data.exists);
 
           if (response.data.exists) {
             axios
-              .get(`https://localhost:7058/api/Receptionist/getbill/${appid}`)
+              .get(`https://localhost:7058/api/Receptionist/getbill/${appid}`, {
+                headers: { Authorization: `Bearer ${token}` },
+              })
               .then((res) => setFormData(res.data))
-              .catch((err) => console.error('Error fetching bill data', err));
+              .catch((err) => console.error("Error fetching bill data", err));
           }
 
           setLoading(false);
         })
         .catch((error) => {
-          console.error('Error checking bill existence:', error);
+          console.error("Error checking bill existence:", error);
           setLoading(false);
         });
     }
-  }, [appid]);
+  }, [appid,navigate]);
 
   useEffect(() => {
     const total =
@@ -75,18 +93,26 @@ const Bill = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (billExists) return alert('Bill has already been generated.');
-    if (appointmentStatus !== 'Complete')
-      return alert("Bill can only be created when appointment status is 'Complete'.");
+    if (billExists) return alert("Bill has already been generated.");
+    if (appointmentStatus !== "Complete")
+      return alert(
+        "Bill can only be created when appointment status is 'Complete'."
+      );
 
     try {
-      await axios.post('https://localhost:7058/api/Receptionist/create-bill', formData);
-      alert('Bill created successfully!');
+      await axios.post(
+        "https://localhost:7058/api/Receptionist/create-bill",
+        formData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      alert("Bill created successfully!");
       setBillExists(true);
       navigate(-1);
     } catch (error) {
-      console.error('Error creating bill:', error);
-      alert('Failed to create bill.');
+      console.error("Error creating bill:", error);
+      alert("Failed to create bill.");
     }
   };
 
@@ -98,7 +124,9 @@ const Bill = () => {
         <div className="col-md-8 col-lg-6">
           <div className="card shadow rounded-4 border-0">
             <div className="card-body p-4">
-              <h3 className="card-title text-center mb-4">Generate Patient Bill</h3>
+              <h3 className="card-title text-center mb-4">
+                Generate Patient Bill
+              </h3>
 
               {billExists && (
                 <div className="alert alert-info text-center" role="alert">
@@ -106,35 +134,63 @@ const Bill = () => {
                 </div>
               )}
 
-              {appointmentStatus !== 'Complete' && !billExists && (
+              {appointmentStatus !== "Complete" && !billExists && (
                 <div className="alert alert-warning text-center">
-                  This appointment is not completed yet. Please complete it before generating a bill.
+                  This appointment is not completed yet. Please complete it
+                  before generating a bill.
                 </div>
               )}
 
               <form onSubmit={handleSubmit}>
                 {[
-                  { label: 'Appointment ID', name: 'appointmentId', readOnly: true },
-                  { label: 'Consultation Fee', name: 'consultationFee', type: 'number' },
-                  { label: 'Treatment Charges', name: 'treatmentCharges', type: 'number' },
-                  { label: 'Medication Charges', name: 'medicationCharges', type: 'number' },
-                  { label: 'Other Charges', name: 'otherCharges', type: 'number' },
-                  { label: 'Total Amount', name: 'totalAmount', type: 'number', readOnly: true },
-                  { label: 'Bill Date', name: 'billDate', type: 'date' },
+                  {
+                    label: "Appointment ID",
+                    name: "appointmentId",
+                    readOnly: true,
+                  },
+                  {
+                    label: "Consultation Fee",
+                    name: "consultationFee",
+                    type: "number",
+                  },
+                  {
+                    label: "Treatment Charges",
+                    name: "treatmentCharges",
+                    type: "number",
+                  },
+                  {
+                    label: "Medication Charges",
+                    name: "medicationCharges",
+                    type: "number",
+                  },
+                  {
+                    label: "Other Charges",
+                    name: "otherCharges",
+                    type: "number",
+                  },
+                  {
+                    label: "Total Amount",
+                    name: "totalAmount",
+                    type: "number",
+                    readOnly: true,
+                  },
+                  { label: "Bill Date", name: "billDate", type: "date" },
                 ].map((field, index) => (
                   <div className="mb-3" key={index}>
                     <label className="form-label">{field.label}</label>
                     <input
-                      type={field.type || 'text'}
+                      type={field.type || "text"}
                       className="form-control"
                       name={field.name}
                       value={formData[field.name]}
                       onChange={handleChange}
                       readOnly={field.readOnly}
                       disabled={
-                        field.readOnly || billExists || appointmentStatus !== 'Complete'
+                        field.readOnly ||
+                        billExists ||
+                        appointmentStatus !== "Complete"
                       }
-                      min={field.type === 'number' ? '0' : undefined}
+                      min={field.type === "number" ? "0" : undefined}
                     />
                   </div>
                 ))}
@@ -143,7 +199,7 @@ const Bill = () => {
                   <button
                     type="submit"
                     className="btn btn-success"
-                    disabled={billExists || appointmentStatus !== 'Complete'}
+                    disabled={billExists || appointmentStatus !== "Complete"}
                   >
                     <i className="bi bi-receipt-cutoff me-2"></i>
                     Create Bill

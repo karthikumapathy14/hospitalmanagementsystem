@@ -3,13 +3,20 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import DoctorDashboard from "./DoctorDashboard";
+import { toast } from "react-toastify";
 
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
   const navigate = useNavigate();
   const { setAppid } = useAuth();
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
+      if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
     axios
       .get("https://localhost:7058/api/Doctor/api/appointments/my", {
         headers: {
@@ -26,7 +33,7 @@ const Appointments = () => {
       .catch((error) => {
         console.error("Error fetching appointments:", error);
       });
-  }, []);
+  }, [navigate]);
 
   const handleEdit = (appointmentId) => {
     if (!appointmentId) {
