@@ -76,7 +76,7 @@ const Login = () => {
                      style={{ background: 'linear-gradient(135deg, #1e88e5 0%, #0d47a1 100%)' }}>
                   <div className="text-center">
                     <FaClinicMedical size={48} className="mb-4" />
-                    <h2 className="mb-3 fw-bold">Harmony Health</h2>
+                    <h2 className="mb-3 fw-bold">Medcare Health</h2>
                     <div className="d-flex justify-content-center mb-4">
                       <div className="border-top border-2 border-white w-25"></div>
                     </div>
@@ -174,7 +174,7 @@ const Login = () => {
 
                   <div className="text-center mt-4 pt-3 border-top">
                     <p className="small text-muted mb-0">
-                      © {new Date().getFullYear()} Harmony Health Systems. All rights reserved.
+                      © {new Date().getFullYear()} Medcare Health Systems. All rights reserved.
                     </p>
                   </div>
                 </div>
