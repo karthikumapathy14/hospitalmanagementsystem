@@ -25,13 +25,14 @@ const Editappointment = () => {
     const { name, value } = e.target;
 
     if (name === 'departmentId') {
-      const filteredDoctors = doc.filter((d) => d.departmentId === value);
-      setfiltered(filteredDoctors);
       setforms((prev) => ({
         ...prev,
         departmentId: value,
         doctorId: ''
       }));
+
+      const filteredDoctors = doc.filter((d) => d.departmentId === value);
+      setfiltered(filteredDoctors);
     } else {
       setforms((prev) => ({
         ...prev,
@@ -51,16 +52,22 @@ const Editappointment = () => {
   }, []);
 
   useEffect(() => {
-    if (doc.length > 0) {
-      axios.get(`https://localhost:7058/api/Receptionist/getappointmentid/${id}`)
-        .then((res) => {
-          setforms(res.data);
-          const filteredDoctors = doc.filter((d) => d.departmentId === res.data.departmentId);
-          setfiltered(filteredDoctors);
-        })
-        .catch(console.error);
+    axios.get(`https://localhost:7058/api/Receptionist/getappointmentid/${id}`)
+      .then((res) => {
+        setforms(res.data);
+      })
+      .catch(console.error);
+  }, [id]);
+
+  useEffect(() => {
+    if (forms.departmentId && doc.length > 0) {
+      const filteredDoctors = doc.filter(
+        (d) => d.departmentId === forms.departmentId || d.id === forms.doctorId
+      );
+      console.log(filteredDoctors);
+      setfiltered(filteredDoctors);
     }
-  }, [id, doc]);
+  }, [forms.departmentId, doc, forms.doctorId]);
 
   const handlesubmit = (e) => {
     e.preventDefault();
@@ -120,17 +127,21 @@ const Editappointment = () => {
                   <select
                     className="form-select"
                     name="doctorId"
-                    value={forms.doctorId}
+                    value={forms.doctorId || ""}
                     onChange={handlechange}
                     required
                     disabled={!forms.departmentId}
                   >
                     <option value="">Select Doctor</option>
-                    {(forms.departmentId ? filtered : doc).map((d) => (
-                      <option key={d.id} value={d.id}>
-                        {d.userName}
-                      </option>
-                    ))}
+                    {filtered.length > 0 ? (
+                      filtered.map((d) => (
+                        <option key={d.id} value={d.id}>
+                          {d.userName}
+                        </option>
+                      ))
+                    ) : (
+                      <option disabled>No doctors found</option>
+                    )}
                   </select>
                 </div>
 

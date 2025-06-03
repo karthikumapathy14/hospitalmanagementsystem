@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import ReceptionistNavbar from "./ReceptionistNavbar";
 import { useAuth } from "../AuthContext";
-import BillPatientView from "../Patient.js/Billpatientview";
 
 const ListAppointment = () => {
   const navigate = useNavigate();
@@ -14,25 +13,22 @@ const ListAppointment = () => {
   const [bills, setBills] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
+  const [statusFilter, setStatusFilter] = useState("All"); // <-- Added
 
-  // Fetch all bills
+  // Fetch bills
   const fetchBills = async () => {
     try {
-      const res = await axios.get(
-        "https://localhost:7058/api/Receptionist/bill"
-      );
+      const res = await axios.get("https://localhost:7058/api/Receptionist/bill");
       setBills(res.data);
     } catch (err) {
       console.error("Failed to fetch bills:", err);
     }
   };
 
-  // Fetch all appointments
+  // Fetch appointments
   const fetchAppointments = async () => {
     try {
-      const res = await axios.get(
-        "https://localhost:7058/api/Receptionist/getappointment"
-      );
+      const res = await axios.get("https://localhost:7058/api/Receptionist/getappointment");
       setAppointments(res.data);
     } catch (err) {
       console.error("Failed to fetch appointments:", err);
@@ -44,20 +40,20 @@ const ListAppointment = () => {
     fetchBills();
   }, [location]);
 
-  // Search filter
-  const filteredAppointments = appointments.filter(
-    (item) =>
+  // Search + Status Filter
+  const filteredAppointments = appointments.filter((item) => {
+    const matchesSearch =
       item.patientid?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.departmentName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.doctorName?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+      item.doctorName?.toLowerCase().includes(searchTerm.toLowerCase());
 
-  // Navigate to bill page
+    const matchesStatus = statusFilter === "All" || item.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
+
   const handleBillNavigation = async (appointmentId) => {
     try {
-      const response = await axios.get(
-        `https://localhost:7058/api/Receptionist/billbyid/${appointmentId}`
-      );
+      const response = await axios.get(`https://localhost:7058/api/Receptionist/billbyid/${appointmentId}`);
       if (response.data.exists) {
         alert("Bill already generated for this appointment.");
       } else {
@@ -70,11 +66,8 @@ const ListAppointment = () => {
     }
   };
 
-  // Update bill status
   const handleBillStatusUpdate = async (appointmentId, newStatus) => {
-    const confirmChange = window.confirm(
-      `Are you sure you want to mark this bill as ${newStatus}?`
-    );
+    const confirmChange = window.confirm(`Are you sure you want to mark this bill as ${newStatus}?`);
     if (!confirmChange) return;
 
     setLoading(true);
@@ -86,9 +79,7 @@ const ListAppointment = () => {
 
       setBills((prevBills) =>
         prevBills.map((bill) =>
-          bill.appointmentId === appointmentId
-            ? { ...bill, billstatus: newStatus }
-            : bill
+          bill.appointmentId === appointmentId ? { ...bill, billstatus: newStatus } : bill
         )
       );
 
@@ -110,6 +101,7 @@ const ListAppointment = () => {
             <div className="container mt-4">
               <h2 className="text-center mb-4">Appointments List</h2>
 
+              {/* Search */}
               <div className="input-group w-100 mb-4">
                 <span className="input-group-text bg-white border-end-0">
                   <i className="bi bi-search text-muted"></i>
@@ -117,12 +109,41 @@ const ListAppointment = () => {
                 <input
                   type="text"
                   className="form-control border-start-0"
-                  placeholder="Search by Patient ID, Department, Doctor "
+                  placeholder="Search by Patient ID, Department, Doctor"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
 
+              {/* Filter Buttons */}
+              <div className="mb-4 d-flex justify-content-center gap-3">
+                <button
+                  className={`btn ${statusFilter === "All" ? "btn-dark" : "btn-outline-dark"}`}
+                  onClick={() => setStatusFilter("All")}
+                >
+                  All
+                </button>
+                <button
+                  className={`btn ${statusFilter === "Complete" ? "btn-success" : "btn-outline-success"}`}
+                  onClick={() => setStatusFilter("Complete")}
+                >
+                  Complete
+                </button>
+                <button
+                  className={`btn ${statusFilter === "Schedule" ? "btn-primary" : "btn-outline-primary"}`}
+                  onClick={() => setStatusFilter("Schedule")}
+                >
+                  Schedule
+                </button>
+                <button
+                  className={`btn ${statusFilter === "Pending" ? "btn-warning" : "btn-outline-warning"}`}
+                  onClick={() => setStatusFilter("Pending")}
+                >
+                  Pending
+                </button>
+              </div>
+
+              {/* Appointments Table */}
               <div className="table-responsive">
                 <table className="table table-hover table-striped table-bordered">
                   <thead className="table-dark">
@@ -142,9 +163,7 @@ const ListAppointment = () => {
                   <tbody>
                     {filteredAppointments.length > 0 ? (
                       filteredAppointments.map((item) => {
-                        const bill = bills.find(
-                          (b) => b.appointmentId === item.appointmentId
-                        );
+                        const bill = bills.find((b) => b.appointmentId === item.appointmentId);
                         const billStatus = bill?.billstatus || "Pending";
                         const billId = bill?.id;
 
@@ -153,19 +172,17 @@ const ListAppointment = () => {
                             <td>{item.patientid}</td>
                             <td>{item.departmentName}</td>
                             <td>{item.doctorName}</td>
-                            <td>
-                              {new Date(
-                                item.appointmentDate
-                              ).toLocaleDateString()}
-                            </td>
+                            <td>{new Date(item.appointmentDate).toLocaleDateString()}</td>
                             <td>{item.appointmentTime}</td>
                             <td>{item.reason}</td>
                             <td>
                               <span
                                 className={`badge ${
                                   item.status === "Confirmed"
+                                    ? "bg-primary"
+                                    : item.status === "Completed"
                                     ? "bg-success"
-                                    : "bg-secondary"
+                                    : "bg-warning"
                                 }`}
                               >
                                 {item.status}
@@ -178,25 +195,16 @@ const ListAppointment = () => {
                                     className="form-check-input"
                                     type="checkbox"
                                     id={`billSwitch-${item.appointmentId}`}
-                                    checked={
-                                      billStatus.toLowerCase() === "paid"
-                                    }
+                                    checked={billStatus.toLowerCase() === "paid"}
                                     onChange={(e) => {
-                                      const newStatus = e.target.checked
-                                        ? "Paid"
-                                        : "Pending";
-                                      handleBillStatusUpdate(
-                                        item.appointmentId,
-                                        newStatus
-                                      );
+                                      const newStatus = e.target.checked ? "Paid" : "Pending";
+                                      handleBillStatusUpdate(item.appointmentId, newStatus);
                                     }}
                                     disabled={loading}
                                   />
                                   <label
                                     className={`form-check-label fw-semibold ${
-                                      billStatus.toLowerCase() === "paid"
-                                        ? "text-success"
-                                        : "text-warning"
+                                      billStatus.toLowerCase() === "paid" ? "text-success" : "text-warning"
                                     }`}
                                     htmlFor={`billSwitch-${item.appointmentId}`}
                                   >
@@ -204,42 +212,26 @@ const ListAppointment = () => {
                                   </label>
                                 </div>
                               ) : (
-                                <span className="badge bg-warning text-dark">
-                                  Pending
-                                </span>
+                                <span className="badge bg-warning text-dark">Pending</span>
                               )}
                             </td>
                             <td>{new Date(item.createdAt).toLocaleString()}</td>
                             <td>
-                              <Link
-                                to={`/editappointment/${item.appointmentId}`}
-                              >
-                                <button className="btn btn-sm btn-outline-primary">
-                                  <i className="bi bi-pencil-square me-1"></i>{" "}
-                                  Edit
+                              <Link to={`/editappointment/${item.appointmentId}`}>
+                                <button className="btn btn-sm btn-outline-primary me-2">
+                                  <i className="bi bi-pencil-square me-1"></i>Edit
                                 </button>
                               </Link>
                               <button
-                                className="btn btn-sm btn-outline-secondary ms-2"
-                                onClick={() =>
-                                  handleBillNavigation(item.appointmentId)
-                                }
+                                className="btn btn-sm btn-outline-secondary me-2"
+                                onClick={() => handleBillNavigation(item.appointmentId)}
                                 disabled={!!billId}
-                                title={
-                                  billId
-                                    ? "Bill already generated"
-                                    : "Generate bill"
-                                }
+                                title={billId ? "Bill already generated" : "Generate bill"}
                               >
-                                <i className="bi bi-cash-stack me-1"></i> Bill
+                                <i className="bi bi-cash-stack me-1"></i>Bill
                               </button>
-
-                              <Link
-                                to={`/billpatientview/${item.appointmentId}`}
-                              >
-                                <button className="btn btn-outline-primary">
-                                  Bill View
-                                </button>
+                              <Link to={`/billpatientview/${item.appointmentId}`}>
+                                <button className="btn btn-sm btn-outline-info">Bill View</button>
                               </Link>
                             </td>
                           </tr>

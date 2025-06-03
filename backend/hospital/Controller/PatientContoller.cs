@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace hospital.Controller
 {
     [Route("api/[controller]")]
-    [Authorize(Roles = "Patient")]
+    //[Authorize(Roles = "Patient")]
     [ApiController]
     public class PatientContoller : ControllerBase
     {

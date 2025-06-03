@@ -13,7 +13,7 @@ namespace hospital.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Receptionist")]
+    //[Authorize(Roles = "Receptionist")]
     public class ReceptionistController : ControllerBase
     {
         private readonly Applicationdbcontext _dbcontext;
@@ -248,10 +248,15 @@ namespace hospital.Controller
                               DepartmentName = a.Department != null ? a.Department.DepartmentName : "Unknown",
                               BillStatus = b != null ? b.billstatus : "Pending",
                               BillId = b != null ? b.BillId : 0
-                          }).ToList();
+                          })
+                          .OrderByDescending(x => x.AppointmentDate)
+                          .ThenByDescending(x => x.AppointmentTime)
+                          .ToList();
 
             return Ok(result);
         }
+
+
 
 
         //[HttpPost("Billgeneration")]

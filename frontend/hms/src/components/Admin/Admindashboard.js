@@ -66,7 +66,7 @@ const Admindashboard = () => {
 
     fetchCounts();
   }, []);
- 
+
   const fetchDaywiseAppointments = async () => {
     try {
       const res = await axios.get(

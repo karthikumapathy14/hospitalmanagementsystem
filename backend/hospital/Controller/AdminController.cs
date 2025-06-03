@@ -10,7 +10,7 @@ namespace hospital.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AdminController : ControllerBase
     {
         private readonly Applicationdbcontext _dbcontext;
