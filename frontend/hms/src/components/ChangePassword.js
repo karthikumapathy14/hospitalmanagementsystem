@@ -1,7 +1,13 @@
-import React, { useState } from "react";
-import { FaLock, FaKey, FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import {
+  FaLock,
+  FaKey,
+  FaCheckCircle,
+  FaExclamationCircle,
+} from "react-icons/fa";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ChangePassword = () => {
   const [formData, setFormData] = useState({
@@ -12,24 +18,30 @@ const ChangePassword = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
+  const token = localStorage.getItem("token");
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  useEffect(() => {
+    if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
+  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
     setError("");
 
     try {
-      const token = localStorage.getItem("token");
       const response = await axios.post(
         "https://localhost:7058/api/Authentication/changepassword",
-        formData,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
+        formData
       );
       setMessage(response.data.message);
       setTimeout(() => navigate(-1), 1500); // redirect after success
@@ -115,8 +127,7 @@ const ChangePassword = () => {
 const styles = {
   pageContainer: {
     minHeight: "100vh",
-    background:
-      "linear-gradient(135deg, #d1e8ff 0%, #f9fbfd 100%)",
+    background: "linear-gradient(135deg, #d1e8ff 0%, #f9fbfd 100%)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

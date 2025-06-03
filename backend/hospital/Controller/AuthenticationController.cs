@@ -124,9 +124,9 @@ namespace hospital.Controller
                 var claims = new List<Claim>
         {
                     new Claim(ClaimTypes.NameIdentifier, user.Id),
-            new Claim(ClaimTypes.NameIdentifier, user.UserName),
+            new Claim(ClaimTypes.Name, user.UserName),
             new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Role, roles.FirstOrDefault() ?? "User")
+            //new Claim(ClaimTypes.Role, roles.FirstOrDefault() ?? "User")
         };
                
 
@@ -211,6 +211,7 @@ namespace hospital.Controller
             }
             return Unauthorized("Invalid email or password");
         }
+
 
         [Authorize]
         [HttpPost("changepassword")]

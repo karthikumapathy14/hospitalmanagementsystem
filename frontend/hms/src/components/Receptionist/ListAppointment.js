@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import ReceptionistNavbar from "./ReceptionistNavbar";
 import { useAuth } from "../AuthContext";
 import BillPatientView from "../Patient.js/Billpatientview";
+import { toast } from "react-toastify";
 
 const ListAppointment = () => {
   const navigate = useNavigate();
@@ -14,12 +15,15 @@ const ListAppointment = () => {
   const [bills, setBills] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const token = localStorage.getItem("token");
   // Fetch all bills
   const fetchBills = async () => {
     try {
       const res = await axios.get(
-        "https://localhost:7058/api/Receptionist/bill"
+        "https://localhost:7058/api/Receptionist/bill",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       setBills(res.data);
     } catch (err) {
@@ -31,7 +35,10 @@ const ListAppointment = () => {
   const fetchAppointments = async () => {
     try {
       const res = await axios.get(
-        "https://localhost:7058/api/Receptionist/getappointment"
+        "https://localhost:7058/api/Receptionist/getappointment",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       setAppointments(res.data);
     } catch (err) {
@@ -40,9 +47,14 @@ const ListAppointment = () => {
   };
 
   useEffect(() => {
+    if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
     fetchAppointments();
     fetchBills();
-  }, [location]);
+  }, [location, navigate]);
 
   // Search filter
   const filteredAppointments = appointments.filter(
@@ -54,9 +66,17 @@ const ListAppointment = () => {
 
   // Navigate to bill page
   const handleBillNavigation = async (appointmentId) => {
+          if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
     try {
       const response = await axios.get(
-        `https://localhost:7058/api/Receptionist/billbyid/${appointmentId}`
+        `https://localhost:7058/api/Receptionist/billbyid/${appointmentId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       if (response.data.exists) {
         alert("Bill already generated for this appointment.");
@@ -81,6 +101,9 @@ const ListAppointment = () => {
     try {
       await axios.put(
         `https://localhost:7058/api/Receptionist/update-bill-status/${appointmentId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
         { billstatus: newStatus }
       );
 

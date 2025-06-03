@@ -7,18 +7,19 @@ using Microsoft.EntityFrameworkCore;
 namespace hospital.Controller
 {
     [Route("api/[controller]")]
-    //[Authorize(Roles ="Patient")]
+    [Authorize(Roles ="Patient")]
+    //[Authorize]
     [ApiController]
-    public class PatientContoller : ControllerBase
+    public class PatientController : ControllerBase
     {
         private readonly Applicationdbcontext _dbcontext;
 
-        public PatientContoller(Applicationdbcontext dbcontext)
+        public PatientController(Applicationdbcontext dbcontext)
         {
             _dbcontext = dbcontext;
         }
 
-        [HttpGet("api/patient/appointments/my")]
+        [HttpGet("appointments/my")]
         public async Task<IActionResult> GetAppointmentsForPatient()
         {
             var patientIdClaim = User.FindFirst("PatientId")?.Value;

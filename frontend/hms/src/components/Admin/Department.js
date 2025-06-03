@@ -1,26 +1,43 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import Adminnavbar from './Adminnavbar';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Adminnavbar from "./Adminnavbar";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Department = () => {
   const [formData, setFormData] = useState({
-    departmentName: ''
+    departmentName: "",
   });
-  const [message, setMessage] = useState('');
-
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
+  
+  useEffect(() => {
+    if (!token) {
+      toast.error("Restricted Access"); // 👈 Toast shown
+      navigate("/"); // 👈 Navigate to login
+      return; // 👈 Prevent further execution
+    }
+  }, [navigate]);
+  const token = localStorage.getItem("token");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://localhost:7058/api/Admin/create-dept', formData);
+      const response = await axios.post(
+        "https://localhost:7058/api/Admin/create-dept",
+        formData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setMessage(response.data);
-      setFormData({ departmentName: '' }); // Clear form after successful submission
+      setFormData({ departmentName: "" }); // Clear form after successful submission
     } catch (error) {
       console.error(error);
       if (error.response) {
@@ -32,17 +49,32 @@ const Department = () => {
   };
 
   return (
-    <div className='d-flex'>
+    <div className="d-flex">
       <Adminnavbar />
-      <div className='flex-grow-1 d-flex justify-content-center align-items-center bg-light' style={{ minHeight: '100vh' }}>
-        <div className="p-4 shadow-lg rounded-lg" style={{ width: '100%', maxWidth: '500px', backgroundColor: '#ffffff' ,borderRadius:"20px"}}>
+      <div
+        className="flex-grow-1 d-flex justify-content-center align-items-center bg-light"
+        style={{ minHeight: "100vh" }}
+      >
+        <div
+          className="p-4 shadow-lg rounded-lg"
+          style={{
+            width: "100%",
+            maxWidth: "500px",
+            backgroundColor: "#ffffff",
+            borderRadius: "20px",
+          }}
+        >
           <h3 className="text-center mb-5 text-dark">Add Department</h3>
           {message && (
-            <div className={`alert ${message.includes('success') ? 'alert-success' : 'alert-danger'} mb-4`}>
+            <div
+              className={`alert ${
+                message.includes("success") ? "alert-success" : "alert-danger"
+              } mb-4`}
+            >
               {message}
             </div>
           )}
-          
+
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className="form-label fw-bold">Department Name</label>
@@ -58,7 +90,11 @@ const Department = () => {
             </div>
 
             <div className="d-flex justify-content-center mt-4">
-              <button type="submit" className="btn btn-primary px-4 py-2 rounded-pill" style={{ width: '200px' }}>
+              <button
+                type="submit"
+                className="btn btn-primary px-4 py-2 rounded-pill"
+                style={{ width: "200px" }}
+              >
                 Add Department
               </button>
             </div>

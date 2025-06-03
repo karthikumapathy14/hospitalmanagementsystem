@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Adminnavbar from "./Adminnavbar";
 import axios from "axios";
+import {toast} from 'react-toastify';
 import {
   FaUserMd,
   FaUserNurse,
@@ -18,6 +19,7 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
+import { useNavigate } from "react-router-dom";
 
 const Admindashboard = () => {
   const [counts, setCounts] = useState({
@@ -28,50 +30,71 @@ const Admindashboard = () => {
     appointments: 0,
     todaysAppointments: 0,
   });
-
+  const navigate = useNavigate();
   const [showChart, setShowChart] = useState(false);
   const [chartData, setChartData] = useState([]);
 
-  useEffect(() => {
-    const fetchCounts = async () => {
-      try {
-        const [
-          doctorsRes,
-          nursesRes,
-          patientsRes,
-          receptionistRes,
-          appointmentsRes,
-          todayRes,
-        ] = await Promise.all([
-          axios.get("https://localhost:7058/api/Admin/totaldoctors"),
-          axios.get("https://localhost:7058/api/Admin/totalnurses"),
-          axios.get("https://localhost:7058/api/Admin/totalpatients"),
-          axios.get("https://localhost:7058/api/Admin/totalreceptionist"),
-          axios.get("https://localhost:7058/api/Admin/totalappointments"),
-          axios.get("https://localhost:7058/api/Admin/today-appointments"),
-        ]);
+useEffect(() => {
+  const fetchCounts = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("Restricted Access"); // 👈 Toast shown
+      navigate("/"); // 👈 Navigate to login
+      return; // 👈 Prevent further execution
+    }
 
-        setCounts({
-          doctors: doctorsRes.data,
-          nurses: nursesRes.data,
-          patients: patientsRes.data,
-          receptionist: receptionistRes.data,
-          appointments: appointmentsRes.data,
-          todaysAppointments: todayRes.data,
-        });
-      } catch (err) {
-        console.error("Error fetching dashboard counts:", err);
-      }
-    };
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
 
-    fetchCounts();
-  }, []);
- 
+      const [
+        doctorsRes,
+        nursesRes,
+        patientsRes,
+        receptionistRes,
+        appointmentsRes,
+        todayRes,
+      ] = await Promise.all([
+        axios.get("https://localhost:7058/api/Admin/totaldoctors", config),
+        axios.get("https://localhost:7058/api/Admin/totalnurses", config),
+        axios.get("https://localhost:7058/api/Admin/totalpatients", config),
+        axios.get("https://localhost:7058/api/Admin/totalreceptionist", config),
+        axios.get("https://localhost:7058/api/Admin/totalappointments", config),
+        axios.get("https://localhost:7058/api/Admin/today-appointments", config),
+      ]);
+
+      setCounts({
+        doctors: doctorsRes.data,
+        nurses: nursesRes.data,
+        patients: patientsRes.data,
+        receptionist: receptionistRes.data,
+        appointments: appointmentsRes.data,
+        todaysAppointments: todayRes.data,
+      });
+    } catch (err) {
+      console.error("Error fetching dashboard counts:", err);
+    }
+  };
+
+  fetchCounts();
+}, [navigate]);
+
+
   const fetchDaywiseAppointments = async () => {
+    const token = localStorage.getItem("token");
     try {
       const res = await axios.get(
-        "https://localhost:7058/api/Admin/getdaywisereport"
+        "https://localhost:7058/api/Admin/getdaywisereport",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
+
       const formattedData = res.data.map((item) => ({
         date: new Date(item.date).toLocaleDateString(),
         count: item.count,
@@ -92,7 +115,10 @@ const Admindashboard = () => {
           <div className="row g-4">
             {/* Doctors */}
             <div className="col-md-4">
-              <div className="card shadow-sm border-0" style={{ backgroundColor: "#e0f7fa" }}>
+              <div
+                className="card shadow-sm border-0"
+                style={{ backgroundColor: "#e0f7fa" }}
+              >
                 <div className="card-body text-center">
                   <FaUserMd size={40} color="#00796b" />
                   <h5 className="mt-3">{counts.doctors}</h5>
@@ -103,7 +129,10 @@ const Admindashboard = () => {
 
             {/* Nurses */}
             <div className="col-md-4">
-              <div className="card shadow-sm border-0" style={{ backgroundColor: "#f1f8e9" }}>
+              <div
+                className="card shadow-sm border-0"
+                style={{ backgroundColor: "#f1f8e9" }}
+              >
                 <div className="card-body text-center">
                   <FaUserNurse size={40} color="#558b2f" />
                   <h5 className="mt-3">{counts.nurses}</h5>
@@ -114,7 +143,10 @@ const Admindashboard = () => {
 
             {/* Patients */}
             <div className="col-md-4">
-              <div className="card shadow-sm border-0" style={{ backgroundColor: "#fff3e0" }}>
+              <div
+                className="card shadow-sm border-0"
+                style={{ backgroundColor: "#fff3e0" }}
+              >
                 <div className="card-body text-center">
                   <FaUsers size={40} color="#ef6c00" />
                   <h5 className="mt-3">{counts.patients}</h5>
@@ -125,7 +157,10 @@ const Admindashboard = () => {
 
             {/* Receptionist */}
             <div className="col-md-6">
-              <div className="card shadow-sm border-0" style={{ backgroundColor: "#f3e5f5" }}>
+              <div
+                className="card shadow-sm border-0"
+                style={{ backgroundColor: "#f3e5f5" }}
+              >
                 <div className="card-body text-center">
                   <FaUserTie size={40} color="#6a1b9a" />
                   <h5 className="mt-3">{counts.receptionist}</h5>
@@ -151,7 +186,10 @@ const Admindashboard = () => {
 
             {/* Today's Appointments */}
             <div className="col-md-6">
-              <div className="card shadow-sm border-0" style={{ backgroundColor: "#ffe0b2" }}>
+              <div
+                className="card shadow-sm border-0"
+                style={{ backgroundColor: "#ffe0b2" }}
+              >
                 <div className="card-body text-center">
                   <FaCalendarDay size={40} color="#f57c00" />
                   <h5 className="mt-3">{counts.todaysAppointments}</h5>
@@ -170,7 +208,12 @@ const Admindashboard = () => {
                     <XAxis dataKey="date" />
                     <YAxis />
                     <Tooltip />
-                    <Line type="monotone" dataKey="count" stroke="#42a5f5" strokeWidth={2} />
+                    <Line
+                      type="monotone"
+                      dataKey="count"
+                      stroke="#42a5f5"
+                      strokeWidth={2}
+                    />
                   </LineChart>
                 </ResponsiveContainer>
               </div>

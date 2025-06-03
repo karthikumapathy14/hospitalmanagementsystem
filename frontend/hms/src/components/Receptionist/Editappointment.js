@@ -1,6 +1,7 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Editappointment = () => {
   const [forms, setforms] = useState({
@@ -10,7 +11,7 @@ const Editappointment = () => {
     appointmentDate: "",
     appointmentTime: "",
     reason: "",
-    status: ""
+    status: "",
   });
 
   const navigate = useNavigate();
@@ -20,52 +21,80 @@ const Editappointment = () => {
   const [doc, getdoc] = useState([]);
   const [filtered, setfiltered] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const token = localStorage.getItem("token");
   const handlechange = (e) => {
     const { name, value } = e.target;
 
-    if (name === 'departmentId') {
+    if (name === "departmentId") {
       const filteredDoctors = doc.filter((d) => d.departmentId === value);
       setfiltered(filteredDoctors);
       setforms((prev) => ({
         ...prev,
         departmentId: value,
-        doctorId: ''
+        doctorId: "",
       }));
     } else {
       setforms((prev) => ({
         ...prev,
-        [name]: value
+        [name]: value,
       }));
     }
   };
 
   useEffect(() => {
-    axios.get("https://localhost:7058/api/Admin/get-dept")
+          if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
+    axios
+      .get("https://localhost:7058/api/Admin/get-dept", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => getdept(res.data))
       .catch(console.error);
 
-    axios.get("https://localhost:7058/api/Admin/docGetAll")
+    axios
+      .get("https://localhost:7058/api/Admin/docGetAll", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => getdoc(res.data))
       .catch(console.error);
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
+          if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
     if (doc.length > 0) {
-      axios.get(`https://localhost:7058/api/Receptionist/getappointmentid/${id}`)
+      axios
+        .get(`https://localhost:7058/api/Receptionist/getappointmentid/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
         .then((res) => {
           setforms(res.data);
-          const filteredDoctors = doc.filter((d) => d.departmentId === res.data.departmentId);
+          const filteredDoctors = doc.filter(
+            (d) => d.departmentId === res.data.departmentId
+          );
           setfiltered(filteredDoctors);
         })
         .catch(console.error);
     }
-  }, [id, doc]);
+  }, [id, doc,navigate]);
 
   const handlesubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    axios.put(`https://localhost:7058/api/Receptionist/Edit-appointment/${id}`, forms)
+    axios
+      .put(
+        `https://localhost:7058/api/Receptionist/Edit-appointment/${id}`,
+        forms,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then(() => {
         alert("Appointment updated successfully!");
         navigate(-1);
@@ -83,9 +112,10 @@ const Editappointment = () => {
         <div className="col-md-10 col-lg-8">
           <div className="card border-0 shadow-lg rounded-4">
             <div className="card-body p-4">
-              <h2 className="text-center text-primary fw-bold mb-4">Edit Appointment</h2>
+              <h2 className="text-center text-primary fw-bold mb-4">
+                Edit Appointment
+              </h2>
               <form onSubmit={handlesubmit}>
-
                 <div className="mb-4">
                   <label className="form-label fw-semibold">Patient ID</label>
                   <input
@@ -135,7 +165,9 @@ const Editappointment = () => {
                 </div>
 
                 <div className="mb-4">
-                  <label className="form-label fw-semibold">Appointment Date</label>
+                  <label className="form-label fw-semibold">
+                    Appointment Date
+                  </label>
                   <input
                     type="date"
                     className="form-control"
@@ -147,7 +179,9 @@ const Editappointment = () => {
                 </div>
 
                 <div className="mb-4">
-                  <label className="form-label fw-semibold">Appointment Time</label>
+                  <label className="form-label fw-semibold">
+                    Appointment Time
+                  </label>
                   <input
                     type="time"
                     className="form-control"
@@ -204,7 +238,6 @@ const Editappointment = () => {
                     Cancel
                   </button>
                 </div>
-
               </form>
             </div>
           </div>

@@ -1,37 +1,51 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const PatientHistory = () => {
   const [history, setHistory] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredHistory, setFilteredHistory] = useState([]);
+  const navigate=useNavigate();
 
+  const token = localStorage.getItem("token");
   // Fetch history once on mount
   useEffect(() => {
-    axios.get('https://localhost:7058/api/Doctor/history')
+      if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
+    axios
+      .get("https://localhost:7058/api/Doctor/history", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         setHistory(res.data);
         setFilteredHistory(res.data); // set initial filtered data
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [navigate]);
 
   // Run filter whenever search term or original data changes
   useEffect(() => {
     const term = searchTerm.toLowerCase();
 
-    const filtered = history.filter(item => {
-      const patientId = String(item?.patient?.patientid || '');
-      const patientDbId = String(item?.patient?.id || '');
-      const appointmentId = String(item?.appointmentId || '');
-      const appointmentDate = String(item?.appointmentDate || '');
-      const reason = String(item?.reason || '');
-      const doctorName = String(item?.doctor?.docname || '');
-      const departmentName = String(item?.doctor?.department?.departmentName || '');
-      const diagnosis = String(item?.prescription?.diagnosis || '');
-      const medications = String(item?.prescription?.medications || '');
-      const notes = String(item?.prescription?.notes || '');
-      const prescribedDate = String(item?.prescription?.prescribedDate || '');
+    const filtered = history.filter((item) => {
+      const patientId = String(item?.patient?.patientid || "");
+      const patientDbId = String(item?.patient?.id || "");
+      const appointmentId = String(item?.appointmentId || "");
+      const appointmentDate = String(item?.appointmentDate || "");
+      const reason = String(item?.reason || "");
+      const doctorName = String(item?.doctor?.docname || "");
+      const departmentName = String(
+        item?.doctor?.department?.departmentName || ""
+      );
+      const diagnosis = String(item?.prescription?.diagnosis || "");
+      const medications = String(item?.prescription?.medications || "");
+      const notes = String(item?.prescription?.notes || "");
+      const prescribedDate = String(item?.prescription?.prescribedDate || "");
 
       return (
         patientId.toLowerCase().includes(term) ||
@@ -68,9 +82,8 @@ const PatientHistory = () => {
         <table className="table table-bordered table-striped">
           <thead className="table-dark">
             <tr>
-             
               <th>Patient Unique Id</th>
-              
+
               <th>Appointment Date</th>
               <th>Reason</th>
               <th>Doctor Name</th>
@@ -82,23 +95,33 @@ const PatientHistory = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredHistory.length > 0 ? filteredHistory.map((item, index) => (
-              <tr key={index}>
-                {/* <td>{item.patient.id}</td> */}
-                <td>{item.patient.patientid}</td>
-                {/* <td>{item.appointmentId}</td> */}
-                <td>{item.appointmentDate}</td>
-                <td>{item.reason}</td>
-                <td>{item.doctor?.docname || '-'}</td>
-                <td>{item.doctor?.department?.departmentName || '-'}</td>
-                <td>{item.prescription?.diagnosis}</td>
-                <td>{item.prescription?.medications || 'N/A'}</td>
-                <td>{item.prescription?.notes || 'N/A'}</td>
-                <td>{item.prescription?.prescribedDate ? new Date(item.prescription.prescribedDate).toLocaleDateString() : 'N/A'}</td>
-              </tr>
-            )) : (
+            {filteredHistory.length > 0 ? (
+              filteredHistory.map((item, index) => (
+                <tr key={index}>
+                  {/* <td>{item.patient.id}</td> */}
+                  <td>{item.patient.patientid}</td>
+                  {/* <td>{item.appointmentId}</td> */}
+                  <td>{item.appointmentDate}</td>
+                  <td>{item.reason}</td>
+                  <td>{item.doctor?.docname || "-"}</td>
+                  <td>{item.doctor?.department?.departmentName || "-"}</td>
+                  <td>{item.prescription?.diagnosis}</td>
+                  <td>{item.prescription?.medications || "N/A"}</td>
+                  <td>{item.prescription?.notes || "N/A"}</td>
+                  <td>
+                    {item.prescription?.prescribedDate
+                      ? new Date(
+                          item.prescription.prescribedDate
+                        ).toLocaleDateString()
+                      : "N/A"}
+                  </td>
+                </tr>
+              ))
+            ) : (
               <tr>
-                <td colSpan="11" className="text-center">No history available.</td>
+                <td colSpan="11" className="text-center">
+                  No history available.
+                </td>
               </tr>
             )}
           </tbody>

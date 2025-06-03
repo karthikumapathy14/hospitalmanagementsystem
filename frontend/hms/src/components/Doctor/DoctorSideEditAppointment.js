@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const DoctorSideEditAppointment = () => {
   const { id } = useParams();
@@ -9,29 +10,38 @@ const DoctorSideEditAppointment = () => {
   const [appointment, setAppointment] = useState("");
   const [loading, setLoading] = useState(true);
   const [nurses, getnurse] = useState([]);
-
+  const token = localStorage.getItem("token");
   useEffect(() => {
     if (!id) {
-      alert('Invalid appointment ID!');
+      alert("Invalid appointment ID!");
       return;
     }
 
+    if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
     axios
-      .get(`https://localhost:7058/api/Doctor/api/appointments/${id}`)
+      .get(`https://localhost:7058/api/Doctor/api/appointments/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         setAppointment(res.data);
         setLoading(false);
       })
       .catch((err) => {
-        console.error('Error fetching appointment:', err);
-        alert('Invalid appointment ID or failed to fetch!');
+        console.error("Error fetching appointment:", err);
+        alert("Invalid appointment ID or failed to fetch!");
         setLoading(false);
       });
-  }, [id]);
+  }, [id,navigate]);
 
   useEffect(() => {
     axios
-      .get("https://localhost:7058/api/Admin/getnurse")
+      .get("https://localhost:7058/api/Admin/getnurse", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => getnurse(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -46,14 +56,23 @@ const DoctorSideEditAppointment = () => {
     };
 
     axios
-      .put(`https://localhost:7058/api/Doctor/api/Editappointments/${id}`, payload)
+      .put(
+        `https://localhost:7058/api/Doctor/api/Editappointments/${id}`,
+        payload,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then(() => {
-        alert('Appointment updated successfully!');
-        navigate('/viewappointment');
+        alert("Appointment updated successfully!");
+        navigate("/viewappointment");
       })
       .catch((err) => {
-        console.error('Error updating appointment:', err.response?.data || err.message);
-        alert('Failed to update appointment');
+        console.error(
+          "Error updating appointment:",
+          err.response?.data || err.message
+        );
+        alert("Failed to update appointment");
       });
   };
 
@@ -62,7 +81,10 @@ const DoctorSideEditAppointment = () => {
   };
 
   if (loading) return <div className="text-center mt-5">Loading...</div>;
-  if (!appointment) return <div className="text-danger text-center mt-5">No appointment found</div>;
+  if (!appointment)
+    return (
+      <div className="text-danger text-center mt-5">No appointment found</div>
+    );
 
   return (
     <div className="container mt-5">
@@ -75,7 +97,7 @@ const DoctorSideEditAppointment = () => {
               <input
                 type="text"
                 className="form-control"
-                value={appointment.patientName || ''}
+                value={appointment.patientName || ""}
                 disabled
               />
             </div>
@@ -84,7 +106,7 @@ const DoctorSideEditAppointment = () => {
               <input
                 type="text"
                 className="form-control"
-                value={appointment.reason || ''}
+                value={appointment.reason || ""}
                 disabled
               />
             </div>
@@ -96,7 +118,7 @@ const DoctorSideEditAppointment = () => {
               <select
                 className="form-select"
                 name="status"
-                value={appointment?.status || ''}
+                value={appointment?.status || ""}
                 onChange={handleChange}
               >
                 <option value="">-- Select Status --</option>
@@ -111,7 +133,7 @@ const DoctorSideEditAppointment = () => {
               <select
                 className="form-select"
                 name="nurseId"
-                value={appointment?.nurseId || ''}
+                value={appointment?.nurseId || ""}
                 onChange={handleChange}
               >
                 <option value="">-- Select Nurse --</option>

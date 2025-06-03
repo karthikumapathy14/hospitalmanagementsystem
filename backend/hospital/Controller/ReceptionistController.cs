@@ -13,7 +13,8 @@ namespace hospital.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Roles ="Receptionist")]
+    [Authorize(Roles ="Receptionist")]
+    //[Authorize]
     public class ReceptionistController : ControllerBase
     {
         private readonly Applicationdbcontext _dbcontext;

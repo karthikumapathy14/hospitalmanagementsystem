@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import { useParams, useNavigate } from "react-router-dom";
 import Nursesidebar from "./Nursesidebar";
+import { toast } from "react-toastify";
 
 const Editappointmentnurse = () => {
   const { id } = useParams();
@@ -10,10 +11,17 @@ const Editappointmentnurse = () => {
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-
+const token = localStorage.getItem("token");
   useEffect(() => {
+      if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
     axios
-      .get(`https://localhost:7058/api/Nurse/getbyidprescibe/${id}`)
+      .get(`https://localhost:7058/api/Nurse/getbyidprescibe/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         setData(res.data);
         setLoading(false);
@@ -22,12 +30,14 @@ const Editappointmentnurse = () => {
         console.log(err);
         setLoading(false);
       });
-  }, [id]);
+  }, [id,navigate]);
 
   const handleEdit = (e) => {
     e.preventDefault();
     axios
-      .put(`https://localhost:7058/api/Nurse/updateprescription/${id}`, data)
+      .put(`https://localhost:7058/api/Nurse/updateprescription/${id}`, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
 
       .then(() => {
         alert("✅ Prescription updated successfully");
