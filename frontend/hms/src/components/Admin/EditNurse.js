@@ -37,7 +37,7 @@ const EditNurse = () => {
       })
       .then((res) => setNurse(res.data))
       .catch((err) => console.log(err));
-  }, [id]);
+  }, [id,navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
