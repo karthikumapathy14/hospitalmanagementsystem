@@ -9,27 +9,11 @@ const Viewappointmentnurse = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-<<<<<<< Updated upstream
   useEffect(() => {
       if (!token) {
       toast.error("Restricted Access");
       navigate("/");
       return;
-=======
-    const[data,getdata]=useState([])
-    const navigate=useNavigate()
-    
-    useEffect(()=>{
-        axios.get('https://localhost:7058/api/Nurse/appointmentnurse',{ headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },})
-        .then((res)=>{getdata(res.data);console.log('Appointments fetched:', res.data);})
-        .catch((err)=>console.log(err))
-    },[])
-
-    const handleEdit=(appointmentId)=>{
-        navigate(`/Editappointmentnurse/${appointmentId}`)
->>>>>>> Stashed changes
     }
     axios
       .get('https://localhost:7058/api/Nurse/appointmentnurse', {
@@ -49,7 +33,6 @@ const Viewappointmentnurse = () => {
   };
 
   return (
-<<<<<<< Updated upstream
     <div className="d-flex" style={{ minHeight: "100vh" }}>
       {/* Sidebar */}
       <div style={{ width: "250px", backgroundColor: "#f8f9fa" }}>
@@ -109,37 +92,6 @@ const Viewappointmentnurse = () => {
         </div>
       </div>
       </div>
-=======
-    <div>
-      <h2>View Appointment</h2>
-      <table className='table table-bordered table-striped'>
-        <thead>
-            <tr>
-            <th>Patient Id</th>
-            <th>Patient Name</th>
-            <th>Date</th>
-            <th>Reason</th>
-            <th>status</th>
-            <th>Doctor Name</th>
-            <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {data.map((item)=><tr key={item.appointmentId}>
-                <td>{item.patientId}</td>
-                <td>{item.patientName}</td>
-                <td>{item.appointmentDate}</td>
-                <td>{item.reason}</td>
-                <td>{item.status}</td>
-                <td>{item.doctorName}</td>
-                <td><button className='btn btn-warning' onClick={()=>handleEdit(item.appointmentId)}>Edit</button></td>
-                </tr>)}
-        </tbody>
-      </table>
-    </div>
-  )
-}
->>>>>>> Stashed changes
 
 
 

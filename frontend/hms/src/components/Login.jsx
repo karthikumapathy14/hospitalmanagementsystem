@@ -29,8 +29,9 @@ const Login = () => {
 
     try {
       const response = await axios.post('https://localhost:7058/api/Authentication/login', data, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+        // headers: { Authorization: `Bearer ${token}` },
+      }
+    );
       const token = response.data?.token;
       if (!token) throw new Error('Invalid response from server.');
 

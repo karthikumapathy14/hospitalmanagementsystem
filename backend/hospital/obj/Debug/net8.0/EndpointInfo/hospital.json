@@ -913,10 +913,10 @@
         }
       }
     },
-    "/api/Patient/appointments/my": {
+    "/api/PatientContoller/api/patient/appointments/my": {
       "get": {
         "tags": [
-          "Patient"
+          "PatientContoller"
         ],
         "responses": {
           "200": {
@@ -925,10 +925,10 @@
         }
       }
     },
-    "/api/Patient/BillView/getbyid/{id}": {
+    "/api/PatientContoller/BillView/getbyid/{id}": {
       "get": {
         "tags": [
-          "Patient"
+          "PatientContoller"
         ],
         "parameters": [
           {
