@@ -18,6 +18,8 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Admindashboard = () => {
   const [counts, setCounts] = useState({
@@ -31,7 +33,16 @@ const Admindashboard = () => {
 
   const [showChart, setShowChart] = useState(false);
   const [chartData, setChartData] = useState([]);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    toast.error("Restricted Access");
+    navigate("/");
+    return;
+  }
+}, []);
   useEffect(() => {
     const fetchCounts = async () => {
       try {

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Addprescription = () => {
   const [prescribe, setPrescribe] = useState({
@@ -14,6 +15,15 @@ const Addprescription = () => {
 
   const { doctorId, appid } = useAuth();
   console.log("prescription", appid);
+
+  useEffect(() => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    toast.error("Restricted Access");
+    navigate("/");
+    return;
+  }
+}, []);
 
   const handleChange = (e) => {
     setPrescribe({ ...prescribe, [e.target.name]: e.target.value });
