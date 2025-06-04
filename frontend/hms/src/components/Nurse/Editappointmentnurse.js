@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
+
 import { useParams, useNavigate } from "react-router-dom";
 import Nursesidebar from "./Nursesidebar";
 import { toast } from "react-toastify";
@@ -22,6 +23,7 @@ const token = localStorage.getItem("token");
       .get(`https://localhost:7058/api/Nurse/getbyidprescibe/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
+
       .then((res) => {
         setData(res.data);
         setLoading(false);
@@ -30,11 +32,14 @@ const token = localStorage.getItem("token");
         console.log(err);
         setLoading(false);
       });
+
   }, [id,navigate]);
+
 
   const handleEdit = (e) => {
     e.preventDefault();
     axios
+
       .put(`https://localhost:7058/api/Nurse/updateprescription/${id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -45,6 +50,7 @@ const token = localStorage.getItem("token");
       })
       .catch((err) => console.error(err));
 
+
   };
 
   const handleChange = (e) => {
@@ -53,18 +59,22 @@ const token = localStorage.getItem("token");
 
   if (loading) {
 
+
     return (
       <div className="d-flex justify-content-center align-items-center vh-100">
         <div className="spinner-border text-primary" role="status"></div>
       </div>
     );
 
+
   }
 
   if (!data || !data.appointmentId) {
     return (
       <div className="text-center mt-5">
+
         <h4 className="text-danger">⚠ No prescription record found</h4>
+
 
         <h4 className="text-danger">No prescription added</h4>
       </div>
@@ -148,6 +158,7 @@ const token = localStorage.getItem("token");
           </div>
         </div>
 </div>
+
     </div>
   );
 };

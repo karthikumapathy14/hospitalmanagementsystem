@@ -9,11 +9,13 @@ const Viewappointmentnurse = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
+
   useEffect(() => {
       if (!token) {
       toast.error("Restricted Access");
       navigate("/");
       return;
+
     }
     axios
       .get('https://localhost:7058/api/Nurse/appointmentnurse', {
@@ -33,6 +35,7 @@ const Viewappointmentnurse = () => {
   };
 
   return (
+
     <div className="d-flex" style={{ minHeight: "100vh" }}>
       {/* Sidebar */}
       <div style={{ width: "250px", backgroundColor: "#f8f9fa" }}>
@@ -92,6 +95,7 @@ const Viewappointmentnurse = () => {
         </div>
       </div>
       </div>
+
 
 
 
