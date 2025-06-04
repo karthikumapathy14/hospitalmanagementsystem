@@ -213,7 +213,6 @@ namespace hospital.Controller
         }
 
 
-
         [Authorize]
         [HttpPost("changepassword")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePassword model)

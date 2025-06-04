@@ -1,35 +1,49 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import Adminnavbar from './Adminnavbar';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Adminnavbar from "./Adminnavbar";
+import { toast } from "react-toastify";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    UserName: '',
-    Email: '',
-    PasswordHash: '',
-    Role: ''
+    UserName: "",
+    Email: "",
+    PasswordHash: "",
+    Role: "",
   });
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
-
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
+  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://localhost:7058/api/Authentication/Register', formData);
+      const response = await axios.post(
+        "https://localhost:7058/api/Authentication/Register",
+        formData
+      );
       setMessage("✅ " + response.data);
       setTimeout(() => null, 2000);
     } catch (error) {
       if (error.response) {
-        setMessage("❌ " + (error.response.data[0]?.description || "Registration failed."));
+        setMessage(
+          "❌ " +
+            (error.response.data[0]?.description || "Registration failed.")
+        );
       } else {
         setMessage("❌ Something went wrong.");
       }
@@ -41,8 +55,13 @@ const RegisterForm = () => {
       <Adminnavbar />
       <div className="flex-grow-1 bg-light">
         <div className="container d-flex justify-content-center align-items-center min-vh-100">
-          <div className="card shadow rounded-4 p-4" style={{ maxWidth: '500px', width: '100%' }}>
-            <h3 className="text-center text-primary mb-4">🏥 User Registration</h3>
+          <div
+            className="card shadow rounded-4 p-4"
+            style={{ maxWidth: "500px", width: "100%" }}
+          >
+            <h3 className="text-center text-primary mb-4">
+              🏥 User Registration
+            </h3>
             {message && <div className="alert alert-info">{message}</div>}
 
             <form onSubmit={handleSubmit}>
@@ -76,7 +95,7 @@ const RegisterForm = () => {
                 <label className="form-label">🔐 Password</label>
                 <div className="input-group">
                   <input
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     name="PasswordHash"
                     className="form-control"
                     placeholder="Enter password"
@@ -99,7 +118,6 @@ const RegisterForm = () => {
                 </div>
               </div>
 
-
               <div className="mb-4">
                 <label className="form-label">🎓 Role</label>
                 <select
@@ -117,11 +135,13 @@ const RegisterForm = () => {
                 </select>
               </div>
 
-              <button type="submit" className="btn btn-primary w-100 fw-semibold">
+              <button
+                type="submit"
+                className="btn btn-primary w-100 fw-semibold"
+              >
                 ➕ Register
               </button>
             </form>
-
           </div>
         </div>
       </div>

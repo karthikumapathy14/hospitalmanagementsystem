@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ReceptionistNavbar from "./ReceptionistNavbar";
+import { toast } from "react-toastify";
 
 const CreatePatient = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +25,14 @@ const CreatePatient = () => {
       [e.target.name]: e.target.value,
     });
   };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
+  }, []);
   const token = localStorage.getItem("token");
   const handleSubmit = async (e) => {
     e.preventDefault();

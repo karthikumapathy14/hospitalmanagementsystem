@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Editappointment = () => {
   const [forms, setforms] = useState({
@@ -15,7 +16,7 @@ const Editappointment = () => {
 
   const navigate = useNavigate();
   const { id } = useParams();
-
+const token = localStorage.getItem("token");
   const [dept, getdept] = useState([]);
   const [doc, getdoc] = useState([]);
   const [filtered, setfiltered] = useState([]);
@@ -42,6 +43,12 @@ const Editappointment = () => {
   };
 
   useEffect(() => {
+      if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
+
     axios.get("https://localhost:7058/api/Admin/get-dept")
       .then((res) => getdept(res.data))
       .catch(console.error);
