@@ -1,3 +1,4 @@
+using hospital;
 using hospital.Data;
 using hospital.SeedData;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -30,6 +31,8 @@ builder.Services.AddCors(options =>
 
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 builder.Services.AddControllers()
     .AddNewtonsoftJson(options =>
     {
@@ -63,6 +66,8 @@ builder.Services.AddAuthentication(options =>
 });
 
 var app = builder.Build();
+
+
 
 using (var scope = app.Services.CreateScope())
 {

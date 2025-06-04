@@ -178,9 +178,9 @@ const ListAppointment = () => {
                             <td>
                               <span
                                 className={`badge ${
-                                  item.status === "Confirmed"
+                                  item.status === "Schedule"
                                     ? "bg-primary"
-                                    : item.status === "Completed"
+                                    : item.status === "Complete"
                                     ? "bg-success"
                                     : "bg-warning"
                                 }`}

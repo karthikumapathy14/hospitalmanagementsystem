@@ -152,7 +152,7 @@ const Login = () => {
                           Remember me
                         </label>
                       </div>
-                      <a href="/forgot-password" className="small text-decoration-none">
+                      <a href="/forgotpassword" className="small text-decoration-none">
                         Forgot password?
                       </a>
                     </div>

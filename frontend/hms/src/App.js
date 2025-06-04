@@ -39,6 +39,8 @@ import Bill from './components/Receptionist/Bill.js';
 import Viewapatientappointment from './components/Patient.js/viewpatientappointment.js'
 import Billpatientview from './components/Patient.js/Billpatientview.js';
 import ChangePassword from './components/ChangePassword.js';
+import ForgotPassword from './components/Receptionist/ForgetPassword.js';
+import ResetPassword from './components/Receptionist/ResetPassword.js';
 
 
 function App() {
@@ -92,6 +94,8 @@ function App() {
               {/* {patient dashboard} */}
               <Route path='/Viewapatientappointment' element={<Viewapatientappointment/>}></Route>
               <Route path='/billpatientview/:id' element={<Billpatientview/>}></Route>
+                <Route path="/forgotpassword" element={<ForgotPassword />} />
+               <Route path="/resetpassword" element={<ResetPassword />} />
             </Routes>
           </div>
         </div>
