@@ -16,6 +16,11 @@ const Viewapatientappointment = () => {
 
     try {
       const token = localStorage.getItem('token');
+       if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
       if (!token) {
         setError('Token not found. Please login again.');
         setLoading(false);
@@ -30,11 +35,7 @@ const Viewapatientappointment = () => {
         setLoading(false);
         return;
       }
-      if (!token) {
-      toast.error("Restricted Access");
-      navigate("/");
-      return;
-    }
+     
       const response = await axios.get(
         `https://localhost:7058/api/PatientContoller/api/patient/appointments/my`,
         {

@@ -3,89 +3,123 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Nursesidebar from './Nursesidebar';
 import { toast } from 'react-toastify';
+import { Button, Offcanvas } from 'react-bootstrap';
 
 const Viewappointmentnurse = () => {
   const [data, setData] = useState([]);
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
-      if (!token) {
+    if (!token) {
       toast.error("Restricted Access");
       navigate("/");
       return;
-
     }
+
     axios
       .get('https://localhost:7058/api/Nurse/appointmentnurse', {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
         setData(res.data);
-        console.log('Appointments fetched:', res.data);
       })
       .catch((err) => console.log(err));
-  }, [navigate]);
+  }, [navigate, token]);
 
   const handleEdit = (appointmentId) => {
     navigate(`/Editappointmentnurse/${appointmentId}`);
   };
 
-  return (
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-    <div className="d-flex" style={{ minHeight: "100vh" }}>
-      {/* Sidebar */}
-      <div style={{ width: "250px", backgroundColor: "#f8f9fa" }}>
-        <Nursesidebar />
-      </div>
-      <div className='flex-grow-1' style={{ backgroundColor: "#e8f4f8" }}>
-      <div className="card shadow-lg border-0  m-5">
-        <div className="card-header bg-info text-white text-center">
-          <h4 className="mb-0">
-            <i className="bi bi-calendar-check"></i> Nurse - View Appointments
+  const upcomingAppointments = data.filter(item => {
+    const appointmentDate = new Date(item.appointmentDate);
+    appointmentDate.setHours(0, 0, 0, 0);
+    return appointmentDate >= today;
+  });
+
+  const pastAppointments = data.filter(item => {
+    const appointmentDate = new Date(item.appointmentDate);
+    appointmentDate.setHours(0, 0, 0, 0);
+    return appointmentDate < today;
+  });
+
+  const renderTable = (appointments, title, isPast = false) => (
+    <div className="container-fluid px-0 px-md-3">
+      <div className="card shadow-sm border-0 mb-4">
+        <div className={`card-header ${isPast ? 'bg-secondary' : 'bg-info'} text-white py-2 py-md-3`}>
+          <h4 className="mb-0 text-center">
+            <i className="bi bi-calendar-check me-2"></i> {title}
           </h4>
         </div>
-        <div className="card-body p-4">
-          {data.length === 0 ? (
-            <p className="text-center text-muted">No appointments found.</p>
+        <div className="card-body p-0 p-md-3">
+          {appointments.length === 0 ? (
+            <div className="text-center py-4">
+              <p className="text-muted">No {title.toLowerCase()} found.</p>
+            </div>
           ) : (
-            <div className="table-responsive">
-              <table className="table table-bordered table-striped align-middle">
-                <thead className="table-primary text-center">
+            <div className="table-responsive" style={{ overflowX: 'auto' }}>
+              <table className="table table-hover mb-0" style={{ minWidth: '700px' }}>
+                <thead className="table-primary">
                   <tr>
-                    <th>Patient ID</th>
-                    <th>Patient Name</th>
-                    <th>Appointment Date</th>
-                    <th>Reason</th>
+                    <th>Patient</th>
+                    <th className="d-none d-md-table-cell">ID</th>
+                    <th>Date</th>
+                    <th className="d-none d-lg-table-cell">Reason</th>
                     <th>Status</th>
-                    <th>Doctor Name</th>
-                    <th>Action</th>
+                    <th className="d-none d-xl-table-cell">Doctor</th>
+                    {!isPast && <th>Action</th>}
                   </tr>
                 </thead>
                 <tbody>
-                  {data.map((item) => (
+                  {appointments.map((item) => (
                     <tr key={item.appointmentId}>
-                      <td>{item.patientId}</td>
-                      <td>{item.patientName}</td>
-                      <td>{new Date(item.appointmentDate).toLocaleDateString()}</td>
-                      <td>{item.reason}</td>
+                      <td className="text-nowrap">{item.patientName}</td>
+                      <td className="d-none d-md-table-cell">{item.patientId}</td>
+                      <td className="text-nowrap">
+                        {new Date(item.appointmentDate).toLocaleDateString('en-US', {
+                          month: 'short',
+                          day: 'numeric',
+                          year: 'numeric'
+                        })}
+                      </td>
+                      <td className="d-none d-lg-table-cell">{item.reason}</td>
                       <td>
-                        <span className={`badge ${item.status === 'Pending' ? 'bg-warning' : item.status === 'Approved' ? 'bg-success' : 'bg-secondary'}`}>
+                        <span className={`badge ${
+                          item.status === 'Pending' ? 'bg-warning' :
+                          item.status === 'Approved' ? 'bg-success' :
+                          'bg-secondary'
+                        }`}>
                           {item.status}
                         </span>
                       </td>
-                      <td>{item.doctorName}</td>
-                      <td className="text-center">
-                        <button
-                          className="btn btn-outline-warning btn-sm"
-                          onClick={() => handleEdit(item.appointmentId)}
-                        >
-                          Edit <i className="bi bi-pencil-square ms-1"></i>
-                        </button>
-                      </td>
+                      <td className="d-none d-xl-table-cell">{item.doctorName}</td>
+                      {!isPast && (
+                        <td>
+                          <button
+                            className="btn btn-sm btn-outline-warning"
+                            onClick={() => handleEdit(item.appointmentId)}
+                          >
+                            <i className="bi bi-pencil-square"></i>
+                            <span className="d-none d-md-inline ms-1">Edit</span>
+                          </button>
+                        </td>
+                      )}
                     </tr>
                   ))}
                 </tbody>
@@ -94,11 +128,53 @@ const Viewappointmentnurse = () => {
           )}
         </div>
       </div>
+    </div>
+  );
+
+  return (
+    <div className="d-flex" style={{ minHeight: "100vh" }}>
+      {/* Desktop Sidebar */}
+      {!isMobile && (
+        <div style={{ width: "260px", flexShrink: 0 }}>
+          <Nursesidebar />
+        </div>
+      )}
+
+      {/* Mobile Sidebar Offcanvas */}
+      {isMobile && (
+        <Offcanvas show={showSidebar} onHide={() => setShowSidebar(false)}>
+          <Offcanvas.Header closeButton className="bg-info text-white">
+            <Offcanvas.Title>Menu</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body className="p-0">
+            <Nursesidebar isMobile={true} closeSidebar={() => setShowSidebar(false)} />
+          </Offcanvas.Body>
+        </Offcanvas>
+      )}
+
+      {/* Main Content */}
+      <div className="flex-grow-1 bg-light">
+        {/* Mobile Header */}
+        {isMobile && (
+          <div className="sticky-top bg-info text-white p-2 shadow-sm">
+            <div className="d-flex align-items-center">
+              <Button 
+                variant="outline-light" 
+                className="me-3"
+                onClick={() => setShowSidebar(true)}
+              >
+                <i className="bi bi-list"></i>
+              </Button>
+              <h5 className="mb-0">Appointments</h5>
+            </div>
+          </div>
+        )}
+
+        <div className="p-2 p-md-4">
+          {renderTable(upcomingAppointments, "Upcoming Appointments")}
+          {renderTable(pastAppointments, "Past Appointments", true)}
+        </div>
       </div>
-
-
-
-
     </div>
   );
 };

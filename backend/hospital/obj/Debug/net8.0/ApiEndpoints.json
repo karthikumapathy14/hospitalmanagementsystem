@@ -449,6 +449,27 @@
   },
   {
     "ContainingType": "hospital.Controller.DoctorController",
+    "Method": "UpdateStatus",
+    "RelativePath": "api/Doctor/appointments/{id}/status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "hospital.Model.Appointment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.DoctorController",
     "Method": "GetTodaysAppointmentCountForDoctor",
     "RelativePath": "api/Doctor/appointments/today-count",
     "HttpMethod": "GET",
