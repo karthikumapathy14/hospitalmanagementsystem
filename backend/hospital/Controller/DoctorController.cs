@@ -40,18 +40,21 @@ namespace hospital.Controller
             var appointments = await _dbcontext.appointments
                 .Include(a => a.Patient)
                 .Where(a => a.DoctorId == doctorId)
-                .Select(a => new
-                {   a.AppointmentId,
-                    a.DoctorId,
-                    a.AppointmentDate,
-                    a.AppointmentTime,
-                    a.Reason,
-                    a.NurseId,
-                    a.PatientId,
-                    Patientid = a.Patient.patientid,
-                    PatientName = a.Patient.UserName,
-                    a.Status
-                })
+                .OrderBy(a=>a.AppointmentDate)
+               .Select(a => new
+               {
+                   a.AppointmentId,
+                   a.DoctorId,
+                   a.AppointmentDate,
+                   a.AppointmentTime,
+                   a.Reason,
+                   a.NurseId,
+                   a.PatientId,
+                   Patientid = a.Patient.patientid,
+                   PatientName = a.Patient.UserName,
+                   a.Status,
+                   PrescriptionAdded = _dbcontext.Prescription.Any(p => p.AppointmentId == a.AppointmentId)
+               })
                 .ToListAsync();
 
             return Ok(appointments);
@@ -141,6 +144,30 @@ namespace hospital.Controller
 
             return Ok(prescription);
         }
+
+        [HttpPut("appointments/{id}/status")]
+        public async Task<IActionResult> UpdateStatus(int id, [FromBody] Appointment dto)
+        {
+            var appointment = await _dbcontext.appointments.FindAsync(id);
+            if (appointment == null)
+                return NotFound("Appointment not found");
+
+            // Check if status is "Complete"
+            if (dto.Status == "Complete")
+            {
+                // Check if a prescription exists for this appointment
+                var hasPrescription = await _dbcontext.Prescription.AnyAsync(p => p.AppointmentId == id);
+                if (!hasPrescription)
+                    return BadRequest("Cannot mark appointment as complete without prescription.");
+            }
+
+            appointment.Status = dto.Status;
+            await _dbcontext.SaveChangesAsync();
+
+            return Ok("Status updated successfully");
+        }
+
+
 
         [HttpGet("filterbyid/{id}")]
         public async Task<IActionResult> filterbyid(int id)

@@ -133,20 +133,7 @@ const DoctorSideEditAppointment = () => {
           </div>
 
           <div className="row mb-3">
-            <div className="col-md-6">
-              <label className="form-label fw-semibold">Status:</label>
-              <select
-                className="form-select"
-                name="status"
-                value={appointment.status || ""}
-                onChange={handleChange}
-              >
-                <option value="">-- Select Status --</option>
-                <option value="Schedule">Schedule</option>
-                <option value="Complete">Complete</option>
-                <option value="Cancel">Cancel</option>
-              </select>
-            </div>
+         
 
             <div className="col-md-6">
               <label className="form-label fw-semibold">Assign Nurse:</label>

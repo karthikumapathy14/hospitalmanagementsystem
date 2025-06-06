@@ -42,6 +42,7 @@ import ChangePassword from './components/ChangePassword.js';
 import ForgotPassword from './components/Receptionist/ForgetPassword.js';
 import ResetPassword from './components/Receptionist/ResetPassword.js';
 import WhatsAppSender from './components/WhatsAppSender.js';
+import Viewprescription from './components/Doctor/Viewprescription.js';
 
 
 function App() {
@@ -88,6 +89,7 @@ function App() {
               <Route path="/DoctorSideEditAppointment/:id" element={<DoctorSideEditAppointment />} />
               <Route path='/Addprescription' element={<Addprescription/>}></Route>
               <Route path='/PatientHistory' element={<PatientHistory/>}></Route>
+              <Route path='/viewprescription/:id' element={<Viewprescription/>}></Route>
 
               {/* nurse dashboard */}
               <Route path='/Viewappointmentnurse' element={<Viewappointmentnurse/>}></Route>
