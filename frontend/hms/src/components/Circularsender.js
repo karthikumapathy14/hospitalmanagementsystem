@@ -5,8 +5,8 @@ const rolesList = ["Doctor", "Nurse", "Patient", "Admin", "Receptionist"];
 
 const MessageSender = () => {
   const [selectedRoles, setSelectedRoles] = useState([]);
+  const [selectAll, setSelectAll] = useState(false);
   const [subject, setSubject] = useState("");
- 
   const [message, setMessage] = useState("");
   const [emails, setEmails] = useState([]);
   const [status, setStatus] = useState({ type: "", message: "" });
@@ -15,9 +15,18 @@ const MessageSender = () => {
 
   const handleRoleChange = (e) => {
     const { value, checked } = e.target;
-    setSelectedRoles((prev) =>
-      checked ? [...prev, value] : prev.filter((role) => role !== value)
-    );
+    let updatedRoles = checked
+      ? [...selectedRoles, value]
+      : selectedRoles.filter((role) => role !== value);
+
+    setSelectedRoles(updatedRoles);
+    setSelectAll(updatedRoles.length === rolesList.length);
+  };
+
+  const handleSelectAll = (e) => {
+    const isChecked = e.target.checked;
+    setSelectAll(isChecked);
+    setSelectedRoles(isChecked ? [...rolesList] : []);
   };
 
   const fetchEmails = async () => {
@@ -44,6 +53,11 @@ const MessageSender = () => {
     }
   };
 
+  const clearEmails = () => {
+    setEmails([]);
+    setStatus({ type: "info", message: "Recipient list cleared." });
+  };
+
   const sendMessage = async (e) => {
     e.preventDefault();
 
@@ -56,14 +70,12 @@ const MessageSender = () => {
     const payload = {
       emails,
       subject,
-
       message,
     };
 
     try {
       await axios.post("https://localhost:7058/api/Message/send", payload);
       setStatus({ type: "success", message: `Email sent successfully to ${emails.length} recipients!` });
-      // Clear form after successful send
       setSubject("");
       setMessage("");
     } catch (error) {
@@ -97,22 +109,36 @@ const MessageSender = () => {
 
               <div className="mb-4">
                 <h5 className="mb-3">Select Recipient Roles</h5>
-                <div className="d-flex flex-wrap gap-3">
-                  {rolesList.map((role) => (
-                    <div className="form-check" key={role}>
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        id={`role-${role}`}
-                        value={role}
-                        onChange={handleRoleChange}
-                        checked={selectedRoles.includes(role)}
-                      />
-                      <label className="form-check-label fw-medium" htmlFor={`role-${role}`}>
-                        {role}
-                      </label>
-                    </div>
-                  ))}
+                <div className="d-flex flex-column gap-2">
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      id="select-all"
+                      checked={selectAll}
+                      onChange={handleSelectAll}
+                    />
+                    <label className="form-check-label fw-bold" htmlFor="select-all">
+                      Select All
+                    </label>
+                  </div>
+                  <div className="d-flex flex-wrap gap-3">
+                    {rolesList.map((role) => (
+                      <div className="form-check" key={role}>
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          id={`role-${role}`}
+                          value={role}
+                          onChange={handleRoleChange}
+                          checked={selectedRoles.includes(role)}
+                        />
+                        <label className="form-check-label fw-medium" htmlFor={`role-${role}`}>
+                          {role}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -138,7 +164,12 @@ const MessageSender = () => {
 
               {emails.length > 0 && (
                 <div className="mb-4">
-                  <h5 className="mb-3">Recipient List ({emails.length})</h5>
+                  <div className="d-flex justify-content-between align-items-center mb-2">
+                    <h5 className="mb-0">Recipient List ({emails.length})</h5>
+                    <button className="btn btn-outline-danger btn-sm" onClick={clearEmails}>
+                      <i className="bi bi-x-circle me-1"></i> Clear Recipients
+                    </button>
+                  </div>
                   <div className="border rounded p-3 bg-light" style={{ maxHeight: "200px", overflowY: "auto" }}>
                     <div className="row row-cols-1 row-cols-md-2 g-2">
                       {emails.map((email, idx) => (
@@ -170,7 +201,6 @@ const MessageSender = () => {
                     placeholder="Enter email subject"
                   />
                 </div>
-
 
                 <div className="mb-4">
                   <label htmlFor="message" className="form-label fw-medium">

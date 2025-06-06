@@ -183,7 +183,17 @@ const Adminnavbar = () => {
           <i className="bi bi-list-ul me-2"></i>
           Change Password
         </Link>
-
+           <Link
+          className={`nav-link py-2 ps-3 rounded ${
+            isActive("/Circularsender")
+              ? "bg-sky-50 text-sky-700 border-start border-sky-500"
+              : "text-sky-600"
+          }`}
+          to="/Circularsender"
+        >
+          <i className="bi bi-list-ul me-2"></i>
+         Circular Sender
+        </Link>
         <button
           onClick={handleLogout}
           className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded text-danger bg-transparent border-0 text-start ${
