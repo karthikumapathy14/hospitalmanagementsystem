@@ -536,6 +536,38 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "hospital.Controller.MessageController",
+    "Method": "GetEmailsByRoles",
+    "RelativePath": "api/Message/emails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "role",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.MessageController",
+    "Method": "SendBulkEmail",
+    "RelativePath": "api/Message/send",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "hospital.Model.BulkEmailRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "hospital.Controller.NurseController",
     "Method": "GetAppointmentfornurse",
     "RelativePath": "api/Nurse/appointmentnurse",

@@ -42,6 +42,7 @@ import ChangePassword from './components/ChangePassword.js';
 import ForgotPassword from './components/Receptionist/ForgetPassword.js';
 import ResetPassword from './components/Receptionist/ResetPassword.js';
 import WhatsAppSender from './components/WhatsAppSender.js';
+import Circularsender from './components/Circularsender.js'
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
               <Route path="/" element={<Login />} />
               <Route path='/changepassword' element={<ChangePassword/>}></Route>
               <Route path='/WhatsAppSender' element={<WhatsAppSender/>}></Route>
+              <Route path='/Circularsender' element={<Circularsender/>}></Route>
 
               {/* Admin navbar */}
               <Route path="/reg" element={<Reg />} />
