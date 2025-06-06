@@ -141,8 +141,7 @@
               "RelativeToolTip": "hospital\\Model\\Doctor.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAQwA8AAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T07:30:15.543Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-31T07:30:15.543Z"
             },
             {
               "$type": "Document",
@@ -178,8 +177,7 @@
               "RelativeToolTip": "hospital\\Model\\Nurse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T07:30:15.56Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-31T07:30:15.56Z"
             },
             {
               "$type": "Document",
@@ -189,7 +187,7 @@
               "RelativeDocumentMoniker": "hospital\\Controller\\DoctorController.cs",
               "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\DoctorController.cs",
               "RelativeToolTip": "hospital\\Controller\\DoctorController.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAiwDcAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAiwDIAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-31T07:30:15.564Z",
               "EditorCaption": ""
@@ -204,8 +202,7 @@
               "RelativeToolTip": "hospital\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T09:56:28.172Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-04T09:56:28.172Z"
             },
             {
               "$type": "Document",
@@ -265,8 +262,7 @@
               "RelativeToolTip": "hospital\\Model\\Appointment.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAqwCwAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T07:30:15.556Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-31T07:30:15.556Z"
             },
             {
               "$type": "Document",

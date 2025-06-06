@@ -155,13 +155,7 @@ const Appointments = () => {
       <DoctorDashboard />
       <div className="flex-grow-1 p-4" style={{ marginLeft: "230px" }}>
         <div className="container-fluid py-3 px-4">
-          <div className="card shadow rounded-4 border-0 mb-4">
-            <div className="card-body">
-              <h2 className="text-center text-primary mb-4">
-                Upcomming Appointments
-              </h2>
-
-              <div className="d-flex justify-content-end mb-3">
+          <div className="d-flex justify-content-end mb-3">
                 <button
                   type="button"
                   onClick={viewappointment}
@@ -170,6 +164,13 @@ const Appointments = () => {
                   View Patient History
                 </button>
               </div>
+          <div className="card shadow rounded-4 border-0 mb-4">
+            <div className="card-body">
+              <h2 className="text-center text-primary mb-4">
+                Upcomming Appointments
+              </h2>
+
+              
 
               <div className="table-responsive">
                 <table className="table table-hover text-center align-middle">
@@ -317,7 +318,7 @@ const Appointments = () => {
                   <tbody>
                     {completedAppointments.length === 0 ? (
                       <tr>
-                        <td colSpan="5" className="text-muted">
+                        <td colSpan="6" className="text-muted">
                           No completed appointments today.
                         </td>
                       </tr>
