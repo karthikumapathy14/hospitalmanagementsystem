@@ -12,9 +12,9 @@ const Editappointmentnurse = () => {
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   useEffect(() => {
-      if (!token) {
+    if (!token) {
       toast.error("Restricted Access");
       navigate("/");
       return;
@@ -33,7 +33,7 @@ const token = localStorage.getItem("token");
         setLoading(false);
       });
 
-  }, [id,navigate]);
+  }, [id, navigate]);
 
 
   const handleEdit = (e) => {
@@ -153,11 +153,11 @@ const token = localStorage.getItem("token");
               </form>
             </div>
             <div className="card-footer text-center text-muted">
-              
+
             </div>
           </div>
         </div>
-</div>
+      </div>
 
     </div>
   );

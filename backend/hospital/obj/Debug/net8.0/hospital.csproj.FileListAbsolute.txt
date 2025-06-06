@@ -713,3 +713,5 @@ C:\Users\karthik\Desktop\HMS\hospitalmanagementsystem\backend\hospital\obj\Debug
 C:\Users\karthik\Desktop\HMS\hospitalmanagementsystem\backend\hospital\obj\Debug\net8.0\hospital.pdb
 C:\Users\karthik\Desktop\HMS\hospitalmanagementsystem\backend\hospital\obj\Debug\net8.0\hospital.genruntimeconfig.cache
 C:\Users\karthik\Desktop\HMS\hospitalmanagementsystem\backend\hospital\obj\Debug\net8.0\ref\hospital.dll
+C:\Users\karthik\Desktop\HMS\hospitalmanagementsystem\backend\hospital\bin\Debug\net8.0\Microsoft.Bcl.Memory.dll
+C:\Users\karthik\Desktop\HMS\hospitalmanagementsystem\backend\hospital\bin\Debug\net8.0\Twilio.dll

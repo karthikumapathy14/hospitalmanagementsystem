@@ -6,14 +6,15 @@ import { toast } from "react-toastify";
 const DoctorSideEditAppointment = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const [appointment, setAppointment] = useState("");
+  const [appointment, setAppointment] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [nurses, getnurse] = useState([]);
+  const [nurses, setNurses] = useState([]);
   const token = localStorage.getItem("token");
+
+  // Fetch appointment details
   useEffect(() => {
     if (!id) {
-      alert("Invalid appointment ID!");
+      toast.error("Invalid appointment ID!");
       return;
     }
 
@@ -22,6 +23,7 @@ const DoctorSideEditAppointment = () => {
       navigate("/");
       return;
     }
+
     axios
       .get(`https://localhost:7058/api/Doctor/api/appointments/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -32,28 +34,49 @@ const DoctorSideEditAppointment = () => {
       })
       .catch((err) => {
         console.error("Error fetching appointment:", err);
-        alert("Invalid appointment ID or failed to fetch!");
+        toast.error("Failed to fetch appointment!");
         setLoading(false);
       });
-  }, [id,navigate]);
+  }, [id, navigate, token]);
 
+  // Fetch nurse list
   useEffect(() => {
     axios
       .get("https://localhost:7058/api/Admin/getnurse", {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => getnurse(res.data))
-      .catch((err) => console.log(err));
-  }, []);
+      .then((res) => setNurses(res.data))
+      .catch((err) => {
+        console.error("Error fetching nurses:", err);
+        toast.error("Failed to load nurses");
+      });
+  }, [token]);
 
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setAppointment((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Handle update
   const handleUpdate = (e) => {
     e.preventDefault();
+
+    if (!appointment.status || !appointment.nurseId) {
+      toast.warning("Please select both status and nurse");
+      return;
+    }
 
     const payload = {
       appointmentId: appointment.appointmentId,
       status: appointment.status,
       nurseId: parseInt(appointment.nurseId),
     };
+
+    console.log("Submitting payload:", payload);
 
     axios
       .put(
@@ -64,7 +87,7 @@ const DoctorSideEditAppointment = () => {
         }
       )
       .then(() => {
-        alert("Appointment updated successfully!");
+        toast.success("Appointment updated successfully!");
         navigate("/viewappointment");
       })
       .catch((err) => {
@@ -72,14 +95,11 @@ const DoctorSideEditAppointment = () => {
           "Error updating appointment:",
           err.response?.data || err.message
         );
-        alert("Failed to update appointment");
+        toast.error("Failed to update appointment");
       });
   };
 
-  const handleChange = (e) => {
-    setAppointment({ ...appointment, [e.target.name]: e.target.value });
-  };
-
+  // UI rendering
   if (loading) return <div className="text-center mt-5">Loading...</div>;
   if (!appointment)
     return (
@@ -118,7 +138,7 @@ const DoctorSideEditAppointment = () => {
               <select
                 className="form-select"
                 name="status"
-                value={appointment?.status || ""}
+                value={appointment.status || ""}
                 onChange={handleChange}
               >
                 <option value="">-- Select Status --</option>
@@ -133,7 +153,7 @@ const DoctorSideEditAppointment = () => {
               <select
                 className="form-select"
                 name="nurseId"
-                value={appointment?.nurseId || ""}
+                value={appointment.nurseId || ""}
                 onChange={handleChange}
               >
                 <option value="">-- Select Nurse --</option>

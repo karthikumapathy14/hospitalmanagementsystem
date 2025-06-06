@@ -41,6 +41,7 @@ import Billpatientview from './components/Patient.js/Billpatientview.js';
 import ChangePassword from './components/ChangePassword.js';
 import ForgotPassword from './components/Receptionist/ForgetPassword.js';
 import ResetPassword from './components/Receptionist/ResetPassword.js';
+import WhatsAppSender from './components/WhatsAppSender.js';
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
               {/* common */}
               <Route path="/" element={<Login />} />
               <Route path='/changepassword' element={<ChangePassword/>}></Route>
+              <Route path='/WhatsAppSender' element={<WhatsAppSender/>}></Route>
 
               {/* Admin navbar */}
               <Route path="/reg" element={<Reg />} />

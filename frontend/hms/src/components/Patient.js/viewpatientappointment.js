@@ -36,7 +36,7 @@ const Viewapatientappointment = () => {
       return;
     }
       const response = await axios.get(
-        `https://localhost:7058/api/Patient/appointments/my`,
+        `https://localhost:7058/api/PatientContoller/api/patient/appointments/my`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

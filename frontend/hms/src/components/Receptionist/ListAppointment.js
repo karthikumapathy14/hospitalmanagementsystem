@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import ReceptionistNavbar from "./ReceptionistNavbar";
 import { useAuth } from "../AuthContext";
+import { toast } from "react-toastify";
 
 const ListAppointment = () => {
   const navigate = useNavigate();
@@ -18,7 +19,9 @@ const ListAppointment = () => {
   // Fetch bills
   const fetchBills = async () => {
     try {
-      const res = await axios.get("https://localhost:7058/api/Receptionist/bill");
+      const res = await axios.get(
+        "https://localhost:7058/api/Receptionist/bill"
+      );
       setBills(res.data);
     } catch (err) {
       console.error("Failed to fetch bills:", err);
@@ -28,14 +31,22 @@ const ListAppointment = () => {
   // Fetch appointments
   const fetchAppointments = async () => {
     try {
-      const res = await axios.get("https://localhost:7058/api/Receptionist/getappointment");
+      const res = await axios.get(
+        "https://localhost:7058/api/Receptionist/getappointment"
+      );
       setAppointments(res.data);
     } catch (err) {
       console.error("Failed to fetch appointments:", err);
     }
   };
 
+  const token = localStorage.getItem("token");
   useEffect(() => {
+    if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+      return;
+    }
     fetchAppointments();
     fetchBills();
   }, [location]);
@@ -47,13 +58,16 @@ const ListAppointment = () => {
       item.departmentName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.doctorName?.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesStatus = statusFilter === "All" || item.status === statusFilter;
+    const matchesStatus =
+      statusFilter === "All" || item.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
 
   const handleBillNavigation = async (appointmentId) => {
     try {
-      const response = await axios.get(`https://localhost:7058/api/Receptionist/billbyid/${appointmentId}`);
+      const response = await axios.get(
+        `https://localhost:7058/api/Receptionist/billbyid/${appointmentId}`
+      );
       if (response.data.exists) {
         alert("Bill already generated for this appointment.");
       } else {
@@ -67,7 +81,9 @@ const ListAppointment = () => {
   };
 
   const handleBillStatusUpdate = async (appointmentId, newStatus) => {
-    const confirmChange = window.confirm(`Are you sure you want to mark this bill as ${newStatus}?`);
+    const confirmChange = window.confirm(
+      `Are you sure you want to mark this bill as ${newStatus}?`
+    );
     if (!confirmChange) return;
 
     setLoading(true);
@@ -79,7 +95,9 @@ const ListAppointment = () => {
 
       setBills((prevBills) =>
         prevBills.map((bill) =>
-          bill.appointmentId === appointmentId ? { ...bill, billstatus: newStatus } : bill
+          bill.appointmentId === appointmentId
+            ? { ...bill, billstatus: newStatus }
+            : bill
         )
       );
 
@@ -118,25 +136,39 @@ const ListAppointment = () => {
               {/* Filter Buttons */}
               <div className="mb-4 d-flex justify-content-center gap-3">
                 <button
-                  className={`btn ${statusFilter === "All" ? "btn-dark" : "btn-outline-dark"}`}
+                  className={`btn ${
+                    statusFilter === "All" ? "btn-dark" : "btn-outline-dark"
+                  }`}
                   onClick={() => setStatusFilter("All")}
                 >
                   All
                 </button>
                 <button
-                  className={`btn ${statusFilter === "Complete" ? "btn-success" : "btn-outline-success"}`}
+                  className={`btn ${
+                    statusFilter === "Complete"
+                      ? "btn-success"
+                      : "btn-outline-success"
+                  }`}
                   onClick={() => setStatusFilter("Complete")}
                 >
                   Complete
                 </button>
                 <button
-                  className={`btn ${statusFilter === "Schedule" ? "btn-primary" : "btn-outline-primary"}`}
+                  className={`btn ${
+                    statusFilter === "Schedule"
+                      ? "btn-primary"
+                      : "btn-outline-primary"
+                  }`}
                   onClick={() => setStatusFilter("Schedule")}
                 >
                   Schedule
                 </button>
                 <button
-                  className={`btn ${statusFilter === "Pending" ? "btn-warning" : "btn-outline-warning"}`}
+                  className={`btn ${
+                    statusFilter === "Pending"
+                      ? "btn-warning"
+                      : "btn-outline-warning"
+                  }`}
                   onClick={() => setStatusFilter("Pending")}
                 >
                   Pending
@@ -163,7 +195,9 @@ const ListAppointment = () => {
                   <tbody>
                     {filteredAppointments.length > 0 ? (
                       filteredAppointments.map((item) => {
-                        const bill = bills.find((b) => b.appointmentId === item.appointmentId);
+                        const bill = bills.find(
+                          (b) => b.appointmentId === item.appointmentId
+                        );
                         const billStatus = bill?.billstatus || "Pending";
                         const billId = bill?.id;
 
@@ -172,7 +206,11 @@ const ListAppointment = () => {
                             <td>{item.patientid}</td>
                             <td>{item.departmentName}</td>
                             <td>{item.doctorName}</td>
-                            <td>{new Date(item.appointmentDate).toLocaleDateString()}</td>
+                            <td>
+                              {new Date(
+                                item.appointmentDate
+                              ).toLocaleDateString()}
+                            </td>
                             <td>{item.appointmentTime}</td>
                             <td>{item.reason}</td>
                             <td>
@@ -195,16 +233,25 @@ const ListAppointment = () => {
                                     className="form-check-input"
                                     type="checkbox"
                                     id={`billSwitch-${item.appointmentId}`}
-                                    checked={billStatus.toLowerCase() === "paid"}
+                                    checked={
+                                      billStatus.toLowerCase() === "paid"
+                                    }
                                     onChange={(e) => {
-                                      const newStatus = e.target.checked ? "Paid" : "Pending";
-                                      handleBillStatusUpdate(item.appointmentId, newStatus);
+                                      const newStatus = e.target.checked
+                                        ? "Paid"
+                                        : "Pending";
+                                      handleBillStatusUpdate(
+                                        item.appointmentId,
+                                        newStatus
+                                      );
                                     }}
                                     disabled={loading}
                                   />
                                   <label
                                     className={`form-check-label fw-semibold ${
-                                      billStatus.toLowerCase() === "paid" ? "text-success" : "text-warning"
+                                      billStatus.toLowerCase() === "paid"
+                                        ? "text-success"
+                                        : "text-warning"
                                     }`}
                                     htmlFor={`billSwitch-${item.appointmentId}`}
                                   >
@@ -212,26 +259,41 @@ const ListAppointment = () => {
                                   </label>
                                 </div>
                               ) : (
-                                <span className="badge bg-warning text-dark">Pending</span>
+                                <span className="badge bg-warning text-dark">
+                                  Pending
+                                </span>
                               )}
                             </td>
                             <td>{new Date(item.createdAt).toLocaleString()}</td>
                             <td>
-                              <Link to={`/editappointment/${item.appointmentId}`}>
+                              <Link
+                                to={`/editappointment/${item.appointmentId}`}
+                              >
                                 <button className="btn btn-sm btn-outline-primary me-2">
-                                  <i className="bi bi-pencil-square me-1"></i>Edit
+                                  <i className="bi bi-pencil-square me-1"></i>
+                                  Edit
                                 </button>
                               </Link>
                               <button
                                 className="btn btn-sm btn-outline-secondary me-2"
-                                onClick={() => handleBillNavigation(item.appointmentId)}
+                                onClick={() =>
+                                  handleBillNavigation(item.appointmentId)
+                                }
                                 disabled={!!billId}
-                                title={billId ? "Bill already generated" : "Generate bill"}
+                                title={
+                                  billId
+                                    ? "Bill already generated"
+                                    : "Generate bill"
+                                }
                               >
                                 <i className="bi bi-cash-stack me-1"></i>Bill
                               </button>
-                              <Link to={`/billpatientview/${item.appointmentId}`}>
-                                <button className="btn btn-sm btn-outline-info">Bill View</button>
+                              <Link
+                                to={`/billpatientview/${item.appointmentId}`}
+                              >
+                                <button className="btn btn-sm btn-outline-info">
+                                  Bill View
+                                </button>
                               </Link>
                             </td>
                           </tr>
