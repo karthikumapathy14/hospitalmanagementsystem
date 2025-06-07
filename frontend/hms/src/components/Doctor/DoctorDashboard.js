@@ -91,17 +91,6 @@ const DoctorSidebar = ({ doctor }) => {
           Change Password
         </Link>
 
-          <Link
-          className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
-            isActive("/DoctorAvailabilityForm")
-              ? "bg-sky-100 text-sky-800 fw-medium"
-              : "text-sky-600"
-          }`}
-          to="/DoctorAvailabilityForm"
-        >
-          <i className="bi bi-shield-lock" style={{ fontSize: "1.1rem" }}></i>
-          Doctor Availability Form
-        </Link>
 
         <button
           onClick={handleLogout}

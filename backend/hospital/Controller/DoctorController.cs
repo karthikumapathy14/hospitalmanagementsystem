@@ -304,53 +304,5 @@ namespace hospital.Controller
         }
 
 
-        //slots available
-
-        [HttpPost("add-availability")]
-        public async Task<IActionResult> AddAvailability([FromBody] DoctorAvailability availability)
-        {
-            var doctorIdClaim = User.FindFirst("DoctorId")?.Value;
-            if (string.IsNullOrEmpty(doctorIdClaim))
-                return Unauthorized("No DoctorId claim found.");
-
-            if (!int.TryParse(doctorIdClaim, out int doctorId))
-                return Unauthorized("Invalid DoctorId claim.");
-
-            availability.DoctorId = doctorId;
-
-            _dbcontext.DoctorAvailability.Add(availability);
-            await _dbcontext.SaveChangesAsync();
-
-            return Ok("Availability added.");
-        }
-
-        [HttpGet("my-availability")]
-        public async Task<IActionResult> GetMyAvailability()
-        {
-            var doctorIdClaim = User.FindFirst("DoctorId")?.Value;
-            if (string.IsNullOrEmpty(doctorIdClaim) || !int.TryParse(doctorIdClaim, out int doctorId))
-                return Unauthorized("Invalid or missing DoctorId claim.");
-
-            var availabilities = await _dbcontext.DoctorAvailability
-                .Where(a => a.DoctorId == doctorId && a.Date >= DateOnly.FromDateTime(DateTime.Today))
-                .OrderBy(a => a.Date)
-                .ThenBy(a => a.StartTime)
-                .ToListAsync();
-
-            return Ok(availabilities);
-        }
-
-        //[HttpGet("api/doctor/availability/{doctorId}")]
-        //public async Task<IActionResult> GetDoctorAvailability(int doctorId)
-        //{
-        //    var availabilities = await _dbcontext.DoctorAvailability
-        //        .Where(a => a.DoctorId == doctorId && a.Date >= DateOnly.FromDateTime(DateTime.Today))
-        //        .OrderBy(a => a.Date)
-        //        .ThenBy(a => a.StartTime)
-        //        .ToListAsync();
-
-        //    return Ok(availabilities);
-        //}
-
     }
 }
