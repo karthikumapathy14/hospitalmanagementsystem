@@ -43,7 +43,7 @@ const Nursesidebar = ({ isMobile, closeSidebar }) => {
 
       {/* Navigation */}
       <nav className="nav flex-column px-2 pt-3 flex-grow-1">
-        <Link
+        {/* <Link
           className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
             isActive("/") ? "bg-sky-100 text-sky-800 fw-semibold" : "text-sky-600"
           }`}
@@ -52,7 +52,7 @@ const Nursesidebar = ({ isMobile, closeSidebar }) => {
         >
           <i className="bi bi-speedometer2 fs-5"></i>
           Dashboard
-        </Link>
+        </Link> */}
 
         <Link
           className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${

@@ -402,22 +402,6 @@
   },
   {
     "ContainingType": "hospital.Controller.DoctorController",
-    "Method": "AddAvailability",
-    "RelativePath": "api/Doctor/add-availability",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "availability",
-        "Type": "hospital.Model.DoctorAvailability",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "hospital.Controller.DoctorController",
     "Method": "GetAppointmentById",
     "RelativePath": "api/Doctor/api/appointments/{id}",
     "HttpMethod": "GET",
@@ -554,16 +538,6 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "hospital.Controller.DoctorController",
-    "Method": "GetMyAvailability",
-    "RelativePath": "api/Doctor/my-availability",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
     "ReturnTypes": []
   },
   {

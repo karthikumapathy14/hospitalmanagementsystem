@@ -38,7 +38,7 @@ namespace hospital.Controller
             var appointment = await _dbcontext.appointments
                .Include(a=>a.Patient)
                .ThenInclude(a=>a.Doctor)
-               .OrderBy(a=>a.AppointmentDate)
+               .OrderByDescending(a=>a.AppointmentDate)
                .Where(a=>a.NurseId == nurseId)
                 .Select(a => new
                 {  

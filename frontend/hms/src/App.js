@@ -43,7 +43,7 @@ import ForgotPassword from './components/Receptionist/ForgetPassword.js';
 import ResetPassword from './components/Receptionist/ResetPassword.js';
 import WhatsAppSender from './components/WhatsAppSender.js';
 import Circularsender from './components/Circularsender.js'
-
+import Viewprescription from './components/Doctor/Viewprescription.js';
 
 function App() {
   return (
@@ -90,6 +90,9 @@ function App() {
               <Route path="/DoctorSideEditAppointment/:id" element={<DoctorSideEditAppointment />} />
               <Route path='/Addprescription' element={<Addprescription/>}></Route>
               <Route path='/PatientHistory' element={<PatientHistory/>}></Route>
+              <Route path='/Viewprescription/:id' element={<Viewprescription/>}></Route>
+             
+              
 
               {/* nurse dashboard */}
               <Route path='/Viewappointmentnurse' element={<Viewappointmentnurse/>}></Route>

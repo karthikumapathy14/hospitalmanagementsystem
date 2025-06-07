@@ -25,16 +25,20 @@ const Viewprescription = () => {
           return;
         }
 
-    axios
-      .get(`https://localhost:7058/api/Nurse/getbyidprescibe/${id}`)
-      .then((res) => {
-        setData(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching prescription:", err);
-        toast.error("Failed to load prescription");
-        setLoading(false);
+ axios
+    .get(`https://localhost:7058/api/Nurse/getbyidprescibe/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      setData(res.data);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error("Error fetching prescription:", err);
+      toast.error("Failed to load prescription");
+      setLoading(false);
       });
   }, [id]);
 
