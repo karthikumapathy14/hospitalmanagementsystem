@@ -938,35 +938,23 @@
         }
       }
     },
-    "/api/Doctor/add-availability": {
-      "post": {
+    "/api/Message/emails": {
+      "get": {
         "tags": [
-          "Doctor"
+          "Message"
         ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/DoctorAvailability"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DoctorAvailability"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DoctorAvailability"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/DoctorAvailability"
+        "parameters": [
+          {
+            "name": "role",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -974,11 +962,35 @@
         }
       }
     },
-    "/api/Doctor/my-availability": {
-      "get": {
+    "/api/Message/send": {
+      "post": {
         "tags": [
-          "Doctor"
+          "Message"
         ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkEmailRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkEmailRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkEmailRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkEmailRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -1491,78 +1503,6 @@
           }
         }
       }
-    },
-    "/api/Receptionist/receptionist/get-slots/{doctorId}/{date}": {
-      "get": {
-        "tags": [
-          "Receptionist"
-        ],
-        "parameters": [
-          {
-            "name": "doctorId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "date",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "date"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Receptionist/receptionist/book-slot": {
-      "post": {
-        "tags": [
-          "Receptionist"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
     }
   },
   "components": {
@@ -1631,30 +1571,6 @@
         },
         "additionalProperties": false
       },
-      "AvailableSlots": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "doctoravailabilityId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "slotTime": {
-            "type": "string",
-            "format": "time"
-          },
-          "isBooked": {
-            "type": "boolean"
-          },
-          "doctorAvailability": {
-            "$ref": "#/components/schemas/DoctorAvailability"
-          }
-        },
-        "additionalProperties": false
-      },
       "Bill": {
         "type": "object",
         "properties": {
@@ -1697,6 +1613,27 @@
           },
           "appointment": {
             "$ref": "#/components/schemas/Appointment"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BulkEmailRequest": {
+        "type": "object",
+        "properties": {
+          "emails": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "subject": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1780,42 +1717,6 @@
           "departmentId": {
             "type": "integer",
             "format": "int32",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "DoctorAvailability": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "doctorId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "date": {
-            "type": "string",
-            "format": "date"
-          },
-          "startTime": {
-            "type": "string",
-            "format": "time"
-          },
-          "endTime": {
-            "type": "string",
-            "format": "time"
-          },
-          "doctor": {
-            "$ref": "#/components/schemas/Doctor"
-          },
-          "slots": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AvailableSlots"
-            },
             "nullable": true
           }
         },

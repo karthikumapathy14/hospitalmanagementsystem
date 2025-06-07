@@ -42,8 +42,7 @@ import ChangePassword from './components/ChangePassword.js';
 import ForgotPassword from './components/Receptionist/ForgetPassword.js';
 import ResetPassword from './components/Receptionist/ResetPassword.js';
 import WhatsAppSender from './components/WhatsAppSender.js';
-import Viewprescription from './components/Doctor/Viewprescription.js';
-import DoctorAvailabilityForm from './components/Doctor/DoctorAvailabilityForm.js';
+import Circularsender from './components/Circularsender.js'
 
 
 function App() {
@@ -60,6 +59,7 @@ function App() {
               <Route path="/" element={<Login />} />
               <Route path='/changepassword' element={<ChangePassword/>}></Route>
               <Route path='/WhatsAppSender' element={<WhatsAppSender/>}></Route>
+              <Route path='/Circularsender' element={<Circularsender/>}></Route>
 
               {/* Admin navbar */}
               <Route path="/reg" element={<Reg />} />
@@ -90,8 +90,6 @@ function App() {
               <Route path="/DoctorSideEditAppointment/:id" element={<DoctorSideEditAppointment />} />
               <Route path='/Addprescription' element={<Addprescription/>}></Route>
               <Route path='/PatientHistory' element={<PatientHistory/>}></Route>
-              <Route path='/viewprescription/:id' element={<Viewprescription/>}></Route>
-              <Route path='/DoctorAvailabilityForm' element={<DoctorAvailabilityForm/>}></Route>
 
               {/* nurse dashboard */}
               <Route path='/Viewappointmentnurse' element={<Viewappointmentnurse/>}></Route>
@@ -100,7 +98,6 @@ function App() {
               {/* {patient dashboard} */}
               <Route path='/Viewapatientappointment' element={<Viewapatientappointment/>}></Route>
               <Route path='/billpatientview/:id' element={<Billpatientview/>}></Route>
-                
                 <Route path="/forgotpassword" element={<ForgotPassword />} />
                <Route path="/resetpassword" element={<ResetPassword />} />
             </Routes>
