@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\receptionistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\receptionistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -55,16 +63,8 @@
       "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\hospital.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\model\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -154,31 +154,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PatientController.cs",
-              "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\PatientController.cs",
-              "RelativeDocumentMoniker": "hospital\\Controller\\PatientController.cs",
-              "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\PatientController.cs",
-              "RelativeToolTip": "hospital\\Controller\\PatientController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T10:03:40.334Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "20250508101338_nin.cs",
-              "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Migrations\\20250508101338_nin.cs",
-              "RelativeDocumentMoniker": "hospital\\Migrations\\20250508101338_nin.cs",
-              "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Migrations\\20250508101338_nin.cs",
-              "RelativeToolTip": "hospital\\Migrations\\20250508101338_nin.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T10:01:35.608Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "MessageController.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\MessageController.cs",
               "RelativeDocumentMoniker": "hospital\\Controller\\MessageController.cs",
@@ -190,7 +166,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AdminController.cs",
               "RelativeDocumentMoniker": "hospital\\Controller\\AdminController.cs",
@@ -214,7 +190,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "Nurse.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Nurse.cs",
               "RelativeDocumentMoniker": "hospital\\Model\\Nurse.cs",
@@ -238,7 +214,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "EmailService.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\EmailService.cs",
               "RelativeDocumentMoniker": "hospital\\EmailService.cs",
@@ -250,7 +226,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\appsettings.json",
               "RelativeDocumentMoniker": "hospital\\appsettings.json",
@@ -262,20 +238,68 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "ReceptionistController.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\ReceptionistController.cs",
               "RelativeDocumentMoniker": "hospital\\Controller\\ReceptionistController.cs",
               "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\ReceptionistController.cs",
               "RelativeToolTip": "hospital\\Controller\\ReceptionistController.cs",
-              "ViewState": "AgIAAOoAAAAAAAAAAAAiwAEBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAOoAAAAAAAAAAAAiwPoAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T07:30:15.537Z",
+              "WhenOpened": "2025-05-31T07:30:15.537Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AccountController.cs",
+              "RelativeDocumentMoniker": "hospital\\Controller\\AccountController.cs",
+              "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AccountController.cs",
+              "RelativeToolTip": "hospital\\Controller\\AccountController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAkwCIAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T09:54:40.797Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AuthenticationController.cs",
+              "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AuthenticationController.cs",
+              "RelativeDocumentMoniker": "hospital\\Controller\\AuthenticationController.cs",
+              "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AuthenticationController.cs",
+              "RelativeToolTip": "hospital\\Controller\\AuthenticationController.cs",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAUwIEAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-31T07:30:15.546Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 4,
+              "Title": "20250508101338_nin.cs",
+              "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Migrations\\20250508101338_nin.cs",
+              "RelativeDocumentMoniker": "hospital\\Migrations\\20250508101338_nin.cs",
+              "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Migrations\\20250508101338_nin.cs",
+              "RelativeToolTip": "hospital\\Migrations\\20250508101338_nin.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-06T10:01:35.608Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PatientController.cs",
+              "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\PatientController.cs",
+              "RelativeDocumentMoniker": "hospital\\Controller\\PatientController.cs",
+              "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\PatientController.cs",
+              "RelativeToolTip": "hospital\\Controller\\PatientController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-06T10:03:40.334Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "ForgotPasswordDto.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\ForgotPasswordDto.cs",
               "RelativeDocumentMoniker": "hospital\\Model\\ForgotPasswordDto.cs",
@@ -287,7 +311,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "Doctor.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Doctor.cs",
               "RelativeDocumentMoniker": "hospital\\Model\\Doctor.cs",
@@ -299,7 +323,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\User.cs",
               "RelativeDocumentMoniker": "hospital\\Model\\User.cs",
@@ -311,7 +335,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "BulkEmailRequest.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\BulkEmailRequest.cs",
               "RelativeDocumentMoniker": "hospital\\Model\\BulkEmailRequest.cs",
@@ -323,7 +347,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "hospital.csproj",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\hospital.csproj",
               "RelativeDocumentMoniker": "hospital\\hospital.csproj",
@@ -335,7 +359,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Program.cs",
               "RelativeDocumentMoniker": "hospital\\Program.cs",
@@ -356,30 +380,6 @@
               "ViewState": "AgIAAAYAAAAAAAAAAAAAACkAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-31T07:30:15.566Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "AuthenticationController.cs",
-              "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AuthenticationController.cs",
-              "RelativeDocumentMoniker": "hospital\\Controller\\AuthenticationController.cs",
-              "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AuthenticationController.cs",
-              "RelativeToolTip": "hospital\\Controller\\AuthenticationController.cs",
-              "ViewState": "AgIAAFIAAAAAAAAAAADwv18AAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T07:30:15.546Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AccountController.cs",
-              "RelativeDocumentMoniker": "hospital\\Controller\\AccountController.cs",
-              "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AccountController.cs",
-              "RelativeToolTip": "hospital\\Controller\\AccountController.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAkwCIAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T09:54:40.797Z"
             },
             {
               "$type": "Document",
