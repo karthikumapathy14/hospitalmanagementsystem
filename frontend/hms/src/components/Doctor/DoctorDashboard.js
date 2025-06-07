@@ -52,7 +52,7 @@ const DoctorSidebar = ({ doctor }) => {
       </div>
 
       {/* Doctor Info */}
-      {doctor && (
+      {/* {doctor && (
         <div className="text-center mb-4 px-3">
           <img
             src={doctor.imageUrl}
@@ -63,7 +63,7 @@ const DoctorSidebar = ({ doctor }) => {
           <h6 className="mb-0 text-sky-800">{doctor.name}</h6>
           <small className="text-muted">{doctor.qualifications}</small>
         </div>
-      )}
+      )} */}
 
       {/* Navigation */}
       <nav className="nav flex-column gap-1 px-3">
@@ -89,6 +89,18 @@ const DoctorSidebar = ({ doctor }) => {
         >
           <i className="bi bi-shield-lock" style={{ fontSize: "1.1rem" }}></i>
           Change Password
+        </Link>
+
+          <Link
+          className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
+            isActive("/DoctorAvailabilityForm")
+              ? "bg-sky-100 text-sky-800 fw-medium"
+              : "text-sky-600"
+          }`}
+          to="/DoctorAvailabilityForm"
+        >
+          <i className="bi bi-shield-lock" style={{ fontSize: "1.1rem" }}></i>
+          Doctor Availability Form
         </Link>
 
         <button

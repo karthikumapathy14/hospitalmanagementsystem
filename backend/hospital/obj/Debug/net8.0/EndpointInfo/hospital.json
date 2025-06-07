@@ -938,6 +938,54 @@
         }
       }
     },
+    "/api/Doctor/add-availability": {
+      "post": {
+        "tags": [
+          "Doctor"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DoctorAvailability"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DoctorAvailability"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DoctorAvailability"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DoctorAvailability"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Doctor/my-availability": {
+      "get": {
+        "tags": [
+          "Doctor"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Nurse/Patientlist": {
       "get": {
         "tags": [
@@ -1443,6 +1491,78 @@
           }
         }
       }
+    },
+    "/api/Receptionist/receptionist/get-slots/{doctorId}/{date}": {
+      "get": {
+        "tags": [
+          "Receptionist"
+        ],
+        "parameters": [
+          {
+            "name": "doctorId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Receptionist/receptionist/book-slot": {
+      "post": {
+        "tags": [
+          "Receptionist"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1507,6 +1627,30 @@
           },
           "nurse": {
             "$ref": "#/components/schemas/Nurse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AvailableSlots": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "doctoravailabilityId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "slotTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "isBooked": {
+            "type": "boolean"
+          },
+          "doctorAvailability": {
+            "$ref": "#/components/schemas/DoctorAvailability"
           }
         },
         "additionalProperties": false
@@ -1636,6 +1780,42 @@
           "departmentId": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DoctorAvailability": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "doctorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "doctor": {
+            "$ref": "#/components/schemas/Doctor"
+          },
+          "slots": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvailableSlots"
+            },
             "nullable": true
           }
         },

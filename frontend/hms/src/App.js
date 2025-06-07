@@ -43,6 +43,7 @@ import ForgotPassword from './components/Receptionist/ForgetPassword.js';
 import ResetPassword from './components/Receptionist/ResetPassword.js';
 import WhatsAppSender from './components/WhatsAppSender.js';
 import Viewprescription from './components/Doctor/Viewprescription.js';
+import DoctorAvailabilityForm from './components/Doctor/DoctorAvailabilityForm.js';
 
 
 function App() {
@@ -90,6 +91,7 @@ function App() {
               <Route path='/Addprescription' element={<Addprescription/>}></Route>
               <Route path='/PatientHistory' element={<PatientHistory/>}></Route>
               <Route path='/viewprescription/:id' element={<Viewprescription/>}></Route>
+              <Route path='/DoctorAvailabilityForm' element={<DoctorAvailabilityForm/>}></Route>
 
               {/* nurse dashboard */}
               <Route path='/Viewappointmentnurse' element={<Viewappointmentnurse/>}></Route>

@@ -337,5 +337,32 @@ namespace hospital.Controller
             return Ok(bill);
         }
 
+
+        //slot checking
+        [HttpGet("receptionist/get-slots/{doctorId}/{date}")]
+        public async Task<IActionResult> GetSlots(int doctorId,DateOnly date)
+        {
+            var avalability=await _dbcontext.DoctorAvailability
+                .Include(d=>d.Slots)
+                .FirstOrDefaultAsync(a=>a.DoctorId == doctorId && a.Date==date) ;
+
+            if(avalability == null )
+                return NotFound("No Slots available");
+            return Ok(avalability.Slots);
+        }
+
+        [HttpPost("receptionist/book-slot")]
+        public async Task<IActionResult> BookSlot([FromBody] int slotId)
+        {
+            var slot = await _dbcontext.AvailableSlots.FindAsync(slotId);
+            if (slot == null || slot.IsBooked)
+                return BadRequest("Slot not available");
+
+            slot.IsBooked = true;
+            await _dbcontext.SaveChangesAsync();
+            return Ok("Slot booked successfully.");
+        }
+
+
     }
 }
