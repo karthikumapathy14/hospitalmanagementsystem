@@ -20,6 +20,8 @@ namespace hospital.Model
         public string Bloodgrp { get; set; }
         public string Address { get; set; }
         public bool status { get; set; }
+        public string Availability { get; set; }
+
 
 
         public string Prescription { get; set; }

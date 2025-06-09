@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using hospital.Data;
 
@@ -11,9 +12,11 @@ using hospital.Data;
 namespace hospital.Migrations
 {
     [DbContext(typeof(Applicationdbcontext))]
-    partial class ApplicationdbcontextModelSnapshot : ModelSnapshot
+    [Migration("20250609072719_helll")]
+    partial class helll
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -635,9 +638,6 @@ namespace hospital.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Availability")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")

@@ -938,31 +938,82 @@
         }
       }
     },
-    "/api/Doctor/add-availability": {
-      "post": {
+    "/api/Doctor/{id}": {
+      "get": {
         "tags": [
           "Doctor"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Doctor"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Doctor"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Doctor"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Doctor/UpdateAvailability/{id}": {
+      "put": {
+        "tags": [
+          "Doctor"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "requestBody": {
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/DoctorAvailability"
+                "$ref": "#/components/schemas/Doctor"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DoctorAvailability"
+                "$ref": "#/components/schemas/Doctor"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/DoctorAvailability"
+                "$ref": "#/components/schemas/Doctor"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/DoctorAvailability"
+                "$ref": "#/components/schemas/Doctor"
               }
             }
           }
@@ -974,14 +1025,40 @@
         }
       }
     },
-    "/api/Doctor/my-availability": {
+    "/api/Doctor/available": {
       "get": {
         "tags": [
           "Doctor"
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Doctor"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Doctor"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Doctor"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1691,30 +1768,6 @@
         },
         "additionalProperties": false
       },
-      "AvailableSlots": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "doctoravailabilityId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "slotTime": {
-            "type": "string",
-            "format": "time"
-          },
-          "isBooked": {
-            "type": "boolean"
-          },
-          "doctorAvailability": {
-            "$ref": "#/components/schemas/DoctorAvailability"
-          }
-        },
-        "additionalProperties": false
-      },
       "Bill": {
         "type": "object",
         "properties": {
@@ -1855,48 +1908,16 @@
           "user": {
             "$ref": "#/components/schemas/User"
           },
+          "availability": {
+            "type": "string",
+            "nullable": true
+          },
           "department": {
             "$ref": "#/components/schemas/Department"
           },
           "departmentId": {
             "type": "integer",
             "format": "int32",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "DoctorAvailability": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "doctorId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "date": {
-            "type": "string",
-            "format": "date"
-          },
-          "startTime": {
-            "type": "string",
-            "format": "time"
-          },
-          "endTime": {
-            "type": "string",
-            "format": "time"
-          },
-          "doctor": {
-            "$ref": "#/components/schemas/Doctor"
-          },
-          "slots": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AvailableSlots"
-            },
             "nullable": true
           }
         },
@@ -1964,6 +1985,10 @@
           "status": {
             "type": "boolean"
           },
+          "availability": {
+            "type": "string",
+            "nullable": true
+          },
           "user": {
             "$ref": "#/components/schemas/User"
           }
@@ -2019,6 +2044,10 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "availability": {
+            "type": "string",
+            "nullable": true
           },
           "prescription": {
             "type": "string",
@@ -2122,6 +2151,10 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "availability": {
+            "type": "string",
+            "nullable": true
           },
           "user": {
             "$ref": "#/components/schemas/User"

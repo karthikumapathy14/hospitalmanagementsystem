@@ -18,8 +18,10 @@ namespace hospital.Model
         public string Address { get; set; }
         public bool status { get; set; } = true;
         public User User { get; set; }
-       
-     
+        public string Availability { get; set; } = "unavailable";
+
+
+
         public Department Department { get; set; }
         [ForeignKey("Department")]
         public int? DepartmentId { get; set; }
