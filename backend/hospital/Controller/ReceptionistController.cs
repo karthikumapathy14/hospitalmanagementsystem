@@ -152,29 +152,62 @@ namespace hospital.Controller
             
         }
 
-      
+
         [HttpPost("Create-appointment")]
-        
-        public async Task<IActionResult> CreateAppointment(Appointment dto)
+        public async Task<IActionResult> CreateAppointment([FromBody] Appointment dto)
         {
+            var availability = await _dbcontext.DoctorAvailabilities
+                .FirstOrDefaultAsync(a =>
+                    a.DoctorId == dto.DoctorId &&
+                    dto.AppointmentDate.Date >= a.StartDate.Date &&
+                    dto.AppointmentDate.Date <= a.EndDate.Date);
+
+            if (availability == null)
+                return BadRequest("Doctor is not available on this date.");
+
+            // Use dto.StartTime directly
+            if (dto.StartTime < availability.StartTime || dto.StartTime >= availability.EndTime)
+                return BadRequest("Start time is outside the available window.");
+
+            var existing = await _dbcontext.appointments.FirstOrDefaultAsync(a =>
+                a.DoctorId == dto.DoctorId &&
+                a.AppointmentDate == dto.AppointmentDate &&
+                a.StartTime == dto.StartTime);
+
+            if (existing != null)
+                return Conflict("This time slot is already booked.");
+
             var appointment = new Appointment
             {
                 DoctorId = dto.DoctorId,
                 PatientId = dto.PatientId,
                 DepartmentId = dto.DepartmentId,
                 AppointmentDate = dto.AppointmentDate,
-                AppointmentTime=dto.AppointmentTime,
+                StartTime = dto.StartTime,
+                EndTime = dto.StartTime.Add(TimeSpan.FromMinutes(15)),
                 Reason = dto.Reason,
                 Status = dto.Status,
-
                 CreatedAt = DateTime.UtcNow
             };
+
+            var isBooked = _dbcontext.appointments.Any(a =>
+    a.DoctorId == appointment.DoctorId &&
+    a.AppointmentDate.Date == appointment.AppointmentDate.Date &&
+    a.StartTime == appointment.StartTime &&
+    a.Status != "Cancel");
+
+            if (isBooked)
+            {
+                return Conflict("This slot is already booked.");
+            }
 
             _dbcontext.appointments.Add(appointment);
             await _dbcontext.SaveChangesAsync();
 
-            return Ok("register successfully");
+            return Ok("Appointment booked successfully.");
         }
+
+
 
         [HttpPut("Edit-appointment/{id}")]
         public async Task<IActionResult> Editappointment(int id,Appointment dto)
@@ -192,11 +225,14 @@ namespace hospital.Controller
             if (dto.DepartmentId.HasValue)
                 appid.DepartmentId = dto.DepartmentId.Value;
 
-            if (dto.AppointmentDate >= DateOnly.MinValue)
-                 appid.AppointmentDate = dto.AppointmentDate;
+            if (dto.AppointmentDate >= DateTime.MinValue)
+            {
+                appid.AppointmentDate = dto.AppointmentDate;
+            }
 
-           
-                appid.AppointmentTime = dto.AppointmentTime;
+
+            appid.StartTime = dto.StartTime;
+            appid.EndTime = dto.EndTime;
 
             if (!string.IsNullOrWhiteSpace(dto.Reason) && dto.Reason != "string")
                 appid.Reason = dto.Reason;
@@ -242,7 +278,8 @@ namespace hospital.Controller
                               a.Status,
                               a.CreatedAt,
                               a.AppointmentDate,
-                              a.AppointmentTime,
+                              a.StartTime,
+                              a.EndTime,
                               Patientid = a.Patient != null ? a.Patient.patientid : "Unknown",
                               DoctorName = a.Doctor != null ? a.Doctor.UserName : "Unknown",
                               DepartmentName = a.Department != null ? a.Department.DepartmentName : "Unknown",
@@ -250,7 +287,7 @@ namespace hospital.Controller
                               BillId = b != null ? b.BillId : 0
                           })
                           .OrderByDescending(x => x.AppointmentDate)
-                          .ThenByDescending(x => x.AppointmentTime)
+                          .ThenByDescending(x => x.StartTime)
                           .ToList();
 
             return Ok(result);
@@ -338,29 +375,125 @@ namespace hospital.Controller
         }
 
 
-        //slot checking
-        [HttpGet("receptionist/get-slots/{doctorId}/{date}")]
-        public async Task<IActionResult> GetSlots(int doctorId,DateOnly date)
+
+
+        //book appointment
+
+        //[HttpPost("book")]
+        //public async Task<IActionResult> BookAppointment([FromBody] BookAppointmentDto dto)
+        //{
+        //    var availability = await _dbcontext.DoctorAvailabilities
+        //        .FirstOrDefaultAsync(a =>
+        //            a.DoctorId == dto.DoctorId &&
+        //            dto.AppointmentDate.Date >= a.StartDate.Date &&
+        //            dto.AppointmentDate.Date <= a.EndDate.Date);
+
+        //    if (availability == null)
+        //        return BadRequest("Doctor is not available on this date.");
+
+        //    if (dto.StartTime < availability.StartTime || dto.StartTime >= availability.EndTime)
+        //        return BadRequest("Start time is outside the available window.");
+
+        //    var existing = await _dbcontext.appointments.FirstOrDefaultAsync(a =>
+        //        a.DoctorId == dto.DoctorId &&
+        //        a.AppointmentDate == dto.AppointmentDate &&
+        //        a.StartTime == dto.StartTime);
+
+        //    if (existing != null)
+        //        return Conflict("This time slot is already booked.");
+
+        //    var appointment = new Appointment
+        //    {
+        //        DoctorId = dto.DoctorId,
+        //        PatientId = dto.PatientId,
+        //        AppointmentDate = dto.AppointmentDate,
+        //        StartTime = dto.StartTime,
+        //        EndTime = dto.StartTime.Add(TimeSpan.FromMinutes(15)) // default slot
+        //    };
+
+        //    _dbcontext.appointments.Add(appointment);
+        //    await _dbcontext.SaveChangesAsync();
+
+        //    return Ok("Appointment booked successfully.");
+        //}
+
+
+        //[HttpGet("slots")]
+        //public async Task<IActionResult> GetAvailableSlots(int doctorId, DateTime date)
+        //{
+        //    // Find the doctor's availability for that day
+        //    var availability = await _dbcontext.DoctorAvailabilities
+        //        .FirstOrDefaultAsync(a =>
+        //            a.DoctorId == doctorId &&
+        //            date.Date >= a.StartDate.Date &&
+        //            date.Date <= a.EndDate.Date);
+
+        //    if (availability == null)
+        //        return Ok(new List<string>()); // No availability
+
+        //    // Generate all possible 15-min slots within availability range
+        //    var start = availability.StartTime;
+        //    var end = availability.EndTime;
+        //    var slots = new List<string>();
+
+        //    while (start + TimeSpan.FromMinutes(15) <= end)
+        //    {
+        //        slots.Add(start.ToString(@"hh\:mm")); // convert to "HH:mm" string
+        //        start = start.Add(TimeSpan.FromMinutes(15 + availability.BufferAfter)); // include buffer
+        //    }
+
+        //    // Get existing appointments for that doctor on that day
+        //    var bookedSlots = await _dbcontext.appointments
+        //        .Where(a => a.DoctorId == doctorId && a.AppointmentDate.Date == date.Date)
+        //        .Select(a => a.StartTime.ToString(@"hh\:mm"))
+        //        .ToListAsync();
+
+        //    // Filter out booked slots
+        //    var availableSlots = slots.Except(bookedSlots).ToList();
+
+        //    return Ok(availableSlots);
+        //}
+
+        [HttpGet("Get-available-slots/{doctorId}/{date}")]
+        public IActionResult GetAvailableSlots(int doctorId, DateTime date)
         {
-            var avalability=await _dbcontext.DoctorAvailability
-                .Include(d=>d.Slots)
-                .FirstOrDefaultAsync(a=>a.DoctorId == doctorId && a.Date==date) ;
+            var availability = _dbcontext.DoctorAvailabilities
+                .FirstOrDefault(a =>
+                    a.DoctorId == doctorId &&
+                    a.StartDate.Date <= date.Date &&
+                    a.EndDate.Date >= date.Date);
 
-            if(avalability == null )
-                return NotFound("No Slots available");
-            return Ok(avalability.Slots);
-        }
+            if (availability == null)
+            {
+                return Ok(new List<object>());
+            }
 
-        [HttpPost("receptionist/book-slot")]
-        public async Task<IActionResult> BookSlot([FromBody] int slotId)
-        {
-            var slot = await _dbcontext.AvailableSlots.FindAsync(slotId);
-            if (slot == null || slot.IsBooked)
-                return BadRequest("Slot not available");
+            var slots = new List<object>();
+            var startTime = availability.StartTime;
+            var endTime = availability.EndTime;
+            var bufferAfter = availability.BufferAfter;
+            var current = startTime;
 
-            slot.IsBooked = true;
-            await _dbcontext.SaveChangesAsync();
-            return Ok("Slot booked successfully.");
+            while (current < endTime)
+            {
+                // Check if this slot is already booked
+                bool isBooked = _dbcontext.appointments.Any(a =>
+                    a.DoctorId == doctorId &&
+                    a.AppointmentDate.Date == date.Date &&
+                    a.StartTime == current &&
+                    a.Status != "Cancel" // exclude cancelled appointments
+                );
+
+                slots.Add(new
+                {
+                    time = current.ToString(@"hh\:mm"),
+                    isBooked = isBooked
+                });
+
+                current = current + TimeSpan.FromMinutes(15 + bufferAfter);
+            }
+
+            return Ok(slots);
         }
 
 

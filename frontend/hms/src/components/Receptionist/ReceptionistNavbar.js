@@ -150,6 +150,18 @@ const ReceptionistNavbar = () => {
           Change Password
         </Link>
 
+        <Link
+          className={`nav-link py-2 ps-3 rounded ${
+            isActive("/ReceptionistBookingForm")
+              ? "bg-sky-50 text-sky-700 border-start border-sky-500"
+              : "text-sky-600"
+          }`}
+          to="/ReceptionistBookingForm"
+        >
+          <i className="bi bi-list-ul me-2"></i>
+          Book
+        </Link>
+
         {/* Quick Actions Section */}
         <div className="mt-4 mb-2 text-uppercase small fw-bold text-sky-600 ps-3">
           <i className="bi bi-lightning-charge me-2"></i>

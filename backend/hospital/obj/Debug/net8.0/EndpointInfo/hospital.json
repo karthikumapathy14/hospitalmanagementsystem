@@ -938,7 +938,7 @@
         }
       }
     },
-    "/api/Doctor/add-availability": {
+    "/api/Doctor/availability": {
       "post": {
         "tags": [
           "Doctor"
@@ -974,7 +974,7 @@
         }
       }
     },
-    "/api/Doctor/my-availability": {
+    "/api/Doctor/GetAvailability": {
       "get": {
         "tags": [
           "Doctor"
@@ -1552,7 +1552,7 @@
         }
       }
     },
-    "/api/Receptionist/receptionist/get-slots/{doctorId}/{date}": {
+    "/api/Receptionist/Get-available-slots/{doctorId}/{date}": {
       "get": {
         "tags": [
           "Receptionist"
@@ -1573,50 +1573,10 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "date"
+              "format": "date-time"
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Receptionist/receptionist/book-slot": {
-      "post": {
-        "tags": [
-          "Receptionist"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -1656,11 +1616,15 @@
           },
           "appointmentDate": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
-          "appointmentTime": {
+          "startTime": {
             "type": "string",
-            "format": "time"
+            "format": "date-span"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-span"
           },
           "reason": {
             "maxLength": 255,
@@ -1687,30 +1651,6 @@
           },
           "nurse": {
             "$ref": "#/components/schemas/Nurse"
-          }
-        },
-        "additionalProperties": false
-      },
-      "AvailableSlots": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "doctoravailabilityId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "slotTime": {
-            "type": "string",
-            "format": "time"
-          },
-          "isBooked": {
-            "type": "boolean"
-          },
-          "doctorAvailability": {
-            "$ref": "#/components/schemas/DoctorAvailability"
           }
         },
         "additionalProperties": false
@@ -1877,27 +1817,32 @@
             "type": "integer",
             "format": "int32"
           },
-          "date": {
+          "startDate": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
           },
           "startTime": {
             "type": "string",
-            "format": "time"
+            "format": "date-span"
           },
           "endTime": {
             "type": "string",
-            "format": "time"
+            "format": "date-span"
+          },
+          "bufferBefor": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bufferAfter": {
+            "type": "integer",
+            "format": "int32"
           },
           "doctor": {
             "$ref": "#/components/schemas/Doctor"
-          },
-          "slots": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AvailableSlots"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false

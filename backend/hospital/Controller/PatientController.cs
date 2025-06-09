@@ -34,7 +34,7 @@ namespace hospital.Controller
                 {
                     a.AppointmentId,
                     a.AppointmentDate,
-                    a.AppointmentTime,
+                    a. StartTime,
                     a.Reason,
                     a.Status,
                     a.CreatedAt,
@@ -72,7 +72,7 @@ namespace hospital.Controller
                     // Appointment Info
                     AppointmentId = b.Appointment.AppointmentId,
                     b.Appointment.AppointmentDate,
-                    b.Appointment.AppointmentTime,
+                    b.Appointment.StartTime,
                     b.Appointment.Reason,
 
                     // Patient Info

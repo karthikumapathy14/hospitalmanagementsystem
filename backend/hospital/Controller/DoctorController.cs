@@ -46,7 +46,7 @@ namespace hospital.Controller
                    a.AppointmentId,
                    a.DoctorId,
                    a.AppointmentDate,
-                   a.AppointmentTime,
+                   a.StartTime,
                    a.Reason,
                    a.NurseId,
                    a.PatientId,
@@ -71,7 +71,7 @@ namespace hospital.Controller
                     a.AppointmentId,
                     a.DoctorId,
                     a.AppointmentDate,
-                    a.AppointmentTime,
+                    a.StartTime,
                     a.Reason,
                     a.Status,
                     a.NurseId,
@@ -294,15 +294,41 @@ namespace hospital.Controller
                 return Unauthorized("User ID not found in token");
 
             int doctorId = int.Parse(userIdClaim.Value);
-            DateTime today = DateTime.Today;
+            DateTime todayStart = DateTime.Today;
+            DateTime todayEnd = todayStart.AddDays(1);
 
             int todayCount = await _dbcontext.appointments
-                .CountAsync(a => a.DoctorId == doctorId && a.AppointmentDate == DateOnly.FromDateTime(DateTime.Today)
-);
+                .CountAsync(a => a.DoctorId == doctorId && a.AppointmentDate >= todayStart && a.AppointmentDate < todayEnd);
 
             return Ok(todayCount);
         }
 
 
+        //availability
+
+        [HttpPost("availability")]
+        public async Task<IActionResult> PostAvailability([FromBody] DoctorAvailability availability)
+        {
+            var doctorIdClaim = User.FindFirst("DoctorId")?.Value;
+
+            if (string.IsNullOrEmpty(doctorIdClaim) || !int.TryParse(doctorIdClaim, out int doctorId))
+            {
+                return Unauthorized("Invalid DoctorId claim Value");
+            }
+
+            availability.DoctorId = doctorId;
+
+            _dbcontext.DoctorAvailabilities.Add(availability);
+            await _dbcontext.SaveChangesAsync();
+
+            return Ok("Availability saved successfully.");
+        }
+
+        [HttpGet("GetAvailability")]
+        public async Task<IActionResult> GetAppointment()
+        {
+            var slots = await _dbcontext.DoctorAvailabilities.ToListAsync();
+            return Ok(slots);
+        }
     }
 }

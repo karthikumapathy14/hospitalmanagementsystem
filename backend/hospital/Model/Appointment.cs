@@ -22,8 +22,9 @@ namespace hospital.Model
         [ForeignKey("Department")]
         public int? DepartmentId { get; set; }
 
-        public DateOnly AppointmentDate { get; set; }
-        public TimeOnly AppointmentTime { get; set; } 
+        public DateTime AppointmentDate { get; set; }
+        public TimeSpan StartTime { get; set; } 
+        public TimeSpan EndTime { get; set; }   
 
         [MaxLength(255)]
         public string Reason { get; set; }
@@ -31,13 +32,7 @@ namespace hospital.Model
 
         [MaxLength(50)]
         public string Status { get; set; } = "Schedule";
-
-      
-
-
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-       
 
         // Navigation properties
         public virtual Department Department { get; set; }
