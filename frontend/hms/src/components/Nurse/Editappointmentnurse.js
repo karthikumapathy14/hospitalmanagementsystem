@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+<<<<<<< Updated upstream
 
 
 import { useParams, useNavigate } from "react-router-dom";
@@ -24,6 +25,18 @@ const Editappointmentnurse = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
 
+=======
+import { useParams } from "react-router-dom";
+
+const Editappointmentnurse = () => {
+  const { id } = useParams();
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get(`https://localhost:7058/api/Nurse/getbyidprescibe/${id}`)
+>>>>>>> Stashed changes
       .then((res) => {
         setData(res.data);
         setLoading(false);
@@ -32,13 +45,18 @@ const Editappointmentnurse = () => {
         console.log(err);
         setLoading(false);
       });
+<<<<<<< Updated upstream
 
   }, [id, navigate]);
 
+=======
+  }, [id]);
+>>>>>>> Stashed changes
 
   const handleEdit = (e) => {
     e.preventDefault();
     axios
+<<<<<<< Updated upstream
       .put(`https://localhost:7058/api/Nurse/updateprescription/${id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -50,6 +68,14 @@ const Editappointmentnurse = () => {
       .catch((err) => console.error(err));
 
 
+=======
+      .put(`https://localhost:7058/api/Nurse/updateprescription/${id}`, data)
+      .then((res) => {
+        console.log(res.data);
+        alert("Prescription updated successfully");
+      })
+      .catch((err) => console.log(err));
+>>>>>>> Stashed changes
   };
 
   const handleChange = (e) => {
@@ -57,6 +83,7 @@ const Editappointmentnurse = () => {
   };
 
   if (loading) {
+<<<<<<< Updated upstream
 
 
     return (
@@ -66,21 +93,28 @@ const Editappointmentnurse = () => {
     );
 
 
+=======
+    return <div className="text-center mt-5">Loading...</div>;
+>>>>>>> Stashed changes
   }
 
   if (!data || !data.appointmentId) {
     return (
       <div className="text-center mt-5">
+<<<<<<< Updated upstream
 
         <h4 className="text-danger">⚠ No prescription record found</h4>
 
 
+=======
+>>>>>>> Stashed changes
         <h4 className="text-danger">No prescription added</h4>
       </div>
     );
   }
 
   return (
+<<<<<<< Updated upstream
 
     <div className="d-flex" style={{ minHeight: "100vh" }}>
       {/* Sidebar */}
@@ -158,6 +192,65 @@ const Editappointmentnurse = () => {
         </div>
       </div>
 
+=======
+    <div className="container mt-5">
+      <div className="card shadow-sm p-4">
+        <h3 className="mb-4 text-center text-primary">Edit Prescription Details</h3>
+        <form onSubmit={handleEdit}>
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Appointment ID</label>
+            <input
+              className="form-control"
+              name="appointmentId"
+              value={data.appointmentId}
+              readOnly
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Diagnosis</label>
+            <input
+              type="text"
+              className="form-control"
+              name="diagnosis"
+              value={data.diagnosis}
+              onChange={handleChange}
+              placeholder="Enter diagnosis"
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Notes</label>
+            <textarea
+              className="form-control"
+              name="notes"
+              value={data.notes}
+              onChange={handleChange}
+              rows="3"
+              placeholder="Enter notes"
+            ></textarea>
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Medications</label>
+            <input
+              type="text"
+              className="form-control"
+              name="medications"
+              value={data.medications}
+              onChange={handleChange}
+              placeholder="Enter medications"
+            />
+          </div>
+
+          <div className="text-center">
+            <button type="submit" className="btn btn-success px-4">
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+>>>>>>> Stashed changes
     </div>
   );
 };

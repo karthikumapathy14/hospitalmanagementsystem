@@ -211,6 +211,7 @@ namespace hospital.Controller
             }
             return Unauthorized("Invalid email or password");
         }
+<<<<<<< Updated upstream
 
 
         [Authorize]
@@ -244,5 +245,7 @@ namespace hospital.Controller
         }
 
 
+=======
+>>>>>>> Stashed changes
     }
 }
