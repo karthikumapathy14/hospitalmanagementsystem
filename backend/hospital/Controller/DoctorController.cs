@@ -46,7 +46,8 @@ namespace hospital.Controller
                    a.AppointmentId,
                    a.DoctorId,
                    a.AppointmentDate,
-                   a.AppointmentTime,
+                   a.StartTime,
+                   a.EndTime,
                    a.Reason,
                    a.NurseId,
                    a.PatientId,
@@ -71,7 +72,8 @@ namespace hospital.Controller
                     a.AppointmentId,
                     a.DoctorId,
                     a.AppointmentDate,
-                    a.AppointmentTime,
+                    a.StartTime,
+                    a.EndTime,
                     a.Reason,
                     a.Status,
                     a.NurseId,
@@ -297,8 +299,8 @@ namespace hospital.Controller
             DateTime today = DateTime.Today;
 
             int todayCount = await _dbcontext.appointments
-                .CountAsync(a => a.DoctorId == doctorId && a.AppointmentDate == DateOnly.FromDateTime(DateTime.Today)
-);
+     .CountAsync(a => a.DoctorId == doctorId &&
+                      a.AppointmentDate.Date == DateTime.Today);
 
             return Ok(todayCount);
         }
