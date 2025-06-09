@@ -46,7 +46,7 @@ namespace hospital.Controller
                    a.AppointmentId,
                    a.DoctorId,
                    a.AppointmentDate,
-                   a.StartTime,
+                   a.AppointmentTime,
                    a.Reason,
                    a.NurseId,
                    a.PatientId,
@@ -71,7 +71,7 @@ namespace hospital.Controller
                     a.AppointmentId,
                     a.DoctorId,
                     a.AppointmentDate,
-                    a.StartTime,
+                    a.AppointmentTime,
                     a.Reason,
                     a.Status,
                     a.NurseId,
@@ -294,41 +294,49 @@ namespace hospital.Controller
                 return Unauthorized("User ID not found in token");
 
             int doctorId = int.Parse(userIdClaim.Value);
-            DateTime todayStart = DateTime.Today;
-            DateTime todayEnd = todayStart.AddDays(1);
+            DateTime today = DateTime.Today;
 
             int todayCount = await _dbcontext.appointments
-                .CountAsync(a => a.DoctorId == doctorId && a.AppointmentDate >= todayStart && a.AppointmentDate < todayEnd);
+                .CountAsync(a => a.DoctorId == doctorId && a.AppointmentDate == DateOnly.FromDateTime(DateTime.Today)
+);
 
             return Ok(todayCount);
         }
 
-
-        //availability
-
-        [HttpPost("availability")]
-        public async Task<IActionResult> PostAvailability([FromBody] DoctorAvailability availability)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Doctor>> GetDoctor(int id)
         {
-            var doctorIdClaim = User.FindFirst("DoctorId")?.Value;
-
-            if (string.IsNullOrEmpty(doctorIdClaim) || !int.TryParse(doctorIdClaim, out int doctorId))
+            var doctor = await _dbcontext.Doctors.FindAsync(id);
+            if (doctor == null)
             {
-                return Unauthorized("Invalid DoctorId claim Value");
+                return NotFound();
             }
 
-            availability.DoctorId = doctorId;
+            return doctor;
+        }
+        // Update Availability
+        [HttpPut("UpdateAvailability/{id}")]
+        public async Task<IActionResult> UpdateAvailability(int id, [FromBody] Doctor updatedDoctor)
+        {
+            var doctor = await _dbcontext.Doctors.FindAsync(id);
+            if (doctor == null)
+            {
+                return NotFound();
+            }
 
-            _dbcontext.DoctorAvailabilities.Add(availability);
+            doctor.Availability = updatedDoctor.Availability;
             await _dbcontext.SaveChangesAsync();
 
-            return Ok("Availability saved successfully.");
+            return Ok(new { message = "Availability updated successfully." });
         }
 
-        [HttpGet("GetAvailability")]
-        public async Task<IActionResult> GetAppointment()
+        // Optional: Get All Available Doctors
+        [HttpGet("available")]
+        public async Task<ActionResult<IEnumerable<Doctor>>> GetAvailableDoctors()
         {
-            var slots = await _dbcontext.DoctorAvailabilities.ToListAsync();
-            return Ok(slots);
+            return await _dbcontext.Doctors
+                .Where(d => d.Availability == "Available")
+                .ToListAsync();
         }
     }
 }

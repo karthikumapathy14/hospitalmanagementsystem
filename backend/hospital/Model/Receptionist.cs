@@ -18,6 +18,9 @@ namespace hospital.Model
         public string Address { get; set; }
 
         public bool status { get; set; } = true;
+        public string Availability { get; set; }
+
+
 
         public User User { get; set; }
        

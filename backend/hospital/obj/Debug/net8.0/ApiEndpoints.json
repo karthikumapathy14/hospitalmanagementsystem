@@ -402,6 +402,32 @@
   },
   {
     "ContainingType": "hospital.Controller.DoctorController",
+    "Method": "GetDoctor",
+    "RelativePath": "api/Doctor/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "hospital.Model.Doctor",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "hospital.Controller.DoctorController",
     "Method": "GetAppointmentById",
     "RelativePath": "api/Doctor/api/appointments/{id}",
     "HttpMethod": "GET",
@@ -480,19 +506,23 @@
   },
   {
     "ContainingType": "hospital.Controller.DoctorController",
-    "Method": "PostAvailability",
-    "RelativePath": "api/Doctor/availability",
-    "HttpMethod": "POST",
+    "Method": "GetAvailableDoctors",
+    "RelativePath": "api/Doctor/available",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
+    "Parameters": [],
+    "ReturnTypes": [
       {
-        "Name": "availability",
-        "Type": "hospital.Model.DoctorAvailability",
-        "IsRequired": true
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[hospital.Model.Doctor, hospital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
       }
-    ],
-    "ReturnTypes": []
+    ]
   },
   {
     "ContainingType": "hospital.Controller.DoctorController",
@@ -514,16 +544,6 @@
     "ContainingType": "hospital.Controller.DoctorController",
     "Method": "getPatient",
     "RelativePath": "api/Doctor/getAllPatient",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "hospital.Controller.DoctorController",
-    "Method": "GetAppointment",
-    "RelativePath": "api/Doctor/GetAvailability",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -577,6 +597,27 @@
       {
         "Name": "prescription",
         "Type": "hospital.Model.Prescription",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.DoctorController",
+    "Method": "UpdateAvailability",
+    "RelativePath": "api/Doctor/UpdateAvailability/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedDoctor",
+        "Type": "hospital.Model.Doctor",
         "IsRequired": true
       }
     ],
@@ -799,27 +840,6 @@
   },
   {
     "ContainingType": "hospital.Controller.ReceptionistController",
-    "Method": "GetAvailableSlots",
-    "RelativePath": "api/Receptionist/Get-available-slots/{doctorId}/{date}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "doctorId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "date",
-        "Type": "System.DateTime",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "hospital.Controller.ReceptionistController",
     "Method": "GetBillByAppointmentId",
     "RelativePath": "api/Receptionist/get-bill/{appointmentId}",
     "HttpMethod": "GET",
@@ -881,6 +901,43 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "BookSlot",
+    "RelativePath": "api/Receptionist/receptionist/book-slot",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "slotId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "GetSlots",
+    "RelativePath": "api/Receptionist/receptionist/get-slots/{doctorId}/{date}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "doctorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "date",
+        "Type": "System.DateOnly",
         "IsRequired": true
       }
     ],
