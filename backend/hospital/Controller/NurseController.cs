@@ -45,7 +45,7 @@ namespace hospital.Controller
                  a.AppointmentId,
                     a.DoctorId,
                     a.AppointmentDate,
-                    a.AppointmentTime,
+                    a.StartTime,
                     a.Reason,
                     a.PatientId,
                     DoctorName=a.Doctor.UserName,

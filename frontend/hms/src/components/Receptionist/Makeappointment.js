@@ -3,14 +3,16 @@ import React, { useEffect, useState } from "react";
 import ReceptionistNavbar from "./ReceptionistNavbar";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Makeappointment = () => {
   const [forms, setForm] = useState({
     doctorId: "",
     patientid: "",
     departmentId: "",
-    appointmentDate: "",
-    appointmentTime: "",
+    appointmentDate: new Date(),
+    startTime: "",
     reason: "",
     status: "",
     createdAt: new Date().toISOString().split("T")[0],
@@ -20,31 +22,63 @@ const Makeappointment = () => {
   const [patient, getpatient] = useState([]);
   const [filtered, setfiltered] = useState([]);
   const [dept, getdept] = useState([]);
+  const [availableSlots, setAvailableSlots] = useState([]);
   const [message, setMessage] = useState("");
   const today = new Date().toISOString().split("T")[0];
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm({ ...forms, [name]: value });
+    setForm((prev) => ({ ...prev, [name]: value }));
 
     if (name === "departmentId") {
       const filteredDoctors = doc.filter((d) => d.departmentId == value);
       setfiltered(filteredDoctors);
-      setForm((prev) => ({ ...prev, doctorId: "" }));
+      setForm((prev) => ({ ...prev, doctorId: "", startTime: "" }));
+      setAvailableSlots([]);
+    }
+
+    if (name === "doctorId" || name === "appointmentDate") {
+      setForm((prev) => ({ ...prev, startTime: "" }));
+      setAvailableSlots([]);
     }
   };
+
+  const appointmentDateString =
+    typeof forms.appointmentDate === "string"
+      ? forms.appointmentDate
+      : forms.appointmentDate.toISOString().split("T")[0];
+
+  // 🧠 Generate 15-minute slots from doctor availability
+  useEffect(() => {
+    if (!forms.doctorId || !appointmentDateString) {
+      setAvailableSlots([]);
+      return;
+    }
+
+    axios
+      .get(
+        `https://localhost:7058/api/Receptionist/Get-available-slots/${forms.doctorId}/${appointmentDateString}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((res) => {
+        setAvailableSlots(res.data); // use directly
+      })
+      .catch(() => setMessage("Failed to load available slots"));
+  }, [forms.doctorId, appointmentDateString, token]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Basic Validation
     if (
       !forms.patientid ||
       !forms.departmentId ||
       !forms.doctorId ||
       !forms.appointmentDate ||
-      !forms.appointmentTime ||
+      !forms.startTime ||
       !forms.reason ||
       !forms.status
     ) {
@@ -52,37 +86,47 @@ const Makeappointment = () => {
       return;
     }
 
+    const payload = {
+      ...forms,
+      appointmentDate: appointmentDateString,
+    };
+    console.log(payload);
     axios
       .post(
         "https://localhost:7058/api/Receptionist/Create-appointment",
-        forms,
+        payload,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       )
       .then((res) => {
         setMessage("Appointment created successfully.");
-        // Reset form
+        console.log(payload);
         setForm({
           doctorId: "",
           patientid: "",
           departmentId: "",
-          appointmentDate: "",
-          appointmentTime: "",
+          appointmentDate: new Date(),
+          startTime: "",
           reason: "",
           status: "",
           createdAt: today,
         });
+        setAvailableSlots([]);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error(err);
+        setMessage("Failed to create appointment.");
+      });
   };
 
   useEffect(() => {
-          if (!token) {
+    if (!token) {
       toast.error("Restricted Access");
       navigate("/");
       return;
     }
+
     axios
       .get("https://localhost:7058/api/Admin/docGetAll", {
         headers: { Authorization: `Bearer ${token}` },
@@ -103,7 +147,7 @@ const Makeappointment = () => {
       })
       .then((res) => getdept(res.data))
       .catch((err) => console.log(err));
-  }, [navigate]);
+  }, [navigate, token]);
 
   return (
     <div
@@ -170,25 +214,45 @@ const Makeappointment = () => {
                   ))}
                 </select>
 
-                <label className="form-label mt-3">Appointment Time</label>
-                <input
-                  type="time"
-                  step="1"
-                  className="form-control"
-                  name="appointmentTime"
-                  value={forms.appointmentTime}
-                  onChange={handleChange}
-                />
-
                 <label className="form-label mt-3">Appointment Date</label>
-                <input
-                  type="date"
+                <DatePicker
+                  selected={
+                    typeof forms.appointmentDate === "string"
+                      ? new Date(forms.appointmentDate)
+                      : forms.appointmentDate
+                  }
+                  onChange={(date) =>
+                    setForm((prev) => ({ ...prev, appointmentDate: date }))
+                  }
+                  minDate={new Date()}
+                  dateFormat="yyyy-MM-dd"
                   className="form-control"
                   name="appointmentDate"
-                  value={forms.appointmentDate}
-                  onChange={handleChange}
-                  min={today}
                 />
+
+                <label className="form-label mt-3">Available Time Slots</label>
+                {availableSlots.length > 0 ? (
+                  <select
+                    className="form-select"
+                    name="startTime"
+                    value={forms.startTime}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Select Time</option>
+                    {availableSlots.map((slot, index) => (
+                      <option
+                        key={slot.time}
+                        value={slot.time}
+                        disabled={slot.isBooked}
+                      >
+                        {slot.time} {slot.isBooked ? "(Booked)" : ""}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <p>No available slots for selected date and doctor</p>
+                )}
 
                 <label className="form-label mt-3">Reason</label>
                 <input

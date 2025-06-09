@@ -22,10 +22,8 @@ namespace hospital.Data
         public DbSet<Receptionist> Receptionists { get; set; }
         public DbSet<Prescription> Prescription { get; set; }
         public DbSet<Appointment> appointments { get; set; }
-        public DbSet<DoctorAvailability> DoctorAvailability { get; set; }
-
-        public DbSet<AvailableSlots> AvailableSlots { get; set; }
-
+        
+        public DbSet<DoctorAvailability> DoctorAvailabilities { get; set; }
         public DbSet<Bill> bill { get; set; }
     }
 

@@ -283,8 +283,11 @@ namespace hospital.Controller
         [HttpGet("today-appointments")]
         public IActionResult GettodayAppointment()
         {
-            var today = DateOnly.FromDateTime(DateTime.Today); // Ensures DateOnly type
-            int count = _dbcontext.appointments.Count(a => a.AppointmentDate == today);
+            DateOnly today = DateOnly.FromDateTime(DateTime.Today);
+
+            int count = _dbcontext.appointments
+                .Count(a => DateOnly.FromDateTime(a.AppointmentDate) == today);
+
             return Ok(count);
         }
 
@@ -303,8 +306,9 @@ namespace hospital.Controller
         [HttpGet("gettodaystatusreport")]
         public IActionResult GetTodayStatusReport()
         {
-            DateOnly today = DateOnly.FromDateTime(DateTime.Today); // ✅ DateOnly
+            //DateOnly today = DateOnly.FromDateTime(DateTime.Today); // ✅ DateOnly
 
+            DateTime today = DateTime.Today;
             var statusCounts = _dbcontext.appointments
                 .Where(a => a.AppointmentDate == today) // ✅ Direct comparison
                 .GroupBy(a => a.Status)
