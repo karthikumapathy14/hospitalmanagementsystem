@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-
 import { useParams, useNavigate } from "react-router-dom";
 import Nursesidebar from "./Nursesidebar";
 import { toast } from "react-toastify";
@@ -23,7 +22,6 @@ const Editappointmentnurse = () => {
       .get(`https://localhost:7058/api/Nurse/getbyidprescibe/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-
       .then((res) => {
         setData(res.data);
         setLoading(false);
@@ -48,8 +46,6 @@ const Editappointmentnurse = () => {
         navigate("/Viewappointmentnurse");
       })
       .catch((err) => console.error(err));
-
-
   };
 
   const handleChange = (e) => {
@@ -65,17 +61,13 @@ const Editappointmentnurse = () => {
       </div>
     );
 
-
   }
 
   if (!data || !data.appointmentId) {
     return (
       <div className="text-center mt-5">
-
         <h4 className="text-danger">⚠ No prescription record found</h4>
 
-
-        <h4 className="text-danger">No prescription added</h4>
       </div>
     );
   }
@@ -157,7 +149,6 @@ const Editappointmentnurse = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };

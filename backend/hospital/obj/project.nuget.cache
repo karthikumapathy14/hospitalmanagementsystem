@@ -116,5 +116,12 @@
     "C:\\Users\\karthik\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\karthik\\.nuget\\packages\\twilio\\7.11.1\\twilio.7.11.1.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

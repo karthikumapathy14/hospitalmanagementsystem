@@ -213,6 +213,7 @@ namespace hospital.Controller
         }
 
 
+
         [Authorize]
         [HttpPost("changepassword")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePassword model)
@@ -242,7 +243,6 @@ namespace hospital.Controller
             // Since JWT is stateless, logout is handled on client by deleting token
             return Ok(new { message = "Logged out successfully." });
         }
-
 
     }
 }

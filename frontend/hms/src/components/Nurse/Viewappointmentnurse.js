@@ -17,6 +17,7 @@ const Viewappointmentnurse = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
+
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
@@ -40,6 +41,8 @@ const Viewappointmentnurse = () => {
         toast.error("Failed to load appointments");
       });
   }, [navigate, token]);
+
+
 
   const handleEdit = (appointmentId) => {
     navigate(`/Editappointmentnurse/${appointmentId}`);
