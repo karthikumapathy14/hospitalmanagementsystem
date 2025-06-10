@@ -179,7 +179,7 @@
               "RelativeDocumentMoniker": "hospital\\Controller\\DoctorController.cs",
               "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\DoctorController.cs",
               "RelativeToolTip": "hospital\\Controller\\DoctorController.cs",
-              "ViewState": "AgIAADYBAAAAAAAAAAAUwEEBAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAACsBAAAAAAAAAADwvzEBAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-31T07:30:15.564Z",
               "EditorCaption": ""
@@ -194,8 +194,7 @@
               "RelativeToolTip": "hospital\\Model\\BookAppointmentDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T06:59:21.965Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T06:59:21.965Z"
             },
             {
               "$type": "Document",
@@ -207,8 +206,7 @@
               "RelativeToolTip": "hospital\\Controller\\AuthenticationController.cs",
               "ViewState": "AgIAANgAAAAAAAAAAIAwwPcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T07:30:15.546Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-31T07:30:15.546Z"
             },
             {
               "$type": "Document",
@@ -256,8 +254,7 @@
               "RelativeToolTip": "hospital\\Model\\BulkEmailRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T05:35:49.434Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-06T05:35:49.434Z"
             },
             {
               "$type": "Document",
@@ -269,8 +266,7 @@
               "RelativeToolTip": "hospital\\Model\\DoctorAvailability.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T05:02:34.213Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-09T05:02:34.213Z"
             },
             {
               "$type": "Document",
@@ -282,8 +278,7 @@
               "RelativeToolTip": "hospital\\Model\\Appointment.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAIwB0AAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T07:30:15.556Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-31T07:30:15.556Z"
             },
             {
               "$type": "Document",

@@ -322,7 +322,7 @@ namespace hospital.Controller
         [HttpPost("availability")]
         public async Task<IActionResult> PostAvailability([FromBody] DoctorAvailability availability)
         {
-            var doctorIdClaim = User.FindFirst("DoctorId")?.Value;
+            var doctorIdClaim = User.FindFirst("DoctorId")?.Value ;
 
             if (string.IsNullOrEmpty(doctorIdClaim) || !int.TryParse(doctorIdClaim, out int doctorId))
             {
