@@ -50,7 +50,6 @@ const Makeappointment = () => {
       ? forms.appointmentDate
       : forms.appointmentDate.toISOString().split("T")[0];
 
-  // 🧠 Generate 15-minute slots from doctor availability
   useEffect(() => {
     if (!forms.doctorId || !appointmentDateString) {
       setAvailableSlots([]);
@@ -65,7 +64,7 @@ const Makeappointment = () => {
         }
       )
       .then((res) => {
-        setAvailableSlots(res.data); // use directly
+        setAvailableSlots(res.data);
       })
       .catch(() => setMessage("Failed to load available slots"));
   }, [forms.doctorId, appointmentDateString, token]);
@@ -90,7 +89,7 @@ const Makeappointment = () => {
       ...forms,
       appointmentDate: appointmentDateString,
     };
-    console.log(payload);
+
     axios
       .post(
         "https://localhost:7058/api/Receptionist/Create-appointment",
@@ -99,9 +98,8 @@ const Makeappointment = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       )
-      .then((res) => {
+      .then(() => {
         setMessage("Appointment created successfully.");
-        console.log(payload);
         setForm({
           doctorId: "",
           patientid: "",
@@ -131,7 +129,9 @@ const Makeappointment = () => {
       .get("https://localhost:7058/api/Admin/docGetAll", {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => setdoc(res.data))
+      .then((res) => {setdoc(res.data);
+        console.log(res.data.availability)
+      })
       .catch((err) => console.log(err));
 
     axios
@@ -148,6 +148,13 @@ const Makeappointment = () => {
       .then((res) => getdept(res.data))
       .catch((err) => console.log(err));
   }, [navigate, token]);
+
+  const getDoctorById = (id) =>
+    doc.find((d) => d.id === parseInt(id));
+
+  const isDoctorAvailable = (id) =>
+    getDoctorById(id)?.availability?.trim().toLowerCase() === "available";
+
 
   return (
     <div
@@ -209,10 +216,30 @@ const Makeappointment = () => {
                   <option value="">- Select Doctor -</option>
                   {(forms.departmentId ? filtered : doc).map((item) => (
                     <option key={item.id} value={item.id}>
-                      {item.userName}
+                      {item.userName}{" "}
+                      {item.availability?.trim().toLowerCase() ===
+                      "available"
+                        ? "🟢"
+                        : "🔴"}
                     </option>
                   ))}
                 </select>
+
+                {forms.doctorId && (
+                  <div className="mt-2">
+                    <strong>Status: </strong>
+                    <span
+                      style={{
+                        color: isDoctorAvailable(forms.doctorId)
+                          ? "green"
+                          : "red",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {getDoctorById(forms.doctorId)?.availability || "Unknown"}
+                    </span>
+                  </div>
+                )}
 
                 <label className="form-label mt-3">Appointment Date</label>
                 <DatePicker
@@ -240,7 +267,7 @@ const Makeappointment = () => {
                     required
                   >
                     <option value="">Select Time</option>
-                    {availableSlots.map((slot, index) => (
+                    {availableSlots.map((slot) => (
                       <option
                         key={slot.time}
                         value={slot.time}

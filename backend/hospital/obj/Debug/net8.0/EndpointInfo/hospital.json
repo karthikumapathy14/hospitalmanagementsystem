@@ -978,31 +978,42 @@
         }
       }
     },
-    "/api/Doctor/availability": {
+    "/api/Doctor/UpdateAvailability/{id}": {
       "post": {
         "tags": [
           "Doctor"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "requestBody": {
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/DoctorAvailability"
+                "$ref": "#/components/schemas/Doctor"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DoctorAvailability"
+                "$ref": "#/components/schemas/Doctor"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/DoctorAvailability"
+                "$ref": "#/components/schemas/Doctor"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/DoctorAvailability"
+                "$ref": "#/components/schemas/Doctor"
               }
             }
           }
@@ -1010,6 +1021,44 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Doctor/available": {
+      "get": {
+        "tags": [
+          "Doctor"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Doctor"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Doctor"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Doctor"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1834,47 +1883,6 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "DoctorAvailability": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "doctorId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "startDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "endDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "startTime": {
-            "type": "string",
-            "format": "date-span"
-          },
-          "endTime": {
-            "type": "string",
-            "format": "date-span"
-          },
-          "bufferBefor": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "bufferAfter": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "doctor": {
-            "$ref": "#/components/schemas/Doctor"
           }
         },
         "additionalProperties": false

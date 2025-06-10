@@ -143,7 +143,7 @@ const DoctorSidebar = () => {
           Change Password
         </Link>
 
-         <Link
+            <Link
           className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
             isActive("/DoctorAvailibility")
               ? "bg-sky-100 text-sky-800 fw-medium"
