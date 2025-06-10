@@ -3,46 +3,38 @@
   "WorkspaceRootPath": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\",
   "Documents": [
     {
-<<<<<<< Updated upstream
-=======
-      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\nursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\nursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\model\\nurse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\model\\nurse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\model\\prescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\model\\prescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
->>>>>>> Stashed changes
       "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\receptionistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\receptionistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\model\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\model\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\model\\bookappointmentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\model\\bookappointmentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-<<<<<<< Updated upstream
+      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\model\\doctoravailability.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\model\\doctoravailability.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\model\\bulkemailrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\model\\bulkemailrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\receptionistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\receptionistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -55,24 +47,12 @@
       "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\nursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\model\\doctoravailability.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\model\\doctoravailability.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\migrations\\20250508101338_nin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\migrations\\20250508101338_nin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\model\\bulkemailrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\model\\bulkemailrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\messagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -143,8 +123,6 @@
       "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\model\\prescription.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-=======
->>>>>>> Stashed changes
       "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\kaviarasi\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\migrations\\20250526055704_hel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\migrations\\20250526055704_hel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -187,7 +165,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -195,18 +173,29 @@
             },
             {
               "$type": "Document",
-<<<<<<< Updated upstream
-              "DocumentIndex": 1,
-=======
-              "DocumentIndex": 9,
-              "Title": "Patient.cs",
-              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Patient.cs",
-              "RelativeDocumentMoniker": "hospital\\Model\\Patient.cs",
-              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Patient.cs",
-              "RelativeToolTip": "hospital\\Model\\Patient.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "DoctorController.cs",
+              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\DoctorController.cs",
+              "RelativeDocumentMoniker": "hospital\\Controller\\DoctorController.cs",
+              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\DoctorController.cs",
+              "RelativeToolTip": "hospital\\Controller\\DoctorController.cs",
+              "ViewState": "AgIAADYBAAAAAAAAAAAUwEEBAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T10:45:35.726Z"
+              "WhenOpened": "2025-05-31T07:30:15.564Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BookAppointmentDto.cs",
+              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\BookAppointmentDto.cs",
+              "RelativeDocumentMoniker": "hospital\\Model\\BookAppointmentDto.cs",
+              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\BookAppointmentDto.cs",
+              "RelativeToolTip": "hospital\\Model\\BookAppointmentDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T06:59:21.965Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -216,114 +205,10 @@
               "RelativeDocumentMoniker": "hospital\\Controller\\AuthenticationController.cs",
               "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AuthenticationController.cs",
               "RelativeToolTip": "hospital\\Controller\\AuthenticationController.cs",
-              "ViewState": "AgIAAKsAAAAAAAAAAAAwwL4AAABMAAAAAAAAAA==",
+              "ViewState": "AgIAANgAAAAAAAAAAIAwwPcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T10:36:36.63Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "NurseController.cs",
-              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\NurseController.cs",
-              "RelativeDocumentMoniker": "hospital\\Controller\\NurseController.cs",
-              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\NurseController.cs",
-              "RelativeToolTip": "hospital\\Controller\\NurseController.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAkwD4AAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T10:34:57.973Z",
+              "WhenOpened": "2025-05-31T07:30:15.546Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
->>>>>>> Stashed changes
-              "Title": "ReceptionistController.cs",
-              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\ReceptionistController.cs",
-              "RelativeDocumentMoniker": "hospital\\Controller\\ReceptionistController.cs",
-              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\ReceptionistController.cs",
-              "RelativeToolTip": "hospital\\Controller\\ReceptionistController.cs",
-              "ViewState": "AgIAAJMBAAAAAAAAAAAQwOMBAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T07:30:15.537Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-<<<<<<< Updated upstream
-=======
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AdminController.cs",
-              "RelativeDocumentMoniker": "hospital\\Controller\\AdminController.cs",
-              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AdminController.cs",
-              "RelativeToolTip": "hospital\\Controller\\AdminController.cs",
-              "ViewState": "AgIAAMAAAAAAAAAAAAAvwLkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T10:05:19.385Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Nurse.cs",
-              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Nurse.cs",
-              "RelativeDocumentMoniker": "hospital\\Model\\Nurse.cs",
-              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Nurse.cs",
-              "RelativeToolTip": "hospital\\Model\\Nurse.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAgwBcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T10:05:05.862Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
->>>>>>> Stashed changes
-              "Title": "Appointment.cs",
-              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Appointment.cs",
-              "RelativeDocumentMoniker": "hospital\\Model\\Appointment.cs",
-              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Appointment.cs",
-              "RelativeToolTip": "hospital\\Model\\Appointment.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAA0wB0AAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T07:30:15.556Z"
-            },
-            {
-              "$type": "Document",
-<<<<<<< Updated upstream
-              "DocumentIndex": 0,
-              "Title": "DoctorController.cs",
-              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\DoctorController.cs",
-              "RelativeDocumentMoniker": "hospital\\Controller\\DoctorController.cs",
-              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\DoctorController.cs",
-              "RelativeToolTip": "hospital\\Controller\\DoctorController.cs",
-              "ViewState": "AgIAAB4BAAAAAAAAAAAlwCoBAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T07:30:15.564Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Applicationdbcontext.cs",
-              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Data\\Applicationdbcontext.cs",
-              "RelativeDocumentMoniker": "hospital\\Data\\Applicationdbcontext.cs",
-              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Data\\Applicationdbcontext.cs",
-              "RelativeToolTip": "hospital\\Data\\Applicationdbcontext.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T07:30:15.569Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "BookAppointmentDto.cs",
-              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\BookAppointmentDto.cs",
-              "RelativeDocumentMoniker": "hospital\\Model\\BookAppointmentDto.cs",
-              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\BookAppointmentDto.cs",
-              "RelativeToolTip": "hospital\\Model\\BookAppointmentDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T06:59:21.965Z"
             },
             {
               "$type": "Document",
@@ -339,7 +224,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AdminController.cs",
               "RelativeDocumentMoniker": "hospital\\Controller\\AdminController.cs",
@@ -351,7 +236,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "NurseController.cs",
               "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\NurseController.cs",
               "RelativeDocumentMoniker": "hospital\\Controller\\NurseController.cs",
@@ -363,7 +248,70 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BulkEmailRequest.cs",
+              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\BulkEmailRequest.cs",
+              "RelativeDocumentMoniker": "hospital\\Model\\BulkEmailRequest.cs",
+              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\BulkEmailRequest.cs",
+              "RelativeToolTip": "hospital\\Model\\BulkEmailRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-06T05:35:49.434Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DoctorAvailability.cs",
+              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\DoctorAvailability.cs",
+              "RelativeDocumentMoniker": "hospital\\Model\\DoctorAvailability.cs",
+              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\DoctorAvailability.cs",
+              "RelativeToolTip": "hospital\\Model\\DoctorAvailability.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T05:02:34.213Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Appointment.cs",
+              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Appointment.cs",
+              "RelativeDocumentMoniker": "hospital\\Model\\Appointment.cs",
+              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Appointment.cs",
+              "RelativeToolTip": "hospital\\Model\\Appointment.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAIwB0AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-31T07:30:15.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "ReceptionistController.cs",
+              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\ReceptionistController.cs",
+              "RelativeDocumentMoniker": "hospital\\Controller\\ReceptionistController.cs",
+              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\ReceptionistController.cs",
+              "RelativeToolTip": "hospital\\Controller\\ReceptionistController.cs",
+              "ViewState": "AgIAAJMBAAAAAAAAAAAQwOMBAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-31T07:30:15.537Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Applicationdbcontext.cs",
+              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Data\\Applicationdbcontext.cs",
+              "RelativeDocumentMoniker": "hospital\\Data\\Applicationdbcontext.cs",
+              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Data\\Applicationdbcontext.cs",
+              "RelativeToolTip": "hospital\\Data\\Applicationdbcontext.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-31T07:30:15.569Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "PatientController.cs",
               "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\PatientController.cs",
               "RelativeDocumentMoniker": "hospital\\Controller\\PatientController.cs",
@@ -372,18 +320,6 @@
               "ViewState": "AgIAADoAAAAAAAAAAAAlwEoAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-06T10:03:40.334Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "DoctorAvailability.cs",
-              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\DoctorAvailability.cs",
-              "RelativeDocumentMoniker": "hospital\\Model\\DoctorAvailability.cs",
-              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\DoctorAvailability.cs",
-              "RelativeToolTip": "hospital\\Model\\DoctorAvailability.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T05:02:34.213Z"
             },
             {
               "$type": "Document",
@@ -471,7 +407,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "AccountController.cs",
               "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AccountController.cs",
               "RelativeDocumentMoniker": "hospital\\Controller\\AccountController.cs",
@@ -480,18 +416,6 @@
               "ViewState": "AgIAABAAAAAAAAAAAAAkwCIAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-04T09:54:40.797Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "AuthenticationController.cs",
-              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AuthenticationController.cs",
-              "RelativeDocumentMoniker": "hospital\\Controller\\AuthenticationController.cs",
-              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AuthenticationController.cs",
-              "RelativeToolTip": "hospital\\Controller\\AuthenticationController.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAAqwGAAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T07:30:15.546Z"
             },
             {
               "$type": "Document",
@@ -507,7 +431,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "20250508101338_nin.cs",
               "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Migrations\\20250508101338_nin.cs",
               "RelativeDocumentMoniker": "hospital\\Migrations\\20250508101338_nin.cs",
@@ -552,18 +476,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-06T06:00:11.405Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "BulkEmailRequest.cs",
-              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\BulkEmailRequest.cs",
-              "RelativeDocumentMoniker": "hospital\\Model\\BulkEmailRequest.cs",
-              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\BulkEmailRequest.cs",
-              "RelativeToolTip": "hospital\\Model\\BulkEmailRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T05:35:49.434Z"
             },
             {
               "$type": "Document",
@@ -711,9 +623,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 29,
-=======
-              "DocumentIndex": 3,
->>>>>>> Stashed changes
               "Title": "Prescription.cs",
               "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Prescription.cs",
               "RelativeDocumentMoniker": "hospital\\Model\\Prescription.cs",
@@ -721,31 +630,11 @@
               "RelativeToolTip": "hospital\\Model\\Prescription.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAxwAgAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-<<<<<<< Updated upstream
               "WhenOpened": "2025-05-31T07:30:15.562Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 30,
-=======
-              "WhenOpened": "2025-05-26T09:51:40.342Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DoctorController.cs",
-              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\DoctorController.cs",
-              "RelativeDocumentMoniker": "hospital\\Controller\\DoctorController.cs",
-              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\DoctorController.cs",
-              "RelativeToolTip": "hospital\\Controller\\DoctorController.cs",
-              "ViewState": "AgIAAFAAAAAAAAAAAAAIwDYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T09:51:40.345Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
->>>>>>> Stashed changes
               "Title": "20250526055704_hel.cs",
               "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Migrations\\20250526055704_hel.cs",
               "RelativeDocumentMoniker": "hospital\\Migrations\\20250526055704_hel.cs",
@@ -753,23 +642,7 @@
               "RelativeToolTip": "hospital\\Migrations\\20250526055704_hel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-<<<<<<< Updated upstream
               "WhenOpened": "2025-05-31T07:30:15.568Z"
-=======
-              "WhenOpened": "2025-05-26T09:51:40.347Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Applicationdbcontext.cs",
-              "DocumentMoniker": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Data\\Applicationdbcontext.cs",
-              "RelativeDocumentMoniker": "hospital\\Data\\Applicationdbcontext.cs",
-              "ToolTip": "C:\\Users\\Kaviarasi\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Data\\Applicationdbcontext.cs",
-              "RelativeToolTip": "hospital\\Data\\Applicationdbcontext.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABYAAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T09:51:40.348Z"
->>>>>>> Stashed changes
             }
           ]
         }

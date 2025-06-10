@@ -211,7 +211,7 @@ namespace hospital.Controller
             }
             return Unauthorized("Invalid email or password");
         }
-<<<<<<< Updated upstream
+
 
 
         [Authorize]
@@ -244,8 +244,5 @@ namespace hospital.Controller
             return Ok(new { message = "Logged out successfully." });
         }
 
-
-=======
->>>>>>> Stashed changes
     }
 }

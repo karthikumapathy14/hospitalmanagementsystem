@@ -45,7 +45,7 @@ import WhatsAppSender from './components/WhatsAppSender.js';
 import Circularsender from './components/Circularsender.js'
 import Viewprescription from './components/Doctor/Viewprescription.js';
 import DoctorAvailibility from './components/Doctor/DoctorAvailibility.js';
-import ReceptionistBookingForm from './components/Receptionist/ReceptionistBookingForm.js';
+
 
 function App() {
   return (
@@ -85,7 +85,7 @@ function App() {
               <Route path='/Listappointment' element={<ListAppointment />}></Route>
               <Route path='/editappointment/:id' element={<Editappointment />}></Route>
               <Route path='/billgenerate' element={<Bill/>}></Route>
-              <Route path='/ReceptionistBookingForm' element={<ReceptionistBookingForm/>}></Route>
+         
 
               {/* Doctor dashboard */}
               {/* <Route path='/DoctorDashboard' element={<DoctorDashboard/>}></Route> */}

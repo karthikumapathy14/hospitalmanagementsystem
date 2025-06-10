@@ -194,7 +194,7 @@ namespace hospital.Controller
                 .Where(a => a.PatientId == patientId)
                 .Include(a => a.Doctor)
                 .Include(a => a.Doctor.Department)
-                .Include(a => a.Patient) // ✅ include Patient
+                .Include(a => a.Patient) 
                 .OrderByDescending(a => a.AppointmentDate)
                 .Select(a => new
                 {
@@ -276,7 +276,7 @@ namespace hospital.Controller
                         p.Prescribedby,
                         p.PrescribedDate
                     })
-                    .FirstOrDefault() // ✅ returns a single object instead of list
+                    .FirstOrDefault() 
             }).ToList();
 
             if (!result.Any())
@@ -316,29 +316,24 @@ namespace hospital.Controller
 
             return doctor;
         }
-        // Update Availability
-        [HttpPut("UpdateAvailability/{id}")]
-        public async Task<IActionResult> UpdateAvailability(int id, [FromBody] Doctor updatedDoctor)
+
+
+        // set Availability
+        [HttpPost("availability")]
+        public async Task<IActionResult> PostAvailability([FromBody] DoctorAvailability availability)
         {
-            var doctor = await _dbcontext.Doctors.FindAsync(id);
-            if (doctor == null)
+            var doctorIdClaim = User.FindFirst("DoctorId")?.Value;
+
+            if (string.IsNullOrEmpty(doctorIdClaim) || !int.TryParse(doctorIdClaim, out int doctorId))
             {
-                return NotFound();
+                return Unauthorized("Invalid DoctorId claim Value");
             }
 
-            doctor.Availability = updatedDoctor.Availability;
+            availability.DoctorId = doctorId;
+            _dbcontext.DoctorAvailabilities.Add(availability);
             await _dbcontext.SaveChangesAsync();
 
-            return Ok(new { message = "Availability updated successfully." });
-        }
-
-        // Optional: Get All Available Doctors
-        [HttpGet("available")]
-        public async Task<ActionResult<IEnumerable<Doctor>>> GetAvailableDoctors()
-        {
-            return await _dbcontext.Doctors
-                .Where(d => d.Availability == "Available")
-                .ToListAsync();
+            return Ok("Availability saved successfully.");
         }
     }
 }
