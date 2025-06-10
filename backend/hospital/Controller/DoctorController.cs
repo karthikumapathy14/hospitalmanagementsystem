@@ -316,29 +316,6 @@ namespace hospital.Controller
 
             return doctor;
         }
-        // Update Availability
-        [HttpPut("UpdateAvailability/{id}")]
-        public async Task<IActionResult> UpdateAvailability(int id, [FromBody] Doctor updatedDoctor)
-        {
-            var doctor = await _dbcontext.Doctors.FindAsync(id);
-            if (doctor == null)
-            {
-                return NotFound();
-            }
-
-            doctor.Availability = updatedDoctor.Availability;
-            await _dbcontext.SaveChangesAsync();
-
-            return Ok(new { message = "Availability updated successfully." });
-        }
-
-        // Optional: Get All Available Doctors
-        [HttpGet("available")]
-        public async Task<ActionResult<IEnumerable<Doctor>>> GetAvailableDoctors()
-        {
-            return await _dbcontext.Doctors
-                .Where(d => d.Availability == "Available")
-                .ToListAsync();
-        }
+      
     }
 }

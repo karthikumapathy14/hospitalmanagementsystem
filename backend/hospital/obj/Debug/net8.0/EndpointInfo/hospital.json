@@ -979,7 +979,7 @@
       }
     },
     "/api/Doctor/UpdateAvailability/{id}": {
-      "put": {
+      "post": {
         "tags": [
           "Doctor"
         ],

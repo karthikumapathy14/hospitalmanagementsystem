@@ -606,7 +606,7 @@
     "ContainingType": "hospital.Controller.DoctorController",
     "Method": "UpdateAvailability",
     "RelativePath": "api/Doctor/UpdateAvailability/{id}",
-    "HttpMethod": "PUT",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [

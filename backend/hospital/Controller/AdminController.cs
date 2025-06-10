@@ -42,6 +42,7 @@ namespace hospital.Controller
                     d.Qualification,
                     d.Address,
                     d.status,
+                    d.Availability,
                     d.DepartmentId,
                     DepartmentName = d.Department != null ? d.Department.DepartmentName : "Not Provided"
                 })
