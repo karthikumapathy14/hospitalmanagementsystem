@@ -194,7 +194,7 @@ namespace hospital.Controller
                 .Where(a => a.PatientId == patientId)
                 .Include(a => a.Doctor)
                 .Include(a => a.Doctor.Department)
-                .Include(a => a.Patient) // ✅ include Patient
+                .Include(a => a.Patient) 
                 .OrderByDescending(a => a.AppointmentDate)
                 .Select(a => new
                 {
@@ -276,7 +276,7 @@ namespace hospital.Controller
                         p.Prescribedby,
                         p.PrescribedDate
                     })
-                    .FirstOrDefault() // ✅ returns a single object instead of list
+                    .FirstOrDefault() 
             }).ToList();
 
             if (!result.Any())
@@ -316,6 +316,24 @@ namespace hospital.Controller
 
             return doctor;
         }
-      
+
+
+        // set Availability
+        [HttpPost("availability")]
+        public async Task<IActionResult> PostAvailability([FromBody] DoctorAvailability availability)
+        {
+            var doctorIdClaim = User.FindFirst("DoctorId")?.Value ;
+
+            if (string.IsNullOrEmpty(doctorIdClaim) || !int.TryParse(doctorIdClaim, out int doctorId))
+            {
+                return Unauthorized("Invalid DoctorId claim Value");
+            }
+
+            availability.DoctorId = doctorId;
+            _dbcontext.DoctorAvailabilities.Add(availability);
+            await _dbcontext.SaveChangesAsync();
+
+            return Ok("Availability saved successfully.");
+        }
     }
 }
