@@ -506,6 +506,43 @@
   },
   {
     "ContainingType": "hospital.Controller.DoctorController",
+    "Method": "PostAvailability",
+    "RelativePath": "api/Doctor/availability",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "availability",
+        "Type": "hospital.Model.DoctorAvailability",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.DoctorController",
+    "Method": "UpdateAvailabilityStatus",
+    "RelativePath": "api/Doctor/availabilitystatus/{doctorId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "doctorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "hospital.Model.Doctor",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.DoctorController",
     "Method": "filterbyid",
     "RelativePath": "api/Doctor/filterbyid/{id}",
     "HttpMethod": "GET",

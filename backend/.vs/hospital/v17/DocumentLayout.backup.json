@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\receptionistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\receptionistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\model\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\model\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\receptionistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\controller\\receptionistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\controller\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -33,10 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\model\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|solutionrelative:hospital\\model\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8B7E7237-93EB-417D-93BC-DD5E6EEE32F9}|hospital\\hospital.csproj|c:\\users\\karthik\\desktop\\hms\\hospitalmanagementsystem\\backend\\hospital\\model\\receptionist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -170,23 +170,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "BookAppointmentDto.cs",
-              "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\BookAppointmentDto.cs",
-              "RelativeDocumentMoniker": "hospital\\Model\\BookAppointmentDto.cs",
-              "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\BookAppointmentDto.cs",
-              "RelativeToolTip": "hospital\\Model\\BookAppointmentDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-09T11:23:28.99Z"
             },
             {
               "$type": "Document",
@@ -202,13 +190,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "DoctorController.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\DoctorController.cs",
               "RelativeDocumentMoniker": "hospital\\Controller\\DoctorController.cs",
               "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\DoctorController.cs",
               "RelativeToolTip": "hospital\\Controller\\DoctorController.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAmwCIBAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAADQBAAAAAAAAAAAgwEIBAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-31T07:30:15.564Z",
               "EditorCaption": ""
@@ -227,7 +215,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "EmailService.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\EmailService.cs",
               "RelativeDocumentMoniker": "hospital\\EmailService.cs",
@@ -251,7 +239,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\appsettings.json",
               "RelativeDocumentMoniker": "hospital\\appsettings.json",
@@ -263,20 +251,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "ReceptionistController.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\ReceptionistController.cs",
               "RelativeDocumentMoniker": "hospital\\Controller\\ReceptionistController.cs",
               "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\ReceptionistController.cs",
               "RelativeToolTip": "hospital\\Controller\\ReceptionistController.cs",
-              "ViewState": "AgIAAK8AAAAAAAAAAAAAAMYAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAADwBAAAAAAAAAAAowMYAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T07:30:15.537Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-31T07:30:15.537Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Controller\\AdminController.cs",
               "RelativeDocumentMoniker": "hospital\\Controller\\AdminController.cs",
@@ -288,7 +275,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Admin.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Admin.cs",
               "RelativeDocumentMoniker": "hospital\\Model\\Admin.cs",
@@ -297,6 +284,31 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-09T11:23:42.761Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Doctor.cs",
+              "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Doctor.cs",
+              "RelativeDocumentMoniker": "hospital\\Model\\Doctor.cs",
+              "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Doctor.cs",
+              "RelativeToolTip": "hospital\\Model\\Doctor.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAQwBIAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-31T07:30:15.543Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BookAppointmentDto.cs",
+              "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\BookAppointmentDto.cs",
+              "RelativeDocumentMoniker": "hospital\\Model\\BookAppointmentDto.cs",
+              "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\BookAppointmentDto.cs",
+              "RelativeToolTip": "hospital\\Model\\BookAppointmentDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-09T11:23:28.99Z"
             },
             {
               "$type": "Document",
@@ -312,7 +324,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "DoctorAvailability.cs",
               "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\DoctorAvailability.cs",
               "RelativeDocumentMoniker": "hospital\\Model\\DoctorAvailability.cs",
@@ -333,18 +345,6 @@
               "ViewState": "AgIAAAgAAAAAAAAAAAAQwAsAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-31T07:30:15.553Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Doctor.cs",
-              "DocumentMoniker": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Doctor.cs",
-              "RelativeDocumentMoniker": "hospital\\Model\\Doctor.cs",
-              "ToolTip": "C:\\Users\\karthik\\Desktop\\HMS\\hospitalmanagementsystem\\backend\\hospital\\Model\\Doctor.cs",
-              "RelativeToolTip": "hospital\\Model\\Doctor.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAQwBQAAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T07:30:15.543Z"
             },
             {
               "$type": "Document",

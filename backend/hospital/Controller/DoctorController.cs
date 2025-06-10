@@ -317,6 +317,24 @@ namespace hospital.Controller
             return doctor;
         }
 
+        [HttpPut("availabilitystatus/{doctorId}")]
+        public async Task<IActionResult> UpdateAvailabilityStatus(int doctorId, [FromBody] Doctor request)
+        {
+            if (request == null || string.IsNullOrEmpty(request.Availability))
+                return BadRequest("Invalid status.");
+
+            var doctor = await _dbcontext.Doctors.FindAsync(doctorId);
+            if (doctor == null)
+                return NotFound("Doctor not found.");
+
+            doctor.Availability = request.Availability;
+            await _dbcontext.SaveChangesAsync();
+
+            return Ok(new { message = "Availability status updated." });
+        }
+
+
+
 
         // set Availability
         [HttpPost("availability")]

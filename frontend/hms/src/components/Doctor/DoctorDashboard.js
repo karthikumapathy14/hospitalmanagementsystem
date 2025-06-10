@@ -42,7 +42,7 @@ const DoctorSidebar = () => {
         availability === "Available" ? "Unavailable" : "Available";
       const token = localStorage.getItem("token");
       await axios.put(
-        `https://localhost:7058/api/Doctor/UpdateAvailability/${doctorId}`,
+        `https://localhost:7058/api/Doctor/availabilitystatus/${doctorId}`,
         { availability: newAvailability }, // this matches your backend model
         {
           headers: {
