@@ -80,6 +80,32 @@ namespace hospital.Controller
             return Ok("Prescription Updated Successfully");
 
         }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Nurse>> GetNurse(int id)
+        {
+            var nurse = await _dbcontext.Nurses.FindAsync(id);
+            if (nurse == null)
+            {
+                return NotFound();
+            }
+            return nurse;
+        }
+
+        [HttpPut("availabilitystatus/{nurseId}")]
+        public async Task<IActionResult> UpdateAvailabilityStatus(int nurseId, [FromBody] Nurse request)
+        {
+            if (request == null || string.IsNullOrEmpty(request.Availability))
+                return BadRequest("Invalid status.");
+
+            var nurse = await _dbcontext.Nurses.FindAsync(nurseId);
+            if (nurse == null)
+                return NotFound("Nurse not found.");
+
+            nurse.Availability = request.Availability;
+            await _dbcontext.SaveChangesAsync();
+
+            return Ok(new { message = "Availability status updated successfully." });
+        }
 
 
     }

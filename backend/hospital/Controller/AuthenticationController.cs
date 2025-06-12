@@ -1,4 +1,5 @@
 ﻿using hospital.Data;
+using hospital.Migrations;
 using hospital.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -170,6 +171,7 @@ namespace hospital.Controller
                         return Unauthorized("Receptionist record not found.");
                     if (!receptionist.status)
                         return BadRequest("Your account is inactive. Contact admin.");
+                    claims.Add(new Claim("ReceptionistId", receptionist.Id.ToString()));
                 }
                 else if (roles.Contains("Patient"))
                 {
@@ -199,6 +201,7 @@ namespace hospital.Controller
                 string doctorId = claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value;
                 string nurseId = claims.FirstOrDefault(c => c.Type == "NurseId")?.Value;
                 string patientId = claims.FirstOrDefault(c => c.Type == "PatientId")?.Value;
+                string receptionistId = claims.FirstOrDefault(c => c.Type == "ReceptionistId")?.Value;
 
                 return Ok(new
                 {
@@ -206,6 +209,7 @@ namespace hospital.Controller
                     expiration = token.ValidTo,
                     nurseID=nurseId,
                     patientID=patientId,
+                    receptionistID=receptionistId,
                     doctorID = doctorId // optional: frontend can store/use if needed
                 });
             }

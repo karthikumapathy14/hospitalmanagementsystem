@@ -1,11 +1,76 @@
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { logout } from "../Logout";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 const Nursesidebar = ({ isMobile, closeSidebar }) => {
   const location = useLocation();
-
   const isActive = (path) => location.pathname === path;
+
+  const token = localStorage.getItem("token");
+  const [nurseId, setNurseId] = useState(null);
+  const [availability, setAvailability] = useState("Unavailable");
+
+  useEffect(() => {
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        console.log(decoded)
+        const idFromToken = decoded?.NurseId;
+        const idFromStorage = localStorage.getItem("nurseId");
+        const resolvedId = idFromToken || idFromStorage;
+        if (resolvedId) {
+          setNurseId(resolvedId);
+        } else {
+          console.error("Nurse ID not found in token or localStorage");
+        }
+      } catch (err) {
+        console.error("Token decoding failed", err);
+        const idFromStorage = localStorage.getItem("nurseId");
+        if (idFromStorage) setNurseId(idFromStorage);
+      }
+    }
+  }, [token]);
+
+  useEffect(() => {
+    const fetchAvailability = async () => {
+      if (!nurseId) return;
+      try {
+        const response = await axios.get(`https://localhost:7058/api/Nurse/${nurseId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setAvailability(response.data.availability);
+      } catch (error) {
+        console.error("Error fetching nurse availability:", error);
+      }
+    };
+    fetchAvailability();
+  }, [nurseId]);
+
+  const toggleAvailability = async () => {
+    if (!nurseId) {
+      console.error("Nurse ID is undefined. Cannot toggle availability.");
+      return;
+    }
+    try {
+      const newStatus = availability === "Available" ? "Unavailable" : "Available";
+      await axios.put(
+        `https://localhost:7058/api/Nurse/availabilitystatus/${nurseId}`,
+        { availability: newStatus },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setAvailability(newStatus);
+    } catch (err) {
+      console.error("Error updating availability:", err);
+    }
+  };
 
   const handleLogout = () => {
     logout();
@@ -13,14 +78,14 @@ const Nursesidebar = ({ isMobile, closeSidebar }) => {
   };
 
   return (
-    <div className={`d-flex flex-column h-100 ${isMobile ? "w-100" : ""}`}
+    <div
+      className={`d-flex flex-column h-100 ${isMobile ? "w-100" : ""}`}
       style={{
         background: "linear-gradient(to bottom, #f0f9ff, #e0f2fe)",
         borderRight: isMobile ? "none" : "1px solid #bae6fd",
         boxShadow: isMobile ? "none" : "2px 0 10px rgba(0, 0, 0, 0.05)",
       }}
     >
-      {/* Header */}
       <div className="text-center py-3 border-bottom border-sky-200">
         <div className="d-flex flex-column align-items-center justify-content-center gap-2 mb-2 px-2">
           <div
@@ -41,25 +106,28 @@ const Nursesidebar = ({ isMobile, closeSidebar }) => {
         </div>
       </div>
 
-      {/* Navigation */}
-      <nav className="nav flex-column px-2 pt-3 flex-grow-1">
-        {/* <Link
-          className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
-            isActive("/") ? "bg-sky-100 text-sky-800 fw-semibold" : "text-sky-600"
-          }`}
-          to="/"
-          onClick={isMobile ? closeSidebar : null}
-        >
-          <i className="bi bi-speedometer2 fs-5"></i>
-          Dashboard
-        </Link> */}
+      <div className="text-center my-3 px-3">
+        <label className="form-check form-switch d-flex align-items-center justify-content-center gap-2">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            checked={availability === "Available"}
+            onChange={toggleAvailability}
+            role="switch"
 
+          />
+          <span className={`badge ${availability === "Available" ? "bg-success" : "bg-danger"}`}>
+            {availability}
+          </span>
+        </label>
+      </div>
+
+      <nav className="nav flex-column px-2 pt-3 flex-grow-1">
         <Link
-          className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
-            isActive("/Viewappointmentnurse")
+          className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${isActive("/Viewappointmentnurse")
               ? "bg-sky-100 text-sky-800 fw-semibold"
               : "text-sky-600"
-          }`}
+            }`}
           to="/Viewappointmentnurse"
           onClick={isMobile ? closeSidebar : null}
         >
@@ -68,11 +136,10 @@ const Nursesidebar = ({ isMobile, closeSidebar }) => {
         </Link>
 
         <Link
-          className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
-            isActive("/changepassword")
+          className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${isActive("/changepassword")
               ? "bg-sky-50 text-sky-700 border-start border-3 border-sky-500"
               : "text-sky-600"
-          }`}
+            }`}
           to="/changepassword"
           onClick={isMobile ? closeSidebar : null}
         >
@@ -90,7 +157,6 @@ const Nursesidebar = ({ isMobile, closeSidebar }) => {
         </button>
       </nav>
 
-      {/* Footer */}
       <div
         className="mt-auto text-center py-3 px-3"
         style={{

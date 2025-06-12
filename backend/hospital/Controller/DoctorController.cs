@@ -320,7 +320,7 @@ namespace hospital.Controller
         [HttpPut("availabilitystatus/{doctorId}")]
         public async Task<IActionResult> UpdateAvailabilityStatus(int doctorId, [FromBody] Doctor request)
         {
-            if (request == null || string.IsNullOrEmpty(request.Availability))
+            if (request == null || string.IsNullOrEmpty(request.Availability    ))
                 return BadRequest("Invalid status.");
 
             var doctor = await _dbcontext.Doctors.FindAsync(doctorId);

@@ -1,14 +1,26 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { logout } from "../Logout";
+import { jwtDecode } from "jwt-decode";
 
 const Adminnavbar = () => {
   const location = useLocation();
-
   const isActive = (path) => location.pathname === path;
-    const handleLogout = () => {
+  let adminName=''
+
+  const handleLogout = () => {
     logout();
   };
+
+  const token = localStorage.getItem("token"); 
+  const decoded=jwtDecode(token)
+  console.log(decoded)
+
+  if(token){
+    adminName=decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
+    console.log(adminName)
+  }
+  // console.log(adminName) // 👈 Get admin name from localStorage
 
   return (
     <div
@@ -48,14 +60,21 @@ const Adminnavbar = () => {
             MEDCARE HOSPITAL
           </h4>
         </div>
+
         <div className="badge bg-sky-100 text-sky-800 px-3 py-1 rounded-pill text-muted">
           <i className="bi bi-person-gear me-1"></i> Admin Panel
         </div>
+
+           {adminName && (
+          <div className="badge bg-sky-200 text-sky-800 px-3 py-1 rounded-pill mb-1 text-dark">
+            <i className="bi bi-person-circle me-1"></i> Welcome {adminName} !
+          </div>
+        )}
+        
       </div>
 
       {/* Navigation */}
       <nav className="nav flex-column gap-1 px-3">
-        {/* Dashboard */}
         <Link
           className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
             isActive("/Admindashboard")
@@ -64,26 +83,19 @@ const Adminnavbar = () => {
           }`}
           to="/Admindashboard"
         >
-          <i
-            className="bi bi-speedometer2"
-            style={{ width: "24px", fontSize: "1.1rem" }}
-          ></i>
+          <i className="bi bi-speedometer2" style={{ width: "24px", fontSize: "1.1rem" }}></i>
           Dashboard
         </Link>
 
-        {/* User Management Header */}
         <div className="mt-3 mb-2 text-uppercase small fw-bold text-sky-600 ps-3">
           <i className="bi bi-person-lines-fill me-2"></i>
           User Management
         </div>
 
-        {/* Edit Users Collapsible */}
         <div className="mb-2">
           <button
             className={`btn btn-link text-start w-100 d-flex align-items-center justify-content-between gap-2 py-2 px-3 rounded ${
-              ["/listdoc", "/ListNurse", "/listrecep", "/Department"].includes(
-                location.pathname
-              )
+              ["/listdoc", "/ListNurse", "/listrecep", "/Department"].includes(location.pathname)
                 ? "bg-sky-50 text-sky-700"
                 : "text-sky-600"
             }`}
@@ -92,10 +104,7 @@ const Adminnavbar = () => {
             style={{ textDecoration: "none" }}
           >
             <span className="d-flex align-items-center gap-2">
-              <i
-                className="bi bi-person-gear"
-                style={{ width: "24px", fontSize: "1.1rem" }}
-              ></i>
+              <i className="bi bi-person-gear" style={{ width: "24px", fontSize: "1.1rem" }}></i>
               Edit Users
             </span>
             <i className="bi bi-chevron-down small"></i>
@@ -103,9 +112,7 @@ const Adminnavbar = () => {
 
           <div
             className={`collapse ${
-              ["/listdoc", "/ListNurse", "/listrecep", "/Department"].includes(
-                location.pathname
-              )
+              ["/listdoc", "/ListNurse", "/listrecep", "/Department"].includes(location.pathname)
                 ? "show"
                 : ""
             }`}
@@ -156,19 +163,13 @@ const Adminnavbar = () => {
           </div>
         </div>
 
-        {/* Register User */}
         <Link
           className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
-            isActive("/reg")
-              ? "bg-sky-100 text-sky-800 fw-medium"
-              : "text-sky-600"
+            isActive("/reg") ? "bg-sky-100 text-sky-800 fw-medium" : "text-sky-600"
           }`}
           to="/reg"
         >
-          <i
-            className="bi bi-person-plus"
-            style={{ width: "24px", fontSize: "1.1rem" }}
-          ></i>
+          <i className="bi bi-person-plus" style={{ width: "24px", fontSize: "1.1rem" }}></i>
           Register User
         </Link>
 
@@ -183,7 +184,8 @@ const Adminnavbar = () => {
           <i className="bi bi-list-ul me-2"></i>
           Change Password
         </Link>
-           <Link
+
+        <Link
           className={`nav-link py-2 ps-3 rounded ${
             isActive("/Circularsender")
               ? "bg-sky-50 text-sky-700 border-start border-sky-500"
@@ -192,8 +194,9 @@ const Adminnavbar = () => {
           to="/Circularsender"
         >
           <i className="bi bi-list-ul me-2"></i>
-         Circular Sender
+          Circular Sender
         </Link>
+
         <button
           onClick={handleLogout}
           className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded text-danger bg-transparent border-0 text-start ${
@@ -222,9 +225,7 @@ const Adminnavbar = () => {
             <i className="bi bi-info-circle"></i>
           </button>
         </div>
-        <small className="text-sky-700 d-block">
-          Hospital Management System
-        </small>
+        <small className="text-sky-700 d-block">Hospital Management System</small>
         <small className="text-sky-500">v2.4.1</small>
       </div>
     </div>

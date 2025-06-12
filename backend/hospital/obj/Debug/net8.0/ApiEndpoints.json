@@ -653,12 +653,59 @@
   },
   {
     "ContainingType": "hospital.Controller.NurseController",
+    "Method": "GetNurse",
+    "RelativePath": "api/Nurse/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "hospital.Model.Nurse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "hospital.Controller.NurseController",
     "Method": "GetAppointmentfornurse",
     "RelativePath": "api/Nurse/appointmentnurse",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.NurseController",
+    "Method": "UpdateAvailabilityStatus",
+    "RelativePath": "api/Nurse/availabilitystatus/{nurseId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nurseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "hospital.Model.Nurse",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -729,6 +776,53 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "GetReceptionist",
+    "RelativePath": "api/Receptionist/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "hospital.Model.Receptionist",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "UpdateAvailabilityStatus",
+    "RelativePath": "api/Receptionist/availabilitystatus/{receptionistId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "receptionistId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "hospital.Model.Receptionist",
         "IsRequired": true
       }
     ],

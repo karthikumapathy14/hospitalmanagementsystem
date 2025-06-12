@@ -20,7 +20,6 @@ const Appointments = () => {
       return;
     }
 
-
     loadAppointments();
 
     axios
@@ -48,7 +47,6 @@ const Appointments = () => {
           prescriptionAdded: item.prescriptionAdded || false,
         }));
 
-        // nurse dropdown with already assigned nurse
         const initialSelectedNurses = {};
         updatedAppointments.forEach((appointment) => {
           if (appointment.nurseId) {
@@ -156,21 +154,20 @@ const Appointments = () => {
       <div className="flex-grow-1 p-4" style={{ marginLeft: "230px" }}>
         <div className="container-fluid py-3 px-4">
           <div className="d-flex justify-content-end mb-3">
-                <button
-                  type="button"
-                  onClick={viewappointment}
-                  className="btn btn-outline-success"
-                >
-                  View Patient History
-                </button>
-              </div>
+            <button
+              type="button"
+              onClick={viewappointment}
+              className="btn btn-outline-success"
+            >
+              View Patient History
+            </button>
+          </div>
+
           <div className="card shadow rounded-4 border-0 mb-4">
             <div className="card-body">
               <h2 className="text-center text-primary mb-4">
-                Upcomming Appointments
+                Upcoming Appointments
               </h2>
-
-              
 
               <div className="table-responsive">
                 <table className="table table-hover text-center align-middle">
@@ -232,8 +229,19 @@ const Appointments = () => {
                               >
                                 <option value="">-- Select Nurse --</option>
                                 {nurses.map((nurse) => (
-                                  <option key={nurse.id} value={nurse.id}>
-                                    {nurse.userName}
+                                  <option
+                                    key={nurse.id}
+                                    value={nurse.id}
+                                    disabled={nurse.availability !== "Available"}
+                                    style={{
+                                      color:
+                                        nurse.availability === "Available"
+                                          ? "green"
+                                          : "red",
+                                      fontWeight: "bold",
+                                    }}
+                                  >
+                                    {nurse.userName} ({nurse.availability})
                                   </option>
                                 ))}
                               </select>
@@ -245,8 +253,6 @@ const Appointments = () => {
                               >
                                 Assign Nurse
                               </button>
-
-                              {/* ✅ Add this below the button */}
                               {appointment.nurseId && (
                                 <div className="text-muted small">
                                   Assigned:{" "}
@@ -257,7 +263,6 @@ const Appointments = () => {
                               )}
                             </div>
                           </td>
-
                           <td>
                             <button
                               className="btn btn-outline-success btn-sm"
@@ -265,7 +270,7 @@ const Appointments = () => {
                                 setAppid(appointment.appointmentId);
                                 handleAdd();
                               }}
-                              disabled={appointment.prescriptionAdded} // Disable if already added
+                              disabled={appointment.prescriptionAdded}
                               title={
                                 appointment.prescriptionAdded
                                   ? "Prescription already added"
@@ -338,7 +343,18 @@ const Appointments = () => {
                               {appointment.status}
                             </span>
                           </td>
-                            <td><button className="btn btn-outline-primary" onClick={()=>navigate(`/viewprescription/${appointment.appointmentId}`)}>View/Edit Prescription</button></td>
+                          <td>
+                            <button
+                              className="btn btn-outline-primary"
+                              onClick={() =>
+                                navigate(
+                                  `/viewprescription/${appointment.appointmentId}`
+                                )
+                              }
+                            >
+                              View/Edit Prescription
+                            </button>
+                          </td>
                         </tr>
                       ))
                     )}

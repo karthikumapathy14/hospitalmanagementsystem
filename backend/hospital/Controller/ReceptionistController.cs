@@ -496,6 +496,32 @@ namespace hospital.Controller
             return Ok(slots);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Receptionist>> GetReceptionist(int id)
+        {
+            var receptionist = await _dbcontext.Receptionists.FindAsync(id);
+            if (receptionist == null)
+            {
+                return NotFound("Receptionist not found.");
+            }
+            return receptionist;
+        }
 
+        [HttpPut("availabilitystatus/{receptionistId}")]
+        public async Task<IActionResult> UpdateAvailabilityStatus(int receptionistId, [FromBody] Receptionist request)
+        {
+            if (request == null || string.IsNullOrEmpty(request.Availability))
+                return BadRequest("Invalid status.");
+
+            var receptionist = await _dbcontext.Receptionists.FindAsync(receptionistId);
+            if (receptionist == null)
+                return NotFound("Receptionist not found.");
+
+            receptionist.Availability = request.Availability;
+            await _dbcontext.SaveChangesAsync();
+
+            return Ok(new { message = "Availability status updated successfully." });
+        }
     }
 }
+

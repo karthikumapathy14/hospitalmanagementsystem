@@ -1215,6 +1215,93 @@
         }
       }
     },
+    "/api/Nurse/{id}": {
+      "get": {
+        "tags": [
+          "Nurse"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Nurse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Nurse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Nurse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Nurse/availabilitystatus/{nurseId}": {
+      "put": {
+        "tags": [
+          "Nurse"
+        ],
+        "parameters": [
+          {
+            "name": "nurseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Nurse"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Nurse"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Nurse"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Nurse"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/PatientContoller/api/patient/appointments/my": {
       "get": {
         "tags": [
@@ -1652,6 +1739,93 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Receptionist/{id}": {
+      "get": {
+        "tags": [
+          "Receptionist"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receptionist"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receptionist"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receptionist"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Receptionist/availabilitystatus/{receptionistId}": {
+      "put": {
+        "tags": [
+          "Receptionist"
+        ],
+        "parameters": [
+          {
+            "name": "receptionistId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Receptionist"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Receptionist"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Receptionist"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Receptionist"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
