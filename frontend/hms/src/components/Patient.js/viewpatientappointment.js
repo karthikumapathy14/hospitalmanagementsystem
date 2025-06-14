@@ -73,8 +73,7 @@ const Viewapatientappointment = () => {
 
   return (
     <>
-      <PatientNavbar />
-
+    
       <div className="container mt-5">
         <h2 className="mb-4 text-center">My Appointments</h2>
 
@@ -122,7 +121,7 @@ const Viewapatientappointment = () => {
                     <td>{app.reason || 'N/A'}</td>
                     <td>{getStatusBadge(app.status)}</td>
                     <td>
-                      <Link to={`/billpatientview/${app.appointmentId}`}>
+                      <Link to={`/patient/billpatientview/${app.appointmentId}`}>
                         <button className="btn btn-outline-primary btn-sm">
                           View Bill
                         </button>

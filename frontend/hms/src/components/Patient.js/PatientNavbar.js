@@ -28,11 +28,11 @@ const PatientNavbar = () => {
         <div className="d-flex align-items-center gap-3 ms-auto">
           <Link
             className={`btn btn-sm ${
-              isActive("/changepassword")
+              isActive("/patient/changepassword")
                 ? "btn-primary text-white"
                 : "btn-outline-primary"
             }`}
-            to="/changepassword"
+            to="/patient/changepassword"
           >
             <i className="bi bi-shield-lock-fill me-1"></i> Change Password
           </Link>

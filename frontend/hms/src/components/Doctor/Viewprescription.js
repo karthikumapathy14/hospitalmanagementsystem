@@ -73,7 +73,7 @@ const Viewprescription = () => {
     <div>
       <div
         className="flex-grow-1 p-4"
-        style={{ backgroundColor: "#e8f4f8", height: "100vh" }}
+        style={{ height: "100vh" }}
       >
         <div className="container">
           <div

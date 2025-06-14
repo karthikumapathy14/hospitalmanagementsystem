@@ -158,14 +158,9 @@ const Makeappointment = () => {
 
   return (
     <div
-      className="d-flex"
-      style={{ minHeight: "100vh", backgroundColor: "#f8f9fa" }}
-    >
-      <ReceptionistNavbar />
+      className="d-flex">
       <div
-        className="flex-grow-1 p-4"
-        style={{ marginLeft: "260px", width: "calc(100% - 260px)" }}
-      >
+        className="flex-grow-1 p-4">
         <div className="container-fluid py-4">
           <div className="card shadow-sm border-0 p-4">
             <div className="row justify-content-center">

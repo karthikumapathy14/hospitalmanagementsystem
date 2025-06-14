@@ -47,11 +47,11 @@ const Login = () => {
       const role = decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
       localStorage.setItem('role', role);
 
-      if (role.includes('Admin')) navigate('/Admindashboard');
-      else if (role.includes('Receptionist')) navigate('/Createappointment');
-      else if (role.includes('Nurse')) navigate('/Viewappointmentnurse');
-      else if (role.includes('Doctor')) navigate('/viewappointment');
-      else if (role.includes('Patient')) navigate('/Viewapatientappointment');
+      if (role.includes('Admin')) navigate('/admin/Admindashboard');
+      else if (role.includes('Receptionist')) navigate('/receptionist/Createappointment');
+      else if (role.includes('Nurse')) navigate('/nurse/Viewappointmentnurse');
+      else if (role.includes('Doctor')) navigate('/doctor/viewappointment');
+      else if (role.includes('Patient')) navigate('/patient/Viewapatientappointment');
       else navigate('/unauthorized');
     } catch (error) {
       console.error('Login failed:', error);

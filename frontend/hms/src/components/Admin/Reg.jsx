@@ -52,7 +52,7 @@ const RegisterForm = () => {
 
   return (
     <div className="d-flex">
-      <Adminnavbar />
+     
       <div className="flex-grow-1 bg-light">
         <div className="container d-flex justify-content-center align-items-center min-vh-100">
           <div

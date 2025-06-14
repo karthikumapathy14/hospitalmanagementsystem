@@ -88,7 +88,7 @@ const DoctorSideEditAppointment = () => {
       )
       .then(() => {
         toast.success("Appointment updated successfully!");
-        navigate("/viewappointment");
+        navigate("/doctor/viewappointment");
       })
       .catch((err) => {
         console.error(

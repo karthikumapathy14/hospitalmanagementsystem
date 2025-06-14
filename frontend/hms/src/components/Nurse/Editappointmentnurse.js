@@ -43,7 +43,7 @@ const Editappointmentnurse = () => {
 
       .then(() => {
         alert("✅ Prescription updated successfully");
-        navigate("/Viewappointmentnurse");
+        navigate("/nurse/Viewappointmentnurse");
       })
       .catch((err) => console.error(err));
   };
@@ -74,14 +74,9 @@ const Editappointmentnurse = () => {
 
   return (
 
-    <div className="d-flex" style={{ minHeight: "100vh" }}>
-      {/* Sidebar */}
-      <div style={{ width: "250px", backgroundColor: "#f8f9fa" }}>
-        <Nursesidebar />
-      </div>
-
+    <div className="d-flex" >
       {/* Main Content */}
-      <div className="flex-grow-1 p-4" style={{ backgroundColor: "#e8f4f8" }}>
+      <div className="flex-grow-1 p-4" >
         <div className="container">
           <div className="card shadow border-0 rounded-4 mx-auto" style={{ maxWidth: "720px" }}>
             <div className="card-header bg-info text-white text-center rounded-top-4">

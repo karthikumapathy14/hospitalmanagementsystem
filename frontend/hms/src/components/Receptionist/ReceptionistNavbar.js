@@ -138,16 +138,16 @@ const ReceptionistNavbar = () => {
 
       {/* NAVIGATION */}
       <nav className="nav flex-column gap-1 px-3">
-        <Link className={`nav-link ${isActive("/listpatient") ? "bg-sky-100 fw-medium" : "text-sky-600"}`} to="/listpatient">
+        <Link className={`nav-link ${isActive("/receptionist/listpatient") ? "bg-sky-100 fw-medium" : "text-sky-600"}`} to="/receptionist/listpatient">
           <i className="bi bi-list-ul me-2"></i> Patient List
         </Link>
-        <Link className={`nav-link ${isActive("/CreatePatient") ? "bg-sky-100 fw-medium" : "text-sky-600"}`} to="/CreatePatient">
+        <Link className={`nav-link ${isActive("/receptionist/CreatePatient") ? "bg-sky-100 fw-medium" : "text-sky-600"}`} to="/receptionist/CreatePatient">
           <i className="bi bi-person-plus me-2"></i> Register Patient
         </Link>
-        <Link className={`nav-link ${isActive("/Listappointment") ? "bg-sky-100 fw-medium" : "text-sky-600"}`} to="/Listappointment">
+        <Link className={`nav-link ${isActive("/receptionist/Listappointment") ? "bg-sky-100 fw-medium" : "text-sky-600"}`} to="/receptionist/Listappointment">
           <i className="bi bi-calendar me-2"></i> List Appointment
         </Link>
-        <Link className={`nav-link ${isActive("/changepassword") ? "bg-sky-100 fw-medium" : "text-sky-600"}`} to="/changepassword">
+        <Link className={`nav-link ${isActive("/receptionist/changepassword") ? "bg-sky-100 fw-medium" : "text-sky-600"}`} to="/receptionist/changepassword">
           <i className="bi bi-shield-lock me-2"></i> Change Password
         </Link>
         <button onClick={handleLogout} className="nav-link text-danger border-0 text-start bg-transparent">

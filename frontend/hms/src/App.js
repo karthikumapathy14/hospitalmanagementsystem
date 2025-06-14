@@ -39,13 +39,18 @@ import Bill from './components/Receptionist/Bill.js';
 import Viewapatientappointment from './components/Patient.js/viewpatientappointment.js'
 import Billpatientview from './components/Patient.js/Billpatientview.js';
 import ChangePassword from './components/ChangePassword.js';
-import ForgotPassword from './components/Receptionist/ForgetPassword.js';
-import ResetPassword from './components/Receptionist/ResetPassword.js';
+import ForgotPassword from './components/ForgetPassword.js';
+import ResetPassword from './components/ResetPassword.js';
 import WhatsAppSender from './components/WhatsAppSender.js';
 import Circularsender from './components/Circularsender.js'
 import Viewprescription from './components/Doctor/Viewprescription.js';
 import DoctorAvailibility from './components/Doctor/DoctorAvailibility.js';
 import Staffavailable from './components/Admin/Staffavailable.js';
+import AdminApp from './components/Admin/AdminApp.js';
+import DoctorApp from './components/Doctor/DoctorApp.js';
+import NurseApp from './components/Nurse/NurseApp.js';
+import PatientApp from './components/Patient.js/PatientApp.js';
+import ReceptionistApp from './components/Receptionist/ReceptionistApp.js';
 
 
 function App() {
@@ -60,12 +65,23 @@ function App() {
             <Routes>
               {/* common */}
               <Route path="/" element={<Login />} />
-              <Route path='/changepassword' element={<ChangePassword/>}></Route>
+
+              <Route path='/admin/*' element={<AdminApp/>}></Route>
+              <Route path='/doctor/*' element={<DoctorApp/>}></Route>
+              <Route path='/nurse/*' element={<NurseApp/>}></Route>
+              <Route path='/patient/*' element={<PatientApp/>}></Route>
+              <Route path='/receptionist/*' element={<ReceptionistApp/>}></Route>
+
+              <Route path="/forgotpassword" element={<ForgotPassword />} />
+               <Route path="/resetpassword" element={<ResetPassword />} />
+
+
+              {/* <Route path='/changepassword' element={<ChangePassword/>}></Route>
               <Route path='/WhatsAppSender' element={<WhatsAppSender/>}></Route>
-              <Route path='/Circularsender' element={<Circularsender/>}></Route>
+              <Route path='/Circularsender' element={<Circularsender/>}></Route> */}
 
               {/* Admin navbar */}
-              <Route path="/reg" element={<Reg />} />
+              {/* <Route path="/reg" element={<Reg />} />
               <Route path='/department' element={<Department />}></Route>
               <Route path='/listdoc' element={<ListDoc />}></Route>
               <Route path='/listdoc/:id' element={<EditDoct />}></Route>
@@ -74,40 +90,38 @@ function App() {
               <Route path='/ListNurse/:id' element={<EditNurse />}></Route>
               <Route path='/listrecep' element={<ListReceptionist />}></Route>
               <Route path='/listrecep/:id' element={<EditRecep />}></Route>
-              <Route path ='/Staffavailable' element={<Staffavailable/>}/>
+              <Route path ='/Staffavailable' element={<Staffavailable/>}/> */}
 
               {/* receptionist dashboard */}
         
-              <Route path='/listPatient' element={<ListPatient />}></Route>
+              {/* <Route path='/listPatient' element={<ListPatient />}></Route>
               <Route path='/listPatient/:id' element={<EditPaient />}></Route>
               <Route path='/CreatePatient' element={<CreatePatient />}></Route>
-              {/* <Route path='/createApponitment' element={<Appointment/>}></Route>
-              <Route path='/createApponitment/:id' element={<Makeappointment/>}></Route> */}
+             
               <Route path='/Createappointment' element={<Makeappointment />}></Route>
               <Route path='/Listappointment' element={<ListAppointment />}></Route>
               <Route path='/editappointment/:id' element={<Editappointment />}></Route>
-              <Route path='/billgenerate' element={<Bill/>}></Route>
+              <Route path='/billgenerate' element={<Bill/>}></Route> */}
          
 
               {/* Doctor dashboard */}
-              {/* <Route path='/DoctorDashboard' element={<DoctorDashboard/>}></Route> */}
-              <Route path='/viewappointment' element={<Viewappointment />}> </Route>
+             
+              {/* <Route path='/viewappointment' element={<Viewappointment />}> </Route>
               <Route path="/DoctorSideEditAppointment/:id" element={<DoctorSideEditAppointment />} />
               <Route path='/Addprescription' element={<Addprescription/>}></Route>
               <Route path='/PatientHistory' element={<PatientHistory/>}></Route>
               <Route path='/Viewprescription/:id' element={<Viewprescription/>}></Route>
              <Route path='/DoctorAvailibility' element={<DoctorAvailibility/>}></Route>
-              
+               */}
 
               {/* nurse dashboard */}
-              <Route path='/Viewappointmentnurse' element={<Viewappointmentnurse/>}></Route>
-              <Route path='/Editappointmentnurse/:id' element={<Editappointmentnurse/>}></Route>
+              {/* <Route path='/Viewappointmentnurse' element={<Viewappointmentnurse/>}></Route>
+              <Route path='/Editappointmentnurse/:id' element={<Editappointmentnurse/>}></Route> */}
 
               {/* {patient dashboard} */}
-              <Route path='/Viewapatientappointment' element={<Viewapatientappointment/>}></Route>
-              <Route path='/billpatientview/:id' element={<Billpatientview/>}></Route>
-                <Route path="/forgotpassword" element={<ForgotPassword />} />
-               <Route path="/resetpassword" element={<ResetPassword />} />
+              {/* <Route path='/Viewapatientappointment' element={<Viewapatientappointment/>}></Route>
+              <Route path='/billpatientview/:id' element={<Billpatientview/>}></Route> */}
+                
             </Routes>
           </div>
         </div>

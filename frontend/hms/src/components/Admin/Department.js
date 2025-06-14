@@ -50,7 +50,7 @@ const Department = () => {
 
   return (
     <div className="d-flex">
-      <Adminnavbar />
+     
       <div
         className="flex-grow-1 d-flex justify-content-center align-items-center bg-light"
         style={{ minHeight: "100vh" }}

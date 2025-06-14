@@ -101,7 +101,7 @@ const Nursesidebar = ({ isMobile, closeSidebar }) => {
           </div>
           <h5 className="text-sky-800 fw-bold mb-0">MEDCARE HOSPITAL</h5>
         </div>
-        <div className="badge bg-sky-0 tex-dark px-3 py-1 rounded-pill">
+        <div className=" tex-dark px-3 py-1 rounded-pill">
           <i className="bi bi-reception-4 me-1"></i> Nurse Desk
         </div>
       </div>
@@ -124,11 +124,11 @@ const Nursesidebar = ({ isMobile, closeSidebar }) => {
 
       <nav className="nav flex-column px-2 pt-3 flex-grow-1">
         <Link
-          className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${isActive("/Viewappointmentnurse")
+          className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${isActive("/nurse/Viewappointmentnurse")
               ? "bg-sky-100 text-sky-800 fw-semibold"
               : "text-sky-600"
             }`}
-          to="/Viewappointmentnurse"
+          to="/nurse/Viewappointmentnurse"
           onClick={isMobile ? closeSidebar : null}
         >
           <i className="bi bi-calendar-check fs-5"></i>
@@ -136,11 +136,11 @@ const Nursesidebar = ({ isMobile, closeSidebar }) => {
         </Link>
 
         <Link
-          className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${isActive("/changepassword")
+          className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${isActive("/nurse/changepassword")
               ? "bg-sky-50 text-sky-700 border-start border-3 border-sky-500"
               : "text-sky-600"
             }`}
-          to="/changepassword"
+          to="/nurse/changepassword"
           onClick={isMobile ? closeSidebar : null}
         >
           <i className="bi bi-shield-lock fs-5"></i>

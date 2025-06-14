@@ -64,18 +64,10 @@ const EditPatient = () => {
   };
 
   return (
-    <div
-      className="d-flex"
-      style={{
-        backgroundColor: "#f8fafc",
-        minHeight: "100vh",
-        backgroundImage: "linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%)",
-      }}
-    >
-      <ReceptionistNavbar />
+    <div>
       <div
         className="flex-grow-1 d-flex justify-content-center align-items-center p-5"
-        style={{ marginLeft: "260px", width: "calc(100% - 260px)" }}
+        
       >
         <div
           className="p-4 shadow-lg rounded-lg"

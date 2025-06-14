@@ -63,7 +63,7 @@ const EditDoct = () => {
       })
       .then(() => {
         alert("Doctor Details Updated Successfully");
-        navigate("/listdoc");
+        navigate("/admin/listdoc");
       })
       .catch((err) => console.log(err));
   };
@@ -74,14 +74,14 @@ const EditDoct = () => {
         .delete(`https://localhost:7058/api/Admin/docdelete/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-        .then(() => navigate("/listdoc"))
+        .then(() => navigate("/admin/listdoc"))
         .catch((err) => console.log(err));
     }
   };
 
   return (
     <div className="d-flex">
-      <Adminnavbar />
+    
       <div
         className="flex-grow-1 d-flex justify-content-center align-items-center bg-light"
         style={{ minHeight: "100vh" }}

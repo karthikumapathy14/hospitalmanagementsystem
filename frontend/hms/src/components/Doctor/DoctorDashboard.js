@@ -121,11 +121,11 @@ const DoctorSidebar = () => {
       <nav className="nav flex-column gap-1 px-3">
         <Link
           className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
-            isActive("/viewappointment")
+            isActive("/doctor/viewappointment")
               ? "bg-sky-100 text-sky-800 fw-medium"
               : "text-sky-600"
           }`}
-          to="/viewappointment"
+          to="/doctor/viewappointment"
         >
           <i className="bi bi-person-plus" style={{ fontSize: "1.1rem" }}></i>
           View Appointments
@@ -133,11 +133,11 @@ const DoctorSidebar = () => {
 
         <Link
           className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
-            isActive("/changepassword")
+            isActive("/doctor/changepassword")
               ? "bg-sky-100 text-sky-800 fw-medium"
               : "text-sky-600"
           }`}
-          to="/changepassword"
+          to="/doctor/changepassword"
         >
           <i className="bi bi-shield-lock" style={{ fontSize: "1.1rem" }}></i>
           Change Password
@@ -145,11 +145,11 @@ const DoctorSidebar = () => {
 
             <Link
           className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
-            isActive("/DoctorAvailibility")
+            isActive("/doctor/DoctorAvailibility")
               ? "bg-sky-100 text-sky-800 fw-medium"
               : "text-sky-600"
           }`}
-          to="/DoctorAvailibility"
+          to="/doctor/DoctorAvailibility"
         >
           <i className="bi bi-shield-lock" style={{ fontSize: "1.1rem" }}></i>
           Doctor Availibility

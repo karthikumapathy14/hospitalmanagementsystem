@@ -51,7 +51,7 @@ const EditRecep = () => {
       )
       .then(() => {
         alert("Receptionist Details Updated Successfully");
-        navigate("/listReceptionist");
+        navigate("/admin/listReceptionist");
       })
       .catch((err) => console.log(err));
   };
@@ -62,14 +62,14 @@ const EditRecep = () => {
         .delete(`https://localhost:7058/api/Admin/delete-receptionist/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
-        .then(() => navigate("/listReceptionist"))
+        .then(() => navigate("/admin/listReceptionist"))
         .catch((err) => console.log(err));
     }
   };
 
   return (
     <div className="d-flex">
-      <Adminnavbar />
+   
       <div
         className="flex-grow-1 d-flex justify-content-center align-items-center bg-light"
         style={{ minHeight: "100vh" }}

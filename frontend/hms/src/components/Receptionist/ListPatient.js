@@ -12,7 +12,7 @@ const ListPatient = () => {
   const navigate = useNavigate();
 
   const handleEdit = (id) => {
-    navigate(`/Listpatient/${id}`);
+    navigate(`/receptionist/Listpatient/${id}`);
   };
   const token = localStorage.getItem("token");
   useEffect(() => {
@@ -48,14 +48,9 @@ const ListPatient = () => {
   }, [searchTerm, data]);
 
   return (
-    <div
-      className="d-flex"
-      style={{ minHeight: "100vh", backgroundColor: "#f8f9fa" }}
-    >
-      <ReceptionistNavbar />
+    <div>
       <div
         className="flex-grow-1 p-4"
-        style={{ marginLeft: "260px", width: "calc(100% - 260px)" }}
       >
         <div className="container-fluid py-4">
           <div className="card shadow-sm border-0">

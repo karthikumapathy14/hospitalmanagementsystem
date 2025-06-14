@@ -73,7 +73,7 @@ const ListAppointment = () => {
         toast.info("Bill already generated for this appointment.");
       } else {
         setAppid(appointmentId);
-        navigate("/billgenerate");
+        navigate("/receptionist/billgenerate");
       }
     } catch (error) {
       console.error("Error checking bill existence:", error);
@@ -126,8 +126,8 @@ const ListAppointment = () => {
 
   return (
     <div className="d-flex bg-light min-vh-100">
-      <ReceptionistNavbar />
-      <div className="flex-grow-1 p-4" style={{ marginLeft: "230px" }}>
+  
+      <div className="flex-grow-1 p-4" >
         <div className="container-fluid py-3">
           <div className="card shadow-sm border-0 rounded-4 overflow-hidden">
             <div className="card-header bg-primary text-white py-3">
@@ -256,7 +256,7 @@ const ListAppointment = () => {
                               <td>
                                 <div className="d-flex gap-2">
                                   <Link
-                                    to={`/editappointment/${item.appointmentId}`}
+                                    to={`/receptionist/editappointment/${item.appointmentId}`}
                                     className="btn btn-sm btn-outline-primary"
                                     title="Edit Appointment"
                                   >
@@ -275,7 +275,7 @@ const ListAppointment = () => {
                                     <FaMoneyBillWave /> Bill Generate
                                   </button>
                                   <Link
-                                    to={`/billpatientview/${item.appointmentId}`}
+                                    to={`/receptionist/billpatientview/${item.appointmentId}`}
                                     className="btn btn-sm btn-outline-info"
                                     title="View Bill"
                                   >

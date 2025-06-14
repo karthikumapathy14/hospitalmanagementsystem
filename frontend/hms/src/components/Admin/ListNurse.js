@@ -27,15 +27,7 @@ const ListNurse = () => {
   }, [navigate]);
 
   return (
-    <div
-      className="d-flex"
-      style={{
-        backgroundColor: "#f8fafc",
-        minHeight: "100vh",
-        backgroundImage: "linear-gradient(to bottom, #ffffff 0%, #f8fafc 100%)",
-      }}
-    >
-      <Adminnavbar />
+    <div>
       <div className="flex-grow-1 p-4 p-lg-5">
         <div className="container">
           <h2

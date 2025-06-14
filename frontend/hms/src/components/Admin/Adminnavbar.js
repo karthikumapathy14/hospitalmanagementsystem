@@ -77,11 +77,11 @@ const Adminnavbar = () => {
       <nav className="nav flex-column gap-1 px-3">
         <Link
           className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
-            isActive("/Admindashboard")
+            isActive("/admin/Admindashboard")
               ? "bg-sky-100 text-sky-800 fw-medium"
               : "text-sky-600"
           }`}
-          to="/Admindashboard"
+          to="/admin/Admindashboard"
         >
           <i className="bi bi-speedometer2" style={{ width: "24px", fontSize: "1.1rem" }}></i>
           Dashboard
@@ -95,7 +95,7 @@ const Adminnavbar = () => {
         <div className="mb-2">
           <button
             className={`btn btn-link text-start w-100 d-flex align-items-center justify-content-between gap-2 py-2 px-3 rounded ${
-              ["/listdoc", "/ListNurse", "/listrecep", "/Department"].includes(location.pathname)
+              ["/admin/listdoc", "/admin/ListNurse", "/admin/listrecep", "/admin/Department"].includes(location.pathname)
                 ? "bg-sky-50 text-sky-700"
                 : "text-sky-600"
             }`}
@@ -112,7 +112,7 @@ const Adminnavbar = () => {
 
           <div
             className={`collapse ${
-              ["/listdoc", "/ListNurse", "/listrecep", "/Department"].includes(location.pathname)
+              ["/admin/listdoc", "/admin/ListNurse", "/admin/listrecep", "/admin/Department"].includes(location.pathname)
                 ? "show"
                 : ""
             }`}
@@ -121,41 +121,41 @@ const Adminnavbar = () => {
             <nav className="nav flex-column ms-4">
               <Link
                 className={`nav-link py-2 ps-3 rounded ${
-                  isActive("/listdoc")
+                  isActive("/admin/listdoc")
                     ? "bg-sky-50 text-sky-700 border-start border-sky-500"
                     : "text-sky-600"
                 }`}
-                to="/listdoc"
+                to="/admin/listdoc"
               >
                 👨‍⚕️ List Doctors
               </Link>
               <Link
                 className={`nav-link py-2 ps-3 rounded ${
-                  isActive("/ListNurse")
+                  isActive("/admin/ListNurse")
                     ? "bg-sky-50 text-sky-700 border-start border-sky-500"
                     : "text-sky-600"
                 }`}
-                to="/ListNurse"
+                to="/admin/ListNurse"
               >
                 🧑‍⚕️ List Nurses
               </Link>
               <Link
                 className={`nav-link py-2 ps-3 rounded ${
-                  isActive("/listrecep")
+                  isActive("/admin/listrecep")
                     ? "bg-sky-50 text-sky-700 border-start border-sky-500"
                     : "text-sky-600"
                 }`}
-                to="/listrecep"
+                to="/admin/listrecep"
               >
                 🧑‍💼 List Receptionists
               </Link>
               <Link
                 className={`nav-link py-2 ps-3 rounded ${
-                  isActive("/Department")
+                  isActive("/admin/Department")
                     ? "bg-sky-50 text-sky-700 border-start border-sky-500"
                     : "text-sky-600"
                 }`}
-                to="/Department"
+                to="/admin/Department"
               >
                 🏢 Add Department
               </Link>
@@ -165,9 +165,9 @@ const Adminnavbar = () => {
 
         <Link
           className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
-            isActive("/reg") ? "bg-sky-100 text-sky-800 fw-medium" : "text-sky-600"
+            isActive("/admin/reg") ? "bg-sky-100 text-sky-800 fw-medium" : "text-sky-600"
           }`}
-          to="/reg"
+          to="/admin/reg"
         >
           <i className="bi bi-person-plus" style={{ width: "24px", fontSize: "1.1rem" }}></i>
           Register User
@@ -175,11 +175,11 @@ const Adminnavbar = () => {
 
         <Link
           className={`nav-link py-2 ps-3 rounded ${
-            isActive("/changepassword")
+            isActive("/admin/changepassword")
               ? "bg-sky-50 text-sky-700 border-start border-sky-500"
               : "text-sky-600"
           }`}
-          to="/changepassword"
+          to="/admin/changepassword"
         >
           <i className="bi bi-list-ul me-2"></i>
           Change Password
@@ -187,22 +187,22 @@ const Adminnavbar = () => {
 
         <Link
           className={`nav-link py-2 ps-3 rounded ${
-            isActive("/Circularsender")
+            isActive("/admin/Circularsender")
               ? "bg-sky-50 text-sky-700 border-start border-sky-500"
               : "text-sky-600"
           }`}
-          to="/Circularsender"
+          to="/admin/Circularsender"
         >
           <i className="bi bi-list-ul me-2"></i>
           Circular Sender
         </Link>
          <Link
           className={`nav-link py-2 ps-3 rounded ${
-            isActive("/Staffavailable")
+            isActive("/admin/Staffavailable")
               ? "bg-sky-50 text-sky-700 border-start border-sky-500"
               : "text-sky-600"
           }`}
-          to="/Staffavailable"
+          to="/admin/Staffavailable"
         >
           <i className="bi bi-list-ul me-2"></i>
          Staffavailable

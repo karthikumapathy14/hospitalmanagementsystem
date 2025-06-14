@@ -64,11 +64,11 @@ const Appointments = () => {
   };
 
   const handleAdd = () => {
-    navigate("/Addprescription");
+    navigate("/doctor/Addprescription");
   };
 
   const viewappointment = () => {
-    navigate("/PatientHistory");
+    navigate("/doctor/PatientHistory");
   };
 
   const handleNurseChange = (appointmentId, nurseId) => {
@@ -149,9 +149,8 @@ const Appointments = () => {
   );
 
   return (
-    <div className="d-flex bg-light min-vh-100">
-      <DoctorDashboard />
-      <div className="flex-grow-1 p-4" style={{ marginLeft: "230px" }}>
+    <div className="d-flex ">
+      <div className="flex-grow-1" >
         <div className="container-fluid py-3 px-4">
           <div className="d-flex justify-content-end mb-3">
             <button
@@ -348,7 +347,7 @@ const Appointments = () => {
                               className="btn btn-outline-primary"
                               onClick={() =>
                                 navigate(
-                                  `/viewprescription/${appointment.appointmentId}`
+                                  `/doctor/viewprescription/${appointment.appointmentId}`
                                 )
                               }
                             >

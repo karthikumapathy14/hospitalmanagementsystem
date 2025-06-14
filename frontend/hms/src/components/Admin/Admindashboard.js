@@ -118,7 +118,7 @@ const Admindashboard = () => {
 
   return (
     <div className="d-flex">
-      <Adminnavbar />
+    
       <div className="flex-grow-1">
         <div className="container mt-4">
           <h4 className="text-center mb-4">Admin Dashboard</h4>

@@ -55,7 +55,7 @@ const EditNurse = () => {
       })
       .then(() => {
         alert("Nurse Details Updated Successfully");
-        navigate("/listNurse");
+        navigate("/admin/listNurse");
       })
       .catch((err) => console.log(err));
   };
@@ -66,14 +66,14 @@ const EditNurse = () => {
         .delete(`https://localhost:7058/api/Admin/delete-nurse/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
-        .then(() => navigate("/listNurse"))
+        .then(() => navigate("/admin/listNurse"))
         .catch((err) => console.log(err));
     }
   };
 
   return (
     <div className="d-flex">
-      <Adminnavbar />
+    
       <div
         className="flex-grow-1 d-flex justify-content-center align-items-center bg-light"
         style={{ minHeight: "100vh" }}
