@@ -264,8 +264,68 @@
   },
   {
     "ContainingType": "hospital.Controller.AdminController",
+    "Method": "getdocavailablecount",
+    "RelativePath": "api/Admin/getdocavailablecount",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GetDocAvailableDetails",
+    "RelativePath": "api/Admin/getdocavailabledetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
     "Method": "getNurse",
     "RelativePath": "api/Admin/getnurse",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "getnurseavailablecount",
+    "RelativePath": "api/Admin/getnurseavailablecount",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "getnurseavailabledetials",
+    "RelativePath": "api/Admin/getnurseavailabledetials",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "getrecavailablecount",
+    "RelativePath": "api/Admin/getrecavailablecount",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "getrecavailabledetials",
+    "RelativePath": "api/Admin/getrecavailabledetials",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

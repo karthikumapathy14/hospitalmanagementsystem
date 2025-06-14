@@ -196,6 +196,17 @@ const Adminnavbar = () => {
           <i className="bi bi-list-ul me-2"></i>
           Circular Sender
         </Link>
+         <Link
+          className={`nav-link py-2 ps-3 rounded ${
+            isActive("/Staffavailable")
+              ? "bg-sky-50 text-sky-700 border-start border-sky-500"
+              : "text-sky-600"
+          }`}
+          to="/Staffavailable"
+        >
+          <i className="bi bi-list-ul me-2"></i>
+         Staffavailable
+        </Link>
 
         <button
           onClick={handleLogout}

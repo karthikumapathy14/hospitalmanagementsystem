@@ -45,6 +45,7 @@ import WhatsAppSender from './components/WhatsAppSender.js';
 import Circularsender from './components/Circularsender.js'
 import Viewprescription from './components/Doctor/Viewprescription.js';
 import DoctorAvailibility from './components/Doctor/DoctorAvailibility.js';
+import Staffavailable from './components/Admin/Staffavailable.js';
 
 
 function App() {
@@ -73,6 +74,7 @@ function App() {
               <Route path='/ListNurse/:id' element={<EditNurse />}></Route>
               <Route path='/listrecep' element={<ListReceptionist />}></Route>
               <Route path='/listrecep/:id' element={<EditRecep />}></Route>
+              <Route path ='/Staffavailable' element={<Staffavailable/>}/>
 
               {/* receptionist dashboard */}
         

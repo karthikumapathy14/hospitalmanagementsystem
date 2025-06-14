@@ -325,10 +325,60 @@ namespace hospital.Controller
 
             return Ok(result);
         }
+        [HttpGet("getdocavailablecount")]
+        public async Task<IActionResult> getdocavailablecount()
+        {
+           var getdocavailablecount = await _dbcontext.Doctors.CountAsync();
+
+            return Ok(getdocavailablecount);
+        }
+
+        [HttpGet("getnurseavailablecount")]
+        public async Task<IActionResult> getnurseavailablecount()
+        {
+            var getnurseavailablecount = await _dbcontext.Nurses.CountAsync();
+
+            return Ok(getnurseavailablecount);
+        }
+
+        [HttpGet("getrecavailablecount")]
+        public async Task<IActionResult> getrecavailablecount()
+        {
+            var getnurseavailablecount = await _dbcontext.Nurses.CountAsync();
+
+            return Ok(getnurseavailablecount);
+        }
+
+      
+
+[HttpGet("getdocavailabledetails")]
+    public async Task<IActionResult> GetDocAvailableDetails()
+    {
+        var doctorDetails = await _dbcontext.Doctors
+            .Include(d => d.Department) // Eagerly load Department
+            .ToListAsync();
+
+        return Ok(doctorDetails);
+    }
 
 
+    [HttpGet("getnurseavailabledetials")]
 
+        public async Task<IActionResult> getnurseavailabledetials()
+        {
+            var getnurseavailabledetials = await _dbcontext.Nurses.ToListAsync();
 
+            return Ok(getnurseavailabledetials);
+        }
+
+        [HttpGet("getrecavailabledetials")]
+
+        public async Task<IActionResult> getrecavailabledetials ()
+        {
+            var getrecavailabledetials = await _dbcontext.Receptionists.ToListAsync();
+
+            return Ok(getrecavailabledetials);
+        }
 
     }
 }
