@@ -8,15 +8,25 @@ import axios from "axios";
 const Nursesidebar = ({ isMobile, closeSidebar }) => {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
+  let nurseName='';
 
   const token = localStorage.getItem("token");
+  const decoded = jwtDecode(token);
+
   const [nurseId, setNurseId] = useState(null);
   const [availability, setAvailability] = useState("Unavailable");
+
+
+  if (token) {
+    nurseName =
+      decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+    console.log(nurseName);
+  }
 
   useEffect(() => {
     if (token) {
       try {
-        const decoded = jwtDecode(token);
+        
         console.log(decoded)
         const idFromToken = decoded?.NurseId;
         const idFromStorage = localStorage.getItem("nurseId");
@@ -104,6 +114,11 @@ const Nursesidebar = ({ isMobile, closeSidebar }) => {
         <div className=" tex-dark px-3 py-1 rounded-pill">
           <i className="bi bi-reception-4 me-1"></i> Nurse Desk
         </div>
+         {nurseName && (
+          <div className="badge bg-sky-200 text-sky-800 px-3 py-1 rounded-pill mb-1 text-dark">
+            <p><i className="bi bi-person-circle me-1"></i> Welcome {nurseName}!</p>
+          </div>
+        )}
       </div>
 
       <div className="text-center my-3 px-3">

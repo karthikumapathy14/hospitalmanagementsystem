@@ -6,21 +6,22 @@ import { jwtDecode } from "jwt-decode";
 const Adminnavbar = () => {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
-  let adminName=''
+  let adminName = "";
 
   const handleLogout = () => {
     logout();
   };
 
-  const token = localStorage.getItem("token"); 
-  const decoded=jwtDecode(token)
-  console.log(decoded)
+  const token = localStorage.getItem("token");
+  const decoded = jwtDecode(token);
+  console.log(decoded);
 
-  if(token){
-    adminName=decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
-    console.log(adminName)
+  if (token) {
+    adminName =
+      decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+    console.log(adminName);
   }
-  // console.log(adminName) // 👈 Get admin name from localStorage
+  // console.log(adminName) 
 
   return (
     <div
@@ -65,12 +66,11 @@ const Adminnavbar = () => {
           <i className="bi bi-person-gear me-1"></i> Admin Panel
         </div>
 
-           {adminName && (
+        {adminName && (
           <div className="badge bg-sky-200 text-sky-800 px-3 py-1 rounded-pill mb-1 text-dark">
             <i className="bi bi-person-circle me-1"></i> Welcome {adminName} !
           </div>
         )}
-        
       </div>
 
       {/* Navigation */}
@@ -83,7 +83,10 @@ const Adminnavbar = () => {
           }`}
           to="/admin/Admindashboard"
         >
-          <i className="bi bi-speedometer2" style={{ width: "24px", fontSize: "1.1rem" }}></i>
+          <i
+            className="bi bi-speedometer2"
+            style={{ width: "24px", fontSize: "1.1rem" }}
+          ></i>
           Dashboard
         </Link>
 
@@ -95,7 +98,12 @@ const Adminnavbar = () => {
         <div className="mb-2">
           <button
             className={`btn btn-link text-start w-100 d-flex align-items-center justify-content-between gap-2 py-2 px-3 rounded ${
-              ["/admin/listdoc", "/admin/ListNurse", "/admin/listrecep", "/admin/Department"].includes(location.pathname)
+              [
+                "/admin/listdoc",
+                "/admin/ListNurse",
+                "/admin/listrecep",
+                "/admin/Department",
+              ].includes(location.pathname)
                 ? "bg-sky-50 text-sky-700"
                 : "text-sky-600"
             }`}
@@ -104,7 +112,10 @@ const Adminnavbar = () => {
             style={{ textDecoration: "none" }}
           >
             <span className="d-flex align-items-center gap-2">
-              <i className="bi bi-person-gear" style={{ width: "24px", fontSize: "1.1rem" }}></i>
+              <i
+                className="bi bi-person-gear"
+                style={{ width: "24px", fontSize: "1.1rem" }}
+              ></i>
               Edit Users
             </span>
             <i className="bi bi-chevron-down small"></i>
@@ -112,7 +123,12 @@ const Adminnavbar = () => {
 
           <div
             className={`collapse ${
-              ["/admin/listdoc", "/admin/ListNurse", "/admin/listrecep", "/admin/Department"].includes(location.pathname)
+              [
+                "/admin/listdoc",
+                "/admin/ListNurse",
+                "/admin/listrecep",
+                "/admin/Department",
+              ].includes(location.pathname)
                 ? "show"
                 : ""
             }`}
@@ -149,27 +165,31 @@ const Adminnavbar = () => {
               >
                 🧑‍💼 List Receptionists
               </Link>
-              <Link
-                className={`nav-link py-2 ps-3 rounded ${
-                  isActive("/admin/Department")
-                    ? "bg-sky-50 text-sky-700 border-start border-sky-500"
-                    : "text-sky-600"
-                }`}
-                to="/admin/Department"
-              >
-                🏢 Add Department
-              </Link>
             </nav>
           </div>
         </div>
-
+        <Link
+          className={`nav-link py-2 ps-3 rounded ${
+            isActive("/admin/Department")
+              ? "bg-sky-50 text-sky-700 border-start border-sky-500"
+              : "text-sky-600"
+          }`}
+          to="/admin/Department"
+        >
+          🏢 Add Department
+        </Link>
         <Link
           className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
-            isActive("/admin/reg") ? "bg-sky-100 text-sky-800 fw-medium" : "text-sky-600"
+            isActive("/admin/reg")
+              ? "bg-sky-100 text-sky-800 fw-medium"
+              : "text-sky-600"
           }`}
           to="/admin/reg"
         >
-          <i className="bi bi-person-plus" style={{ width: "24px", fontSize: "1.1rem" }}></i>
+          <i
+            className="bi bi-person-plus"
+            style={{ width: "24px", fontSize: "1.1rem" }}
+          ></i>
           Register User
         </Link>
 
@@ -196,7 +216,7 @@ const Adminnavbar = () => {
           <i className="bi bi-list-ul me-2"></i>
           Circular Sender
         </Link>
-         <Link
+        <Link
           className={`nav-link py-2 ps-3 rounded ${
             isActive("/admin/Staffavailable")
               ? "bg-sky-50 text-sky-700 border-start border-sky-500"
@@ -204,8 +224,8 @@ const Adminnavbar = () => {
           }`}
           to="/admin/Staffavailable"
         >
-          <i className="bi bi-list-ul me-2"></i>
-         Staffavailable
+          <i className="bi bi-person-fill-check me-2"></i>
+          Staffavailable
         </Link>
 
         <button
@@ -236,7 +256,9 @@ const Adminnavbar = () => {
             <i className="bi bi-info-circle"></i>
           </button>
         </div>
-        <small className="text-sky-700 d-block">Hospital Management System</small>
+        <small className="text-sky-700 d-block">
+          Hospital Management System
+        </small>
         <small className="text-sky-500">v2.4.1</small>
       </div>
     </div>

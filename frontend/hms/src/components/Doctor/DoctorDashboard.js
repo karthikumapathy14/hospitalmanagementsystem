@@ -2,21 +2,28 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { logout } from "../Common/Logout";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const DoctorSidebar = () => {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
 
   const [availability, setAvailability] = useState("Unavailable");
-   const doctorId = localStorage.getItem("doctorId");
+  const doctorId = localStorage.getItem("doctorId");
+  let docName = "";
+  const token = localStorage.getItem("token");
+    const decoded = jwtDecode(token);
 
+  if (token) {
+    docName =
+      decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+    console.log(docName);
+  }
   // Fetch doctor availability
   const fetchAvailability = async () => {
-    
-    if (!doctorId) return;  // safety check
+    if (!doctorId) return; // safety check
 
     try {
-      const token = localStorage.getItem("token");
       const response = await axios.get(
         `https://localhost:7058/api/Doctor/${doctorId}`,
         {
@@ -97,6 +104,11 @@ const DoctorSidebar = () => {
         <div className="px-3 py-1 rounded-pill">
           <i className="bi bi-reception-4 me-1"></i> Doctor Desk
         </div>
+        {docName && (
+          <div className="badge bg-sky-200 text-sky-800 px-3 py-1 rounded-pill mb-1 text-dark">
+            <p><i className="bi bi-person-circle me-1"></i> Welcome DR. {docName}!</p>
+          </div>
+        )}
       </div>
 
       <div className="text-center mb-3 px-3">
@@ -143,7 +155,7 @@ const DoctorSidebar = () => {
           Change Password
         </Link>
 
-            <Link
+        <Link
           className={`nav-link d-flex align-items-center gap-2 py-2 px-3 rounded ${
             isActive("/doctor/DoctorAvailibility")
               ? "bg-sky-100 text-sky-800 fw-medium"
@@ -182,7 +194,9 @@ const DoctorSidebar = () => {
             <i className="bi bi-question-circle"></i>
           </button>
         </div>
-        <small className="text-sky-700 d-block">Hospital Management System</small>
+        <small className="text-sky-700 d-block">
+          Hospital Management System
+        </small>
         <small className="text-sky-500">v2.4.1</small>
       </div>
     </div>

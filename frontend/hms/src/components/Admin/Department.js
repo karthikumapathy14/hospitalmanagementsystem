@@ -3,28 +3,29 @@ import axios from "axios";
 import Adminnavbar from "./Adminnavbar";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // ✅ required CSS
 
 const Department = () => {
   const [formData, setFormData] = useState({
     departmentName: "",
   });
-  const [message, setMessage] = useState("");
+
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (!token) {
+      toast.error("Restricted Access");
+      navigate("/");
+    }
+  }, [navigate, token]);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
-  
-  useEffect(() => {
-    if (!token) {
-      toast.error("Restricted Access"); // 👈 Toast shown
-      navigate("/"); // 👈 Navigate to login
-      return; // 👈 Prevent further execution
-    }
-  }, [navigate]);
-  const token = localStorage.getItem("token");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,14 +37,14 @@ const Department = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setMessage(response.data);
-      setFormData({ departmentName: "" }); // Clear form after successful submission
+      toast.success("Department added successfully ✅");
+      setFormData({ departmentName: "" }); // Clear form
     } catch (error) {
       console.error(error);
-      if (error.response) {
-        setMessage(error.response.data || "Something went wrong");
+      if (error.response && error.response.data) {
+        toast.error(error.response.data);
       } else {
-        setMessage("Something went wrong.");
+        toast.error("Something went wrong ❌");
       }
     }
   };
@@ -64,16 +65,9 @@ const Department = () => {
             borderRadius: "20px",
           }}
         >
-          <h3 className="text-center mb-5 text-dark">Add Department</h3>
-          {message && (
-            <div
-              className={`alert ${
-                message.includes("success") ? "alert-success" : "alert-danger"
-              } mb-4`}
-            >
-              {message}
-            </div>
-          )}
+          <h3 className="text-center mb-5 text-primary fw-bold">
+            Add Department
+          </h3>
 
           <form onSubmit={handleSubmit}>
             <div className="mb-4">

@@ -157,166 +157,193 @@ const Makeappointment = () => {
 
 
   return (
-    <div
-      className="d-flex">
-      <div
-        className="flex-grow-1 p-4">
-        <div className="container-fluid py-4">
-          <div className="card shadow-sm border-0 p-4">
-            <div className="row justify-content-center">
-              <form onSubmit={handleSubmit} className="col-6">
-                <h3 className="mb-3">Create Appointment</h3>
+    // Inside the return statement:
 
-                {message && (
-                  <div className="alert alert-success">{message}</div>
-                )}
+<div className="d-flex">
+  <div className="flex-grow-1 p-4 bg-light min-vh-100">
+    <div className="container py-4">
+      <div className="card shadow-sm border-0 p-4">
+        <div className="row justify-content-center">
+          <form onSubmit={handleSubmit} className="col-lg-8 col-md-10">
+            <h3 className="mb-4 text-primary text-center">Create Appointment</h3>
 
-                <label className="form-label">Patient</label>
-                <select
-                  className="form-select"
-                  name="patientid"
-                  value={forms.patientid}
-                  onChange={handleChange}
-                >
-                  <option value="">- Select Patient -</option>
-                  {patient.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.patientid}
-                    </option>
-                  ))}
-                </select>
+            {message && (
+              <div className="alert alert-success text-center">{message}</div>
+            )}
 
-                <label className="form-label mt-3">Department</label>
-                <select
-                  className="form-select"
-                  name="departmentId"
-                  value={forms.departmentId}
-                  onChange={handleChange}
-                >
-                  <option value="">- Select Department -</option>
-                  {dept.map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.departmentName}
-                    </option>
-                  ))}
-                </select>
-
-                <label className="form-label mt-3">Doctor</label>
-                <select
-                  className="form-select"
-                  name="doctorId"
-                  value={forms.doctorId}
-                  onChange={handleChange}
-                >
-                  <option value="">- Select Doctor -</option>
-                  {(forms.departmentId ? filtered : doc).map((item) => (
-                    <option key={item.id} value={item.id}>
-                      {item.userName}{" "}
-                      {item.availability?.trim().toLowerCase() ===
-                      "available"
-                        ? "🟢"
-                        : "🔴"}
-                    </option>
-                  ))}
-                </select>
-
-                {forms.doctorId && (
-                  <div className="mt-2">
-                    <strong>Status: </strong>
-                    <span
-                      style={{
-                        color: isDoctorAvailable(forms.doctorId)
-                          ? "green"
-                          : "red",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {getDoctorById(forms.doctorId)?.availability || "Unknown"}
-                    </span>
-                  </div>
-                )}
-
-                <label className="form-label mt-3">Appointment Date</label>
-                <DatePicker
-                  selected={
-                    typeof forms.appointmentDate === "string"
-                      ? new Date(forms.appointmentDate)
-                      : forms.appointmentDate
-                  }
-                  onChange={(date) =>
-                    setForm((prev) => ({ ...prev, appointmentDate: date }))
-                  }
-                  minDate={new Date()}
-                  dateFormat="yyyy-MM-dd"
-                  className="form-control"
-                  name="appointmentDate"
-                />
-
-                <label className="form-label mt-3">Available Time Slots</label>
-                {availableSlots.length > 0 ? (
-                  <select
-                    className="form-select"
-                    name="startTime"
-                    value={forms.startTime}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">Select Time</option>
-                    {availableSlots.map((slot) => (
-                      <option
-                        key={slot.time}
-                        value={slot.time}
-                        disabled={slot.isBooked}
-                      >
-                        {slot.time} {slot.isBooked ? "(Booked)" : ""}
-                      </option>
-                    ))}
-                  </select>
-                ) : (
-                  <p>No available slots for selected date and doctor</p>
-                )}
-
-                <label className="form-label mt-3">Reason</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="reason"
-                  value={forms.reason}
-                  onChange={handleChange}
-                />
-
-                <label className="form-label mt-3">Status</label>
-                <select
-                  className="form-select"
-                  name="status"
-                  value={forms.status}
-                  onChange={handleChange}
-                >
-                  <option value="">- Select Status -</option>
-                  <option value="Schedule">Schedule</option>
-                  <option value="Complete">Complete</option>
-                  <option value="Cancel">Cancel</option>
-                </select>
-
-                <label className="form-label mt-3">Created At</label>
-                <input
-                  type="date"
-                  className="form-control"
-                  name="createdAt"
-                  value={forms.createdAt}
-                  onChange={handleChange}
-                  disabled
-                />
-
-                <button type="submit" className="btn btn-primary mt-4 w-100">
-                  Create Appointment
-                </button>
-              </form>
+            {/* Patient */}
+            <div className="mb-3">
+              <label className="form-label">Patient</label>
+              <select
+                className="form-select"
+                name="patientid"
+                value={forms.patientid}
+                onChange={handleChange}
+              >
+                <option value="">- Select Patient -</option>
+                {patient.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.patientid}
+                  </option>
+                ))}
+              </select>
             </div>
-          </div>
+
+            {/* Department */}
+            <div className="mb-3">
+              <label className="form-label">Department</label>
+              <select
+                className="form-select"
+                name="departmentId"
+                value={forms.departmentId}
+                onChange={handleChange}
+              >
+                <option value="">- Select Department -</option>
+                {dept.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.departmentName}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Doctor */}
+            <div className="mb-3">
+              <label className="form-label">Doctor</label>
+              <select
+                className="form-select"
+                name="doctorId"
+                value={forms.doctorId}
+                onChange={handleChange}
+              >
+                <option value="">- Select Doctor -</option>
+                {(forms.departmentId ? filtered : doc).map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.userName}{" "}
+                    {item.availability?.trim().toLowerCase() === "available"
+                      ? "🟢"
+                      : "🔴"}
+                  </option>
+                ))}
+              </select>
+
+              {forms.doctorId && (
+                <div className="mt-2">
+                  <strong>Status: </strong>
+                  <span
+                    style={{
+                      color: isDoctorAvailable(forms.doctorId)
+                        ? "green"
+                        : "red",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {getDoctorById(forms.doctorId)?.availability || "Unknown"}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* Appointment Date */}
+            <div className="mb-3">
+              <label className="form-label">Appointment Date</label>
+              <DatePicker
+                selected={
+                  typeof forms.appointmentDate === "string"
+                    ? new Date(forms.appointmentDate)
+                    : forms.appointmentDate
+                }
+                onChange={(date) =>
+                  setForm((prev) => ({ ...prev, appointmentDate: date }))
+                }
+                minDate={new Date()}
+                dateFormat="yyyy-MM-dd"
+                className="form-control"
+                name="appointmentDate"
+              />
+            </div>
+
+            {/* Time Slots */}
+            <div className="mb-3">
+              <label className="form-label">Available Time Slots</label>
+              {availableSlots.length > 0 ? (
+                <select
+                  className="form-select"
+                  name="startTime"
+                  value={forms.startTime}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">Select Time</option>
+                  {availableSlots.map((slot) => (
+                    <option
+                      key={slot.time}
+                      value={slot.time}
+                      disabled={slot.isBooked}
+                    >
+                      {slot.time} {slot.isBooked ? "(Booked)" : ""}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <p className="text-danger">No available slots for selected date and doctor</p>
+              )}
+            </div>
+
+            {/* Reason */}
+            <div className="mb-3">
+              <label className="form-label">Reason</label>
+              <input
+                type="text"
+                className="form-control"
+                name="reason"
+                value={forms.reason}
+                onChange={handleChange}
+              />
+            </div>
+
+            {/* Status */}
+            <div className="mb-3">
+              <label className="form-label">Status</label>
+              <select
+                className="form-select"
+                name="status"
+                value={forms.status}
+                onChange={handleChange}
+              >
+                <option value="">- Select Status -</option>
+                <option value="Schedule">Schedule</option>
+                <option value="Complete">Complete</option>
+                <option value="Cancel">Cancel</option>
+              </select>
+            </div>
+
+            {/* Created At */}
+            <div className="mb-3">
+              <label className="form-label">Created At</label>
+              <input
+                type="date"
+                className="form-control"
+                name="createdAt"
+                value={forms.createdAt}
+                onChange={handleChange}
+                disabled
+              />
+            </div>
+
+            {/* Submit */}
+            <div className="d-grid">
+              <button type="submit" className="btn btn-primary mt-2">
+                Create Appointment
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
   );
 };
 
