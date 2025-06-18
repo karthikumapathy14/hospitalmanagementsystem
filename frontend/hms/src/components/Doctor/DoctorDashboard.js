@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { logout } from "../Logout";
+import { logout } from "../Common/Logout";
 import axios from "axios";
 
 const DoctorSidebar = () => {

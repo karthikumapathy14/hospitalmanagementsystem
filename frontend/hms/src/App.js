@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 
 
 import 'react-toastify/dist/ReactToastify.css';
-import Login from './components/Login.jsx';
+import Login from './components/Common/Login.jsx';
 import Department from './components/Admin/Department.js';
 import ListDoc from './components/Admin/ListDoc.js';
 import EditDoct from './components/Admin/EditDoct.js';
@@ -38,11 +38,11 @@ import Editappointmentnurse from './components/Nurse/Editappointmentnurse.js';
 import Bill from './components/Receptionist/Bill.js';
 import Viewapatientappointment from './components/Patient.js/viewpatientappointment.js'
 import Billpatientview from './components/Patient.js/Billpatientview.js';
-import ChangePassword from './components/ChangePassword.js';
-import ForgotPassword from './components/ForgetPassword.js';
-import ResetPassword from './components/ResetPassword.js';
-import WhatsAppSender from './components/WhatsAppSender.js';
-import Circularsender from './components/Circularsender.js'
+import ChangePassword from './components/Common/ChangePassword.js';
+import ForgotPassword from './components/Common/ForgetPassword.js';
+import ResetPassword from './components/Common/ResetPassword.js';
+
+import Circularsender from './components/Admin/Circularsender.js'
 import Viewprescription from './components/Doctor/Viewprescription.js';
 import DoctorAvailibility from './components/Doctor/DoctorAvailibility.js';
 import Staffavailable from './components/Admin/Staffavailable.js';
@@ -51,6 +51,7 @@ import DoctorApp from './components/Doctor/DoctorApp.js';
 import NurseApp from './components/Nurse/NurseApp.js';
 import PatientApp from './components/Patient.js/PatientApp.js';
 import ReceptionistApp from './components/Receptionist/ReceptionistApp.js';
+import Homepage from './components/Common/Homepage.js';
 
 
 function App() {
@@ -64,7 +65,7 @@ function App() {
           <div className='flex-grow-1'>
             <Routes>
               {/* common */}
-              <Route path="/" element={<Login />} />
+              <Route path="/login" element={<Login />} />
 
               <Route path='/admin/*' element={<AdminApp/>}></Route>
               <Route path='/doctor/*' element={<DoctorApp/>}></Route>
@@ -75,6 +76,7 @@ function App() {
               <Route path="/forgotpassword" element={<ForgotPassword />} />
                <Route path="/resetpassword" element={<ResetPassword />} />
 
+              <Route path='/' element={<Homepage/>}></Route>
 
               {/* <Route path='/changepassword' element={<ChangePassword/>}></Route>
               <Route path='/WhatsAppSender' element={<WhatsAppSender/>}></Route>
