@@ -46,7 +46,7 @@ const Addprescription = () => {
       })
       .then((res) => {
         alert("Prescription saved!");
-        navigate("/viewappointment");
+        navigate("/doctor/viewappointment");
         setPrescribe({
           appointmentId: "",
           diagnosis: "",
