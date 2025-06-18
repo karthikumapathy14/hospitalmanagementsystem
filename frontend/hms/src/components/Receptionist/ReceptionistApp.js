@@ -8,7 +8,7 @@ import Editappointment from "./Editappointment";
 import Bill from "./Bill";
 import EditPatient from "./EditPaient";
 import ReceptionistNavbar from "./ReceptionistNavbar";
-import ChangePassword from "../ChangePassword";
+import ChangePassword from "../Common/ChangePassword";
 import BillPatientView from "../Patient.js/Billpatientview";
 
 const ReceptionistApp = () => {

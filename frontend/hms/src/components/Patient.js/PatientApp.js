@@ -3,7 +3,8 @@ import Viewapatientappointment from "./viewpatientappointment";
 import BillPatientView from "./Billpatientview";
 import { Route, Routes } from "react-router-dom";
 import PatientNavbar from "./PatientNavbar";
-import ChangePassword from "../ChangePassword";
+import ChangePassword from "../Common/ChangePassword";
+
 
 const PatientApp = () => {
   return (
@@ -24,8 +25,9 @@ const PatientApp = () => {
               path="Viewapatientappointment"
               element={<Viewapatientappointment />}
             ></Route>
-           <Route path="/billpatientview/:id" element={<BillPatientView />}></Route>
+           <Route path="billpatientview/:id" element={<BillPatientView />}></Route>
             <Route path="changepassword" element={<ChangePassword/>}></Route>
+
           </Routes>
         </div>
       </div>

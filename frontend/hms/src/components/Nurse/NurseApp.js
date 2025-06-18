@@ -3,7 +3,7 @@ import Viewappointmentnurse from "./Viewappointmentnurse";
 import Editappointmentnurse from "./Editappointmentnurse";
 import { Route, Routes } from "react-router-dom";
 import Nursesidebar from "./Nursesidebar";
-import ChangePassword from "../ChangePassword";
+import ChangePassword from "../Common/ChangePassword";
 
 const NurseApp = () => {
   return (

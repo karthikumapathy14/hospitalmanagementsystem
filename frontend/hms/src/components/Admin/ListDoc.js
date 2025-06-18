@@ -9,7 +9,7 @@ const ListDoc = () => {
   const navigate = useNavigate();
 
   const handleEdit = (id) => {
-    navigate(`/listdoc/${id}`);
+    navigate(`/admin/listdoc/${id}`);
   };
 
   const token = localStorage.getItem("token");

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import ReceptionistNavbar from "./ReceptionistNavbar";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../Common/AuthContext";
 import { toast } from "react-toastify";
 import { FaSearch, FaEdit, FaMoneyBillWave, FaFileInvoiceDollar, FaSpinner } from "react-icons/fa";
 import { BsFilterSquare, BsCheckCircleFill, BsClockFill, BsExclamationTriangleFill } from "react-icons/bs";

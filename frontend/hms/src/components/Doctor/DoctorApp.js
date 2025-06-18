@@ -7,7 +7,7 @@ import DoctorAvailibility from './DoctorAvailibility'
 import { Route, Routes } from 'react-router-dom'
 import PatientHistory from './PatientHistory'
 import Appointments from './Viewappointment'
-import ChangePassword from '../ChangePassword'
+import ChangePassword from '../Common/ChangePassword'
 
 const DoctorApp = () => {
   return (

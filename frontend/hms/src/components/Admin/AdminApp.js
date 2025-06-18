@@ -10,9 +10,9 @@ import ListReceptionist from "./ListReceptionist";
 import EditRecep from "./EditRecep";
 import { Route, Routes } from "react-router-dom";
 import Adminnavbar from "./Adminnavbar";
-import ChangePassword from "../ChangePassword";
-import WhatsAppSender from "../WhatsAppSender";
-import MessageSender from "../Circularsender";
+import ChangePassword from "../Common/ChangePassword";
+
+import MessageSender from "./Circularsender";
 import Staffavailable from "./Staffavailable";
 
 const AdminApp = () => {

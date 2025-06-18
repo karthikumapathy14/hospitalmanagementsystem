@@ -328,7 +328,7 @@ namespace hospital.Controller
         [HttpGet("getdocavailablecount")]
         public async Task<IActionResult> getdocavailablecount()
         {
-           var getdocavailablecount = await _dbcontext.Doctors.CountAsync();
+           var getdocavailablecount = await _dbcontext.Doctors.Where(d => d.Availability == "Available").CountAsync();
 
             return Ok(getdocavailablecount);
         }
@@ -336,7 +336,7 @@ namespace hospital.Controller
         [HttpGet("getnurseavailablecount")]
         public async Task<IActionResult> getnurseavailablecount()
         {
-            var getnurseavailablecount = await _dbcontext.Nurses.CountAsync();
+            var getnurseavailablecount = await _dbcontext.Nurses.Where(d=>d.Availability=="Available").CountAsync();
 
             return Ok(getnurseavailablecount);
         }
@@ -344,9 +344,9 @@ namespace hospital.Controller
         [HttpGet("getrecavailablecount")]
         public async Task<IActionResult> getrecavailablecount()
         {
-            var getnurseavailablecount = await _dbcontext.Nurses.CountAsync();
+            var getrecavailablecount = await _dbcontext.Receptionists.Where(d => d.Availability == "Available").CountAsync();
 
-            return Ok(getnurseavailablecount);
+            return Ok(getrecavailablecount);
         }
 
       
