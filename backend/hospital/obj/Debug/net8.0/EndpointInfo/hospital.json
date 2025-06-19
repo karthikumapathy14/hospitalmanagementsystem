@@ -631,6 +631,86 @@
         }
       }
     },
+    "/api/Admin/departments": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/emailsbydepartment": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "department",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Authentication/Register": {
       "post": {
         "tags": [
@@ -2116,6 +2196,10 @@
           "user": {
             "$ref": "#/components/schemas/User"
           },
+          "experience": {
+            "type": "string",
+            "nullable": true
+          },
           "availability": {
             "type": "string",
             "nullable": true
@@ -2233,6 +2317,10 @@
           },
           "status": {
             "type": "boolean"
+          },
+          "experience": {
+            "type": "string",
+            "nullable": true
           },
           "availability": {
             "type": "string",
@@ -2395,6 +2483,10 @@
             "nullable": true
           },
           "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "experience": {
             "type": "string",
             "nullable": true
           },

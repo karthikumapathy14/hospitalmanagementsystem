@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const rolesList = ["Doctor", "Nurse", "Patient", "Admin", "Receptionist"];
@@ -9,10 +9,27 @@ const MessageSender = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [emails, setEmails] = useState([]);
+  const [selectedEmails, setSelectedEmails] = useState([]);
+  const [departments, setDepartments] = useState([]);
+  const [selectedDepartment, setSelectedDepartment] = useState("");
+  const [emailFilter, setEmailFilter] = useState("");
   const [status, setStatus] = useState({ type: "", message: "" });
   const [isFetching, setIsFetching] = useState(false);
   const [isSending, setIsSending] = useState(false);
 
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const response = await axios.get("https://localhost:7058/api/Admin/departments");
+        setDepartments(response.data);
+
+      } catch (error) {
+        console.error("Error fetching departments:", error);
+      }
+    };
+    fetchDepartments();
+  }, []);
+  
   const handleRoleChange = (e) => {
     const { value, checked } = e.target;
     let updatedRoles = checked
@@ -36,14 +53,21 @@ const MessageSender = () => {
     }
 
     setIsFetching(true);
-    const params = new URLSearchParams();
-    selectedRoles.forEach((role) => params.append("role", role));
-
     try {
-      const response = await axios.get(
-        `https://localhost:7058/api/Message/emails?${params.toString()}`
-      );
+      let response;
+
+      if (selectedRoles.length === 1 && selectedRoles[0] === "Doctor" && selectedDepartment) {
+        response = await axios.get(
+          `https://localhost:7058/api/Admin/emailsbydepartment?department=${selectedDepartment}`
+        );
+      } else {
+        const params = new URLSearchParams();
+        selectedRoles.forEach((role) => params.append("role", role));
+        response = await axios.get(`https://localhost:7058/api/Message/emails?${params.toString()}`);
+      }
+
       setEmails(response.data);
+      setSelectedEmails(response.data);
       setStatus({ type: "success", message: `${response.data.length} emails fetched successfully.` });
     } catch (error) {
       console.error("Error fetching emails:", error);
@@ -55,27 +79,31 @@ const MessageSender = () => {
 
   const clearEmails = () => {
     setEmails([]);
+    setSelectedEmails([]);
     setStatus({ type: "info", message: "Recipient list cleared." });
   };
 
   const sendMessage = async (e) => {
     e.preventDefault();
 
-    if (emails.length === 0) {
-      setStatus({ type: "warning", message: "No emails fetched. Please fetch recipients first." });
+    if (selectedEmails.length === 0) {
+      setStatus({ type: "warning", message: "No emails selected to send." });
       return;
     }
 
     setIsSending(true);
     const payload = {
-      emails,
+      emails: selectedEmails,
       subject,
       message,
     };
 
     try {
       await axios.post("https://localhost:7058/api/Message/send", payload);
-      setStatus({ type: "success", message: `Email sent successfully to ${emails.length} recipients!` });
+      setStatus({
+        type: "success",
+        message: `Email sent successfully to ${selectedEmails.length} recipients!`,
+      });
       setSubject("");
       setMessage("");
     } catch (error) {
@@ -85,6 +113,10 @@ const MessageSender = () => {
       setIsSending(false);
     }
   };
+
+  const filteredEmails = emails.filter((email) =>
+    email.toLowerCase().includes(emailFilter.toLowerCase())
+  );
 
   return (
     <div className="container py-4">
@@ -107,6 +139,7 @@ const MessageSender = () => {
                 </div>
               )}
 
+              {/* Role Selection */}
               <div className="mb-4">
                 <h5 className="mb-3">Select Recipient Roles</h5>
                 <div className="d-flex flex-column gap-2">
@@ -142,6 +175,27 @@ const MessageSender = () => {
                 </div>
               </div>
 
+              {/* Department filter for Doctor */}
+              {selectedRoles.length === 1 && selectedRoles.includes("Doctor") && (
+                <div className="mb-4">
+                  <label className="form-label fw-medium">Filter by Department</label>
+                  <select
+                    className="form-select"
+                    
+                    value={selectedDepartment}
+                    onChange={(e) => setSelectedDepartment(e.target.value)}
+                  >
+                    <option value="">-- Select Department --</option>
+                    {departments.map((dept) => (
+                      <option key={dept.id} value={dept.id}>
+                        {dept.departmentName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              {/* Fetch Recipients */}
               <div className="d-grid mb-4">
                 <button
                   className={`btn btn-primary ${isFetching ? "disabled" : ""}`}
@@ -162,20 +216,50 @@ const MessageSender = () => {
                 </button>
               </div>
 
+              {/* Email List */}
               {emails.length > 0 && (
                 <div className="mb-4">
                   <div className="d-flex justify-content-between align-items-center mb-2">
-                    <h5 className="mb-0">Recipient List ({emails.length})</h5>
+                    <h5 className="mb-0">
+                      Recipient List ({selectedEmails.length}/{emails.length}) • Showing {filteredEmails.length}
+                    </h5>
                     <button className="btn btn-outline-danger btn-sm" onClick={clearEmails}>
                       <i className="bi bi-x-circle me-1"></i> Clear Recipients
                     </button>
                   </div>
+
+                  {/* Email Filter Input */}
+                  <div className="mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Search email..."
+                      value={emailFilter}
+                      onChange={(e) => setEmailFilter(e.target.value)}
+                    />
+                  </div>
+
                   <div className="border rounded p-3 bg-light" style={{ maxHeight: "200px", overflowY: "auto" }}>
                     <div className="row row-cols-1 row-cols-md-2 g-2">
-                      {emails.map((email, idx) => (
+                      {filteredEmails.map((email, idx) => (
                         <div key={idx} className="col">
-                          <div className="bg-white p-2 rounded text-truncate">
-                            <small>{email}</small>
+                          <div className="form-check bg-white p-2 rounded">
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              id={`email-${idx}`}
+                              value={email}
+                              checked={selectedEmails.includes(email)}
+                              onChange={(e) => {
+                                const { checked, value } = e.target;
+                                setSelectedEmails((prev) =>
+                                  checked ? [...prev, value] : prev.filter((em) => em !== value)
+                                );
+                              }}
+                            />
+                            <label className="form-check-label text-truncate" htmlFor={`email-${idx}`}>
+                              <small>{email}</small>
+                            </label>
                           </div>
                         </div>
                       ))}
@@ -184,6 +268,7 @@ const MessageSender = () => {
                 </div>
               )}
 
+              {/* Compose Message */}
               <form onSubmit={sendMessage}>
                 <h5 className="mb-3">Compose Message</h5>
 
@@ -221,7 +306,7 @@ const MessageSender = () => {
                   <button
                     type="submit"
                     className={`btn btn-success ${isSending ? "disabled" : ""}`}
-                    disabled={emails.length === 0 || isSending}
+                    disabled={selectedEmails.length === 0 || isSending}
                   >
                     {isSending ? (
                       <>

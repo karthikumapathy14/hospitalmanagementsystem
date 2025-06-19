@@ -95,6 +95,8 @@ namespace hospital.Controller
 
             if (!string.IsNullOrWhiteSpace(doctor.Address) && doctor.Address != "string")
                 docid.Address = doctor.Address;
+            if (!string.IsNullOrWhiteSpace(doctor.Experience) && doctor.Experience != "string")
+                docid.Experience = doctor.Experience;
 
             docid.status = doctor.status;
 
@@ -379,6 +381,37 @@ namespace hospital.Controller
 
             return Ok(getrecavailabledetials);
         }
+        // GET: api/Message/departments
+        [HttpGet("departments")]
+        public async Task<ActionResult<IEnumerable<object>>> GetDepartments()
+        {
+            var departments = await _dbcontext.Departments
+                .Where(d => !string.IsNullOrEmpty(d.DepartmentName))
+                .Select(d => new { d.Id, d.DepartmentName }) 
+                .Distinct()
+                .ToListAsync();
+
+            return Ok(departments);
+        }
+
+
+        [HttpGet("emailsbydepartment")]
+        public async Task<ActionResult<IEnumerable<string>>> GetEmailsByDepartment([FromQuery] int department)
+        {
+           
+            var emails = await _dbcontext.Doctors
+                .Include(d => d.Department) // ensure this line is present!
+                .Where(d => d.Department != null &&
+                            d.Department.Id == department &&
+                            !string.IsNullOrEmpty(d.Email))
+                .Select(d => d.Email)
+                .ToListAsync();
+
+            return Ok(emails);
+        }
+
+
+
 
     }
 }
