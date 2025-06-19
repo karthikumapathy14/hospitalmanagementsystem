@@ -2196,10 +2196,6 @@
           "user": {
             "$ref": "#/components/schemas/User"
           },
-          "experience": {
-            "type": "string",
-            "nullable": true
-          },
           "availability": {
             "type": "string",
             "nullable": true
@@ -2317,10 +2313,6 @@
           },
           "status": {
             "type": "boolean"
-          },
-          "experience": {
-            "type": "string",
-            "nullable": true
           },
           "availability": {
             "type": "string",
@@ -2483,10 +2475,6 @@
             "nullable": true
           },
           "address": {
-            "type": "string",
-            "nullable": true
-          },
-          "experience": {
             "type": "string",
             "nullable": true
           },

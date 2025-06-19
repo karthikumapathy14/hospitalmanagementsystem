@@ -19,7 +19,7 @@ namespace hospital.Model
         public bool status { get; set; } = true;
         public User User { get; set; }
 
-        public string Experience {get; set;}
+      
         public string Availability { get; set; } = "unavailable";
 
 

@@ -95,8 +95,7 @@ namespace hospital.Controller
 
             if (!string.IsNullOrWhiteSpace(doctor.Address) && doctor.Address != "string")
                 docid.Address = doctor.Address;
-            if (!string.IsNullOrWhiteSpace(doctor.Experience) && doctor.Experience != "string")
-                docid.Experience = doctor.Experience;
+           
 
             docid.status = doctor.status;
 

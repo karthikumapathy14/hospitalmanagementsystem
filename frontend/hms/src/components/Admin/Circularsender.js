@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const rolesList = ["Doctor", "Nurse", "Patient", "Admin", "Receptionist"];
+
+const messageTemplates = {
+  urgent: `🚨 Urgent Notice 🚨\n\nPlease take immediate action on the mentioned issue. This is a high-priority concern.\n\nRegards,\nAdmin Team`,
+  meeting: `📅 Meeting Reminder\n\nThis is a reminder about the scheduled meeting on [Date] at [Time]. Please be on time.\n\nRegards,\nHR Department`,
+  update: `📢 System Update\n\nOur system will undergo maintenance from [Start Time] to [End Time]. You may experience limited access during this period.\n\nThank you for your patience.`,
+  holiday: `🎉 Holiday Announcement\n\nWe are pleased to inform you that [Holiday Name] will be observed on [Date]. The hospital will remain closed.\n\nWishing you a happy holiday!`,
+  thankyou: `🙏 Thank You Note\n\nThank you for your dedication and commitment. Your contribution is highly appreciated.\n\nBest regards,\nManagement`,
+  patientgreeting: `👋 Dear Patient,\n\nWe hope you're feeling better today! Remember, your health is our priority. If you have any concerns or need assistance, don’t hesitate to contact us.\n\nWishing you a speedy recovery!\n\nWarm regards,\nYour Healthcare Team`
+};
 
 const MessageSender = () => {
   const [selectedRoles, setSelectedRoles] = useState([]);
@@ -13,7 +24,6 @@ const MessageSender = () => {
   const [departments, setDepartments] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [emailFilter, setEmailFilter] = useState("");
-  const [status, setStatus] = useState({ type: "", message: "" });
   const [isFetching, setIsFetching] = useState(false);
   const [isSending, setIsSending] = useState(false);
 
@@ -22,20 +32,18 @@ const MessageSender = () => {
       try {
         const response = await axios.get("https://localhost:7058/api/Admin/departments");
         setDepartments(response.data);
-
       } catch (error) {
-        console.error("Error fetching departments:", error);
+        toast.error("Failed to load departments");
       }
     };
     fetchDepartments();
   }, []);
-  
+
   const handleRoleChange = (e) => {
     const { value, checked } = e.target;
-    let updatedRoles = checked
+    const updatedRoles = checked
       ? [...selectedRoles, value]
       : selectedRoles.filter((role) => role !== value);
-
     setSelectedRoles(updatedRoles);
     setSelectAll(updatedRoles.length === rolesList.length);
   };
@@ -48,14 +56,13 @@ const MessageSender = () => {
 
   const fetchEmails = async () => {
     if (selectedRoles.length === 0) {
-      setStatus({ type: "danger", message: "Please select at least one role." });
+      toast.warning("Please select at least one role");
       return;
     }
 
     setIsFetching(true);
     try {
       let response;
-
       if (selectedRoles.length === 1 && selectedRoles[0] === "Doctor" && selectedDepartment) {
         response = await axios.get(
           `https://localhost:7058/api/Admin/emailsbydepartment?department=${selectedDepartment}`
@@ -63,15 +70,14 @@ const MessageSender = () => {
       } else {
         const params = new URLSearchParams();
         selectedRoles.forEach((role) => params.append("role", role));
-        response = await axios.get(`https://localhost:7058/api/Message/emails?${params.toString()}`);
+        response = await axios.get(`https://localhost:7058/api/Message/emails?${params}`);
       }
 
       setEmails(response.data);
       setSelectedEmails(response.data);
-      setStatus({ type: "success", message: `${response.data.length} emails fetched successfully.` });
+      toast.success(`Fetched ${response.data.length} emails`);
     } catch (error) {
-      console.error("Error fetching emails:", error);
-      setStatus({ type: "danger", message: "Failed to fetch emails." });
+      toast.error("Failed to fetch emails");
     } finally {
       setIsFetching(false);
     }
@@ -80,35 +86,44 @@ const MessageSender = () => {
   const clearEmails = () => {
     setEmails([]);
     setSelectedEmails([]);
-    setStatus({ type: "info", message: "Recipient list cleared." });
+    toast.info("Recipient list cleared");
   };
 
   const sendMessage = async (e) => {
     e.preventDefault();
-
     if (selectedEmails.length === 0) {
-      setStatus({ type: "warning", message: "No emails selected to send." });
+      toast.warning("No emails selected");
+      return;
+    }
+    if (!subject || !message) {
+      toast.warning("Enter both subject and message");
       return;
     }
 
-    setIsSending(true);
+    const formattedMessage = message.replace(/\n/g, "<br/>");
+    const htmlTemplate = `
+      <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+        <h2 style="color: #2E86C1;">${subject}</h2>
+        <p>${formattedMessage}</p>
+        <hr />
+        <p style="font-size: 0.9em; color: #888;">This is an automated message. Please do not reply.</p>
+      </div>
+    `;
+
     const payload = {
       emails: selectedEmails,
       subject,
-      message,
+      message: htmlTemplate,
     };
 
+    setIsSending(true);
     try {
       await axios.post("https://localhost:7058/api/Message/send", payload);
-      setStatus({
-        type: "success",
-        message: `Email sent successfully to ${selectedEmails.length} recipients!`,
-      });
+      toast.success("Message sent successfully");
       setSubject("");
       setMessage("");
     } catch (error) {
-      console.error("Error sending:", error);
-      setStatus({ type: "danger", message: "Failed to send email." });
+      toast.error("Failed to send message");
     } finally {
       setIsSending(false);
     }
@@ -119,212 +134,166 @@ const MessageSender = () => {
   );
 
   return (
-    <div className="container py-4">
-      <div className="row justify-content-center">
-        <div className="col-lg-8">
-          <div className="card shadow">
-            <div className="card-header bg-primary text-white">
-              <h2 className="h4 mb-0">Circular Sender</h2>
+    <div className="container py-5">
+      <ToastContainer theme="colored" />
+      <div className="card shadow-sm p-4">
+        <h3 className="mb-3 text-primary">Send Circular Message</h3>
+
+        {/* Role selection */}
+        <div className="mb-4">
+          <label className="form-label fw-bold">Select Roles:</label>
+          <div className="form-check mb-2">
+            <input
+              type="checkbox"
+              className="form-check-input"
+              checked={selectAll}
+              onChange={handleSelectAll}
+              id="select-all"
+            />
+            <label className="form-check-label" htmlFor="select-all">Select All Roles</label>
+          </div>
+          {rolesList.map((role) => (
+            <div key={role} className="form-check form-check-inline">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                id={`role-${role}`}
+                value={role}
+                checked={selectedRoles.includes(role)}
+                onChange={handleRoleChange}
+              />
+              <label className="form-check-label" htmlFor={`role-${role}`}>{role}</label>
             </div>
+          ))}
+        </div>
 
-            <div className="card-body p-4">
-              {status.message && (
-                <div className={`alert alert-${status.type} alert-dismissible fade show mb-4`}>
-                  {status.message}
-                  <button
-                    type="button"
-                    className="btn-close"
-                    onClick={() => setStatus({ type: "", message: "" })}
-                  ></button>
-                </div>
-              )}
+        {/* Department selection */}
+        {selectedRoles.length === 1 && selectedRoles[0] === "Doctor" && (
+          <div className="mb-4">
+            <label className="form-label">Department</label>
+            <select
+              className="form-select"
+              value={selectedDepartment}
+              onChange={(e) => setSelectedDepartment(e.target.value)}
+            >
+              <option value="">-- All Departments --</option>
+              {departments.map((d) => (
+                <option key={d.id} value={d.id}>
+                  {d.departmentName}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
-              {/* Role Selection */}
-              <div className="mb-4">
-                <h5 className="mb-3">Select Recipient Roles</h5>
-                <div className="d-flex flex-column gap-2">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id="select-all"
-                      checked={selectAll}
-                      onChange={handleSelectAll}
-                    />
-                    <label className="form-check-label fw-bold" htmlFor="select-all">
-                      Select All
-                    </label>
-                  </div>
-                  <div className="d-flex flex-wrap gap-3">
-                    {rolesList.map((role) => (
-                      <div className="form-check" key={role}>
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          id={`role-${role}`}
-                          value={role}
-                          onChange={handleRoleChange}
-                          checked={selectedRoles.includes(role)}
-                        />
-                        <label className="form-check-label fw-medium" htmlFor={`role-${role}`}>
-                          {role}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+        {/* Buttons */}
+        <div className="mb-4 d-flex gap-2">
+          <button className="btn btn-primary" onClick={fetchEmails} disabled={isFetching}>
+            {isFetching ? "Fetching..." : "Get Recipients"}
+          </button>
+          {emails.length > 0 && (
+            <button className="btn btn-danger" onClick={clearEmails}>Clear List</button>
+          )}
+        </div>
 
-              {/* Department filter for Doctor */}
-              {selectedRoles.length === 1 && selectedRoles.includes("Doctor") && (
-                <div className="mb-4">
-                  <label className="form-label fw-medium">Filter by Department</label>
-                  <select
-                    className="form-select"
-                    
-                    value={selectedDepartment}
-                    onChange={(e) => setSelectedDepartment(e.target.value)}
-                  >
-                    <option value="">-- Select Department --</option>
-                    {departments.map((dept) => (
-                      <option key={dept.id} value={dept.id}>
-                        {dept.departmentName}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              )}
-
-              {/* Fetch Recipients */}
-              <div className="d-grid mb-4">
-                <button
-                  className={`btn btn-primary ${isFetching ? "disabled" : ""}`}
-                  onClick={fetchEmails}
-                  disabled={selectedRoles.length === 0 || isFetching}
-                >
-                  {isFetching ? (
-                    <>
-                      <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                      Fetching...
-                    </>
-                  ) : (
-                    <>
-                      <i className="bi bi-people-fill me-2"></i>
-                      Fetch Recipients
-                    </>
-                  )}
-                </button>
-              </div>
-
-              {/* Email List */}
-              {emails.length > 0 && (
-                <div className="mb-4">
-                  <div className="d-flex justify-content-between align-items-center mb-2">
-                    <h5 className="mb-0">
-                      Recipient List ({selectedEmails.length}/{emails.length}) • Showing {filteredEmails.length}
-                    </h5>
-                    <button className="btn btn-outline-danger btn-sm" onClick={clearEmails}>
-                      <i className="bi bi-x-circle me-1"></i> Clear Recipients
-                    </button>
-                  </div>
-
-                  {/* Email Filter Input */}
-                  <div className="mb-3">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Search email..."
-                      value={emailFilter}
-                      onChange={(e) => setEmailFilter(e.target.value)}
-                    />
-                  </div>
-
-                  <div className="border rounded p-3 bg-light" style={{ maxHeight: "200px", overflowY: "auto" }}>
-                    <div className="row row-cols-1 row-cols-md-2 g-2">
-                      {filteredEmails.map((email, idx) => (
-                        <div key={idx} className="col">
-                          <div className="form-check bg-white p-2 rounded">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id={`email-${idx}`}
-                              value={email}
-                              checked={selectedEmails.includes(email)}
-                              onChange={(e) => {
-                                const { checked, value } = e.target;
-                                setSelectedEmails((prev) =>
-                                  checked ? [...prev, value] : prev.filter((em) => em !== value)
-                                );
-                              }}
-                            />
-                            <label className="form-check-label text-truncate" htmlFor={`email-${idx}`}>
-                              <small>{email}</small>
-                            </label>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Compose Message */}
-              <form onSubmit={sendMessage}>
-                <h5 className="mb-3">Compose Message</h5>
-
-                <div className="mb-3">
-                  <label htmlFor="subject" className="form-label fw-medium">
-                    Subject
-                  </label>
+        {/* Email List */}
+        {emails.length > 0 && (
+          <div className="mb-4">
+            <div className="d-flex justify-content-between align-items-center mb-2">
+              <span>
+                Showing {filteredEmails.length} of {emails.length} emails
+              </span>
+              <input
+                type="text"
+                className="form-control form-control-sm w-25"
+                placeholder="Filter..."
+                value={emailFilter}
+                onChange={(e) => setEmailFilter(e.target.value)}
+              />
+            </div>
+            <div className="border p-2" style={{ maxHeight: 200, overflowY: "auto" }}>
+              {filteredEmails.map((email, i) => (
+                <div key={i} className="form-check">
                   <input
-                    type="text"
-                    className="form-control"
-                    id="subject"
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
-                    required
-                    placeholder="Enter email subject"
+                    type="checkbox"
+                    className="form-check-input"
+                    id={`email-${i}`}
+                    value={email}
+                    checked={selectedEmails.includes(email)}
+                    onChange={(e) => {
+                      const checked = e.target.checked;
+                      setSelectedEmails((prev) =>
+                        checked ? [...prev, email] : prev.filter((em) => em !== email)
+                      );
+                    }}
                   />
-                </div>
-
-                <div className="mb-4">
-                  <label htmlFor="message" className="form-label fw-medium">
-                    Message
+                  <label className="form-check-label" htmlFor={`email-${i}`}>
+                    {email}
                   </label>
-                  <textarea
-                    className="form-control"
-                    id="message"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    rows="5"
-                    required
-                    placeholder="Write your message here..."
-                  />
                 </div>
-
-                <div className="d-grid">
-                  <button
-                    type="submit"
-                    className={`btn btn-success ${isSending ? "disabled" : ""}`}
-                    disabled={selectedEmails.length === 0 || isSending}
-                  >
-                    {isSending ? (
-                      <>
-                        <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <i className="bi bi-send-fill me-2"></i>
-                        Send Email
-                      </>
-                    )}
-                  </button>
-                </div>
-              </form>
+              ))}
             </div>
           </div>
+        )}
+
+        {/* Template Dropdown */}
+        <div className="mb-4">
+          <label className="form-label fw-bold">Choose Message Template</label>
+          <select
+            className="form-select"
+            onChange={(e) => {
+              const selected = e.target.value;
+              if (messageTemplates[selected]) setMessage(messageTemplates[selected]);
+            }}
+          >
+            <option value="">-- Select Template --</option>
+            <option value="urgent">🚨 Urgent Notice</option>
+            <option value="meeting">📅 Meeting Reminder</option>
+            <option value="update">📢 System Update</option>
+            <option value="holiday">🎉 Holiday Announcement</option>
+            <option value="thankyou">🙏 Thank You Note</option>
+            <option value="patientgreeting">👋 Patient Greeting</option>
+          </select>
         </div>
+
+        {/* Compose form */}
+        <form onSubmit={sendMessage}>
+          <div className="mb-3">
+            <label className="form-label fw-bold">Subject</label>
+            <input
+              type="text"
+              className="form-control"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label fw-bold">Message</label>
+            <textarea
+              className="form-control"
+              rows="6"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+            />
+          </div>
+
+          {/* Live Preview */}
+          {message && (
+            <div className="border rounded p-3 bg-light mb-3">
+              <h6 className="text-secondary">Live Preview:</h6>
+              <div dangerouslySetInnerHTML={{ __html: message.replace(/\n/g, "<br/>") }} />
+            </div>
+          )}
+
+          <div className="d-grid">
+            <button className="btn btn-success btn-lg" type="submit" disabled={isSending}>
+              {isSending ? "Sending..." : "Send Message"}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
