@@ -96,6 +96,7 @@ namespace hospital.Controller
 
             if (!string.IsNullOrWhiteSpace(doctor.Address) && doctor.Address != "string")
                 docid.Address = doctor.Address;
+           
 
             docid.status = doctor.status;
             docid.Experience = doctor.Experience;
@@ -384,6 +385,71 @@ namespace hospital.Controller
 
             return Ok(getrecavailabledetials);
         }
+        // GET: api/Message/departments
+        [HttpGet("departments")]
+        public async Task<ActionResult<IEnumerable<object>>> GetDepartments()
+        {
+            var departments = await _dbcontext.Departments
+                .Where(d => !string.IsNullOrEmpty(d.DepartmentName))
+                .Select(d => new { d.Id, d.DepartmentName }) 
+                .Distinct()
+                .ToListAsync();
+
+            return Ok(departments);
+        }
+
+
+        [HttpGet("emailsbydepartment")]
+        public async Task<ActionResult<IEnumerable<string>>> GetEmailsByDepartment([FromQuery] int department)
+        {
+           
+            var emails = await _dbcontext.Doctors
+                .Include(d => d.Department) // ensure this line is present!
+                .Where(d => d.Department != null &&
+                            d.Department.Id == department &&
+                            !string.IsNullOrEmpty(d.Email))
+                .Select(d => d.Email)
+                .ToListAsync();
+
+            return Ok(emails);
+        }
+
+
+        [HttpGet("GetStaffDetailsByRoleAndId/{role}/{id}")]
+        public async Task<IActionResult> GetStaffDetailsByRoleAndId(string role, int id)
+        {
+            if (string.IsNullOrEmpty(role))
+                return BadRequest("Role is required.");
+
+            role = role.ToLower();
+
+            switch (role)
+            {
+                case "doctor":
+                    var doctor = await _dbcontext.Doctors
+                        .Include(d => d.Department)
+                        .FirstOrDefaultAsync(d => d.Id == id);
+                    if (doctor == null) return NotFound("Doctor not found");
+                    return Ok(doctor);
+
+                case "nurse":
+                    var nurse = await _dbcontext.Nurses
+                        .FirstOrDefaultAsync(n => n.Id == id);
+                    if (nurse == null) return NotFound("Nurse not found");
+                    return Ok(nurse);
+
+                case "receptionist":
+                    var receptionist = await _dbcontext.Receptionists
+                        .FirstOrDefaultAsync(r => r.Id == id);
+                    if (receptionist == null) return NotFound("Receptionist not found");
+                    return Ok(receptionist);
+
+                default:
+                    return BadRequest("Invalid role provided.");
+            }
+        }
+
+
 
     }
 }

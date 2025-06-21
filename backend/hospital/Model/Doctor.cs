@@ -11,6 +11,7 @@ namespace hospital.Model
         public string UserId { get; set; }
 
         public string UserName { get; set;}
+
         public string Email { get; set;}
         public string Role { get; set;}
         public string PhoneNo { get; set;}
@@ -19,6 +20,8 @@ namespace hospital.Model
         public bool status { get; set; } = true;
         public int Experience { get; set; }
         public User User { get; set; }
+
+      
         public string Availability { get; set; } = "unavailable";
 
 

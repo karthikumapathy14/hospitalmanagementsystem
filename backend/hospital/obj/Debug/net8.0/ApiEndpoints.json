@@ -81,6 +81,26 @@
   },
   {
     "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GetDepartments",
+    "RelativePath": "api/Admin/departments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
     "Method": "Delete",
     "RelativePath": "api/Admin/docdelete/{id}",
     "HttpMethod": "DELETE",
@@ -183,6 +203,32 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GetEmailsByDepartment",
+    "RelativePath": "api/Admin/emailsbydepartment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "department",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "hospital.Controller.AdminController",
@@ -330,6 +376,27 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GetStaffDetailsByRoleAndId",
+    "RelativePath": "api/Admin/GetStaffDetailsByRoleAndId/{role}/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "role",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

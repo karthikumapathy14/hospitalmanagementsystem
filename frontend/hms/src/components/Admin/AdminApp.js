@@ -14,6 +14,7 @@ import ChangePassword from "../Common/ChangePassword";
 
 import MessageSender from "./Circularsender";
 import Staffavailable from "./Staffavailable";
+import StaffDetails from "./StaffDetails";
 
 const AdminApp = () => {
   return (
@@ -42,6 +43,8 @@ const AdminApp = () => {
             <Route path="ChangePassword" element={<ChangePassword />}></Route>
             <Route path="Circularsender" element={<MessageSender />}></Route>
             <Route path="Staffavailable" element={<Staffavailable/>}></Route>
+            <Route path="staff/details/:role/:id" element={<StaffDetails />} />
+
           </Routes>
         </div>
       </div>

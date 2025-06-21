@@ -72,7 +72,7 @@ namespace hospital.Controller
                 _dbcontext.Doctors.Add(doctor);
                 await _dbcontext.SaveChangesAsync();
             }
-        
+
             else if (model.Role == "Nurse")
             {
                 var nurse = new Nurse
@@ -111,6 +111,7 @@ namespace hospital.Controller
             }
             return Ok("User registered successfully!");
         }
+
 
 
         [HttpPost("login")]

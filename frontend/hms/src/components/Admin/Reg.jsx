@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Adminnavbar from "./Adminnavbar";
 import { toast } from "react-toastify";
+import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,12 +16,6 @@ const RegisterForm = () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -28,7 +23,19 @@ const RegisterForm = () => {
       navigate("/");
       return;
     }
-  }, []);
+  }, [navigate]);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -37,7 +44,6 @@ const RegisterForm = () => {
         formData
       );
       setMessage("✅ " + response.data);
-      setTimeout(() => null, 2000);
     } catch (error) {
       if (error.response) {
         setMessage(
@@ -52,7 +58,6 @@ const RegisterForm = () => {
 
   return (
     <div className="d-flex">
-     
       <div className="flex-grow-1 bg-light">
         <div className="container d-flex justify-content-center align-items-center min-vh-100">
           <div
@@ -62,64 +67,77 @@ const RegisterForm = () => {
             <h3 className="text-center text-primary mb-4">
               🏥 User Registration
             </h3>
+
             {message && <div className="alert alert-info">{message}</div>}
 
             <form onSubmit={handleSubmit}>
+              {/* Username */}
               <div className="mb-3">
-                <label className="form-label">👤 Username</label>
-                <input
-                  type="text"
-                  name="UserName"
-                  className="form-control"
-                  placeholder="Enter username"
-                  value={formData.UserName}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">📧 Email</label>
-                <input
-                  type="email"
-                  name="Email"
-                  className="form-control"
-                  placeholder="Enter email"
-                  value={formData.Email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label">🔐 Password</label>
+                <label className="form-label">Username</label>
                 <div className="input-group">
+                  <span className="input-group-text bg-white">
+                    <FaUser />
+                  </span>
+                  <input
+                    type="text"
+                    name="UserName"
+                    className="form-control border-start-0"
+                    placeholder="Enter username"
+                    value={formData.UserName}
+                    onChange={handleChange}
+                    // required
+                  />
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="mb-3">
+                <label className="form-label">Email</label>
+                <div className="input-group">
+                  <span className="input-group-text bg-white">
+                    <FaEnvelope />
+                  </span>
+                  <input
+                    type="email"
+                    name="Email"
+                    className="form-control border-start-0"
+                    placeholder="Enter email"
+                    value={formData.Email}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Password */}
+              <div className="mb-3">
+                <label className="form-label">Password</label>
+                <div className="input-group">
+                  <span className="input-group-text bg-white">
+                    <FaLock />
+                  </span>
                   <input
                     type={showPassword ? "text" : "password"}
                     name="PasswordHash"
-                    className="form-control"
+                    className="form-control border-start-0 border-end-0"
                     placeholder="Enter password"
                     value={formData.PasswordHash}
                     onChange={handleChange}
                     required
                   />
-                  <button
-                    type="button"
-                    className="btn btn-outline-secondary"
-                    onClick={() => {
-                      setShowPassword(true);
-                      setTimeout(() => {
-                        setShowPassword(false);
-                      }, 5000); // Show password for 5 seconds
-                    }}
+                  <span
+                    className="input-group-text bg-white"
+                    style={{ cursor: "pointer" }}
+                    onClick={togglePasswordVisibility}
                   >
-                    👁️
-                  </button>
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </span>
                 </div>
               </div>
 
+              {/* Role */}
               <div className="mb-4">
-                <label className="form-label">🎓 Role</label>
+                <label className="form-label">Role</label>
                 <select
                   name="Role"
                   className="form-select"
