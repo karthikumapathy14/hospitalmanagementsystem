@@ -43,7 +43,7 @@ import ForgotPassword from './components/Common/ForgetPassword.js';
 import ResetPassword from './components/Common/ResetPassword.js';
 
 import Circularsender from './components/Admin/Circularsender.js'
-import Viewprescription from './components/Doctor/Viewprescription.js';
+
 import DoctorAvailibility from './components/Doctor/DoctorAvailibility.js';
 import Staffavailable from './components/Admin/Staffavailable.js';
 import AdminApp from './components/Admin/AdminApp.js';

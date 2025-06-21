@@ -12,6 +12,7 @@ const EditRecep = () => {
     phoneNo: "",
     address: "",
     status: false,
+    experience:'',
   });
 
   const { id } = useParams();
@@ -129,6 +130,18 @@ const EditRecep = () => {
                 type="text"
                 name="phoneNo"
                 value={receptionist.phoneNo}
+                onChange={handleChange}
+                className="form-control rounded-pill"
+                required
+              />
+            </div>
+
+              <div className="mb-4">
+              <label className="form-label fw-bold">Experience</label>
+              <input
+                type="number"
+                name="experience"
+                value={receptionist.experience}
                 onChange={handleChange}
                 className="form-control rounded-pill"
                 required

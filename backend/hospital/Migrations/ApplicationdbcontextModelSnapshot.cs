@@ -290,11 +290,8 @@ namespace hospital.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentId"));
 
-                    b.Property<DateOnly>("AppointmentDate")
-                        .HasColumnType("date");
-
-                    b.Property<TimeOnly>("AppointmentTime")
-                        .HasColumnType("time");
+                    b.Property<DateTime>("AppointmentDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -305,6 +302,9 @@ namespace hospital.Migrations
                     b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
+
                     b.Property<int?>("NurseId")
                         .HasColumnType("int");
 
@@ -314,6 +314,9 @@ namespace hospital.Migrations
                     b.Property<string>("Reason")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
 
                     b.Property<string>("Status")
                         .HasMaxLength(50)
@@ -330,30 +333,6 @@ namespace hospital.Migrations
                     b.HasIndex("PatientId");
 
                     b.ToTable("appointments");
-                });
-
-            modelBuilder.Entity("hospital.Model.AvailableSlots", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("DoctoravailabilityId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsBooked")
-                        .HasColumnType("bit");
-
-                    b.Property<TimeOnly>("SlotTime")
-                        .HasColumnType("time");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctoravailabilityId");
-
-                    b.ToTable("AvailableSlots");
                 });
 
             modelBuilder.Entity("hospital.Model.Bill", b =>
@@ -431,6 +410,9 @@ namespace hospital.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Experience")
+                        .HasColumnType("int");
+
                     b.Property<string>("PhoneNo")
                         .HasColumnType("nvarchar(max)");
 
@@ -466,16 +448,25 @@ namespace hospital.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateOnly>("Date")
-                        .HasColumnType("date");
+                    b.Property<int>("BufferAfter")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BufferBefor")
+                        .HasColumnType("int");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<TimeOnly>("EndTime")
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("EndTime")
                         .HasColumnType("time");
 
-                    b.Property<TimeOnly>("StartTime")
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("StartTime")
                         .HasColumnType("time");
 
                     b.HasKey("Id");
@@ -501,6 +492,9 @@ namespace hospital.Migrations
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Experience")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNo")
                         .HasColumnType("nvarchar(max)");
@@ -599,6 +593,29 @@ namespace hospital.Migrations
                     b.Property<int>("AppointmentId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Prescribedby")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppointmentId");
+
+                    b.HasIndex("Prescribedby");
+
+                    b.ToTable("Prescription");
+                });
+
+            modelBuilder.Entity("hospital.Model.PrescriptionDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DayNumber")
+                        .HasColumnType("int");
+
                     b.Property<string>("Diagnosis")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
@@ -614,16 +631,14 @@ namespace hospital.Migrations
                     b.Property<DateTime>("PrescribedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Prescribedby")
+                    b.Property<int>("PrescriptionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppointmentId");
+                    b.HasIndex("PrescriptionId");
 
-                    b.HasIndex("Prescribedby");
-
-                    b.ToTable("Prescription");
+                    b.ToTable("PrescriptionDays");
                 });
 
             modelBuilder.Entity("hospital.Model.Receptionist", b =>
@@ -642,6 +657,9 @@ namespace hospital.Migrations
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Experience")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNo")
                         .HasColumnType("nvarchar(max)");
@@ -786,17 +804,6 @@ namespace hospital.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("hospital.Model.AvailableSlots", b =>
-                {
-                    b.HasOne("hospital.Model.DoctorAvailability", "doctorAvailability")
-                        .WithMany("Slots")
-                        .HasForeignKey("DoctoravailabilityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("doctorAvailability");
-                });
-
             modelBuilder.Entity("hospital.Model.Bill", b =>
                 {
                     b.HasOne("hospital.Model.Appointment", "Appointment")
@@ -883,6 +890,17 @@ namespace hospital.Migrations
                     b.Navigation("Doctor");
                 });
 
+            modelBuilder.Entity("hospital.Model.PrescriptionDay", b =>
+                {
+                    b.HasOne("hospital.Model.Prescription", "Prescription")
+                        .WithMany("PrescriptionDays")
+                        .HasForeignKey("PrescriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Prescription");
+                });
+
             modelBuilder.Entity("hospital.Model.Receptionist", b =>
                 {
                     b.HasOne("hospital.Model.User", "User")
@@ -892,9 +910,9 @@ namespace hospital.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("hospital.Model.DoctorAvailability", b =>
+            modelBuilder.Entity("hospital.Model.Prescription", b =>
                 {
-                    b.Navigation("Slots");
+                    b.Navigation("PrescriptionDays");
                 });
 #pragma warning restore 612, 618
         }

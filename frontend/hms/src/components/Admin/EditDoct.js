@@ -14,6 +14,7 @@ const EditDoct = () => {
     address: "",
     departmentId: "",
     status: false,
+    experience:'',
   });
   const [dept, setDepartments] = useState([]); // Corrected to an array
   const { id } = useParams();
@@ -144,7 +145,17 @@ const EditDoct = () => {
                 required
               />
             </div>
-
+              <div className="mb-4">
+              <label className="form-label fw-bold">Experience</label>
+              <input
+                type="number"
+                name="experience"
+                value={doctor.experience}
+                onChange={handleChange}
+                className="form-control rounded-pill"
+                required
+              />
+            </div>
             <div className="mb-4">
               <label className="form-label fw-bold">Qualification</label>
               <input

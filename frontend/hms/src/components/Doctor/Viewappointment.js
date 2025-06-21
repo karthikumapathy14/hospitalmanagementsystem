@@ -33,6 +33,8 @@ const Appointments = () => {
       });
   }, [navigate, token]);
 
+  
+
   const loadAppointments = () => {
     axios
       .get("https://localhost:7058/api/Doctor/api/appointments/my", {
@@ -44,6 +46,7 @@ const Appointments = () => {
         const updatedAppointments = response.data.map((item) => ({
           ...item,
           localStatus: item.status || "",
+          prescriptionId:item.prescriptionId || null,
           prescriptionAdded: item.prescriptionAdded || false,
         }));
 
@@ -63,8 +66,10 @@ const Appointments = () => {
       });
   };
 
-  const handleAdd = () => {
-    navigate("/doctor/Addprescription");
+  const handleAdd = (appointmentId,prescriptionId) => {
+    setAppid(appointmentId);
+    console.log("prescriptionid: ",prescriptionId);
+    navigate(`/doctor/Addprescription/${prescriptionId || 0}`);
   };
 
   const viewappointment = () => {
@@ -150,7 +155,7 @@ const Appointments = () => {
 
   return (
     <div className="d-flex ">
-      <div className="flex-grow-1" >
+      <div className="flex-grow-1">
         <div className="container-fluid py-3 px-4">
           <div className="d-flex justify-content-end mb-3">
             <button
@@ -231,7 +236,9 @@ const Appointments = () => {
                                   <option
                                     key={nurse.id}
                                     value={nurse.id}
-                                    disabled={nurse.availability !== "Available"}
+                                    disabled={
+                                      nurse.availability !== "Available"
+                                    }
                                     style={{
                                       color:
                                         nurse.availability === "Available"
@@ -265,19 +272,12 @@ const Appointments = () => {
                           <td>
                             <button
                               className="btn btn-outline-success btn-sm"
-                              onClick={() => {
-                                setAppid(appointment.appointmentId);
-                                handleAdd();
-                              }}
-                              disabled={appointment.prescriptionAdded}
-                              title={
-                                appointment.prescriptionAdded
-                                  ? "Prescription already added"
-                                  : "Add Prescription"
-                              }
+                              onClick={() => handleAdd(appointment.appointmentId, appointment.prescriptionId)}
+
+                              title="Click to view or add more prescriptions"
                             >
                               {appointment.prescriptionAdded
-                                ? "Added"
+                                ? "Edit/Add"
                                 : "Add Prescription"}
                             </button>
                           </td>
@@ -347,7 +347,7 @@ const Appointments = () => {
                               className="btn btn-outline-primary"
                               onClick={() =>
                                 navigate(
-                                  `/doctor/viewprescription/${appointment.appointmentId}`
+                                  `/doctor/Addprescription/${appointment.prescriptionId}`
                                 )
                               }
                             >

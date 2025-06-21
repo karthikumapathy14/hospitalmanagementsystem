@@ -21,10 +21,22 @@ namespace hospital.Data
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Receptionist> Receptionists { get; set; }
         public DbSet<Prescription> Prescription { get; set; }
+        public DbSet<PrescriptionDay> PrescriptionDays { get; set; }
         public DbSet<Appointment> appointments { get; set; }
         
-        public DbSet<DoctorAvailability> DoctorAvailabilities { get; set; }
+        public DbSet<DoctorAvailability> DoctorAvailability { get; set; }
         public DbSet<Bill> bill { get; set; }
+
+
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<Prescription>()
+                 .HasMany(p => p.PrescriptionDays)
+                 .WithOne(d => d.Prescription)
+                 .HasForeignKey(d => d.PrescriptionId);
+        }
     }
 
 }

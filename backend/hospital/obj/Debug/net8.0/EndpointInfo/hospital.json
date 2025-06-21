@@ -893,6 +893,29 @@
         }
       }
     },
+    "/api/Doctor/getprescriptionbyprescription/{prescriptionId}": {
+      "get": {
+        "tags": [
+          "Doctor"
+        ],
+        "parameters": [
+          {
+            "name": "prescriptionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Doctor/appointments/{id}/status": {
       "put": {
         "tags": [
@@ -1240,21 +1263,10 @@
         }
       }
     },
-    "/api/Nurse/updateprescription/{id}": {
-      "put": {
+    "/api/Nurse/updateprescription": {
+      "post": {
         "tags": [
           "Nurse"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
         ],
         "requestBody": {
           "content": {
@@ -1280,6 +1292,29 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nurse/getprescriptionbyprescription/{prescriptionId}": {
+      "get": {
+        "tags": [
+          "Nurse"
+        ],
+        "parameters": [
+          {
+            "name": "prescriptionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -2113,6 +2148,10 @@
           "status": {
             "type": "boolean"
           },
+          "experience": {
+            "type": "integer",
+            "format": "int32"
+          },
           "user": {
             "$ref": "#/components/schemas/User"
           },
@@ -2138,10 +2177,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "doctorId": {
-            "type": "integer",
-            "format": "int32"
-          },
           "startDate": {
             "type": "string",
             "format": "date-time"
@@ -2163,6 +2198,10 @@
             "format": "int32"
           },
           "bufferAfter": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "doctorId": {
             "type": "integer",
             "format": "int32"
           },
@@ -2222,6 +2261,10 @@
           "role": {
             "type": "string",
             "nullable": true
+          },
+          "experience": {
+            "type": "integer",
+            "format": "int32"
           },
           "phoneNo": {
             "type": "string",
@@ -2335,6 +2378,41 @@
             "type": "integer",
             "format": "int32"
           },
+          "prescribedby": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "doctor": {
+            "$ref": "#/components/schemas/Doctor"
+          },
+          "appointment": {
+            "$ref": "#/components/schemas/Appointment"
+          },
+          "prescriptionDays": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PrescriptionDay"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PrescriptionDay": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dayNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "prescribedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
           "diagnosis": {
             "maxLength": 500,
             "type": "string",
@@ -2350,19 +2428,9 @@
             "type": "string",
             "nullable": true
           },
-          "prescribedDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "prescribedby": {
+          "prescriptionId": {
             "type": "integer",
             "format": "int32"
-          },
-          "doctor": {
-            "$ref": "#/components/schemas/Doctor"
-          },
-          "appointment": {
-            "$ref": "#/components/schemas/Appointment"
           }
         },
         "additionalProperties": false
@@ -2397,6 +2465,10 @@
           "address": {
             "type": "string",
             "nullable": true
+          },
+          "experience": {
+            "type": "integer",
+            "format": "int32"
           },
           "status": {
             "type": "boolean"

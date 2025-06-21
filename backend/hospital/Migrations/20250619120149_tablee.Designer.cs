@@ -12,8 +12,8 @@ using hospital.Data;
 namespace hospital.Migrations
 {
     [DbContext(typeof(Applicationdbcontext))]
-    [Migration("20250609050952_avail")]
-    partial class avail
+    [Migration("20250619120149_tablee")]
+    partial class tablee
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -293,11 +293,8 @@ namespace hospital.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentId"));
 
-                    b.Property<DateOnly>("AppointmentDate")
-                        .HasColumnType("date");
-
-                    b.Property<TimeOnly>("AppointmentTime")
-                        .HasColumnType("time");
+                    b.Property<DateTime>("AppointmentDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -308,6 +305,9 @@ namespace hospital.Migrations
                     b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
+
                     b.Property<int?>("NurseId")
                         .HasColumnType("int");
 
@@ -317,6 +317,9 @@ namespace hospital.Migrations
                     b.Property<string>("Reason")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
 
                     b.Property<string>("Status")
                         .HasMaxLength(50)
@@ -401,11 +404,17 @@ namespace hospital.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Availability")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Experience")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNo")
                         .HasColumnType("nvarchar(max)");
@@ -467,7 +476,7 @@ namespace hospital.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("DoctorAvailabilities");
+                    b.ToTable("DoctorAvailability");
                 });
 
             modelBuilder.Entity("hospital.Model.Nurse", b =>
@@ -481,8 +490,14 @@ namespace hospital.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Availability")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Experience")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNo")
                         .HasColumnType("nvarchar(max)");
@@ -518,6 +533,9 @@ namespace hospital.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Age")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Availability")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Bloodgrp")
@@ -578,18 +596,6 @@ namespace hospital.Migrations
                     b.Property<int>("AppointmentId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Diagnosis")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Medications")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<string>("Notes")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
                     b.Property<DateTime>("PrescribedDate")
                         .HasColumnType("datetime2");
 
@@ -605,6 +611,39 @@ namespace hospital.Migrations
                     b.ToTable("Prescription");
                 });
 
+            modelBuilder.Entity("hospital.Model.PrescriptionDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DayNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Diagnosis")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Medications")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int>("PrescriptionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PrescriptionId");
+
+                    b.ToTable("PrescriptionDays");
+                });
+
             modelBuilder.Entity("hospital.Model.Receptionist", b =>
                 {
                     b.Property<int>("Id")
@@ -616,8 +655,14 @@ namespace hospital.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Availability")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Experience")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNo")
                         .HasColumnType("nvarchar(max)");
@@ -848,6 +893,17 @@ namespace hospital.Migrations
                     b.Navigation("Doctor");
                 });
 
+            modelBuilder.Entity("hospital.Model.PrescriptionDay", b =>
+                {
+                    b.HasOne("hospital.Model.Prescription", "Prescription")
+                        .WithMany("PrescriptionDays")
+                        .HasForeignKey("PrescriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Prescription");
+                });
+
             modelBuilder.Entity("hospital.Model.Receptionist", b =>
                 {
                     b.HasOne("hospital.Model.User", "User")
@@ -855,6 +911,11 @@ namespace hospital.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("hospital.Model.Prescription", b =>
+                {
+                    b.Navigation("PrescriptionDays");
                 });
 #pragma warning restore 612, 618
         }
