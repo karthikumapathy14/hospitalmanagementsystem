@@ -40,6 +40,7 @@ namespace hospital.Controller
                     d.Role,
                     d.PhoneNo,
                     d.Qualification,
+                    d.Experience,
                     d.Address,
                     d.status,
                     d.Availability,
@@ -98,9 +99,11 @@ namespace hospital.Controller
            
 
             docid.status = doctor.status;
+            docid.Experience = doctor.Experience;
 
             if (doctor.DepartmentId != null)
                 docid.DepartmentId = doctor.DepartmentId.Value;
+            
 
             await _dbcontext.SaveChangesAsync();
             return Ok(" Updated successfully");
@@ -185,6 +188,7 @@ namespace hospital.Controller
                 nurseid.PhoneNo = nurse.PhoneNo;
            
                 nurseid.status = nurse.status;
+            nurseid.Experience = nurse.Experience;
 
             if (!string.IsNullOrWhiteSpace(nurse.Role) && nurse.Role != "string")
                 nurseid.Role = nurse.Role;
@@ -231,6 +235,7 @@ namespace hospital.Controller
             if (!string.IsNullOrWhiteSpace(receptionist.Address) && receptionist.Address != "string")
                 rid.Address = receptionist.Address;
             rid.status = receptionist.status;
+          
 
             await _dbcontext.SaveChangesAsync();
             return Ok("Updated Successfully");
@@ -312,7 +317,7 @@ namespace hospital.Controller
 
             DateTime today = DateTime.Today;
             var statusCounts = _dbcontext.appointments
-                .Where(a => a.AppointmentDate == today) // ✅ Direct comparison
+                .Where(a => a.AppointmentDate == today) 
                 .GroupBy(a => a.Status)
                 .Select(g => new { Status = g.Key, Count = g.Count() })
                 .ToList();
@@ -356,7 +361,7 @@ namespace hospital.Controller
     public async Task<IActionResult> GetDocAvailableDetails()
     {
         var doctorDetails = await _dbcontext.Doctors
-            .Include(d => d.Department) // Eagerly load Department
+            .Include(d => d.Department) 
             .ToListAsync();
 
         return Ok(doctorDetails);

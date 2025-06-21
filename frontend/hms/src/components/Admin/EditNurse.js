@@ -13,8 +13,9 @@ const EditNurse = () => {
     address: "",
     doctorId: "",
     status: false,
+    experience:'',
   });
-  const [doc, setDoctors] = useState([]);
+
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -137,6 +138,17 @@ const EditNurse = () => {
               />
             </div>
 
+              <div className="mb-4">
+              <label className="form-label fw-bold">Experience</label>
+              <input
+                type="number"
+                name="experience"
+                value={nurse.experience}
+                onChange={handleChange}
+                className="form-control rounded-pill"
+                required
+              />
+            </div>
             <div className="mb-4">
               <label className="form-label fw-bold">Address</label>
               <input

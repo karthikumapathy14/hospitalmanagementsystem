@@ -83,7 +83,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors("allowReact"); //
+app.UseCors("allowReact"); 
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

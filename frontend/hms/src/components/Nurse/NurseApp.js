@@ -25,7 +25,7 @@ const NurseApp = () => {
               element={<Viewappointmentnurse />}
             ></Route>
             <Route
-              path="Editappointmentnurse/:id"
+              path="Editappointmentnurse/:prescriptionId"
               element={<Editappointmentnurse />}
             ></Route>
              <Route path="ChangePassword" element={<ChangePassword/>}></Route>

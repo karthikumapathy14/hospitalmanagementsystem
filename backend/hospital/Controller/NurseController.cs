@@ -51,6 +51,15 @@ namespace hospital.Controller
                     DoctorName=a.Doctor.UserName,
                     Patientid = a.Patient.patientid,
                     PatientName = a.Patient.UserName,
+
+                    PrescriptionId = _dbcontext.Prescription
+                        .Where(p => p.AppointmentId == a.AppointmentId)
+                        .Select(p => p.Id)
+                        .FirstOrDefault(),
+                    PrescribedBy=_dbcontext.Prescription.Where(p=>p.AppointmentId==a.AppointmentId)
+                        .Select(p=>p.Prescribedby)
+                        .FirstOrDefault(),
+
                     a.Status
                 }).ToListAsync();
             return Ok(appointment);
@@ -65,21 +74,85 @@ namespace hospital.Controller
             return Ok(prescribe);
         }
 
-        [HttpPut("updateprescription/{id}")]
-        public async Task<IActionResult> updatePrescription(int id,Prescription prescription)
+        [HttpPost("updateprescription")]
+        public async Task<IActionResult> UpdatePrescription([FromBody] Prescription prescription)
         {
-            var existing =  _dbcontext.Prescription.FirstOrDefault(a=>a.AppointmentId==id);
-            if (existing == null) return NotFound();
+            // Block create operation
+            if (prescription.Id <= 0)
+            {
+                return BadRequest("New prescriptions cannot be created by this endpoint.");
+            }
 
-            existing.Diagnosis = prescription.Diagnosis;
-            existing.Notes = prescription.Notes;
-            existing.Medications = prescription.Medications;
+            // Proceed to update
+            var existingPrescription = await _dbcontext.Prescription
+                .Include(p => p.PrescriptionDays)
+                .FirstOrDefaultAsync(p => p.Id == prescription.Id);
+
+            if (existingPrescription == null)
+                return NotFound("Prescription not found");
+
+            // Update core fields
+            existingPrescription.Prescribedby = prescription.Prescribedby;
+
+            // Remove old days and add new ones
+            _dbcontext.PrescriptionDays.RemoveRange(existingPrescription.PrescriptionDays);
+            await _dbcontext.SaveChangesAsync();
+
+            foreach (var day in prescription.PrescriptionDays)
+            {
+                day.Id = 0;
+                day.PrescriptionId = existingPrescription.Id;
+                day.Prescription = null;
+                _dbcontext.PrescriptionDays.Add(day);
+            }
 
             await _dbcontext.SaveChangesAsync();
 
-            return Ok("Prescription Updated Successfully");
-
+            return Ok(new
+            {
+                Message = "Prescription updated successfully",
+                PrescriptionId = existingPrescription.Id
+            });
         }
+
+
+        [HttpGet("getprescriptionbyprescription/{prescriptionId}")]
+        public async Task<IActionResult> GetPrescriptionByAppointmentId(int prescriptionId)
+        {
+            var prescription = await _dbcontext.Prescription
+                .Where(p => p.Id == prescriptionId)
+                .Include(p => p.PrescriptionDays)
+                .Include(p => p.Doctor)
+                .Include(p => p.Appointment)
+                    .ThenInclude(a => a.Patient)
+                    .ThenInclude(p => p.User)
+                .FirstOrDefaultAsync();
+
+            if (prescription == null)
+            {
+                return Ok(null);
+            }
+
+            return Ok(new
+            {
+                prescription.Id,
+                prescription.AppointmentId,
+                prescription.Prescribedby,
+                PrescribedDate = prescription.PrescriptionDays.FirstOrDefault()?.PrescribedDate,
+
+                PrescriptionDays = prescription.PrescriptionDays.Select(d => new
+                {
+                    d.PrescribedDate,
+                    d.Id,
+                    d.DayNumber,
+                    d.Diagnosis,
+                    d.Medications,
+                    d.Notes
+                }).ToList()
+            });
+        }
+
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Nurse>> GetNurse(int id)
         {

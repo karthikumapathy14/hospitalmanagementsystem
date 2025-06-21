@@ -156,7 +156,7 @@ namespace hospital.Controller
         [HttpPost("Create-appointment")]
         public async Task<IActionResult> CreateAppointment([FromBody] Appointment dto)
         {
-            var availability = await _dbcontext.DoctorAvailabilities
+            var availability = await _dbcontext.DoctorAvailability
                 .FirstOrDefaultAsync(a =>
                     a.DoctorId == dto.DoctorId &&
                     dto.AppointmentDate.Date >= a.StartDate.Date &&
@@ -457,7 +457,7 @@ namespace hospital.Controller
         [HttpGet("Get-available-slots/{doctorId}/{date}")]
         public IActionResult GetAvailableSlots(int doctorId, DateTime date)
         {
-            var availability = _dbcontext.DoctorAvailabilities
+            var availability = _dbcontext.DoctorAvailability
                 .FirstOrDefault(a =>
                     a.DoctorId == doctorId &&
                     a.StartDate.Date <= date.Date &&

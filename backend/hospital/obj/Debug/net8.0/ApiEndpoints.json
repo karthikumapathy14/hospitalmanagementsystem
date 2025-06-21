@@ -706,6 +706,22 @@
   },
   {
     "ContainingType": "hospital.Controller.DoctorController",
+    "Method": "GetPrescriptionByAppointmentId",
+    "RelativePath": "api/Doctor/getprescriptionbyprescription/{prescriptionId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "prescriptionId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.DoctorController",
     "Method": "GetAllPatientHistories",
     "RelativePath": "api/Doctor/history",
     "HttpMethod": "GET",
@@ -732,7 +748,7 @@
   },
   {
     "ContainingType": "hospital.Controller.DoctorController",
-    "Method": "Createprescription",
+    "Method": "CreateOrUpdatePrescription",
     "RelativePath": "api/Doctor/postprescription",
     "HttpMethod": "POST",
     "IsController": true,
@@ -853,6 +869,22 @@
   },
   {
     "ContainingType": "hospital.Controller.NurseController",
+    "Method": "GetPrescriptionByAppointmentId",
+    "RelativePath": "api/Nurse/getprescriptionbyprescription/{prescriptionId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "prescriptionId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.NurseController",
     "Method": "GetPatientlist",
     "RelativePath": "api/Nurse/Patientlist",
     "HttpMethod": "GET",
@@ -863,17 +895,12 @@
   },
   {
     "ContainingType": "hospital.Controller.NurseController",
-    "Method": "updatePrescription",
-    "RelativePath": "api/Nurse/updateprescription/{id}",
-    "HttpMethod": "PUT",
+    "Method": "UpdatePrescription",
+    "RelativePath": "api/Nurse/updateprescription",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
       {
         "Name": "prescription",
         "Type": "hospital.Model.Prescription",

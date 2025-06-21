@@ -12,8 +12,8 @@ using hospital.Data;
 namespace hospital.Migrations
 {
     [DbContext(typeof(Applicationdbcontext))]
-    [Migration("20250531045303_run")]
-    partial class run
+    [Migration("20250620071812_update")]
+    partial class update
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -293,11 +293,8 @@ namespace hospital.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentId"));
 
-                    b.Property<DateOnly>("AppointmentDate")
-                        .HasColumnType("date");
-
-                    b.Property<TimeOnly>("AppointmentTime")
-                        .HasColumnType("time");
+                    b.Property<DateTime>("AppointmentDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -308,6 +305,9 @@ namespace hospital.Migrations
                     b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
+
                     b.Property<int?>("NurseId")
                         .HasColumnType("int");
 
@@ -317,6 +317,9 @@ namespace hospital.Migrations
                     b.Property<string>("Reason")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
 
                     b.Property<string>("Status")
                         .HasMaxLength(50)
@@ -401,11 +404,17 @@ namespace hospital.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Availability")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Experience")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNo")
                         .HasColumnType("nvarchar(max)");
@@ -434,6 +443,42 @@ namespace hospital.Migrations
                     b.ToTable("Doctors");
                 });
 
+            modelBuilder.Entity("hospital.Model.DoctorAvailability", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BufferAfter")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BufferBefor")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("DoctorAvailability");
+                });
+
             modelBuilder.Entity("hospital.Model.Nurse", b =>
                 {
                     b.Property<int>("Id")
@@ -445,8 +490,14 @@ namespace hospital.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Availability")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Experience")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNo")
                         .HasColumnType("nvarchar(max)");
@@ -482,6 +533,9 @@ namespace hospital.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Age")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Availability")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Bloodgrp")
@@ -542,6 +596,29 @@ namespace hospital.Migrations
                     b.Property<int>("AppointmentId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Prescribedby")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppointmentId");
+
+                    b.HasIndex("Prescribedby");
+
+                    b.ToTable("Prescription");
+                });
+
+            modelBuilder.Entity("hospital.Model.PrescriptionDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DayNumber")
+                        .HasColumnType("int");
+
                     b.Property<string>("Diagnosis")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
@@ -557,16 +634,14 @@ namespace hospital.Migrations
                     b.Property<DateTime>("PrescribedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Prescribedby")
+                    b.Property<int>("PrescriptionId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppointmentId");
+                    b.HasIndex("PrescriptionId");
 
-                    b.HasIndex("Prescribedby");
-
-                    b.ToTable("Prescription");
+                    b.ToTable("PrescriptionDays");
                 });
 
             modelBuilder.Entity("hospital.Model.Receptionist", b =>
@@ -580,8 +655,14 @@ namespace hospital.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Availability")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Experience")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNo")
                         .HasColumnType("nvarchar(max)");
@@ -752,6 +833,17 @@ namespace hospital.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("hospital.Model.DoctorAvailability", b =>
+                {
+                    b.HasOne("hospital.Model.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+                });
+
             modelBuilder.Entity("hospital.Model.Nurse", b =>
                 {
                     b.HasOne("hospital.Model.User", "User")
@@ -801,6 +893,17 @@ namespace hospital.Migrations
                     b.Navigation("Doctor");
                 });
 
+            modelBuilder.Entity("hospital.Model.PrescriptionDay", b =>
+                {
+                    b.HasOne("hospital.Model.Prescription", "Prescription")
+                        .WithMany("PrescriptionDays")
+                        .HasForeignKey("PrescriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Prescription");
+                });
+
             modelBuilder.Entity("hospital.Model.Receptionist", b =>
                 {
                     b.HasOne("hospital.Model.User", "User")
@@ -808,6 +911,11 @@ namespace hospital.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("hospital.Model.Prescription", b =>
+                {
+                    b.Navigation("PrescriptionDays");
                 });
 #pragma warning restore 612, 618
         }

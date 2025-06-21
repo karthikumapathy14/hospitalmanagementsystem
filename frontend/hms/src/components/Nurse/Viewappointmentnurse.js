@@ -33,8 +33,8 @@ const Viewappointmentnurse = () => {
       });
   }, [navigate, token]);
 
-  const handleEdit = (appointmentId) => {
-    navigate(`/nurse/Editappointmentnurse/${appointmentId}`);
+  const handleEdit = (prescriptionId) => {
+    navigate(`/nurse/Editappointmentnurse/${prescriptionId}`);
   };
 
   const filteredData = data.filter((item) => {
@@ -159,7 +159,7 @@ const Viewappointmentnurse = () => {
                             <td>
                               <button
                                 className="btn btn-sm btn-outline-warning"
-                                onClick={() => handleEdit(item.appointmentId)}
+                                onClick={() => handleEdit(item.prescriptionId)}
                               >
                                 <i className="bi bi-pencil-square"></i>
                                 <span className="d-none d-md-inline ms-1">

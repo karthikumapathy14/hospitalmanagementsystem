@@ -10,6 +10,7 @@ namespace hospital.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
+
     //[Authorize(Roles = "Doctor")]
     public class DoctorController : ControllerBase
     {
@@ -54,7 +55,11 @@ namespace hospital.Controller
                    Patientid = a.Patient.patientid,
                    PatientName = a.Patient.UserName,
                    a.Status,
-                   PrescriptionAdded = _dbcontext.Prescription.Any(p => p.AppointmentId == a.AppointmentId)
+                   PrescriptionAdded = _dbcontext.Prescription.Any(p => p.AppointmentId == a.AppointmentId),
+
+                   PrescriptionId = _dbcontext.Prescription.Where(p=>p.AppointmentId==a.AppointmentId)
+                   .Select(p=>(int?)p.Id)
+                   .FirstOrDefault()
                })
                 .ToListAsync();
 
@@ -115,37 +120,106 @@ namespace hospital.Controller
             return Ok(name);
         }
 
-        //[HttpPost("postprescription")]
-        //public async Task<IActionResult> Createprescription(Prescription prescription)
-        //{
-        //     await _dbcontext.Prescription.AddAsync(prescription);
-        //    await _dbcontext.SaveChangesAsync();
-        //    return Ok(prescription);
-        //}
-
 
         [HttpPost("postprescription")]
-        public async Task<IActionResult> Createprescription([FromBody] Prescription prescription)
+     
+        public async Task<IActionResult> CreateOrUpdatePrescription([FromBody] Prescription prescription)
         {
-
-            var appointment = await _dbcontext.appointments
-                .Include(a => a.Patient)
-                .ThenInclude(p => p.User)
-                .FirstOrDefaultAsync(a => a.AppointmentId == prescription.AppointmentId);
-
-            if (appointment == null)
+            if (prescription.Id > 0)
             {
-                return NotFound("Appointment not found.");
+                var presId = prescription.Id;
+
+                var existingPrescription = await _dbcontext.Prescription
+                    .Include(p => p.PrescriptionDays)
+                    .FirstOrDefaultAsync(p => p.Id == presId);
+
+                if (existingPrescription == null)
+                    return NotFound("Prescription not found");
+
+                existingPrescription.Prescribedby = prescription.Prescribedby;
+
+                _dbcontext.PrescriptionDays.RemoveRange(existingPrescription.PrescriptionDays);
+                await _dbcontext.SaveChangesAsync();
+
+                foreach (var day in prescription.PrescriptionDays)
+                {
+                    day.Id = 0; // ✅ Ensures EF treats as new
+                    day.PrescriptionId = existingPrescription.Id;
+                    day.Prescription = null;
+                    _dbcontext.PrescriptionDays.Add(day);
+                }
+
+                await _dbcontext.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    Message = "Prescription updated successfully",
+                    PrescriptionId = existingPrescription.Id
+                });
+            }
+            else
+            {
+                // ✅ Create new prescription
+                prescription.Doctor = null;
+                prescription.Appointment = null;
+
+                if (prescription.PrescriptionDays != null)
+                {
+                    foreach (var day in prescription.PrescriptionDays)
+                    {
+                        day.Id = 0;
+                        day.Prescription = null;
+                    }
+                }
+
+                _dbcontext.Prescription.Add(prescription);
+                await _dbcontext.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    Message = "Prescription created successfully",
+                    PrescriptionId = prescription.Id
+                });
+            }
+        }
+
+
+        [HttpGet("getprescriptionbyprescription/{prescriptionId}")]
+        public async Task<IActionResult> GetPrescriptionByAppointmentId(int prescriptionId)
+        {
+            var prescription = await _dbcontext.Prescription
+                .Where(p => p.Id == prescriptionId)
+                .Include(p => p.PrescriptionDays)
+                .Include(p => p.Doctor)
+                .Include(p => p.Appointment)
+                    .ThenInclude(a => a.Patient)
+                    .ThenInclude(p => p.User)
+                .FirstOrDefaultAsync();
+
+            if (prescription == null)
+            {
+                return Ok(null); 
             }
 
+            return Ok(new
+            {
+                prescription.Id,
+                prescription.AppointmentId,
+                prescription.Prescribedby,
+                PrescribedDate = prescription.PrescriptionDays.FirstOrDefault()?.PrescribedDate,
 
-            prescription.Appointment = appointment;
-
-            _dbcontext.Prescription.Add(prescription);
-            await _dbcontext.SaveChangesAsync();
-
-            return Ok(prescription);
+                PrescriptionDays = prescription.PrescriptionDays.Select(d => new
+                {
+                    d.PrescribedDate,
+                    d.Id,
+                    d.DayNumber,
+                    d.Diagnosis,
+                    d.Medications,
+                    d.Notes
+                }).ToList()
+            });
         }
+
 
         [HttpPut("appointments/{id}/status")]
         public async Task<IActionResult> UpdateStatus(int id, [FromBody] Appointment dto)
@@ -155,12 +229,13 @@ namespace hospital.Controller
                 return NotFound("Appointment not found");
 
             // Check if status is "Complete"
-            if (dto.Status == "Complete")
+            if (dto.Status?.Trim().ToLower() == "complete")
             {
-                // Check if a prescription exists for this appointment
-                var hasPrescription = await _dbcontext.Prescription.AnyAsync(p => p.AppointmentId == id);
+                bool hasPrescription = await _dbcontext.Prescription
+            .AnyAsync(p => p.AppointmentId == id);
+
                 if (!hasPrescription)
-                    return BadRequest("Cannot mark appointment as complete without prescription.");
+                    return BadRequest("Cannot mark appointment as complete without at least one prescription.");
             }
 
             appointment.Status = dto.Status;
@@ -218,11 +293,17 @@ namespace hospital.Controller
                         .Where(p => p.AppointmentId == a.AppointmentId)
                         .Select(p => new
                         {
-                            p.Diagnosis,
-                            p.Medications,
-                            p.Notes,
-                            p.PrescribedDate,
-                            p.Prescribedby
+                            //p.PrescribedDate,
+                            p.Prescribedby,
+                            Days = p.PrescriptionDays.Select(d => new
+                            {
+                               d.PrescribedDate,
+                                d.DayNumber,
+                                d.Diagnosis,
+                                d.Medications,
+                                d.Notes
+                            }).OrderBy(d=>d.DayNumber).ToList()
+                            
                         })
                         .FirstOrDefault()
                 })
@@ -267,16 +348,20 @@ namespace hospital.Controller
                 },
 
                 Prescription = _dbcontext.Prescription
-                    .Where(p => p.AppointmentId == a.AppointmentId)
-                    .Select(p => new
-                    {
-                        p.Diagnosis,
-                        p.Medications,
-                        p.Notes,
-                        p.Prescribedby,
-                        p.PrescribedDate
-                    })
-                    .FirstOrDefault() 
+                        .Where(p => p.AppointmentId == a.AppointmentId)
+                        .Select(p => new
+                        {
+                            //p.PrescribedDate,
+                            p.Prescribedby,
+                            Days = p.PrescriptionDays.Select(d => new
+                            {
+                                d.PrescribedDate,
+                                d.DayNumber,
+                                d.Diagnosis,
+                                d.Medications,
+                                d.Notes
+                            }).OrderBy(d => d.DayNumber).ToList()
+                        }).FirstOrDefault() 
             }).ToList();
 
             if (!result.Any())
@@ -333,9 +418,6 @@ namespace hospital.Controller
             return Ok(new { message = "Availability status updated." });
         }
 
-
-
-
         // set Availability
         [HttpPost("availability")]
         public async Task<IActionResult> PostAvailability([FromBody] DoctorAvailability availability)
@@ -348,7 +430,7 @@ namespace hospital.Controller
             }
 
             availability.DoctorId = doctorId;
-            _dbcontext.DoctorAvailabilities.Add(availability);
+            _dbcontext.DoctorAvailability.Add(availability);
             await _dbcontext.SaveChangesAsync();
 
             return Ok("Availability saved successfully.");

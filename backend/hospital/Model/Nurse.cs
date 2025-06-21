@@ -14,7 +14,7 @@ namespace hospital.Model
 
         public string Email { get; set; }
         public string Role { get; set; }
-     
+        public int Experience { get; set; }
         public string PhoneNo { get; set; }
         public string Address { get; set; }
         public bool status { get; set; } = true;
