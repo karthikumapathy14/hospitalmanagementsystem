@@ -2577,10 +2577,6 @@
             "type": "string",
             "nullable": true
           },
-          "experience": {
-            "type": "integer",
-            "format": "int32"
-          },
           "status": {
             "type": "boolean"
           },

@@ -127,18 +127,22 @@ const Appointments = () => {
       toast.success(response.data || "Status updated successfully");
       loadAppointments();
     } catch (error) {
-      if (
-        error.response &&
-        error.response.status === 400 &&
-        error.response.data ===
-          "Cannot mark appointment as complete without prescription."
-      ) {
-        toast.error(
+       toast.error(
           "Please add a prescription before marking this appointment as complete."
         );
-      } else {
-        toast.error("Failed to update status. Please try again.");
-      }
+      // if (
+      //   error.response &&
+      //   error.response.status === 400 &&
+      //   error.response.data ===
+      //     "Cannot mark appointment as complete without prescription."
+      // ) {
+      //   toast.error(
+      //     "Please add a prescription before marking this appointment as complete."
+      //   );
+      // } 
+      // else {
+      //   toast.error("Failed to update status. Please try again.");
+      // }
     }
   };
 

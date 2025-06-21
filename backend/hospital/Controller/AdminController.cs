@@ -235,7 +235,7 @@ namespace hospital.Controller
             if (!string.IsNullOrWhiteSpace(receptionist.Address) && receptionist.Address != "string")
                 rid.Address = receptionist.Address;
             rid.status = receptionist.status;
-            rid.Experience = receptionist.Experience;
+          
 
             await _dbcontext.SaveChangesAsync();
             return Ok("Updated Successfully");

@@ -80,7 +80,7 @@ const Addprescription = () => {
 
     const payload = {
       appointmentId: parseInt(appid),
-      id: parseInt(prescriptionId),
+      id: parseInt(prescriptionId) || 0 ,
       prescribedby: parseInt(doctorId),
       prescribedDate: new Date().toISOString().split("T")[0],
       prescriptionDays,
@@ -119,7 +119,7 @@ const Addprescription = () => {
                   </div>
                   <div className="col-md-6 mb-3">
                     <label className="form-label fw-bold">Prescription ID</label>
-                    <input className="form-control bg-light" value={prescriptionId} readOnly />
+                    <input className="form-control bg-light" value={prescriptionId||""} readOnly />
                   </div>
                   <div className="col-md-6 mb-3">
                     <label className="form-label fw-bold">Prescribed By</label>
