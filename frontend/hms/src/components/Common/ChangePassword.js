@@ -134,7 +134,6 @@ const ChangePassword = () => {
               <div>{message}</div>
             </div>
           )}
-
           {error && (
             <div className="alert alert-danger d-flex align-items-center mb-3">
               <FaExclamationCircle className="me-2" />
@@ -148,21 +147,24 @@ const ChangePassword = () => {
             <div className="mb-3">
               <label className="form-label">Current Password</label>
               <div className="input-group">
+                <span className="input-group-text bg-white">
+                  <FaLock />
+                </span>
                 <input
                   type={showPassword.current ? "text" : "password"}
                   name="currentPassword"
-                  className="form-control"
+                  className="form-control border-start-0 border-end-0"
                   value={formData.currentPassword}
                   onChange={handleChange}
                   required
                 />
-                <button
-                  className="btn btn-outline-secondary"
-                  type="button"
+                <span
+                  className="input-group-text bg-white"
+                  style={{ cursor: "pointer" }}
                   onClick={() => togglePasswordVisibility("current")}
                 >
                   {showPassword.current ? <FaEyeSlash /> : <FaEye />}
-                </button>
+                </span>
               </div>
             </div>
 
@@ -170,21 +172,24 @@ const ChangePassword = () => {
             <div className="mb-3">
               <label className="form-label">New Password</label>
               <div className="input-group mb-2">
+                <span className="input-group-text bg-white">
+                  <FaLock />
+                </span>
                 <input
                   type={showPassword.new ? "text" : "password"}
                   name="newPassword"
-                  className="form-control"
+                  className="form-control border-start-0 border-end-0"
                   value={formData.newPassword}
                   onChange={handleChange}
                   required
                 />
-                <button
-                  className="btn btn-outline-secondary"
-                  type="button"
+                <span
+                  className="input-group-text bg-white"
+                  style={{ cursor: "pointer" }}
                   onClick={() => togglePasswordVisibility("new")}
                 >
                   {showPassword.new ? <FaEyeSlash /> : <FaEye />}
-                </button>
+                </span>
               </div>
               {formData.newPassword && (
                 <>
@@ -209,11 +214,15 @@ const ChangePassword = () => {
             <div className="mb-4">
               <label className="form-label">Confirm Password</label>
               <div className="input-group">
+                <span className="input-group-text bg-white">
+                  <FaLock />
+                </span>
                 <input
                   type={showPassword.confirm ? "text" : "password"}
                   name="confirmPassword"
-                  className={`form-control ${
-                    formData.confirmPassword && formData.newPassword !== formData.confirmPassword
+                  className={`form-control border-start-0 border-end-0 ${
+                    formData.confirmPassword &&
+                    formData.newPassword !== formData.confirmPassword
                       ? "is-invalid"
                       : ""
                   }`}
@@ -221,13 +230,13 @@ const ChangePassword = () => {
                   onChange={handleChange}
                   required
                 />
-                <button
-                  className="btn btn-outline-secondary"
-                  type="button"
+                <span
+                  className="input-group-text bg-white"
+                  style={{ cursor: "pointer" }}
                   onClick={() => togglePasswordVisibility("confirm")}
                 >
                   {showPassword.confirm ? <FaEyeSlash /> : <FaEye />}
-                </button>
+                </span>
               </div>
               {formData.confirmPassword &&
                 formData.newPassword !== formData.confirmPassword && (
@@ -237,7 +246,7 @@ const ChangePassword = () => {
               )}
             </div>
 
-            {/* Submit Button */}
+            {/* Submit */}
             <button
               type="submit"
               className="btn btn-primary w-100 py-2"
@@ -245,11 +254,7 @@ const ChangePassword = () => {
             >
               {isLoading ? (
                 <>
-                  <span
-                    className="spinner-border spinner-border-sm me-2"
-                    role="status"
-                    aria-hidden="true"
-                  ></span>
+                  <span className="spinner-border spinner-border-sm me-2" />
                   Updating...
                 </>
               ) : (

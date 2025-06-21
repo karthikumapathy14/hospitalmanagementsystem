@@ -14,16 +14,14 @@ const CreatePatient = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
     if (!token) {
       toast.error("Restricted Access");
       navigate("/");
     }
-  }, [navigate]);
-
-  const token = localStorage.getItem("token");
+  }, [navigate, token]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -63,8 +61,8 @@ const CreatePatient = () => {
     } catch (err) {
       toast.error(
         err.response?.data?.[0]?.description ||
-          err.response?.data?.title ||
-          "Registration failed"
+        err.response?.data?.title ||
+        "Registration failed"
       );
     } finally {
       setIsLoading(false);
@@ -84,7 +82,7 @@ const CreatePatient = () => {
                 style={{
                   width: "50px",
                   height: "50px",
-                  backgroundColor: "#38bdf8", 
+                  backgroundColor: "#38bdf8",
                   borderRadius: "50%",
                   display: "flex",
                   alignItems: "center",
@@ -92,24 +90,20 @@ const CreatePatient = () => {
                   marginRight: "15px",
                 }}
               >
-                <i
-                  className="bi bi-person-plus text-white"
-                  style={{ fontSize: "1.5rem" }}
-                ></i>
+                <i className="bi bi-person-plus text-white" style={{ fontSize: "1.5rem" }}></i>
               </div>
               <h2 className="mb-0 text-primary" style={{ fontWeight: "600" }}>
                 New Patient Registration
               </h2>
             </div>
           </div>
+
           <div className="col-lg-6">
-            <div
-              className="card border-0 shadow-sm"
-              style={{ borderRadius: "15px", backgroundColor: "#ffffff" }}
-            >
+            <div className="card border-0 shadow-sm rounded-4">
               <div className="card-body px-5 py-4">
                 <form onSubmit={handleSubmit} autoComplete="off">
-                  <div className="md-6 mb-4">
+                  {/* Name */}
+                  <div className="mb-4">
                     <label className="form-label fw-bold text-muted">
                       <i className="bi bi-person me-2 text-primary"></i>
                       Full Name
@@ -125,7 +119,8 @@ const CreatePatient = () => {
                     />
                   </div>
 
-                  <div className="md-6 mb-4">
+                  {/* Email */}
+                  <div className="mb-4">
                     <label className="form-label fw-bold text-muted">
                       <i className="bi bi-envelope me-2 text-primary"></i>
                       Email Address
@@ -141,8 +136,7 @@ const CreatePatient = () => {
                       autoComplete="off"
                     />
                   </div>
-
-                  <div className="mb-4 position-relative">
+                  <div className="mb-4">
                     <label className="form-label fw-bold text-muted">
                       <i className="bi bi-lock me-2 text-primary"></i>
                       Password
@@ -152,27 +146,30 @@ const CreatePatient = () => {
                         type={showPassword ? "text" : "password"}
                         name="PasswordHash"
                         placeholder="Create a password"
-                        className="form-control rounded-pill"
+                        className="form-control"
                         value={formData.PasswordHash}
                         onChange={handleChange}
                         required
                         minLength="6"
+                        style={{ borderRight: "none" }}
                       />
-                      <button
-                        type="button"
-                        className="btn btn-outline-primary rounded-pill"
-                        onClick={handleShowPassword}
-                        style={{ marginLeft: "10px" }}
+                      <span
+                        className="input-group-text bg-white"
+                        onClick={() => setShowPassword(!showPassword)}
+                        style={{
+                          cursor: "pointer",
+                          borderLeft: "none",
+                          background: "transparent",
+                        }}
                       >
-                        <i
-                          className={`bi ${
-                            showPassword ? "bi-eye-slash" : "bi-eye"
-                          }`}
-                        ></i>
-                      </button>
+                        <i className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`}></i>
+                      </span>
                     </div>
                   </div>
 
+
+
+                  {/* Role */}
                   <div className="mb-4">
                     <label className="form-label fw-bold text-muted">
                       <i className="bi bi-person-badge me-2 text-primary"></i>
@@ -186,6 +183,7 @@ const CreatePatient = () => {
                     />
                   </div>
 
+                  {/* Buttons */}
                   <div className="d-flex justify-content-between mt-5">
                     <button
                       type="button"

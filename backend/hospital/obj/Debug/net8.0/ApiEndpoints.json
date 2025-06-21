@@ -380,6 +380,27 @@
   },
   {
     "ContainingType": "hospital.Controller.AdminController",
+    "Method": "GetStaffDetailsByRoleAndId",
+    "RelativePath": "api/Admin/GetStaffDetailsByRoleAndId/{role}/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "role",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.AdminController",
     "Method": "GetTodayStatusReport",
     "RelativePath": "api/Admin/gettodaystatusreport",
     "HttpMethod": "GET",

@@ -410,6 +410,40 @@ namespace hospital.Controller
         }
 
 
+        [HttpGet("GetStaffDetailsByRoleAndId/{role}/{id}")]
+        public async Task<IActionResult> GetStaffDetailsByRoleAndId(string role, int id)
+        {
+            if (string.IsNullOrEmpty(role))
+                return BadRequest("Role is required.");
+
+            role = role.ToLower();
+
+            switch (role)
+            {
+                case "doctor":
+                    var doctor = await _dbcontext.Doctors
+                        .Include(d => d.Department)
+                        .FirstOrDefaultAsync(d => d.Id == id);
+                    if (doctor == null) return NotFound("Doctor not found");
+                    return Ok(doctor);
+
+                case "nurse":
+                    var nurse = await _dbcontext.Nurses
+                        .FirstOrDefaultAsync(n => n.Id == id);
+                    if (nurse == null) return NotFound("Nurse not found");
+                    return Ok(nurse);
+
+                case "receptionist":
+                    var receptionist = await _dbcontext.Receptionists
+                        .FirstOrDefaultAsync(r => r.Id == id);
+                    if (receptionist == null) return NotFound("Receptionist not found");
+                    return Ok(receptionist);
+
+                default:
+                    return BadRequest("Invalid role provided.");
+            }
+        }
+
 
 
     }

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+
 import axios from 'axios';
 
 const Staffavailable = () => {
@@ -9,6 +11,8 @@ const Staffavailable = () => {
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [availabilityFilter, setAvailabilityFilter] = useState('all');
+
+  const navigate = useNavigate();
 
   const apiEndpoints = {
     Doctor: 'https://localhost:7058/api/Admin/getdocavailabledetails',
@@ -62,7 +66,9 @@ const Staffavailable = () => {
   };
 
   return (
+    
     <div className="container-fluid py-4">
+      
       <div className="row">
         <div className="col-12">
           <div className="card border-0 shadow-sm">
@@ -182,8 +188,14 @@ const Staffavailable = () => {
                             </span>
                           </td>
                           <td className="text-end">
-                            <button className="btn btn-sm btn-outline-primary">Details</button>
+                            <button
+                              className="btn btn-sm btn-outline-primary"
+                              onClick={() => navigate(`/admin/staff/details/${selectedRole}/${staff.id}`)}
+                            >
+                              Details
+                            </button>
                           </td>
+
                         </tr>
                       ))}
                     </tbody>
