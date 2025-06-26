@@ -310,6 +310,7 @@ namespace hospital.Controller
 
             return Ok(result);
         }
+
         [HttpGet("gettodaystatusreport")]
         public IActionResult GetTodayStatusReport()
         {
@@ -331,6 +332,7 @@ namespace hospital.Controller
 
             return Ok(result);
         }
+
         [HttpGet("getdocavailablecount")]
         public async Task<IActionResult> getdocavailablecount()
         {

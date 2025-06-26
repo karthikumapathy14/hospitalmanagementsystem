@@ -1173,6 +1173,22 @@
   },
   {
     "ContainingType": "hospital.Controller.ReceptionistController",
+    "Method": "GetPrescriptionByAppointmentId",
+    "RelativePath": "api/Receptionist/getprescriptionbyappointment/{appointmentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "appointmentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "hospital.Controller.ReceptionistController",
     "Method": "PatientReg",
     "RelativePath": "api/Receptionist/Register",
     "HttpMethod": "POST",

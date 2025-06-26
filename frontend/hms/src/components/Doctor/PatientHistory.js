@@ -7,12 +7,12 @@ const PatientHistory = () => {
   const [history, setHistory] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredHistory, setFilteredHistory] = useState([]);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
   // Fetch history once on mount
   useEffect(() => {
-      if (!token) {
+    if (!token) {
       toast.error("Restricted Access");
       navigate("/");
       return;
@@ -23,6 +23,7 @@ const PatientHistory = () => {
       })
       .then((res) => {
         setHistory(res.data);
+        console.log(res.data);
         setFilteredHistory(res.data); // set initial filtered data
       })
       .catch((err) => console.log(err));
@@ -88,6 +89,7 @@ const PatientHistory = () => {
               <th>Reason</th>
               <th>Doctor Name</th>
               <th>Department Name</th>
+              <th>Prescription Day</th>
               <th>Diagnosis</th>
               <th>Medications</th>
               <th>Notes</th>
@@ -96,30 +98,46 @@ const PatientHistory = () => {
           </thead>
           <tbody>
             {filteredHistory.length > 0 ? (
-              filteredHistory.map((item, index) => (
-                <tr key={index}>
-                  {/* <td>{item.patient.id}</td> */}
-                  <td>{item.patient.patientid}</td>
-                  {/* <td>{item.appointmentId}</td> */}
-                  <td>{item.appointmentDate}</td>
-                  <td>{item.reason}</td>
-                  <td>{item.doctor?.docname || "-"}</td>
-                  <td>{item.doctor?.department?.departmentName || "-"}</td>
-                  <td>{item.prescription?.diagnosis}</td>
-                  <td>{item.prescription?.medications || "N/A"}</td>
-                  <td>{item.prescription?.notes || "N/A"}</td>
-                  <td>
-                    {item.prescription?.prescribedDate
-                      ? new Date(
-                          item.prescription.prescribedDate
-                        ).toLocaleDateString()
-                      : "N/A"}
-                  </td>
-                </tr>
-              ))
+              filteredHistory.map((item, index) => {
+                return item.prescription?.days?.length > 0 ? (
+                  item.prescription.days.map((day, idx) => (
+                    <tr key={`${index}-${idx}`}>
+                      <td>{item.patient.patientid}</td>
+                      <td>
+                        {new Date(item.appointmentDate).toLocaleDateString()}
+                      </td>
+                      <td>{item.reason}</td>
+                      <td>{item.doctor?.docname || "-"}</td>
+                      <td>{item.doctor?.department?.departmentName || "-"}</td>
+                      <td>{day.dayNumber || "N/A"}</td>
+                      <td>{day.diagnosis || "N/A"}</td>
+                      <td>{day.medications || "N/A"}</td>
+                      <td>{day.notes || "N/A"}</td>
+                      <td>
+                        {day.prescribedDate
+                          ? new Date(day.prescribedDate).toLocaleDateString()
+                          : "N/A"}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr key={index}>
+                    <td>{item.patient.patientid}</td>
+                    <td>
+                      {new Date(item.appointmentDate).toLocaleDateString()}
+                    </td>
+                    <td>{item.reason}</td>
+                    <td>{item.doctor?.docname || "-"}</td>
+                    <td>{item.doctor?.department?.departmentName || "-"}</td>
+                    <td colSpan={5} className="text-center">
+                      No prescriptions available.
+                    </td>
+                  </tr>
+                );
+              })
             ) : (
               <tr>
-                <td colSpan="11" className="text-center">
+                <td colSpan="9" className="text-center">
                   No history available.
                 </td>
               </tr>

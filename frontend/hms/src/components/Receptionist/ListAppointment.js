@@ -34,6 +34,7 @@ const ListAppointment = () => {
     try {
       const res = await axios.get("https://localhost:7058/api/Receptionist/getappointment");
       setAppointments(res.data);
+      console.log(res.data)
     } catch (err) {
       console.error("Failed to fetch appointments:", err);
       toast.error("Failed to load appointments data");
@@ -73,7 +74,7 @@ const ListAppointment = () => {
         toast.info("Bill already generated for this appointment.");
       } else {
         setAppid(appointmentId);
-        navigate("/receptionist/billgenerate");
+        navigate("/receptionist/BillPrescription");
       }
     } catch (error) {
       console.error("Error checking bill existence:", error);
@@ -211,7 +212,7 @@ const ListAppointment = () => {
                               <td>
                                 {new Date(item.appointmentDate).toLocaleDateString()}
                               </td>
-                              <td>{item.appointmentTime}</td>
+                              <td>{item.startTime}</td>
                               <td className="text-truncate" style={{ maxWidth: "150px" }} title={item.reason}>
                                 {item.reason}
                               </td>

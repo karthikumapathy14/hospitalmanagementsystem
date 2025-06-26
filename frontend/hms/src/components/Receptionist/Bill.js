@@ -3,6 +3,7 @@ import { useAuth } from "../Common/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Addprescription from "../Doctor/Addprescription";
 
 const Bill = () => {
   const { appid } = useAuth();
@@ -25,12 +26,12 @@ const Bill = () => {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-      if (!token) {
+    if (!token) {
       toast.error("Restricted Access");
       navigate("/");
       return;
     }
-  if (appid) {
+    if (appid) {
       setFormData((prev) => ({ ...prev, appointmentId: appid }));
 
       axios
@@ -68,7 +69,7 @@ const Bill = () => {
           setLoading(false);
         });
     }
-  }, [appid,navigate]);
+  }, [appid, navigate]);
 
   useEffect(() => {
     const total =
@@ -120,8 +121,10 @@ const Bill = () => {
 
   return (
     <div className="container mt-5">
+   
+      {/* Bill */}
       <div className="row justify-content-center">
-        <div className="col-md-8 col-lg-6">
+        <div className="col-md-8 col-lg-10">
           <div className="card shadow rounded-4 border-0">
             <div className="card-body p-4">
               <h3 className="card-title text-center mb-4">

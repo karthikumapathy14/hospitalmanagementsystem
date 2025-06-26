@@ -8,7 +8,7 @@ const BillPatientView = () => {
   const [billData, setBillData] = useState(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const navigate= useNavigate();
+  const navigate = useNavigate();
   const { id } = useParams();
   const { toPDF, targetRef } = usePDF({
     filename: "medical-bill.pdf",
@@ -18,7 +18,7 @@ const BillPatientView = () => {
   });
   const token = localStorage.getItem("token");
   useEffect(() => {
-      if (!token) {
+    if (!token) {
       toast.error("Restricted Access");
       navigate("/");
       return;
@@ -42,7 +42,7 @@ const BillPatientView = () => {
     };
 
     if (id) fetchBillDetails();
-  }, [id,navigate]);
+  }, [id, navigate]);
 
   const formatDate = (dateString) => {
     if (!dateString) return "";
@@ -207,8 +207,8 @@ const BillPatientView = () => {
                     >
                       <p className="mb-0">
                         Dear <strong>{billData.patientName}</strong>,<br />
-                        Thank you for choosing Healing Touch Hospital. Below is
-                        your detailed medical bill.
+                        Thank you for choosing MedCare Hospital. Below is your
+                        detailed medical bill.
                       </p>
                     </div>
 
@@ -337,51 +337,28 @@ const BillPatientView = () => {
                             className="list-unstyled mb-0"
                             style={{ fontSize: "14px" }}
                           >
-                            <li className="mb-1 d-flex">
-                              <span
-                                className="text-muted"
-                                style={{ width: "100px" }}
-                              >
-                                Doctor:
-                              </span>
+                            <li className="mb-1 d-flex justify-content-between">
+                              <span className="text-muted">Doctor:</span>
                               <span>Dr. {billData.doctorName}</span>
                             </li>
-                            <li className="mb-1 d-flex">
-                              <span
-                                className="text-muted"
-                                style={{ width: "100px" }}
-                              >
-                                Department:
-                              </span>
+                            <li className="mb-1 d-flex justify-content-between">
+                              <span className="text-muted">Department:</span>
                               <span>{billData.departmentName}</span>
                             </li>
-                            <li className="mb-1 d-flex">
-                              <span
-                                className="text-muted"
-                                style={{ width: "100px" }}
-                              >
+                            <li className="mb-1 d-flex justify-content-between">
+                              <span className="text-muted">
                                 Appointment Date:
                               </span>
                               <span>
                                 {formatDate(billData.appointmentDate)}
                               </span>
                             </li>
-                            <li className="mb-1 d-flex">
-                              <span
-                                className="text-muted"
-                                style={{ width: "100px" }}
-                              >
-                                Time:
-                              </span>
-                              <span>{billData.appointmentTime}</span>
+                            <li className="mb-1 d-flex justify-content-between">
+                              <span className="text-muted">Time:</span>
+                              <span>{billData.startTime}</span>
                             </li>
-                            <li className="d-flex">
-                              <span
-                                className="text-muted"
-                                style={{ width: "100px" }}
-                              >
-                                Reason:
-                              </span>
+                            <li className="d-flex justify-content-between">
+                              <span className="text-muted">Reason:</span>
                               <span>{billData.reason}</span>
                             </li>
                           </ul>

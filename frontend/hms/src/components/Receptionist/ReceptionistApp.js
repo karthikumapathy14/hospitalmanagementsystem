@@ -10,6 +10,8 @@ import EditPatient from "./EditPaient";
 import ReceptionistNavbar from "./ReceptionistNavbar";
 import ChangePassword from "../Common/ChangePassword";
 import BillPatientView from "../Patient.js/Billpatientview";
+import BillPrescription from "./BillPrescription";
+import ViewPrescription from "./ViewPrescription";
 
 const ReceptionistApp = () => {
   return (
@@ -55,6 +57,8 @@ const ReceptionistApp = () => {
             <Route path="billgenerate" element={<Bill />}></Route>
             <Route path="changepassword" element={<ChangePassword/>}></Route>
             <Route path="billpatientview/:id" element={<BillPatientView />}></Route>
+            <Route path="BillPrescription" element={<BillPrescription/>}></Route>
+            <Route path="ViewPrescription/:prescriptionId" element={<ViewPrescription/>}></Route>
           </Routes>
         </div>
       </div>

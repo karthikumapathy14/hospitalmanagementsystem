@@ -293,40 +293,29 @@ namespace hospital.Controller
             return Ok(result);
         }
 
+        [HttpGet("getprescriptionbyappointment/{appointmentId}")]
+        public async Task<IActionResult> GetPrescriptionByAppointmentId(int appointmentId)
+        {
+            // Find the prescription by appointmentId
+            var prescription = await _dbcontext.Prescription
+                .Include(p => p.PrescriptionDays)
+                .Include(p => p.Appointment) 
+                .FirstOrDefaultAsync(p => p.AppointmentId == appointmentId);
+
+            if (prescription == null)
+                return NotFound("No prescription found for this appointment.");
+
+            // Return prescription with nested PrescriptionDays
+            return Ok(new {
+                prescription.Id,
+                prescription.Prescribedby,
+                prescription.AppointmentId,
+                prescription.PrescriptionDays
+            });
+        }
 
 
 
-        //[HttpPost("Billgeneration")]
-        //public async Task<IActionResult> CreateBill(Bill dto)
-        //{
-        //    var bills = new Bill
-        //    {
-        //        AppointmentId = dto.AppointmentId,
-        //        ConsultationFee = dto.ConsultationFee,
-        //        TreatmentCharges = dto.TreatmentCharges,
-        //        MedicationCharges = dto.MedicationCharges,
-        //        OtherCharges = dto.OtherCharges,
-        //        BillDate = DateTime.Now
-        //    };
-        //     _dbcontext.bill.Add(bills);
-        //    await _dbcontext.SaveChangesAsync();
-
-        //    return Ok ("Bill Geneated");
-        //}
-
-        //[HttpGet("bill")]
-        //public async Task<IActionResult> getbill()
-        //{
-        //    var detail = await _dbcontext.bill.ToListAsync();
-        //    return Ok(detail);
-        //}
-
-        //[HttpGet("billbyid/{id}")]
-        //public async Task<IActionResult> GetBillbyid(int id)
-        //{
-        //    var exists =  _dbcontext.bill.Any(b => b.AppointmentId == id);
-        //    return Ok(new { billexists = exists });
-        //}
 
         [HttpGet("bill")]
         public IActionResult GetAllBills()

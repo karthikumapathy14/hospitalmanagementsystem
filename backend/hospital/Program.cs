@@ -30,8 +30,6 @@ builder.Services.AddCors(options =>
     });
 });
 
-
-
 builder.Services.AddControllers();
 builder.Services.AddScoped<IEmailService, EmailService>();
 
