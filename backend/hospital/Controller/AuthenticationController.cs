@@ -149,7 +149,7 @@ namespace hospital.Controller
                     if (!doctor.status)
                         return BadRequest("Your account is inactive. Contact admin.");
 
-                    // ✅ Add doctorId as custom claim
+                    //  Add doctorId as custom claim
                     claims.Add(new Claim("DoctorId", doctor.Id.ToString()));
                 }
 
@@ -181,7 +181,7 @@ namespace hospital.Controller
                     if (patient == null)
                         return Unauthorized("Patient record not found.");
 
-                    // ✅ Ensure proper claim key
+                    // Ensure proper claim key
                     claims.Add(new Claim("PatientId", patient.Id.ToString()));
                 }
 
@@ -211,7 +211,7 @@ namespace hospital.Controller
                     nurseID=nurseId,
                     patientID=patientId,
                     receptionistID=receptionistId,
-                    doctorID = doctorId // optional: frontend can store/use if needed
+                    doctorID = doctorId 
                 });
             }
             return Unauthorized("Invalid email or password");
@@ -245,7 +245,7 @@ namespace hospital.Controller
         [HttpPost("logout")]
         public IActionResult Logout()
         {
-            // Since JWT is stateless, logout is handled on client by deleting token
+          
             return Ok(new { message = "Logged out successfully." });
         }
 

@@ -3,7 +3,7 @@ import axios from "axios";
 import Adminnavbar from "./Adminnavbar";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // ✅ required CSS
+import "react-toastify/dist/ReactToastify.css"; 
 
 const Department = () => {
   const [formData, setFormData] = useState({
@@ -38,7 +38,7 @@ const Department = () => {
         }
       );
       toast.success("Department added successfully ✅");
-      setFormData({ departmentName: "" }); // Clear form
+      setFormData({ departmentName: "" }); 
     } catch (error) {
       console.error(error);
       if (error.response && error.response.data) {

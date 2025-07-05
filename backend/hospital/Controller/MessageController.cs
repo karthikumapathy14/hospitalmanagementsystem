@@ -66,9 +66,5 @@ namespace hospital.Controller
             await _emailService.SendBulkEmailAsync(request.Emails, request.Subject, request.Message);
             return Ok("Emails sent successfully.");
         }
-
-        
-
-
     }
 }

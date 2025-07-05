@@ -29,14 +29,14 @@ import d4 from "../image/indian-doctor-mature-male-medical-standing-isolated-whi
 } from "react-icons/fa";
 
 const App = () => {
-  // Counter states
+
   const [physiciansCount, setPhysiciansCount] = useState(0);
   const [specialtiesCount, setSpecialtiesCount] = useState(0);
   const [nursingCount, setNursingCount] = useState(0);
   const [emergencyCount, setEmergencyCount] = useState(0);
   const countersRef = useRef(null);
 
-  // Intersection Observer for counter animation
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -84,7 +84,7 @@ const App = () => {
     requestAnimationFrame(updateCount);
   };
 
-  // Data arrays
+
   const specialties = [
     {
       icon: <FaHeartbeat className="display-4 text-danger" />,
@@ -197,7 +197,6 @@ const App = () => {
 
   return (
     <div className="hospital-website">
-      {/* Top Banner */}
 
 
       {/* Navbar */}
@@ -241,9 +240,8 @@ const App = () => {
         </div>
       </nav>
 
-      {/* Enhanced Hero Section */}
+      {/* Hero Section */}
       <section className="hero-medical position-relative overflow-hidden" id="Home">
-        {/* Background with gradient overlay */}
         <div className="hero-background position-absolute w-100 h-100">
           <img
             src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop"
@@ -258,12 +256,12 @@ const App = () => {
         <div className="container position-relative d-flex align-items-center" style={{ minHeight: "80vh" }}>
           <div className="row justify-content-center">
             <div className="col-lg-8 text-center text-lg-start">
-              {/* Main Heading with subtle animation */}
+              {/*  Heading  */}
               <h1 className="hero-heading display-3 fw-bold text-white mb-4">
                 Exceptional Care for Life
               </h1>
 
-              {/* Subtitle with decorative element */}
+              {/* Subtitlet */}
               <div className="hero-subtitle-wrapper position-relative mb-5">
                 <p className="lead text-white mb-0">
                   At MedCare Hospital, we blend world-class medical expertise with heartfelt compassion to provide exceptional healthcare services.
@@ -271,18 +269,12 @@ const App = () => {
                 <div className="decorative-line"></div>
               </div>
 
-              {/* CTA Buttons */}
-              {/* <div className="hero-cta-buttons d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-                <button className="btn btn-primary btn-lg px-4 py-3">
-                  <FaPhone className="me-2" /> Emergency Contact
-                </button>
-
-              </div> */}
+             
             </div>
           </div>
         </div>
 
-        {/* Floating decorative elements */}
+  
         <div className="floating-elements">
           <div className="floating-circle circle-1"></div>
           <div className="floating-circle circle-2"></div>
@@ -290,7 +282,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* About */}
       <section className="py-5 bg-light" id="About">
         <div className="container py-5">
           <div className="row align-items-center g-5">
@@ -323,7 +315,7 @@ const App = () => {
           </div>
         </div>
       </section>
-      {/* Stats Section */}
+
       <section ref={countersRef} className="py-5">
         <div className="container py-4">
           <div className="row g-4">
@@ -368,7 +360,7 @@ const App = () => {
       </section>
 
 
-      {/* Services Section */}
+      {/* Services */}
       <section id="services" className="py-5">
         <div className="container py-5">
           <div className="text-center mb-5">
@@ -394,7 +386,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* Facilities Section */}
+      {/* Facilities */}
       <section className="py-5 bg-light">
         <div className="container py-5">
           <div className="text-center mb-5">
@@ -416,7 +408,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* Doctors Section */}
+      {/* Doctor */}
       <section id="doctors" className="py-5">
         <div className="container py-5">
           <div className="text-center mb-5">
@@ -450,7 +442,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Testimonial */}
       <section className="py-5 text-white">
         <div className="container py-5">
           <div className="text-center text-black mb-5">
@@ -486,7 +478,7 @@ const App = () => {
           </div>
         </div>
       </section>
-      {/* Contact Section - Horizontal Layout */}
+      {/* Contact  */}
       <section id="contact" className="py-5 bg-light">
         <div className="container py-5">
           <div className="text-center mb-5">
@@ -495,7 +487,7 @@ const App = () => {
           </div>
 
           <div className="row g-4">
-            {/* Address Card */}
+            {/* Address */}
             <div className="col-md-4">
               <div className="card border-0 shadow-sm h-100 hover-effect">
                 <div className="card-body text-center p-4">
@@ -512,7 +504,7 @@ const App = () => {
               </div>
             </div>
 
-            {/* Phone Card */}
+            {/* Phone */}
             <div className="col-md-4">
               <div className="card border-0 shadow-sm h-100 hover-effect">
                 <div className="card-body text-center p-4">
@@ -521,19 +513,19 @@ const App = () => {
                   </div>
                   <h5 className="fw-bold mb-3">Contact Numbers</h5>
                   <p className="mb-1">
-                    <strong>Main:</strong> (123) 456-7000
+                    <strong>Main:</strong> 9865741025
                   </p>
                   <p className="mb-1">
-                    <strong>Emergency:</strong> (123) 456-7890
+                    <strong>Emergency:</strong> 9748557211
                   </p>
                   <p className="mb-0">
-                    <strong>Appointments:</strong> (123) 456-7891
+                    <strong>Appointments:</strong> 7884965754
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Hours Card */}
+            {/* Hours  */}
             <div className="col-md-4">
               <div className="card border-0 shadow-sm h-100 hover-effect">
                 <div className="card-body text-center p-4">

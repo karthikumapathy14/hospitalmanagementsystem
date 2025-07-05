@@ -143,7 +143,7 @@ namespace hospital.Controller
 
                 foreach (var day in prescription.PrescriptionDays)
                 {
-                    day.Id = 0; // ✅ Ensures EF treats as new
+                    day.Id = 0; 
                     day.PrescriptionId = existingPrescription.Id;
                     day.Prescription = null;
                     _dbcontext.PrescriptionDays.Add(day);
@@ -159,7 +159,7 @@ namespace hospital.Controller
             }
             else
             {
-                // ✅ Create new prescription
+                //  Create new prescription
                 prescription.Doctor = null;
                 prescription.Appointment = null;
 

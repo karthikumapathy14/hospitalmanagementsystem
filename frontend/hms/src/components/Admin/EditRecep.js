@@ -52,7 +52,7 @@ const EditRecep = () => {
       )
       .then(() => {
         alert("Receptionist Details Updated Successfully");
-        navigate("/admin/listReceptionist");
+        navigate(-1);
       })
       .catch((err) => console.log(err));
   };

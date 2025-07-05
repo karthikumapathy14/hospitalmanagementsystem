@@ -79,7 +79,7 @@ const Login = () => {
           <div className="col-lg-8">
             <div className="card shadow-lg border-0 rounded-3 overflow-hidden">
               <div className="row g-0">
-                {/* Left Panel */}
+        
                 <div className="col-md-6 d-none d-md-flex align-items-center justify-content-center p-5 text-white"
                   style={{ background: 'linear-gradient(135deg, #1e88e5 0%, #0d47a1 100%)' }}>
                   <div className="text-center">
@@ -98,7 +98,7 @@ const Login = () => {
                   </div>
                 </div>
 
-                {/* Right Panel - Login */}
+                {/* Login */}
                 <div className="col-md-6 bg-white p-5">
                   <div className="text-center mb-4">
                     <FaUserCircle size={48} className="text-primary mb-3" />
@@ -114,7 +114,7 @@ const Login = () => {
                   )}
 
                   <form onSubmit={handleFormSubmit}>
-                    {/* Email Field */}
+                    {/* Email */}
                     <div className="mb-4">
                       <label className="form-label fw-bold text-secondary small">EMAIL</label>
                       <div className="input-group">
@@ -133,7 +133,7 @@ const Login = () => {
                       </div>
                     </div>
 
-                    {/* Password Field with Eye Icon */}
+                    {/* Password */}
                     <div className="mb-4">
                       <label className="form-label fw-bold text-secondary small">PASSWORD</label>
                       <div className="input-group">
@@ -159,7 +159,7 @@ const Login = () => {
                       </div>
                     </div>
 
-                    {/* Extras */}
+                 
                     <div className="d-flex justify-content-between align-items-center mb-4">
                       <div className="form-check">
                         <input type="checkbox" className="form-check-input" id="rememberMe" />

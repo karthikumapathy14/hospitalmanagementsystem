@@ -156,7 +156,7 @@ const Addprescription = () => {
                       ))}
                     </ul>
 
-                    {/* Only render active day's content */}
+         
                     <div className="tab-content p-3 border border-top-0 rounded-bottom">
                       {prescriptionDays[activeDay] && (
                         <div className="tab-pane fade show active">

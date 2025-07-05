@@ -10,7 +10,7 @@ const PatientHistory = () => {
   const navigate=useNavigate();
 
   const token = localStorage.getItem("token");
-  // Fetch history once on mount
+ 
   useEffect(() => {
       if (!token) {
       toast.error("Restricted Access");
@@ -23,12 +23,12 @@ const PatientHistory = () => {
       })
       .then((res) => {
         setHistory(res.data);
-        setFilteredHistory(res.data); // set initial filtered data
+        setFilteredHistory(res.data); 
       })
       .catch((err) => console.log(err));
   }, [navigate]);
 
-  // Run filter whenever search term or original data changes
+  
   useEffect(() => {
     const term = searchTerm.toLowerCase();
 

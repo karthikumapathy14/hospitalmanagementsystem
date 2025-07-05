@@ -228,7 +228,7 @@ const EditPatient = () => {
               />
             </div>
 
-            {/* s */}
+   
 
             <div className="mb-4">
               <label className="form-label fw-bold">Status</label>
