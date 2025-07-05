@@ -4,11 +4,14 @@ import { useAuth } from "../Common/AuthContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const Addprescription = () => {
+const ViewPrescription = () => {
   const [prescriptionDays, setPrescriptionDays] = useState([]);
   const [activeDay, setActiveDay] = useState(0);
   const { doctorId, appid } = useAuth();
-  const { prescriptionId } = useParams();
+  const [prescriptionId, setPrescriptionId] = useState("");
+const [prescribedBy, setPrescribedBy] = useState("");
+
+//   const { prescriptionId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,7 +24,7 @@ const Addprescription = () => {
 
     axios
       .get(
-        `https://localhost:7058/api/Doctor/getprescriptionbyprescription/${prescriptionId}`,
+        `https://localhost:7058/api/Receptionist/getprescriptionbyappointment/${appid}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -33,13 +36,15 @@ const Addprescription = () => {
             prescribedDate: day.prescribedDate?.split("T")[0] || "",
           }));
           setPrescriptionDays(formatted);
+          setPrescriptionId(res.data.id);       
+      setPrescribedBy(res.data.prescribedby); 
           console.log(formatted)
         }
       })
       .catch(() => {
         console.log("No existing prescription found, starting fresh");
       });
-  }, [prescriptionId, navigate]);
+  }, [appid, navigate]);
 
   const handleDayChange = (index, field, value) => {
     const updated = [...prescriptionDays];
@@ -47,61 +52,6 @@ const Addprescription = () => {
     setPrescriptionDays(updated);
   };
 
-  const addDay = () => {
-    const dayNumbers = prescriptionDays.map((d) => d.dayNumber);
-    let nextDay = 1;
-    while (dayNumbers.includes(nextDay)) nextDay++;
-
-    const newDay = {
-      dayNumber: nextDay,
-      diagnosis: "",
-      medications: "",
-      notes: "",
-      prescribedDate: "",
-    };
-
-    setPrescriptionDays([...prescriptionDays, newDay]);
-    setActiveDay(prescriptionDays.length);
-  };
-
-  const removeDay = (index) => {
-    if (prescriptionDays.length <= 1) {
-      toast.warning("You must have at least one day");
-      return;
-    }
-
-    const updated = prescriptionDays.filter((_, i) => i !== index);
-    setPrescriptionDays(updated);
-    setActiveDay(Math.min(activeDay, updated.length - 1));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem("token");
-
-    const payload = {
-      appointmentId: parseInt(appid),
-      id: parseInt(prescriptionId) || 0 ,
-      prescribedby: parseInt(doctorId),
-      prescribedDate: new Date().toISOString().split("T")[0],
-      prescriptionDays,
-    };
-
-    try {
-      await axios.post(
-        "https://localhost:7058/api/Doctor/postprescription",
-        payload,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      toast.success("Prescription saved successfully!");
-      navigate("/doctor/viewappointment");
-    } catch (err) {
-      console.error(err);
-      toast.error("Error saving prescription.");
-    }
-  };
 
   return (
     <div className="container py-5">
@@ -112,7 +62,7 @@ const Addprescription = () => {
               <h2 className="h4 mb-0 text-center">Multi-Day Prescription</h2>
             </div>
             <div className="card-body">
-              <form onSubmit={handleSubmit}>
+              <form >
                 <div className="row mb-4">
                   <div className="col-md-6 mb-3">
                     <label className="form-label fw-bold">Appointment ID</label>
@@ -124,7 +74,7 @@ const Addprescription = () => {
                   </div>
                   <div className="col-md-6 mb-3">
                     <label className="form-label fw-bold">Prescribed By</label>
-                    <input className="form-control bg-light" value={doctorId} readOnly />
+                    <input className="form-control bg-light" value={prescribedBy} readOnly />
                   </div>
                 </div>
 
@@ -142,22 +92,14 @@ const Addprescription = () => {
                           >
                             Day {day.dayNumber}
 
-                            {prescriptionDays.length > 1 && (
-                            <button
-                              type="button"
-                              className="btn btn-sm btn-outline-danger ms-2"
-                              onClick={() => removeDay(index)}
-                            >
-                              ×
-                            </button>
-                          )}
+                          
                           </button>
                           
                         </li>
                       ))}
                     </ul>
 
-         
+                    {/* Only render active day's content */}
                     <div className="tab-content p-3 border border-top-0 rounded-bottom">
                       {prescriptionDays[activeDay] && (
                         <div className="tab-pane fade show active">
@@ -170,7 +112,7 @@ const Addprescription = () => {
                               onChange={(e) =>
                                 handleDayChange(activeDay, "prescribedDate", e.target.value)
                               }
-                              required
+                               readOnly
                             />
                           </div>
 
@@ -183,7 +125,7 @@ const Addprescription = () => {
                               onChange={(e) =>
                                 handleDayChange(activeDay, "diagnosis", e.target.value)
                               }
-                              required
+                               readOnly
                             />
                           </div>
 
@@ -196,7 +138,7 @@ const Addprescription = () => {
                               onChange={(e) =>
                                 handleDayChange(activeDay, "medications", e.target.value)
                               }
-                              required
+                               readOnly
                             />
                           </div>
 
@@ -208,7 +150,9 @@ const Addprescription = () => {
                               value={prescriptionDays[activeDay].notes}
                               onChange={(e) =>
                                 handleDayChange(activeDay, "notes", e.target.value)
+                                
                               }
+                              readOnly
                             />
                           </div>
                         </div>
@@ -217,7 +161,7 @@ const Addprescription = () => {
                   </>
                 )}
 
-                <div className="d-flex justify-content-between my-3">
+                {/* <div className="d-flex justify-content-between my-3">
                   <button
                     type="button"
                     className="btn btn-outline-primary"
@@ -228,7 +172,7 @@ const Addprescription = () => {
                   <button type="submit" className="btn btn-primary">
                     <i className="bi bi-save me-2"></i>Save Prescription
                   </button>
-                </div>
+                </div> */}
               </form>
             </div>
           </div>
@@ -238,4 +182,4 @@ const Addprescription = () => {
   );
 };
 
-export default Addprescription;
+export default ViewPrescription;

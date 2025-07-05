@@ -181,7 +181,7 @@ const DoctorAvailibility = () => {
                   </Form.Group>
                 </Row>
 
-                <Row className="mb-3">
+                {/* <Row className="mb-3">
                   <Form.Group as={Col}>
                     <Form.Label>Buffer Before (minutes)</Form.Label>
                     <Form.Control
@@ -205,7 +205,7 @@ const DoctorAvailibility = () => {
                       max="60"
                     />
                   </Form.Group>
-                </Row>
+                </Row> */}
 
                 <div className="d-grid">
                   <Button variant="primary" type="submit" disabled={loading}>

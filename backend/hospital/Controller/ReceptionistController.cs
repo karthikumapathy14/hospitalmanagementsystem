@@ -291,6 +291,26 @@ namespace hospital.Controller
             return Ok(result);
         }
 
+        [HttpGet("getprescriptionbyappointment/{appointmentId}")]
+        public async Task<IActionResult> GetPrescriptionByAppointmentId(int appointmentId)
+        {
+            // Find the prescription by appointmentId
+            var prescription = await _dbcontext.Prescription
+                .Include(p => p.PrescriptionDays)
+                .Include(p => p.Appointment) 
+                .FirstOrDefaultAsync(p => p.AppointmentId == appointmentId);
+
+            if (prescription == null)
+                return NotFound("No prescription found for this appointment.");
+
+            // Return prescription with nested PrescriptionDays
+            return Ok(new {
+                prescription.Id,
+                prescription.Prescribedby,
+                prescription.AppointmentId,
+                prescription.PrescriptionDays
+            });
+        }
 
 
 

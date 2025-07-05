@@ -1791,6 +1791,29 @@
         }
       }
     },
+    "/api/Receptionist/getprescriptionbyappointment/{appointmentId}": {
+      "get": {
+        "tags": [
+          "Receptionist"
+        ],
+        "parameters": [
+          {
+            "name": "appointmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Receptionist/bill": {
       "get": {
         "tags": [
