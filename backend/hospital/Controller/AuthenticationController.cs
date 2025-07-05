@@ -43,7 +43,7 @@ namespace hospital.Controller
                 return BadRequest(result.Errors);
             }
 
-            //create role if its not there
+         
             if (!await _roleManager.RoleExistsAsync(model.Role))
             {
                 var roleResult = await _roleManager.CreateAsync(new IdentityRole(model.Role));
@@ -122,7 +122,7 @@ namespace hospital.Controller
             {
                 var roles = await _userManager.GetRolesAsync(user);
 
-                // Initialize claims early
+                
                 var claims = new List<Claim>
         {
                     new Claim(ClaimTypes.NameIdentifier, user.Id),
@@ -138,7 +138,7 @@ namespace hospital.Controller
                     claims.Add(new Claim(ClaimTypes.Role, role));
                 }
 
-                // Doctor-specific logic
+      
                 if (roles.Contains("Doctor"))
                 {
                     var doctor = await _dbcontext.Doctors.FirstOrDefaultAsync(d => d.Email == loginDto.Email);
@@ -149,7 +149,7 @@ namespace hospital.Controller
                     if (!doctor.status)
                         return BadRequest("Your account is inactive. Contact admin.");
 
-                    //  Add doctorId as custom claim
+               
                     claims.Add(new Claim("DoctorId", doctor.Id.ToString()));
                 }
 
@@ -181,7 +181,7 @@ namespace hospital.Controller
                     if (patient == null)
                         return Unauthorized("Patient record not found.");
 
-                    // Ensure proper claim key
+                
                     claims.Add(new Claim("PatientId", patient.Id.ToString()));
                 }
 
@@ -198,7 +198,7 @@ namespace hospital.Controller
                     signingCredentials: creds
                 );
 
-                // Extract doctorId if available
+       
                 string doctorId = claims.FirstOrDefault(c => c.Type == "DoctorId")?.Value;
                 string nurseId = claims.FirstOrDefault(c => c.Type == "NurseId")?.Value;
                 string patientId = claims.FirstOrDefault(c => c.Type == "PatientId")?.Value;

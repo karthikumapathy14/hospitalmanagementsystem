@@ -24,7 +24,7 @@ namespace hospital.Controller
         public async Task<IActionResult> GetAllDoctors()
         {
             var doctors = await _dbcontext.Doctors
-                .Include(d => d.Department) // Join Department table
+                .Include(d => d.Department)
                 .Select(d => new
                 {
                     d.Id,
@@ -132,8 +132,7 @@ namespace hospital.Controller
             return Ok(depid);
         }
 
-        //nurse
-
+   
         [HttpGet("getnurse")]
         public async Task<IActionResult> getNurse()
         {
@@ -185,7 +184,7 @@ namespace hospital.Controller
             return Ok("Deleted Successfully");
         }
 
-        //Receptionist
+       
         [HttpGet("get-receptionist")]
         public async Task<IActionResult> GetReceptionist()
         {
@@ -231,8 +230,6 @@ namespace hospital.Controller
             return Ok("Delete successfully");
         }
 
-
-        //dashboard
 
         [HttpGet("totaldoctors")]
         public IActionResult GetTotalDoctors()
@@ -385,7 +382,7 @@ namespace hospital.Controller
         {
            
             var emails = await _dbcontext.Doctors
-                .Include(d => d.Department) // ensure this line is present!
+                .Include(d => d.Department) 
                 .Where(d => d.Department != null &&
                             d.Department.Id == department &&
                             !string.IsNullOrEmpty(d.Email))

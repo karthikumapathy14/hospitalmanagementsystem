@@ -54,7 +54,7 @@ namespace hospital.Controller
                 return BadRequest(result.Errors);
             }
 
-            // Ensure role exists
+          
             if (!await _roleManager.RoleExistsAsync(model.Role))
             {
                 var roleResult = await _roleManager.CreateAsync(new IdentityRole(model.Role));
@@ -163,7 +163,7 @@ namespace hospital.Controller
             if (availability == null)
                 return BadRequest("Doctor is not available on this date.");
 
-            // Use dto.StartTime directly
+  
             if (dto.StartTime < availability.StartTime || dto.StartTime >= availability.EndTime)
                 return BadRequest("Start time is outside the available window.");
 
@@ -189,10 +189,10 @@ namespace hospital.Controller
             };
 
             var isBooked = _dbcontext.appointments.Any(a =>
-    a.DoctorId == appointment.DoctorId &&
-    a.AppointmentDate.Date == appointment.AppointmentDate.Date &&
-    a.StartTime == appointment.StartTime &&
-    a.Status != "Cancel");
+                        a.DoctorId == appointment.DoctorId &&
+                        a.AppointmentDate.Date == appointment.AppointmentDate.Date &&
+                        a.StartTime == appointment.StartTime &&
+                        a.Status != "Cancel");
 
             if (isBooked)
             {
@@ -294,7 +294,7 @@ namespace hospital.Controller
         [HttpGet("getprescriptionbyappointment/{appointmentId}")]
         public async Task<IActionResult> GetPrescriptionByAppointmentId(int appointmentId)
         {
-            // Find the prescription by appointmentId
+           
             var prescription = await _dbcontext.Prescription
                 .Include(p => p.PrescriptionDays)
                 .Include(p => p.Appointment) 
@@ -303,7 +303,7 @@ namespace hospital.Controller
             if (prescription == null)
                 return NotFound("No prescription found for this appointment.");
 
-            // Return prescription with nested PrescriptionDays
+          
             return Ok(new {
                 prescription.Id,
                 prescription.Prescribedby,
@@ -393,7 +393,7 @@ namespace hospital.Controller
                     a.DoctorId == doctorId &&
                     a.AppointmentDate.Date == date.Date &&
                     a.StartTime == current &&
-                    a.Status != "Cancel" // exclude cancelled appointments
+                    a.Status != "Cancel" 
                 );
 
                 slots.Add(new

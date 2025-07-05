@@ -26,7 +26,7 @@ namespace hospital.Model
             {
                 return ConsultationFee + TreatmentCharges + MedicationCharges + OtherCharges;
             }
-            private set { /* Required by EF */ }
+            private set 
         }
         public string billstatus { get; set; } = "Pending";
 

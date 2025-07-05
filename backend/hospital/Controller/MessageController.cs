@@ -49,7 +49,7 @@ namespace hospital.Controller
                 }
             }
 
-            return Ok(emails.Distinct().ToList()); // Avoid duplicates
+            return Ok(emails.Distinct().ToList()); 
         }
 
 
