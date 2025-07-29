@@ -13,18 +13,14 @@ const EditNurse = () => {
     address: "",
     doctorId: "",
     status: false,
-    experience:'',
+    experience: '',
   });
 
 
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   axios.get('https://localhost:7058/api/Admin/docGetAll')
-  //     .then(res => setDoctors(res.data))
-  //     .catch(err => console.log(err));
-  // }, []);
+
   const token = localStorage.getItem("token");
   useEffect(() => {
     if (!token) {
@@ -38,7 +34,7 @@ const EditNurse = () => {
       })
       .then((res) => setNurse(res.data))
       .catch((err) => console.log(err));
-  }, [id,navigate]);
+  }, [id, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -74,7 +70,7 @@ const EditNurse = () => {
 
   return (
     <div className="d-flex">
-    
+
       <div
         className="flex-grow-1 d-flex justify-content-center align-items-center bg-light"
         style={{ minHeight: "100vh" }}
@@ -138,7 +134,7 @@ const EditNurse = () => {
               />
             </div>
 
-              <div className="mb-4">
+            <div className="mb-4">
               <label className="form-label fw-bold">Experience</label>
               <input
                 type="number"
@@ -161,15 +157,7 @@ const EditNurse = () => {
               />
             </div>
 
-            {/* <div className="mb-4">
-              <label className="form-label fw-bold">Doctor</label>
-              <select name="doctorId" value={nurse.doctorId} onChange={handleChange} className="form-select rounded-pill" required>
-                <option value="" disabled>- Select Doctor -</option>
-                {doc.map(doctor => (
-                  <option key={doctor.id} value={doctor.id}>{doctor.userName}</option>
-                ))}
-              </select>
-            </div> */}
+       
 
             <div className="mb-4">
               <label className="form-label fw-bold">Status</label>

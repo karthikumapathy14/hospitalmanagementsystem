@@ -70,7 +70,7 @@ namespace hospital.Controller
         public IActionResult GetAppointmentById(int id)
         {
             var appointment = _dbcontext.appointments
-                .Include(a => a.Patient) // Include related Patient entity
+                .Include(a => a.Patient) 
                 .Where(a => a.AppointmentId == id)
                 .Select(a => new
                 {
@@ -143,7 +143,7 @@ namespace hospital.Controller
 
                 foreach (var day in prescription.PrescriptionDays)
                 {
-                    day.Id = 0; // ✅ Ensures EF treats as new
+                    day.Id = 0; 
                     day.PrescriptionId = existingPrescription.Id;
                     day.Prescription = null;
                     _dbcontext.PrescriptionDays.Add(day);
@@ -159,7 +159,7 @@ namespace hospital.Controller
             }
             else
             {
-                // ✅ Create new prescription
+              
                 prescription.Doctor = null;
                 prescription.Appointment = null;
 
@@ -228,7 +228,7 @@ namespace hospital.Controller
             if (appointment == null)
                 return NotFound("Appointment not found");
 
-            // Check if status is "Complete"
+           
             if (dto.Status?.Trim().ToLower() == "complete")
             {
                 bool hasPrescription = await _dbcontext.Prescription
@@ -370,8 +370,6 @@ namespace hospital.Controller
             return Ok(result);
         }
 
-
-        //dashboard
 
         [HttpGet("appointments/today-count")]
         public async Task<IActionResult> GetTodaysAppointmentCountForDoctor()

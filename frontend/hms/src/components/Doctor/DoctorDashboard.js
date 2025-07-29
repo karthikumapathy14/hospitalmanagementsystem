@@ -19,9 +19,9 @@ const DoctorSidebar = () => {
       decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
     console.log(docName);
   }
-  // Fetch doctor availability
+ 
   const fetchAvailability = async () => {
-    if (!doctorId) return; // safety check
+    if (!doctorId) return; 
 
     try {
       const response = await axios.get(
@@ -37,7 +37,7 @@ const DoctorSidebar = () => {
     }
   };
 
-  // Toggle availability handler
+  
   const toggleAvailability = async () => {
     console.log(doctorId);
     if (!doctorId) {
@@ -50,7 +50,7 @@ const DoctorSidebar = () => {
       const token = localStorage.getItem("token");
       await axios.put(
         `https://localhost:7058/api/Doctor/availabilitystatus/${doctorId}`,
-        { availability: newAvailability }, // this matches your backend model
+        { availability: newAvailability }, 
         {
           headers: {
             Authorization: `Bearer ${token}`,

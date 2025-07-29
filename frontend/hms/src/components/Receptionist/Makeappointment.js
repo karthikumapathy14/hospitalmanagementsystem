@@ -157,7 +157,6 @@ const Makeappointment = () => {
 
 
   return (
-    // Inside the return statement:
 
 <div className="d-flex">
   <div className="flex-grow-1 p-4 bg-light min-vh-100">

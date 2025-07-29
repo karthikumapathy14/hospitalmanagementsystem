@@ -27,7 +27,7 @@ namespace hospital.Controller
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
             var encodedToken = Uri.EscapeDataString(token);
 
-            // 👇 Correct reset URL generation
+          
             var resetUrl = $"{model.ClientURL}?token={encodedToken}&email={Uri.EscapeDataString(user.Email)}";
             var emailBody = $"Click <a href='{resetUrl}'>here</a> to reset your password.";
 

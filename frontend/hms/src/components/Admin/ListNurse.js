@@ -9,7 +9,7 @@ const ListNurse = () => {
   const navigate = useNavigate();
 
   const handleEdit = (id) => {
-    navigate(`/listNurse/${id}`);
+    navigate(`/admin/listNurse/${id}`);
   };
   const token = localStorage.getItem("token");
   useEffect(() => {

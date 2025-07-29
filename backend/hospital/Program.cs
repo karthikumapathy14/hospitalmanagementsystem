@@ -72,10 +72,9 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    await Superadmin.SeedSuperAdminAsync(services);  // Call the SeedSuperAdminAsync method
+    await Superadmin.SeedSuperAdminAsync(services); 
 }
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

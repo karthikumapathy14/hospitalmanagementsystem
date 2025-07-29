@@ -80,7 +80,7 @@ const BillPatientView = () => {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-12">
-            {/* Download PDF button (excluded from PDF) */}
+            {/*  PDF*/}
             <div className="d-flex justify-content-end mb-4">
               <button
                 className="btn btn-primary"
@@ -96,7 +96,7 @@ const BillPatientView = () => {
               </button>
             </div>
 
-            {/* PDF content starts here */}
+            {/* PDFcontent */}
             <div
               ref={targetRef}
               style={{
@@ -195,7 +195,7 @@ const BillPatientView = () => {
                       </div>
                     </div>
 
-                    {/* Patient greeting */}
+                    {/* Patient */}
                     <div
                       className="mb-3 p-2"
                       style={{
@@ -212,21 +212,21 @@ const BillPatientView = () => {
                       </p>
                     </div>
 
-                    {/* Main content row */}
+                    {/* Main */}
                     <div className="row mb-3" style={{ minHeight: "400px" }}>
-                      {/* Left column - Patient and Medical Details */}
+                      {/*  Patient and Medical Details */}
                       <div
                         className="col-md-5 pe-2 d-flex flex-column"
                         style={{ gap: "10px" }}
                       >
-                        {/* Patient Details - Reduced height */}
+                        {/* Patient Details */}
                         <div
                           className="p-2"
                           style={{
                             border: "1px solid #e0e0e0",
                             borderRadius: "6px",
                             backgroundColor: "#f8f9fa",
-                            flex: "0 0 auto", // Remove flex grow to prevent expansion
+                            flex: "0 0 auto", 
                           }}
                         >
                           <h5
@@ -312,7 +312,7 @@ const BillPatientView = () => {
                           </ul>
                         </div>
 
-                        {/* Medical Details - Now has more space */}
+                        {/* Medical Details */}
                         <div
                           className="p-2 flex-grow-1"
                           style={{
@@ -365,12 +365,12 @@ const BillPatientView = () => {
                         </div>
                       </div>
 
-                      {/* Right column - Charges and Payment */}
+                      {/*Payment */}
                       <div
                         className="col-md-7 ps-2 d-flex flex-column"
                         style={{ gap: "10px" }}
                       >
-                        {/* Charges Breakdown */}
+                        {/* Charges */}
                         <div
                           className="p-0 flex-grow-1"
                           style={{
@@ -472,7 +472,7 @@ const BillPatientView = () => {
                           </div>
                         </div>
 
-                        {/* Payment and Notes */}
+                        {/* Payment */}
                         <div className="row g-2" style={{ flex: "0 0 auto" }}>
                           <div className="col-md-6">
                             <div

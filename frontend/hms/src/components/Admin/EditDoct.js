@@ -14,7 +14,7 @@ const EditDoct = () => {
     address: "",
     departmentId: "",
     status: false,
-    experience:'',
+    experience: '',
   });
   const [dept, setDepartments] = useState([]); // Corrected to an array
   const { id } = useParams();
@@ -30,7 +30,7 @@ const EditDoct = () => {
   }, []);
 
   useEffect(() => {
-      if (!token) {
+    if (!token) {
       toast.error("Restricted Access");
       navigate("/");
       return;
@@ -41,7 +41,7 @@ const EditDoct = () => {
       })
       .then((res) => setDoctor(res.data))
       .catch((err) => console.log(err));
-  }, [id,navigate]);
+  }, [id, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,9 +50,8 @@ const EditDoct = () => {
       [name]:
         name === "status"
           ? value === "true"
-          : //   : name === "departmentId"
-            //   ? parseInt(value)  // Ensure departmentId is an integer
-            value,
+          : 
+          value,
     }));
   };
 
@@ -73,8 +72,8 @@ const EditDoct = () => {
     if (window.confirm("Are you sure you want to delete this doctor?")) {
       axios
         .delete(`https://localhost:7058/api/Admin/docdelete/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+          headers: { Authorization: `Bearer ${token}` },
+        })
         .then(() => navigate("/admin/listdoc"))
         .catch((err) => console.log(err));
     }
@@ -82,7 +81,7 @@ const EditDoct = () => {
 
   return (
     <div className="d-flex">
-    
+
       <div
         className="flex-grow-1 d-flex justify-content-center align-items-center bg-light"
         style={{ minHeight: "100vh" }}
@@ -145,7 +144,7 @@ const EditDoct = () => {
                 required
               />
             </div>
-              <div className="mb-4">
+            <div className="mb-4">
               <label className="form-label fw-bold">Experience</label>
               <input
                 type="number"

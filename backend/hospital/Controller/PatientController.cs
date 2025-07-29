@@ -1,6 +1,4 @@
 ﻿using hospital.Data;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +6,7 @@ namespace hospital.Controller
 {
     [Route("api/[controller]")]
     //[Authorize(Roles = "Patient")]
-    [ApiController]
+    [ApiController] 
     public class PatientContoller : ControllerBase
     {
         private readonly Applicationdbcontext _dbcontext;
@@ -34,7 +32,7 @@ namespace hospital.Controller
                 {
                     a.AppointmentId,
                     a.AppointmentDate,
-                    a. StartTime,
+                    a.StartTime,
                     a.Reason,
                     a.Status,
                     a.CreatedAt,
@@ -81,16 +79,12 @@ namespace hospital.Controller
                     PatientEmail = b.Appointment.Patient.Email,
                     PatientPhone = b.Appointment.Patient.PhoneNo,
                     Age = b.Appointment.Patient.Age,
-                    Gender=b.Appointment.Patient.Gender,
+                    Gender = b.Appointment.Patient.Gender,
                     BloodGroup = b.Appointment.Patient.Bloodgrp,
                     PatientAddress = b.Appointment.Patient.Address,
 
                     // Doctor Info
                     DoctorName = b.Appointment.Doctor.UserName,
-            
-           
-       
-
                     // Department
                     DepartmentName = b.Appointment.Doctor.Department.DepartmentName
                 })

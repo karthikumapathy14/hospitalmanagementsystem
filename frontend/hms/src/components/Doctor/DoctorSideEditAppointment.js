@@ -11,7 +11,6 @@ const DoctorSideEditAppointment = () => {
   const [nurses, setNurses] = useState([]);
   const token = localStorage.getItem("token");
 
-  // Fetch appointment details
   useEffect(() => {
     if (!id) {
       toast.error("Invalid appointment ID!");
@@ -39,7 +38,6 @@ const DoctorSideEditAppointment = () => {
       });
   }, [id, navigate, token]);
 
-  // Fetch nurse list
   useEffect(() => {
     axios
       .get("https://localhost:7058/api/Admin/getnurse", {
@@ -52,7 +50,7 @@ const DoctorSideEditAppointment = () => {
       });
   }, [token]);
 
-  // Handle input changes
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAppointment((prev) => ({
@@ -61,7 +59,7 @@ const DoctorSideEditAppointment = () => {
     }));
   };
 
-  // Handle update
+  
   const handleUpdate = (e) => {
     e.preventDefault();
 
@@ -99,7 +97,7 @@ const DoctorSideEditAppointment = () => {
       });
   };
 
-  // UI rendering
+
   if (loading) return <div className="text-center mt-5">Loading...</div>;
   if (!appointment)
     return (

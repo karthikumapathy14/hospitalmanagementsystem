@@ -62,7 +62,7 @@ const Viewappointmentnurse = () => {
   return (
     <div className="d-flex" >
 
-      {/* Main Content */}
+      {/* Main */}
       <div className="flex-grow-1 bg-light">
         <div className="p-2 p-md-4">
           <div className="container-fluid px-0 px-md-3">

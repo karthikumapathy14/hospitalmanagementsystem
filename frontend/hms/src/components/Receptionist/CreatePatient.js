@@ -102,7 +102,7 @@ const CreatePatient = () => {
             <div className="card border-0 shadow-sm rounded-4">
               <div className="card-body px-5 py-4">
                 <form onSubmit={handleSubmit} autoComplete="off">
-                  {/* Name */}
+                
                   <div className="mb-4">
                     <label className="form-label fw-bold text-muted">
                       <i className="bi bi-person me-2 text-primary"></i>
@@ -119,7 +119,7 @@ const CreatePatient = () => {
                     />
                   </div>
 
-                  {/* Email */}
+               
                   <div className="mb-4">
                     <label className="form-label fw-bold text-muted">
                       <i className="bi bi-envelope me-2 text-primary"></i>
@@ -169,7 +169,7 @@ const CreatePatient = () => {
 
 
 
-                  {/* Role */}
+                
                   <div className="mb-4">
                     <label className="form-label fw-bold text-muted">
                       <i className="bi bi-person-badge me-2 text-primary"></i>
@@ -183,7 +183,7 @@ const CreatePatient = () => {
                     />
                   </div>
 
-                  {/* Buttons */}
+        
                   <div className="d-flex justify-content-between mt-5">
                     <button
                       type="button"

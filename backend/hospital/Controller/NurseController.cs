@@ -77,13 +77,13 @@ namespace hospital.Controller
         [HttpPost("updateprescription")]
         public async Task<IActionResult> UpdatePrescription([FromBody] Prescription prescription)
         {
-            // Block create operation
+
             if (prescription.Id <= 0)
             {
                 return BadRequest("New prescriptions cannot be created by this endpoint.");
             }
 
-            // Proceed to update
+          
             var existingPrescription = await _dbcontext.Prescription
                 .Include(p => p.PrescriptionDays)
                 .FirstOrDefaultAsync(p => p.Id == prescription.Id);
@@ -91,10 +91,10 @@ namespace hospital.Controller
             if (existingPrescription == null)
                 return NotFound("Prescription not found");
 
-            // Update core fields
+          
             existingPrescription.Prescribedby = prescription.Prescribedby;
 
-            // Remove old days and add new ones
+
             _dbcontext.PrescriptionDays.RemoveRange(existingPrescription.PrescriptionDays);
             await _dbcontext.SaveChangesAsync();
 

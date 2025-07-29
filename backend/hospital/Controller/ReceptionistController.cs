@@ -33,11 +33,11 @@ namespace hospital.Controller
             string generatedUserName;
             if (model.Role == "Patient")
             {
-                generatedUserName = await GenerateUsernameAsync(model.UserName); // base name comes from model.UserName
+                generatedUserName = await GenerateUsernameAsync(model.UserName); 
             }
             else
             {
-                generatedUserName = model.UserName; // fallback for non-patient users
+                generatedUserName = model.UserName; 
             }
 
             var user = new User
@@ -54,7 +54,7 @@ namespace hospital.Controller
                 return BadRequest(result.Errors);
             }
 
-            // Ensure role exists
+          
             if (!await _roleManager.RoleExistsAsync(model.Role))
             {
                 var roleResult = await _roleManager.CreateAsync(new IdentityRole(model.Role));
@@ -96,13 +96,11 @@ namespace hospital.Controller
         {
             var baseName = name.Replace(" ", "").ToLower();
 
-            // Count existing patients
             int totalPatients = await _dbcontext.Patients.CountAsync();
 
-            // Global patient number (incrementing)
+         
             int nextNumber = totalPatients + 1;
 
-            // Return formatted username like: karthik001, aravind002, etc.
             return $"{baseName}{nextNumber:D3}";
         }
 
@@ -165,7 +163,7 @@ namespace hospital.Controller
             if (availability == null)
                 return BadRequest("Doctor is not available on this date.");
 
-            // Use dto.StartTime directly
+  
             if (dto.StartTime < availability.StartTime || dto.StartTime >= availability.EndTime)
                 return BadRequest("Start time is outside the available window.");
 
@@ -191,10 +189,10 @@ namespace hospital.Controller
             };
 
             var isBooked = _dbcontext.appointments.Any(a =>
-    a.DoctorId == appointment.DoctorId &&
-    a.AppointmentDate.Date == appointment.AppointmentDate.Date &&
-    a.StartTime == appointment.StartTime &&
-    a.Status != "Cancel");
+                        a.DoctorId == appointment.DoctorId &&
+                        a.AppointmentDate.Date == appointment.AppointmentDate.Date &&
+                        a.StartTime == appointment.StartTime &&
+                        a.Status != "Cancel");
 
             if (isBooked)
             {
@@ -296,7 +294,7 @@ namespace hospital.Controller
         [HttpGet("getprescriptionbyappointment/{appointmentId}")]
         public async Task<IActionResult> GetPrescriptionByAppointmentId(int appointmentId)
         {
-            // Find the prescription by appointmentId
+           
             var prescription = await _dbcontext.Prescription
                 .Include(p => p.PrescriptionDays)
                 .Include(p => p.Appointment) 
@@ -305,7 +303,7 @@ namespace hospital.Controller
             if (prescription == null)
                 return NotFound("No prescription found for this appointment.");
 
-            // Return prescription with nested PrescriptionDays
+          
             return Ok(new {
                 prescription.Id,
                 prescription.Prescribedby,
@@ -366,82 +364,7 @@ namespace hospital.Controller
 
 
 
-        //book appointment
-
-        //[HttpPost("book")]
-        //public async Task<IActionResult> BookAppointment([FromBody] BookAppointmentDto dto)
-        //{
-        //    var availability = await _dbcontext.DoctorAvailabilities
-        //        .FirstOrDefaultAsync(a =>
-        //            a.DoctorId == dto.DoctorId &&
-        //            dto.AppointmentDate.Date >= a.StartDate.Date &&
-        //            dto.AppointmentDate.Date <= a.EndDate.Date);
-
-        //    if (availability == null)
-        //        return BadRequest("Doctor is not available on this date.");
-
-        //    if (dto.StartTime < availability.StartTime || dto.StartTime >= availability.EndTime)
-        //        return BadRequest("Start time is outside the available window.");
-
-        //    var existing = await _dbcontext.appointments.FirstOrDefaultAsync(a =>
-        //        a.DoctorId == dto.DoctorId &&
-        //        a.AppointmentDate == dto.AppointmentDate &&
-        //        a.StartTime == dto.StartTime);
-
-        //    if (existing != null)
-        //        return Conflict("This time slot is already booked.");
-
-        //    var appointment = new Appointment
-        //    {
-        //        DoctorId = dto.DoctorId,
-        //        PatientId = dto.PatientId,
-        //        AppointmentDate = dto.AppointmentDate,
-        //        StartTime = dto.StartTime,
-        //        EndTime = dto.StartTime.Add(TimeSpan.FromMinutes(15)) // default slot
-        //    };
-
-        //    _dbcontext.appointments.Add(appointment);
-        //    await _dbcontext.SaveChangesAsync();
-
-        //    return Ok("Appointment booked successfully.");
-        //}
-
-
-        //[HttpGet("slots")]
-        //public async Task<IActionResult> GetAvailableSlots(int doctorId, DateTime date)
-        //{
-        //    // Find the doctor's availability for that day
-        //    var availability = await _dbcontext.DoctorAvailabilities
-        //        .FirstOrDefaultAsync(a =>
-        //            a.DoctorId == doctorId &&
-        //            date.Date >= a.StartDate.Date &&
-        //            date.Date <= a.EndDate.Date);
-
-        //    if (availability == null)
-        //        return Ok(new List<string>()); // No availability
-
-        //    // Generate all possible 15-min slots within availability range
-        //    var start = availability.StartTime;
-        //    var end = availability.EndTime;
-        //    var slots = new List<string>();
-
-        //    while (start + TimeSpan.FromMinutes(15) <= end)
-        //    {
-        //        slots.Add(start.ToString(@"hh\:mm")); // convert to "HH:mm" string
-        //        start = start.Add(TimeSpan.FromMinutes(15 + availability.BufferAfter)); // include buffer
-        //    }
-
-        //    // Get existing appointments for that doctor on that day
-        //    var bookedSlots = await _dbcontext.appointments
-        //        .Where(a => a.DoctorId == doctorId && a.AppointmentDate.Date == date.Date)
-        //        .Select(a => a.StartTime.ToString(@"hh\:mm"))
-        //        .ToListAsync();
-
-        //    // Filter out booked slots
-        //    var availableSlots = slots.Except(bookedSlots).ToList();
-
-        //    return Ok(availableSlots);
-        //}
+      
 
         [HttpGet("Get-available-slots/{doctorId}/{date}")]
         public IActionResult GetAvailableSlots(int doctorId, DateTime date)
@@ -470,7 +393,7 @@ namespace hospital.Controller
                     a.DoctorId == doctorId &&
                     a.AppointmentDate.Date == date.Date &&
                     a.StartTime == current &&
-                    a.Status != "Cancel" // exclude cancelled appointments
+                    a.Status != "Cancel" 
                 );
 
                 slots.Add(new

@@ -20,18 +20,11 @@ namespace hospital.Controller
             _dbcontext = dbcontext;
         }
 
-        //[HttpGet("docGetAll")]
-        //public async Task<IActionResult> Getall()
-        //{
-        //    var getall = await _dbcontext.Doctors.ToListAsync();
-
-        //    return Ok(getall);
-        //}
         [HttpGet("docGetAll")]
         public async Task<IActionResult> GetAllDoctors()
         {
             var doctors = await _dbcontext.Doctors
-                .Include(d => d.Department) // Join Department table
+                .Include(d => d.Department)
                 .Select(d => new
                 {
                     d.Id,
@@ -64,14 +57,7 @@ namespace hospital.Controller
 
 
 
-        //[HttpPost("doccreate-doc")]
-        //public async Task<IActionResult> Create(Doctor doctor)
-        //{
-        //    var create = await _dbcontext.Doctors.AddAsync(doctor);
-        //    _dbcontext.SaveChanges();
-        //    return Ok(create);
-
-        //}
+     
 
         [HttpPut("docedit/{id}")]
         public async Task<IActionResult> Edit(int id, Doctor doctor)
@@ -146,8 +132,7 @@ namespace hospital.Controller
             return Ok(depid);
         }
 
-        //nurse
-
+   
         [HttpGet("getnurse")]
         public async Task<IActionResult> getNurse()
         {
@@ -156,14 +141,7 @@ namespace hospital.Controller
             return Ok(getNurse);
         }
 
-        //[HttpPost("create-nurse")]
-        //public async Task<IActionResult> createNurse(Nurse nurse)
-        //{
-        //    await _dbcontext.Nurses.AddAsync(nurse);
-        //    await _dbcontext.SaveChangesAsync();
-        //    return Ok();
-        //}
-
+      
         [HttpGet("getbyid-nurse/{id}")]
         public async Task<IActionResult> GetidNurse(int id)
         {
@@ -206,7 +184,7 @@ namespace hospital.Controller
             return Ok("Deleted Successfully");
         }
 
-        //Receptionist
+       
         [HttpGet("get-receptionist")]
         public async Task<IActionResult> GetReceptionist()
         {
@@ -235,7 +213,7 @@ namespace hospital.Controller
             if (!string.IsNullOrWhiteSpace(receptionist.Address) && receptionist.Address != "string")
                 rid.Address = receptionist.Address;
             rid.status = receptionist.status;
-          
+            rid.Experience = receptionist.Experience;
 
             await _dbcontext.SaveChangesAsync();
             return Ok("Updated Successfully");
@@ -252,8 +230,6 @@ namespace hospital.Controller
             return Ok("Delete successfully");
         }
 
-
-        //dashboard
 
         [HttpGet("totaldoctors")]
         public IActionResult GetTotalDoctors()
@@ -314,7 +290,7 @@ namespace hospital.Controller
         [HttpGet("gettodaystatusreport")]
         public IActionResult GetTodayStatusReport()
         {
-            //DateOnly today = DateOnly.FromDateTime(DateTime.Today); // ✅ DateOnly
+           
 
             DateTime today = DateTime.Today;
             var statusCounts = _dbcontext.appointments
@@ -387,7 +363,7 @@ namespace hospital.Controller
 
             return Ok(getrecavailabledetials);
         }
-        // GET: api/Message/departments
+    
         [HttpGet("departments")]
         public async Task<ActionResult<IEnumerable<object>>> GetDepartments()
         {
@@ -406,7 +382,7 @@ namespace hospital.Controller
         {
            
             var emails = await _dbcontext.Doctors
-                .Include(d => d.Department) // ensure this line is present!
+                .Include(d => d.Department) 
                 .Where(d => d.Department != null &&
                             d.Department.Id == department &&
                             !string.IsNullOrEmpty(d.Email))
@@ -450,8 +426,5 @@ namespace hospital.Controller
                     return BadRequest("Invalid role provided.");
             }
         }
-
-
-
     }
 }

@@ -19,7 +19,7 @@ const ReceptionistNavbar = () => {
     console.log(recepName);
   }
 
-  // Function to get receptionist ID safely
+  
   const getReceptionistId = () => {
     let id = localStorage.getItem("receptionistId");
     if (!id) {

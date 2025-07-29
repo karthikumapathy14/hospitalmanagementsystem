@@ -130,19 +130,7 @@ const Appointments = () => {
        toast.error(
           "Please add a prescription before marking this appointment as complete."
         );
-      // if (
-      //   error.response &&
-      //   error.response.status === 400 &&
-      //   error.response.data ===
-      //     "Cannot mark appointment as complete without prescription."
-      // ) {
-      //   toast.error(
-      //     "Please add a prescription before marking this appointment as complete."
-      //   );
-      // } 
-      // else {
-      //   toast.error("Failed to update status. Please try again.");
-      // }
+
     }
   };
 
@@ -305,7 +293,7 @@ const Appointments = () => {
             </div>
           </div>
 
-          {/* Completed Appointments Section */}
+          {/* Appointment  */}
           <div className="card shadow rounded-4 border-0">
             <div className="card-body">
               <h2 className="text-center text-success mb-4">
